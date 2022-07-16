@@ -46,11 +46,8 @@ dependencies:
   stacked: ^2.3.6
   flutter_platform_widgets: ^1.20.0
 
-<<<<<<< HEAD
   flutter_speed_dial:
-=======
-  flutter_speed_dial: 
->>>>>>> 6b305eee6a304bfcededcf7c1e09fcc1b5271238
+
 
 dev_dependencies:
   flutter_test:
