@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +11,9 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  final dbRef = FirebaseDatabase.instance.ref();
+  final snapshot = await dbRef.child("Tips/TipsTable");
 
   runApp(MyApp());
 }

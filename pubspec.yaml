@@ -49,6 +49,7 @@ dependencies:
   flutter_speed_dial:
   firebase_core: ^1.19.2
   cloud_firestore: ^3.3.0
+  firebase_database: ^9.0.19
 
 
 dev_dependencies:
