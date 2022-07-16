@@ -37,6 +37,8 @@ dependencies:
   stacked: ^2.3.6
   flutter_platform_widgets: ^1.20.0
 
+  flutter_speed_dial: 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -77,7 +79,7 @@ flutter:
   fonts:
     - family: Forterra
     - fonts:
-      - asset: assets/CrimsonText-SemiBold.ttf 
+      - asset: assets/korinth-serial-bold.ttf 
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
