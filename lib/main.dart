@@ -1,12 +1,8 @@
 import 'package:cut_my_carbon/Forterra%20Icon/Ficon.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'Forterra Icon/Ficon.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+void main() {
   runApp(MyApp());
 }
 
@@ -52,9 +48,18 @@ class _MyAppState extends State<MyApp> {
                     backgroundColor: Colors.green,
                     onTap: () {}),
                 SpeedDialChild(
-                    child: Icon(Forterra.logo),
+                  backgroundColor: Colors.green,
+                  child: Text(
+                    'F',
+                    style: TextStyle(
+                      fontFamily: 'Forterra',
+                      fontSize: 20,
+                    ),
+                    /*child: Icon(Forterra.F),
                     backgroundColor: Colors.green,
-                    onTap: () {}),
+                    onTap: () {}*/
+                  ),
+                )
               ],
             ),
             backgroundColor: Color.fromARGB(255, 119, 188, 63),
@@ -93,12 +98,12 @@ class _MyAppState extends State<MyApp> {
                 child: Text(
                   'Select Your Tip',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 30,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  minimumSize: Size(340, 80),
-                  padding: EdgeInsets.all(30),
+                  minimumSize: Size(248, 60),
+                  padding: EdgeInsets.all(15),
                 ),
               )),
               SizedBox(height: 30),
@@ -113,12 +118,12 @@ class _MyAppState extends State<MyApp> {
                 child: Text(
                   'Statistics',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 30,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  minimumSize: Size(340, 80),
-                  padding: EdgeInsets.all(30),
+                  minimumSize: Size(248, 60),
+                  padding: EdgeInsets.all(15),
                 ),
               ))
             ]))));
