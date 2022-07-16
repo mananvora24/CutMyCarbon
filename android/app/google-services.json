@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "159713230272",
+    "project_id": "cut-my-carbon",
+    "storage_bucket": "cut-my-carbon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159713230272:android:2e1e6484779fa7babadc25",
+        "android_client_info": {
+          "package_name": "com.example.cut_my_carbon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159713230272-kcbeec07cvasah3vipm3ocvf24abea7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjhKaXzhizuSrvkcX2aixLWSQp_1rZTHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159713230272-kcbeec07cvasah3vipm3ocvf24abea7s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
