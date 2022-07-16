@@ -1,11 +1,7 @@
 import 'package:cut_my_carbon/Forterra%20Icon/Ficon.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:firebase_core/firebase_core.dart';
-import 'ui/home_view.dart';
 import 'Forterra Icon/Ficon.dart';
-=======
->>>>>>> 6b305eee6a304bfcededcf7c1e09fcc1b5271238
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 void main() async {
