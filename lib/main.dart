@@ -10,11 +10,11 @@ import 'package:cut_my_carbon/core/services/navigation_service.dart';
 
 import 'locator.dart';
 
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await setupLocator();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
