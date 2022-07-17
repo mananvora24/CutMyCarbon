@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "159713230272-91jjlb570h6kgc9bl9hk57eke86d70cr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cut_my_carbon",
+            "certificate_hash": "c7c2048505d851707cc5f997c05332a6d18459a0"
+          }
+        },
+        {
           "client_id": "159713230272-kcbeec07cvasah3vipm3ocvf24abea7s.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "159713230272-kcbeec07cvasah3vipm3ocvf24abea7s.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "159713230272-k40b6s6opvdcl864s0g8qagf1bafbljf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cutMyCarbon"
+              }
             }
           ]
         }

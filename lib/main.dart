@@ -7,12 +7,16 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:cut_my_carbon/core/utilities/router.dart' as router;
 import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:cut_my_carbon/core/services/navigation_service.dart';
+import 'firebase_options.dart';
 
 import 'locator.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await setupLocator();
   runApp(const MyApp());
 }
