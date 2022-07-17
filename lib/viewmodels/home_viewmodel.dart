@@ -31,12 +31,4 @@ class HomeViewModel extends BaseViewModel {
   void routeToStatsView() {
     _navigationService.navigateTo(HomeViewRoute);
   }
-
-  readTip() {
-    Stream<List<Tip>> readTip() => FirebaseFirestore.instance
-        .collection('Tips')
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => Tip.fromJson(doc.data())).toList());
-  }
 }
