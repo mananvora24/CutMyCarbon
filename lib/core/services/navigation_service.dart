@@ -25,9 +25,6 @@ class NavigationServiceImpl implements NavigationService {
   void pop(returnValue) {
     return _navigationKey.currentState!.pop(returnValue);
   }
-  // bool pop({returnValue}) {
-  //   return navigatorKey.currentState.pop(returnValue);
-  // }
 
   @override
   Future<dynamic> navigateTo(String routeName, {dynamic arguments}) {

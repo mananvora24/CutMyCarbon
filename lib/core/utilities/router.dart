@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/ui/home_view.dart';
+import 'package:cut_my_carbon/ui/tips_view.dart';
 import 'package:cut_my_carbon/core/utilities/route_names.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -29,6 +30,8 @@ class Router {
     switch (settings.name) {
       case HomeViewRoute:
         return HomeView();
+      case TipsViewRoute:
+        return TipsView();
       default:
         return Scaffold(
           body: Center(child: Text('No route defined for ${settings.name}')),

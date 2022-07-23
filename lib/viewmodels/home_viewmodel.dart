@@ -31,4 +31,8 @@ class HomeViewModel extends BaseViewModel {
   void routeToStatsView() {
     _navigationService.navigateTo(HomeViewRoute);
   }
+
+  void routeToTipsView() {
+    _navigationService.navigateTo(TipsViewRoute);
+  }
 }

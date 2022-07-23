@@ -17,10 +17,16 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 */
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 119, 188, 63),
         floatingActionButton: SpeedDial(
           animatedIcon: AnimatedIcons.menu_close,
           backgroundColor: Colors.green,
@@ -52,7 +58,6 @@ class HomeView extends StatelessWidget {
                 onTap: () {}),
           ],
         ),
-        backgroundColor: Color.fromARGB(255, 119, 188, 63),
         body: Center(
             child: Column(children: [
           Container(
@@ -70,21 +75,6 @@ class HomeView extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     shape: CircleBorder(), minimumSize: Size.square(40)),
               )),
-          StreamBuilder<List<Tip>>(
-              stream: readTip(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Something went wrong. ${snapshot}');
-                } else if (snapshot.hasData) {
-                  final tipsSnap = snapshot.data!;
-
-                  return ListView(
-                    children: tipsSnap.map(buildTip).toList(),
-                  );
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              }),
           SizedBox(height: 80),
           Container(
             child: Image.asset(
@@ -133,15 +123,4 @@ class HomeView extends StatelessWidget {
           ))
         ])));
   }
-
-  Widget buildTip(Tip tip) => ListTile(
-        leading: CircleAvatar(child: Text('${tip.carbon}')),
-        title: Text(tip.tip),
-      );
-
-  Stream<List<Tip>> readTip() => FirebaseFirestore.instance
-      .collection('Tips')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => Tip.fromJson(doc.data())).toList());
 }

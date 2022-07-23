@@ -1,4 +1,5 @@
 import 'package:cut_my_carbon/Forterra%20Icon/Ficon.dart';
+import 'package:cut_my_carbon/ui/tips_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,6 +11,8 @@ import 'package:cut_my_carbon/core/services/navigation_service.dart';
 import 'firebase_options.dart';
 
 import 'locator.dart';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +21,12 @@ Future main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await setupLocator();
+
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    if (kReleaseMode) exit(1);
+  };
+
   runApp(const MyApp());
 }
 
@@ -32,14 +41,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorKey: locator<NavigationService>().navigationKey,
-        onGenerateRoute: (settings) =>
-            router.Router.generateRoute(context, settings),
-        title: 'Cut My Carbon',
-        //theme: ThemeData(
-        //scaffoldBackgroundColor: const Color.fromARGB(255, 49, 48, 48),
-        //primarySwatch: Colors.green,
-        home: HomeView());
+      debugShowCheckedModeBanner: false,
+      navigatorKey: locator<NavigationService>().navigationKey,
+      onGenerateRoute: (settings) =>
+          router.Router.generateRoute(context, settings),
+      title: 'Cut My Carbon',
+      home: HomeView(),
+      // tips: TipsView()
+    );
   }
 }
