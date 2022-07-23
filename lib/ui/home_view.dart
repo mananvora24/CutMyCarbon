@@ -105,6 +105,7 @@ class HomeView extends StatelessWidget {
                   child: ElevatedButton(
                 onPressed: () {
                   print("Tips Pressed");
+                  model.routeToTipsView();
                 },
                 onLongPress: () {
                   print("Tips Long Pressed");
