@@ -29,7 +29,7 @@ class Router {
     routeName(tempSettings);
     switch (settings.name) {
       case HomeViewRoute:
-        return HomeView();
+        return HomeView(title: "Test");
       case TipsViewRoute:
         return TipsView();
       default:
