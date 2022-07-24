@@ -77,10 +77,10 @@ class HomeView extends StatelessWidget {
               const SizedBox(height: 60),
               ElevatedButton(
                 onPressed: () {
-                  model.routeToTipsView();
+                  model.routeToTipCategoriesView();
                 },
                 onLongPress: () {
-                  model.routeToTipsView();
+                  model.routeToTipCategoriesView();
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(340, 80),

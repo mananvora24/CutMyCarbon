@@ -3,7 +3,6 @@ import 'package:cut_my_carbon/viewmodels/base_viewmodel.dart';
 import 'package:cut_my_carbon/core/enums/view_state.dart';
 import 'package:cut_my_carbon/locator.dart';
 import 'package:cut_my_carbon/core/services/navigation_service.dart';
-import 'package:flutter/cupertino.dart';
 
 class SharedViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -26,6 +25,10 @@ class SharedViewModel extends BaseViewModel {
 
   void routeToTipsView() {
     _navigationService.navigateTo(TipsViewRoute);
+  }
+
+  void routeToTipCategoriesView() {
+    _navigationService.navigateTo(TipCategoriesViewRoute);
   }
 
   void routeToStatsView() {
