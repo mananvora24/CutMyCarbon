@@ -1,3 +1,6 @@
+import 'package:cut_my_carbon/ui/about_forterra.dart';
+import 'package:cut_my_carbon/ui/about_us.dart';
+import 'package:cut_my_carbon/ui/stats_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:cut_my_carbon/ui/tips_view.dart';
@@ -24,14 +27,20 @@ class Router {
   }
 
   static Widget _generateRoute(RouteSettings settings) {
-    final arguments = settings.arguments;
+    //final arguments = settings.arguments;
     String tempSettings = settings.name ?? '';
     routeName(tempSettings);
     switch (settings.name) {
       case HomeViewRoute:
-        return HomeView(title: "Test");
+        return const HomeView(title: "Test");
       case TipsViewRoute:
-        return TipsView();
+        return TipsView(title: "Tips");
+      case StatsViewRoute:
+        return StatsView(title: "Stats");
+      case AboutForterraViewRoute:
+        return AboutFView(title: "About Forterra");
+      case AboutUsViewRoute:
+        return const AboutUsView(title: "About Cut My Carbon");
       default:
         return Scaffold(
           body: Center(child: Text('No route defined for ${settings.name}')),
