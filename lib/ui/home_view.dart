@@ -53,23 +53,9 @@ class HomeView extends StatelessWidget {
           body: Center(
             child: Column(children: [
               Container(
-                  padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
-                  alignment: Alignment.topRight,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      model.routeToAboutForterraView();
-                    }, //Icon(Icons.letter_, size: 20),
-                    style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        minimumSize: const Size.square(40)),
-                    child: const Text(
-                      'F',
-                      style: TextStyle(
-                        fontFamily: 'Forterra',
-                        fontSize: 20,
-                      ),
-                    ),
-                  )),
+                padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
+                alignment: Alignment.topRight,
+              ),
               const SizedBox(height: 80),
               Image.asset(
                 'assets/Logo.png',
