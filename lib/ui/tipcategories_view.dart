@@ -16,9 +16,6 @@ class TipCategoriesView extends StatelessWidget {
             body: Center(
                 child: Column(children: [
               const SizedBox(height: 70),
-              Image.asset(
-                'assets/Logo.png',
-              ),
               const Text(
                   "Pick one of the categories to get your tip of the week"),
               OutlinedButton(

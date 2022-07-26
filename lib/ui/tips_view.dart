@@ -19,41 +19,6 @@ class TipsView extends StatelessWidget {
       child: Consumer<TipsViewModel>(
         builder: (context, model, child) => Scaffold(
             backgroundColor: Color.fromARGB(255, 119, 188, 63),
-            floatingActionButton: SpeedDial(
-              animatedIcon: AnimatedIcons.menu_close,
-              backgroundColor: Colors.green,
-              spacing: 15,
-              children: [
-                SpeedDialChild(
-                    child: Icon(Icons.settings_rounded),
-                    backgroundColor: Colors.green,
-                    onTap: () {}),
-                SpeedDialChild(
-                    child: Icon(Icons.mail_rounded),
-                    backgroundColor: Colors.green,
-                    onTap: () {}),
-                SpeedDialChild(
-                    child: Icon(Icons.feedback_rounded),
-                    backgroundColor: Colors.green,
-                    onTap: () {}),
-                SpeedDialChild(
-                    child: Icon(Icons.tips_and_updates_rounded),
-                    backgroundColor: Colors.green,
-                    onTap: () {}),
-                SpeedDialChild(
-                    child: const Icon(Icons.info_rounded),
-                    backgroundColor: Colors.green,
-                    onTap: () {
-                      model.routeToAboutUSView();
-                    }),
-                SpeedDialChild(
-                    child: const Icon(Forterra.logo),
-                    backgroundColor: Colors.green,
-                    onTap: () {
-                      model.routeToAboutForterraView();
-                    }),
-              ],
-            ),
             body: //Center(
                 //child: Column(children: [
                 StreamBuilder<QuerySnapshot>(
@@ -65,7 +30,7 @@ class TipsView extends StatelessWidget {
                 }
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Text("Loading");
+                  return Center(child: CircularProgressIndicator());
                 }
 
                 return ListView(
@@ -84,18 +49,14 @@ class TipsView extends StatelessWidget {
             persistentFooterButtons: [
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {
-                  model.routeToHomeView();
-                },
-                onLongPress: () {
-                  model.routeToHomeView();
-                },
+                onPressed: () {},
+                onLongPress: () {},
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),
                   padding: const EdgeInsets.all(10),
                 ),
                 child: const Text(
-                  'Home',
+                  'Select',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -103,18 +64,14 @@ class TipsView extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {
-                  model.routeToStatsView();
-                },
-                onLongPress: () {
-                  model.routeToStatsView();
-                },
+                onPressed: () {},
+                onLongPress: () {},
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),
                   padding: const EdgeInsets.all(10),
                 ),
                 child: const Text(
-                  'Stats',
+                  'Skip',
                   style: TextStyle(
                     fontSize: 20,
                   ),

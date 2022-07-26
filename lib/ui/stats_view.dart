@@ -21,41 +21,6 @@ class StatsView extends StatelessWidget {
       child: Consumer<StatsViewModel>(
         builder: (context, model, child) => Scaffold(
           backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-          floatingActionButton: SpeedDial(
-            animatedIcon: AnimatedIcons.menu_close,
-            backgroundColor: Colors.green,
-            spacing: 15,
-            children: [
-              SpeedDialChild(
-                  child: const Icon(Icons.settings_rounded),
-                  backgroundColor: Colors.green,
-                  onTap: () {}),
-              SpeedDialChild(
-                  child: const Icon(Icons.mail_rounded),
-                  backgroundColor: Colors.green,
-                  onTap: () {}),
-              SpeedDialChild(
-                  child: const Icon(Icons.feedback_rounded),
-                  backgroundColor: Colors.green,
-                  onTap: () {}),
-              SpeedDialChild(
-                  child: const Icon(Icons.tips_and_updates_rounded),
-                  backgroundColor: Colors.green,
-                  onTap: () {}),
-              SpeedDialChild(
-                  child: const Icon(Icons.info_rounded),
-                  backgroundColor: Colors.green,
-                  onTap: () {
-                    model.routeToAboutUSView();
-                  }),
-              SpeedDialChild(
-                  child: const Icon(Forterra.logo),
-                  backgroundColor: Colors.green,
-                  onTap: () {
-                    model.routeToAboutForterraView();
-                  }),
-            ],
-          ),
           body: StreamBuilder<QuerySnapshot>(
             stream: _statStream,
             builder:
