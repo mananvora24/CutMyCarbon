@@ -15,9 +15,7 @@ class AboutUsView extends StatelessWidget {
       child: Consumer<AboutUsViewModel>(
         builder: (context, model, child) => Scaffold(
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-            body: const Center(
-                child: Text(
-                    "This is about Cut My Carbon. It is the sponsor of this App")),
+            body: const Center(child: Text("This is about Cut My Carbon.")),
             persistentFooterButtons: [
               const SizedBox(height: 30),
               ElevatedButton(
