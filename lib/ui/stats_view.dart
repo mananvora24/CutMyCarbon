@@ -20,6 +20,17 @@ class StatsView extends StatelessWidget {
       create: (context) => StatsViewModel(),
       child: Consumer<StatsViewModel>(
         builder: (context, model, child) => Scaffold(
+          appBar: AppBar(
+            /*automaticallyImplyLeading: true,*/
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_new_rounded),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            backgroundColor: Color.fromARGB(255, 119, 188, 63),
+            elevation: 0,
+          ),
           backgroundColor: const Color.fromARGB(255, 119, 188, 63),
           body: StreamBuilder<QuerySnapshot>(
             stream: _statStream,

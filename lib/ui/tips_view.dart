@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,17 @@ class TipsView extends StatelessWidget {
       create: (context) => TipsViewModel(),
       child: Consumer<TipsViewModel>(
         builder: (context, model, child) => Scaffold(
+            appBar: AppBar(
+              /*automaticallyImplyLeading: true,*/
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios_new_rounded),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              backgroundColor: Color.fromARGB(255, 119, 188, 63),
+              elevation: 0,
+            ),
             backgroundColor: Color.fromARGB(255, 119, 188, 63),
             body: //Center(
                 //child: Column(children: [
