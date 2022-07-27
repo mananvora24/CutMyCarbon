@@ -97,7 +97,7 @@ flutter:
   # example:
   fonts:
     - family: Forterra
-    - fonts:
+      fonts:
       - asset: assets/korinth-serial-bold.ttf 
   #
   # For details regarding fonts from package dependencies,

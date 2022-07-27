@@ -20,7 +20,7 @@ class TipCategoriesView extends StatelessWidget {
                   "Pick one of the categories to get your tip of the week"),
               OutlinedButton(
                   onPressed: () {
-                    model.routeToHomeView();
+                    model.routeToTipsView("Home");
                   },
                   child: const Text(
                     'Home',
@@ -30,7 +30,7 @@ class TipCategoriesView extends StatelessWidget {
                   )),
               OutlinedButton(
                   onPressed: () {
-                    model.routeToHomeView();
+                    model.routeToTipsView("Food");
                   },
                   child: const Text(
                     'Food',
@@ -40,7 +40,7 @@ class TipCategoriesView extends StatelessWidget {
                   )),
               OutlinedButton(
                   onPressed: () {
-                    model.routeToHomeView();
+                    model.routeToTipsView("Shopping");
                   },
                   child: const Text(
                     'Shopping',
@@ -50,7 +50,7 @@ class TipCategoriesView extends StatelessWidget {
                   )),
               OutlinedButton(
                   onPressed: () {
-                    model.routeToHomeView();
+                    model.routeToTipsView("Offsetting");
                   },
                   child: const Text(
                     'Offsetting',
@@ -60,7 +60,7 @@ class TipCategoriesView extends StatelessWidget {
                   )),
               OutlinedButton(
                   onPressed: () {
-                    model.routeToHomeView();
+                    model.routeToTipsView("Energy");
                   },
                   child: const Text(
                     'Energy Usage',
@@ -70,7 +70,7 @@ class TipCategoriesView extends StatelessWidget {
                   )),
               OutlinedButton(
                   onPressed: () {
-                    model.routeToHomeView();
+                    model.routeToTipsView("Water");
                   },
                   child: const Text(
                     'Water Usage',
@@ -80,7 +80,7 @@ class TipCategoriesView extends StatelessWidget {
                   )),
               OutlinedButton(
                   onPressed: () {
-                    model.routeToHomeView();
+                    model.routeToTipsView("Transportation");
                   },
                   child: const Text(
                     'Transportation',

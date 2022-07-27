@@ -20,26 +20,26 @@ class SharedViewModel extends BaseViewModel {
   void _initMethod() {}
 
   void routeToHomeView() {
-    _navigationService.navigateTo(HomeViewRoute);
+    _navigationService.navigateTo(homeViewRoute);
   }
 
-  void routeToTipsView() {
-    _navigationService.navigateTo(TipsViewRoute);
+  void routeToTipsView(String category) {
+    _navigationService.navigateTo(tipsViewRoute, arguments: category);
   }
 
   void routeToTipCategoriesView() {
-    _navigationService.navigateTo(TipCategoriesViewRoute);
+    _navigationService.navigateTo(tipCategoriesViewRoute);
   }
 
   void routeToStatsView() {
-    _navigationService.navigateTo(StatsViewRoute);
+    _navigationService.navigateTo(statsViewRoute);
   }
 
   void routeToAboutForterraView() {
-    _navigationService.navigateTo(AboutForterraViewRoute);
+    _navigationService.navigateTo(aboutForterraViewRoute);
   }
 
   void routeToAboutUSView() {
-    _navigationService.navigateTo(AboutUsViewRoute);
+    _navigationService.navigateTo(aboutUsViewRoute);
   }
 }

@@ -1,8 +1,6 @@
 import 'package:cut_my_carbon/viewmodels/aboutus_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
-import 'package:cut_my_carbon/Forterra Icon/Ficon.dart';
 
 class AboutUsView extends StatelessWidget {
   const AboutUsView({Key? key, required this.title}) : super(key: key);

@@ -1,4 +1,6 @@
 /// A value mapping the View UI to the state in the Model.
+// ignore_for_file: constant_identifier_names
+
 enum ViewState {
   /// When nothing is happening or just initialized
 

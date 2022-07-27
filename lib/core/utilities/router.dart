@@ -28,21 +28,23 @@ class Router {
   }
 
   static Widget _generateRoute(RouteSettings settings) {
-    //final arguments = settings.arguments;
+    //final arguments = settings.arguments as String;
+    //final String category = arguments.toString();
     String tempSettings = settings.name ?? '';
     routeName(tempSettings);
     switch (settings.name) {
-      case HomeViewRoute:
+      case homeViewRoute:
         return const HomeView(title: "Test");
-      case TipsViewRoute:
-        return TipsView(title: "Tips");
-      case TipCategoriesViewRoute:
+      case tipsViewRoute:
+        var tipCategory = settings.arguments as String;
+        return TipsView(category: tipCategory);
+      case tipCategoriesViewRoute:
         return const TipCategoriesView(title: "Tip Categories");
-      case StatsViewRoute:
+      case statsViewRoute:
         return StatsView(title: "Stats");
-      case AboutForterraViewRoute:
-        return AboutFView(title: "About Forterra");
-      case AboutUsViewRoute:
+      case aboutForterraViewRoute:
+        return const AboutFView(title: "About Forterra");
+      case aboutUsViewRoute:
         return const AboutUsView(title: "About Cut My Carbon");
       default:
         return Scaffold(

@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/stats_viewmodel.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 
-import '../Forterra Icon/Ficon.dart';
 //import '../models/Stat.dart';
 
 class StatsView extends StatelessWidget {
@@ -68,10 +66,10 @@ class StatsView extends StatelessWidget {
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                model.routeToTipsView();
+                model.routeToTipCategoriesView();
               },
               onLongPress: () {
-                model.routeToTipsView();
+                model.routeToTipCategoriesView();
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(170, 40),
