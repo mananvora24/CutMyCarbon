@@ -3,7 +3,7 @@ import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 
 class TipsViewModel extends SharedViewModel {
   TipsViewModel();
-  int myTipOrder = 1;
+  int myTipOrder = 0;
   CollectionReference userTips =
       FirebaseFirestore.instance.collection('UsertTips');
   String userTip = "";
