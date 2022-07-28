@@ -12,6 +12,17 @@ class TipCategoriesView extends StatelessWidget {
       create: (context) => TipsViewModel(),
       child: Consumer<TipsViewModel>(
         builder: (context, model, child) => Scaffold(
+            appBar: AppBar(
+              /*automaticallyImplyLeading: true,*/
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios_new_rounded),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              backgroundColor: Color.fromARGB(255, 119, 188, 63),
+              elevation: 0,
+            ),
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             body: Center(
                 child: Column(children: [
