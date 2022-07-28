@@ -28,7 +28,6 @@ class NavigationServiceImpl implements NavigationService {
 
   @override
   Future<dynamic> navigateTo(String routeName, {dynamic arguments}) {
-    print('NavigationService navigateTo $routeName');
     return _navigationKey.currentState!
         .pushNamed(routeName, arguments: arguments);
   }

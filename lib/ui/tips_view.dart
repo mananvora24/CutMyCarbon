@@ -12,66 +12,56 @@ class TipsView extends StatelessWidget {
       create: (context) => TipsViewModel(),
       child: Consumer<TipsViewModel>(
         builder: (context, model, child) => Scaffold(
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-            body: Stack(children: [
-              Container(
-                height: 600.0,
-                width: 600.0,
-                margin: const EdgeInsets.symmetric(vertical: 50),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/Logo.png'),
-                    fit: BoxFit.contain,
-                  ),
-                  shape: BoxShape.rectangle,
-                ),
+            appBar: AppBar(
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
+              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+              elevation: 0,
+            ),
+            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            body: Column(children: [
               Container(
-                  margin: const EdgeInsets.symmetric(vertical: 80),
-                  child: model.getData(category)
-                  /*
-                StreamBuilder<QuerySnapshot>(
-                  stream: _tipStream,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return const Text('Something went wrong');
-                    }
-
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    return ListView(
-                      children:
-                          snapshot.data!.docs.map((DocumentSnapshot document) {
-                        Map<String, dynamic> data =
-                            document.data()! as Map<String, dynamic>;
-                        Text tip = const Text("");
-                        bool tipFound = false;
-                        data.forEach((key, value) {
-                          if (data['Category'].toString().compareTo(category) ==
-                                  0 &&
-                              !tipFound) {
-                            print("Category found - tip found");
-                            tipFound = true;
-                            tip = Text("${data['TipID']} => ${data['Tip']}",
-                                textAlign: TextAlign.center,
-                                //overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25.0));
-                          } else {
-                            print("Category found - no tip found");
-                            // tip = const Text("No Tip found");
-                          }
-                        });
-                        return tip;
-                      }).toList(),
-                    );
-                  },
-                ),*/
-                  ),
+                margin: const EdgeInsets.symmetric(vertical: 50),
+                alignment: Alignment.topCenter,
+                child: Text(category,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 25.0)),
+              ),
+              Center(
+                child: FutureBuilder<String>(
+                    future: model.getTipForUser(category, 'user1234'),
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<String> snapshot,
+                    ) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Error');
+                        } else if (snapshot.hasData) {
+                          return Text(snapshot.data!,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25.0));
+                        } else {
+                          return const Text('Empty data');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    }),
+              ),
+              const SizedBox(height: 80),
+              Image.asset(
+                'assets/Logo.png',
+              ),
             ]),
             persistentFooterButtons: [
               const SizedBox(height: 30),

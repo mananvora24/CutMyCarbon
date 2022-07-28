@@ -1,66 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
-import 'package:flutter/material.dart';
 
 class TipsViewModel extends SharedViewModel {
   TipsViewModel();
+  int myTipOrder = 1;
+  CollectionReference userTips =
+      FirebaseFirestore.instance.collection('UsertTips');
+  String dataText = "";
 
-  final Stream<QuerySnapshot> _tipStream =
-      FirebaseFirestore.instance.collection('Tips').snapshots();
-  int myTipID = 0;
-
-  StreamBuilder<QuerySnapshot<Object?>> getData(String category) {
-    /*
-    print("Called getData with category = $category");
-    final databaseReference = FirebaseDatabase.instance.ref("/Tips");
-    return databaseReference.once();
-    */
-    StreamBuilder<QuerySnapshot> queryStreamBuilder =
-        StreamBuilder<QuerySnapshot>(
-      stream: _tipStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return const Text('Something went wrong');
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        bool tipFound = false;
-        return ListView(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data =
-                document.data()! as Map<String, dynamic>;
-            Text tip = const Text("");
-            data.forEach((key, value) {
-              if (data['Category'].toString().compareTo(category) == 0 &&
-                  !tipFound) {
-                print("Category found - tip found");
-                tipFound = true;
-                myTipID = data['TipID'];
-                tip = Text("${data['TipID']} => ${data['Tip']}",
-                    textAlign: TextAlign.center,
-                    //overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 25.0));
-              } else {
-                print("Category found - no tip found");
-                // tip = const Text("No Tip found");
-              }
-            });
-            return tip;
-          }).toList(),
-        );
-      },
-    );
-    //if (queryStreamBuilder.initialData!.docs.isNotEmpty) {
-    //  return queryStreamBuilder.initialData!.docs;
-    //}
-    return queryStreamBuilder;
+  Future<String> getTipForUser(String category, String user) async {
+    bool tipFound = false;
+    await FirebaseFirestore.instance
+        .collection('Tips')
+        .where('Category', isEqualTo: category)
+        .orderBy('TipOrder')
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      List<dynamic> data = querySnapshot.docs;
+      if (data.isEmpty) {
+        print("Data is empty");
+      }
+      for (var snapshot in data) {
+        Map<String, dynamic>? tipData = snapshot.data();
+        tipData?.forEach((key, value) {
+          if (tipData['TipOrder'] > myTipOrder && !tipFound) {
+            // Found the tip needed
+            tipFound = true;
+            dataText = "${tipData['TipOrder']} => ${tipData['Tip']}";
+          }
+        });
+      }
+    });
+    return dataText;
   }
 
-  int getMyTipID() {
-    return myTipID;
+  int getMyTipOrder() {
+    return myTipOrder;
   }
 }
