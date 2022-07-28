@@ -12,40 +12,20 @@ class AboutUsView extends StatelessWidget {
       create: (context) => AboutUsViewModel(),
       child: Consumer<AboutUsViewModel>(
         builder: (context, model, child) => Scaffold(
-            appBar: AppBar(
-              /*automaticallyImplyLeading: true,*/
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios_new_rounded),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              backgroundColor: Color.fromARGB(255, 119, 188, 63),
-              elevation: 0,
+          appBar: AppBar(
+            /*automaticallyImplyLeading: true,*/
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_new_rounded),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-            body: const Center(child: Text("This is about Cut My Carbon.")),
-            persistentFooterButtons: [
-              const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  model.routeToHomeView();
-                },
-                onLongPress: () {
-                  model.routeToHomeView();
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(170, 40),
-                  padding: const EdgeInsets.all(10),
-                ),
-                child: const Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ]),
+            backgroundColor: Color.fromARGB(255, 119, 188, 63),
+            elevation: 0,
+          ),
+          backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+          body: const Center(child: Text("This is about Cut My Carbon.")),
+        ),
       ),
     );
   }

@@ -58,25 +58,6 @@ class StatsView extends StatelessWidget {
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                model.routeToHomeView();
-              },
-              onLongPress: () {
-                model.routeToHomeView();
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(170, 40),
-                padding: const EdgeInsets.all(10),
-              ),
-              child: const Text(
-                'Home',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
                 model.routeToTipCategoriesView();
               },
               onLongPress: () {
