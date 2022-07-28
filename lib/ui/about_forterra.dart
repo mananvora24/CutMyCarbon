@@ -15,15 +15,15 @@ class AboutFView extends StatelessWidget {
           appBar: AppBar(
             /*automaticallyImplyLeading: true,*/
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_rounded),
+              icon: const Icon(Icons.arrow_back_ios_new_rounded),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            backgroundColor: Color.fromARGB(255, 119, 188, 63),
+            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             elevation: 0,
           ),
-          backgroundColor: Color.fromARGB(255, 119, 188, 63),
+          backgroundColor: const Color.fromARGB(255, 119, 188, 63),
           body: const Center(
               child: Text(
                   "This is about Forterra. It is the sponsor of this App")),

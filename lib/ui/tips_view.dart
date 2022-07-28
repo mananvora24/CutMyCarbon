@@ -1,15 +1,10 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TipsView extends StatelessWidget {
-  TipsView({Key? key, required this.category}) : super(key: key);
+  const TipsView({Key? key, required this.category}) : super(key: key);
   final String category;
-  final Stream<QuerySnapshot> _tipStream =
-      FirebaseFirestore.instance.collection('Tips').snapshots();
 
   @override
   Widget build(BuildContext context) {
