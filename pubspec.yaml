@@ -98,11 +98,7 @@ flutter:
   fonts:
     - family: Forterra
       fonts:
-<<<<<<< HEAD
       - asset: assets/korinth-serial-bold.ttf
-=======
-      - asset: assets/korinth-serial-bold.ttf 
->>>>>>> fb04a2eec9ebf38ee2d8689c3395451bd2abae85
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

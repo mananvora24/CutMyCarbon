@@ -1,4 +1,5 @@
 import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,49 +20,42 @@ class TipsView extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
+              title: Text(category,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 25.0)),
               backgroundColor: const Color.fromARGB(255, 119, 188, 63),
               elevation: 0,
             ),
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-            body: Column(children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 50),
-                alignment: Alignment.topCenter,
-                child: Text(category,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 25.0)),
-              ),
-              Center(
-                child: FutureBuilder<String>(
-                    future: model.getTipForUser(category, 'user1234'),
-                    builder: (
-                      BuildContext context,
-                      AsyncSnapshot<String> snapshot,
-                    ) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.done) {
-                        if (snapshot.hasError) {
-                          return const Text('Error');
-                        } else if (snapshot.hasData) {
-                          return Text(snapshot.data!,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 25.0));
-                        } else {
-                          return const Text('Empty data');
-                        }
+            body:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              FutureBuilder<String>(
+                  future: model.getTipForUser(category, 'user1234'),
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<String> snapshot,
+                  ) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return const Text('Error');
+                      } else if (snapshot.hasData) {
+                        return Text(snapshot.data!,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25.0,
+                              color: Colors.white,
+                            ));
                       } else {
-                        return Text('State: ${snapshot.connectionState}');
+                        return const Text('Empty data');
                       }
-                    }),
-              ),
-              const SizedBox(height: 80),
-              Image.asset(
-                'assets/Logo.png',
-              ),
+                    } else {
+                      return Text('State: ${snapshot.connectionState}');
+                    }
+                  }),
             ]),
             persistentFooterButtons: [
               const SizedBox(height: 30),
@@ -73,7 +67,7 @@ class TipsView extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                 ),
                 child: const Text(
-                  'Select',
+                  'Skip',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -88,7 +82,7 @@ class TipsView extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                 ),
                 child: const Text(
-                  'Skip',
+                  'Select',
                   style: TextStyle(
                     fontSize: 20,
                   ),

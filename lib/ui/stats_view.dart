@@ -54,27 +54,6 @@ class StatsView extends StatelessWidget {
               );
             },
           ),
-          persistentFooterButtons: [
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                model.routeToTipCategoriesView();
-              },
-              onLongPress: () {
-                model.routeToTipCategoriesView();
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(170, 40),
-                padding: const EdgeInsets.all(10),
-              ),
-              child: const Text(
-                'Tips',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            )
-          ],
         ),
       ),
     );
