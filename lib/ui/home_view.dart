@@ -62,48 +62,56 @@ class HomeView extends StatelessWidget {
                 'assets/Logo.png',
               ),
               const SizedBox(height: 60),
-              ElevatedButton(
-                onPressed: () async {
-                  bool tipSelected = await model.checkTipStatus('user1234');
-                  if (tipSelected) {
-                    model.routeToTipStatusUpdateView();
-                  } else {
-                    model.routeToTipCategoriesView();
-                  }
-                },
-                onLongPress: () {
-                  model.routeToTipCategoriesView();
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(340, 80),
-                  padding: const EdgeInsets.all(30),
-                ),
-                child: FutureBuilder<String>(
-                    future: model.getTipsButtonText(),
-                    builder: (
-                      BuildContext context,
-                      AsyncSnapshot<String> snapshot,
-                    ) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.done) {
-                        if (snapshot.hasError) {
-                          return const Text('Error');
-                        } else if (snapshot.hasData) {
-                          return Text(snapshot.data!,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 25.0));
-                        } else {
-                          return const Text('Empty data');
-                        }
+              SizedBox(
+                  width: width * 0.8,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      bool tipSelected = await model.checkTipStatus('user1234');
+                      if (tipSelected) {
+                        model.routeToTipStatusUpdateView();
                       } else {
-                        return Text('State: ${snapshot.connectionState}');
+                        model.routeToTipCategoriesView();
                       }
-                    }),
-              ),
-              const SizedBox(height: 30),
+                    },
+                    onLongPress: () async {
+                      bool tipSelected = await model.checkTipStatus('user1234');
+                      if (tipSelected) {
+                        model.routeToTipStatusUpdateView();
+                      } else {
+                        model.routeToTipCategoriesView();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(10),
+                    ),
+                    child: FutureBuilder<String>(
+                        future: model.getTipsButtonText(),
+                        builder: (
+                          BuildContext context,
+                          AsyncSnapshot<String> snapshot,
+                        ) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            if (snapshot.hasError) {
+                              return const Text('Error');
+                            } else if (snapshot.hasData) {
+                              return Text(snapshot.data!,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30.0));
+                            } else {
+                              return const Text('Empty data');
+                            }
+                          } else {
+                            return Text('State: ${snapshot.connectionState}');
+                          }
+                        }),
+                  )),
+              const SizedBox(height: 40),
               SizedBox(
                   width: width * 0.8,
                   child: ElevatedButton(
