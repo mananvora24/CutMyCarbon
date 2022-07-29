@@ -10,6 +10,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -103,24 +104,25 @@ class HomeView extends StatelessWidget {
                     }),
               ),
               const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  model.routeToStatsView();
-                },
-                onLongPress: () {
-                  model.routeToStatsView();
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(340, 80),
-                  padding: const EdgeInsets.all(30),
-                ),
-                child: const Text(
-                  'Statistics',
-                  style: TextStyle(
-                    fontSize: 40,
-                  ),
-                ),
-              )
+              SizedBox(
+                  width: width * 0.8,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      model.routeToStatsView();
+                    },
+                    onLongPress: () {
+                      model.routeToStatsView();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(10),
+                    ),
+                    child: const Text(
+                      'Statistics',
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
+                  )),
             ]),
           ),
         ),
