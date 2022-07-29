@@ -66,8 +66,12 @@ class TipsView extends StatelessWidget {
             persistentFooterButtons: [
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {},
-                onLongPress: () {},
+                onPressed: () {
+                  model.saveSelectedTip();
+                },
+                onLongPress: () {
+                  model.saveSelectedTip();
+                },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),
                   padding: const EdgeInsets.all(10),

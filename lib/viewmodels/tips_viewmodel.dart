@@ -7,6 +7,7 @@ class TipsViewModel extends SharedViewModel {
   CollectionReference userTips =
       FirebaseFirestore.instance.collection('UsertTips');
   String userTip = "";
+  Map<String, dynamic>? tipData = {};
 
   Future<int> getUserCategoryTipOrder(String category, String user) async {
     await FirebaseFirestore.instance
@@ -20,13 +21,34 @@ class TipsViewModel extends SharedViewModel {
         print("Data is empty");
       }
       for (var snapshot in data) {
-        Map<String, dynamic>? tipData = snapshot.data();
+        tipData = snapshot.data();
         tipData?.forEach((key, value) {
-          myTipOrder = tipData['TipOrder'];
+          myTipOrder = tipData!['TipOrder'];
         });
       }
     });
     return myTipOrder;
+  }
+
+  Future<void> saveSelectedTip() async {
+    await userTips
+        .doc("$tipData['User']$tipData['Category']$tipData['TipOrder']")
+        .update(
+          {'TipOrder': "$tipData['TipOrder']"},
+        )
+        .then((value) => print("UserTips Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+
+  Future<void> saveTipStatus(String category, String user) async {
+    await FirebaseFirestore.instance
+        .collection('UserTipStatus')
+        .doc("$user" "TipCheck")
+        .set({'Category': "", 'Selected': false, 'User': user},
+            SetOptions(merge: true))
+        .then((value) => print("UserTipStatus Updated"))
+        .catchError(
+            (error) => print("Failed to update user tip status: $error"));
   }
 
   Future<String> getTipForUser(String category, String user) async {

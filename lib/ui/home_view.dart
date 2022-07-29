@@ -62,8 +62,13 @@ class HomeView extends StatelessWidget {
               ),
               const SizedBox(height: 60),
               ElevatedButton(
-                onPressed: () {
-                  model.routeToTipCategoriesView();
+                onPressed: () async {
+                  bool tipSelected = await model.checkTipStatus('user1234');
+                  if (tipSelected) {
+                    model.routeToTipStatusUpdateView();
+                  } else {
+                    model.routeToTipCategoriesView();
+                  }
                 },
                 onLongPress: () {
                   model.routeToTipCategoriesView();
@@ -72,12 +77,30 @@ class HomeView extends StatelessWidget {
                   minimumSize: const Size(340, 80),
                   padding: const EdgeInsets.all(30),
                 ),
-                child: const Text(
-                  'Select Your Tip',
-                  style: TextStyle(
-                    fontSize: 40,
-                  ),
-                ),
+                child: FutureBuilder<String>(
+                    future: model.getTipsButtonText(),
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<String> snapshot,
+                    ) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Error');
+                        } else if (snapshot.hasData) {
+                          return Text(snapshot.data!,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25.0));
+                        } else {
+                          return const Text('Empty data');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    }),
               ),
               const SizedBox(height: 30),
               ElevatedButton(

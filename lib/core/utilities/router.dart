@@ -1,6 +1,8 @@
 import 'package:cut_my_carbon/ui/about_forterra.dart';
 import 'package:cut_my_carbon/ui/about_us.dart';
 import 'package:cut_my_carbon/ui/stats_view.dart';
+import 'package:cut_my_carbon/ui/tip_selected.dart';
+import 'package:cut_my_carbon/ui/tip_status_update.dart';
 import 'package:cut_my_carbon/ui/tipcategories_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/ui/home_view.dart';
@@ -40,6 +42,16 @@ class Router {
         return TipsView(category: tipCategory);
       case tipCategoriesViewRoute:
         return const TipCategoriesView(title: "Tip Categories");
+      case tipStatusUpdateViewRoute:
+        return const TipStatusUpdateView(
+          title: "Tip Status Update",
+          category: '',
+        );
+      case tipSelectedViewRoute:
+        return const TipSelectedView(
+          title: "Tip Selected",
+          category: '',
+        );
       case statsViewRoute:
         return StatsView(title: "Stats");
       case aboutForterraViewRoute:
