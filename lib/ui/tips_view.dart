@@ -1,18 +1,10 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 
-import '../Forterra Icon/Ficon.dart';
-
 class TipsView extends StatelessWidget {
-  TipsView({Key? key, required this.title}) : super(key: key);
-  final String title;
-  final Stream<QuerySnapshot> _tipStream =
-      FirebaseFirestore.instance.collection('Tips').snapshots();
+  const TipsView({Key? key, required this.category}) : super(key: key);
+  final String category;
 
   @override
   Widget build(BuildContext context) {
@@ -21,44 +13,56 @@ class TipsView extends StatelessWidget {
       child: Consumer<TipsViewModel>(
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
-              /*automaticallyImplyLeading: true,*/
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios_new_rounded),
+                icon: const Icon(Icons.arrow_back_ios_new_rounded),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              backgroundColor: Color.fromARGB(255, 119, 188, 63),
+              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
               elevation: 0,
             ),
-            backgroundColor: Color.fromARGB(255, 119, 188, 63),
-            body: //Center(
-                //child: Column(children: [
-                StreamBuilder<QuerySnapshot>(
-              stream: _tipStream,
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Something went wrong');
-                }
-
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                }
-
-                return ListView(
-                  children:
-                      snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                        document.data()! as Map<String, dynamic>;
-                    return ListTile(
-                      title: Text(data['Category']),
-                      subtitle: Text(data['Tip']),
-                    );
-                  }).toList(),
-                );
-              },
-            ),
+            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            body: Column(children: [
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 50),
+                alignment: Alignment.topCenter,
+                child: Text(category,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 25.0)),
+              ),
+              Center(
+                child: FutureBuilder<String>(
+                    future: model.getTipForUser(category, 'user1234'),
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<String> snapshot,
+                    ) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Error');
+                        } else if (snapshot.hasData) {
+                          return Text(snapshot.data!,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25.0));
+                        } else {
+                          return const Text('Empty data');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    }),
+              ),
+              const SizedBox(height: 80),
+              Image.asset(
+                'assets/Logo.png',
+              ),
+            ]),
             persistentFooterButtons: [
               const SizedBox(height: 30),
               ElevatedButton(

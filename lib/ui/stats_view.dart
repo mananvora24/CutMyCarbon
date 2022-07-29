@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/stats_viewmodel.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 
-import '../Forterra Icon/Ficon.dart';
 //import '../models/Stat.dart';
 
 class StatsView extends StatelessWidget {
@@ -23,12 +21,12 @@ class StatsView extends StatelessWidget {
           appBar: AppBar(
             /*automaticallyImplyLeading: true,*/
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_rounded),
+              icon: const Icon(Icons.arrow_back_ios_new_rounded),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            backgroundColor: Color.fromARGB(255, 119, 188, 63),
+            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             elevation: 0,
           ),
           backgroundColor: const Color.fromARGB(255, 119, 188, 63),
@@ -60,29 +58,10 @@ class StatsView extends StatelessWidget {
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                model.routeToHomeView();
+                model.routeToTipCategoriesView();
               },
               onLongPress: () {
-                model.routeToHomeView();
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(170, 40),
-                padding: const EdgeInsets.all(10),
-              ),
-              child: const Text(
-                'Home',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                model.routeToTipsView();
-              },
-              onLongPress: () {
-                model.routeToTipsView();
+                model.routeToTipCategoriesView();
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(170, 40),

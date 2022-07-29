@@ -1,6 +1,6 @@
-const String HomeViewRoute = 'HomeView';
-const String TipsViewRoute = 'TipsView';
-const String TipCategoriesViewRoute = 'TipCategoriesView';
-const String StatsViewRoute = 'StatsView';
-const String AboutForterraViewRoute = 'AboutForterraView';
-const String AboutUsViewRoute = 'AboutUsView';
+const String homeViewRoute = 'HomeView';
+const String tipsViewRoute = 'TipsView';
+const String tipCategoriesViewRoute = 'TipCategoriesView';
+const String statsViewRoute = 'StatsView';
+const String aboutForterraViewRoute = 'AboutForterraView';
+const String aboutUsViewRoute = 'AboutUsView';

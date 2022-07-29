@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class NavigationService {
-  GlobalKey<NavigatorState> _navigationKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _navigationKey = GlobalKey<NavigatorState>();
   GlobalKey<NavigatorState> get navigationKey => _navigationKey;
   void pop(returnValue);
   Future<dynamic> navigateTo(String routeName, {dynamic arguments});
@@ -16,7 +16,7 @@ abstract class NavigationService {
 
 class NavigationServiceImpl implements NavigationService {
   @override
-  GlobalKey<NavigatorState> _navigationKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _navigationKey = GlobalKey<NavigatorState>();
 
   @override
   GlobalKey<NavigatorState> get navigationKey => _navigationKey;
@@ -28,7 +28,6 @@ class NavigationServiceImpl implements NavigationService {
 
   @override
   Future<dynamic> navigateTo(String routeName, {dynamic arguments}) {
-    print('NavigationService navigateTo $routeName');
     return _navigationKey.currentState!
         .pushNamed(routeName, arguments: arguments);
   }
