@@ -8,7 +8,7 @@ class TipStatusUpdateView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -47,6 +47,20 @@ class TipStatusUpdateView extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                  width: width * 0.8,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(10),
+                    ),
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
+                  )),
             ]),
           ),
         ),
