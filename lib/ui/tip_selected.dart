@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TipSelectedView extends StatelessWidget {
-  const TipSelectedView({Key? key, required this.category}) : super(key: key);
+  const TipSelectedView({Key? key, required this.category, required this.tip})
+      : super(key: key);
   final String category;
+  final String tip;
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+
     return ChangeNotifierProvider(
       create: (context) => TipSelectedViewModel(),
       child: Consumer<TipSelectedViewModel>(
@@ -28,15 +32,20 @@ class TipSelectedView extends StatelessWidget {
             ),
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             body: Column(children: [
-              const SizedBox(height: 80),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 50),
-                alignment: Alignment.topCenter,
-                child: Text(category,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 25.0)),
+              SizedBox(height: height * 0.07),
+              const Text("Thank you. You selected: ",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
+              Text(tip,
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
+              SizedBox(height: height * 0.07),
+              Image.asset(
+                'assets/Logo.png',
               ),
+              SizedBox(height: height * 0.07),
               Center(
                 child: FutureBuilder<String>(
                     future: model.getCategoryFact(category),
@@ -63,12 +72,10 @@ class TipSelectedView extends StatelessWidget {
                       }
                     }),
               ),
-              Image.asset(
-                'assets/Logo.png',
-              ),
+              SizedBox(height: height * 0.07),
             ]),
             persistentFooterButtons: [
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () {
                   model.routeToHomeView();
@@ -77,7 +84,7 @@ class TipSelectedView extends StatelessWidget {
                   model.routeToHomeView();
                 },
                 style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(170, 40),
+                  minimumSize: const Size(170, 30),
                   padding: const EdgeInsets.all(10),
                 ),
                 child: const Text(
