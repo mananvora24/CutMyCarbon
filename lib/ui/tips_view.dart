@@ -79,7 +79,11 @@ class TipsView extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Update Status
+                  // Navigate to next page
+                  // pass correct args
+                },
                 onLongPress: () {},
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),
