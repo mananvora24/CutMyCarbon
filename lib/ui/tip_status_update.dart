@@ -32,8 +32,8 @@ class TipStatusUpdateView extends StatelessWidget {
               ),
               const Text('Enter the number of days you completed the activity',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20.0)),
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
               const SizedBox(
                 height: 50,
               ),
@@ -46,6 +46,10 @@ class TipStatusUpdateView extends StatelessWidget {
                     hintText: '1',
                   ),
                 ),
+              ),
+              const SizedBox(height: 80),
+              Image.asset(
+                'assets/Logo.png',
               ),
             ]),
           ),
