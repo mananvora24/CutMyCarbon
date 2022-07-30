@@ -45,7 +45,7 @@ class Router {
       case tipStatusUpdateViewRoute:
         return const TipStatusUpdateView(
           title: "Tip Status Update",
-          category: '',
+//          category: '',
         );
       case tipSelectedViewRoute:
         return const TipSelectedView(

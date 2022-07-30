@@ -32,6 +32,4 @@ class HomeViewModel extends SharedViewModel {
     }
     return 'Select Your Tip';
   }
-
-  void routeToTipStatusUpdateView() {}
 }

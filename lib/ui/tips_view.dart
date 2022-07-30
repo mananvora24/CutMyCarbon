@@ -56,6 +56,10 @@ class TipsView extends StatelessWidget {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   }),
+              const SizedBox(height: 80),
+              Image.asset(
+                'assets/Logo.png',
+              ),
             ]),
             persistentFooterButtons: [
               const SizedBox(height: 30),

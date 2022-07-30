@@ -1,15 +1,14 @@
-import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class TipStatusUpdateView extends StatelessWidget {
-  const TipStatusUpdateView(
-      {Key? key, required this.category, required String title})
-      : super(key: key);
-  final String category;
+  const TipStatusUpdateView({Key? key, required this.title}) : super(key: key);
+  final String title;
 
   @override
   Widget build(BuildContext context) {
+    //double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -25,48 +24,31 @@ class TipStatusUpdateView extends StatelessWidget {
             elevation: 0,
           ),
           backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-          body: Column(children: [
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 50),
-              alignment: Alignment.topCenter,
-              child: Text(category,
+          body: Center(
+            child: Column(children: [
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
+                alignment: Alignment.topRight,
+              ),
+              const Text('Enter the number of days you completed the activity',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 25.0)),
-            ),
-            const Center(
-                /*
-              child: FutureBuilder<String>(
-                  future: model.getTipForUser(category, 'user1234'),
-                  builder: (
-                    BuildContext context,
-                    AsyncSnapshot<String> snapshot,
-                  ) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return const Text('Error');
-                      } else if (snapshot.hasData) {
-                        return Text(snapshot.data!,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 25.0));
-                      } else {
-                        return const Text('Empty data');
-                      }
-                    } else {
-                      return Text('State: ${snapshot.connectionState}');
-                    }
-                  }),
-                  */
+                      fontWeight: FontWeight.bold, fontSize: 20.0)),
+              const SizedBox(
+                height: 50,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: '1',
+                  ),
                 ),
-            const SizedBox(height: 80),
-            Image.asset(
-              'assets/Logo.png',
-            ),
-          ]),
+              ),
+            ]),
+          ),
         ),
       ),
     );
