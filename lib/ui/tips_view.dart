@@ -1,5 +1,4 @@
 import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -87,8 +86,13 @@ class TipsView extends StatelessWidget {
                   // Update Status
                   // Navigate to next page
                   // pass correct args
+                  print("Category - $category");
+                  model.routeToTipSelectedView(category);
                 },
-                onLongPress: () {},
+                onLongPress: () {
+                  print("Category - $category");
+                  model.routeToTipSelectedView(category);
+                },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),
                   padding: const EdgeInsets.all(10),
