@@ -43,7 +43,6 @@ class Router {
       case tipStatusUpdateViewRoute:
         return const TipStatusUpdateView(
           title: "Tip Status Update",
-//          category: '',
         );
       case tipSelectedViewRoute:
         var tipCategory = settings.arguments as String;
