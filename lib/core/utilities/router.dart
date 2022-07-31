@@ -31,8 +31,6 @@ class Router {
   }
 
   static Widget _generateRoute(RouteSettings settings) {
-    //final arguments = settings.arguments as String;
-    //final String category = arguments.toString();
     String tempSettings = settings.name ?? '';
     routeName(tempSettings);
     switch (settings.name) {
@@ -49,10 +47,9 @@ class Router {
 //          category: '',
         );
       case tipSelectedViewRoute:
-        return const TipSelectedView(
-          title: "Tip Selected",
-          category: '',
-        );
+        var tipCategory = settings.arguments as String;
+        var tip = settings.arguments as String;
+        return TipSelectedView(category: tipCategory, tip: tip);
       case statsViewRoute:
         return StatsView(title: "Stats");
       case aboutForterraViewRoute:

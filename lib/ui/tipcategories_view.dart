@@ -74,7 +74,7 @@ class TipCategoriesView extends StatelessWidget {
                   model.routeToTipsView("Energy");
                 },
                 child: const Text(
-                  'Energy Usage',
+                  'Energy',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -84,7 +84,7 @@ class TipCategoriesView extends StatelessWidget {
                   model.routeToTipsView("Water");
                 },
                 child: const Text(
-                  'Water Usage',
+                  'Water',
                   style: TextStyle(
                     fontSize: 20,
                   ),

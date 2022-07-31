@@ -1,5 +1,4 @@
 import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +8,9 @@ class TipsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    String tip = "";
+
     return ChangeNotifierProvider(
       create: (context) => TipsViewModel(),
       child: Consumer<TipsViewModel>(
@@ -42,6 +44,7 @@ class TipsView extends StatelessWidget {
                       if (snapshot.hasError) {
                         return const Text('Error');
                       } else if (snapshot.hasData) {
+                        tip = snapshot.data!;
                         return Text(snapshot.data!,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
@@ -56,13 +59,13 @@ class TipsView extends StatelessWidget {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   }),
-              const SizedBox(height: 80),
+              SizedBox(height: height * 0.07),
               Image.asset(
                 'assets/Logo.png',
               ),
             ]),
             persistentFooterButtons: [
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () {
                   model.saveSelectedTip();
@@ -81,14 +84,19 @@ class TipsView extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () {
                   // Update Status
                   // Navigate to next page
                   // pass correct args
+                  print("Category - $category");
+                  model.routeToTipSelectedView(category, tip);
                 },
-                onLongPress: () {},
+                onLongPress: () {
+                  print("Category - $category");
+                  model.routeToTipSelectedView(category, tip);
+                },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),
                   padding: const EdgeInsets.all(10),
