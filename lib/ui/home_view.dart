@@ -28,7 +28,9 @@ class HomeView extends StatelessWidget {
               SpeedDialChild(
                   child: const Icon(Icons.mail_rounded),
                   backgroundColor: Colors.green,
-                  onTap: () {}),
+                  onTap: () {
+                    model.routeToInboxView();
+                  }),
               SpeedDialChild(
                   child: const Icon(Icons.feedback_rounded),
                   backgroundColor: Colors.green,

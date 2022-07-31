@@ -7,6 +7,7 @@ import 'package:cut_my_carbon/ui/tipcategories_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:cut_my_carbon/ui/tips_view.dart';
+import 'package:cut_my_carbon/ui/inbox_view.dart';
 import 'package:cut_my_carbon/core/utilities/route_names.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -58,6 +59,8 @@ class Router {
         return const AboutFView(title: "About Forterra");
       case aboutUsViewRoute:
         return const AboutUsView(title: "About Cut My Carbon");
+      case inboxViewRoute:
+        return const InboxView(title: "Inbox");
       default:
         return Scaffold(
           body: Center(child: Text('No route defined for ${settings.name}')),

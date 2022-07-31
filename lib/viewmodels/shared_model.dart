@@ -50,4 +50,8 @@ class SharedViewModel extends BaseViewModel {
   void routeToTipStatusUpdateView() {
     _navigationService.navigateTo(tipStatusUpdateViewRoute);
   }
+
+  void routeToInboxView() {
+    _navigationService.navigateTo(inboxViewRoute);
+  }
 }
