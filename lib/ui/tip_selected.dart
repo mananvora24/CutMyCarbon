@@ -1,5 +1,4 @@
 import 'package:cut_my_carbon/viewmodels/tip_selected_viewmodel.dart';
-import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +11,7 @@ class TipSelectedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    print("Creating Selected View - category = $category, tip = $tip");
 
     return ChangeNotifierProvider(
       create: (context) => TipSelectedViewModel(),
@@ -39,8 +39,8 @@ class TipSelectedView extends StatelessWidget {
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
               Text(tip,
                   textAlign: TextAlign.center,
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 25.0)),
               SizedBox(height: height * 0.07),
               Image.asset(
                 'assets/Logo.png',

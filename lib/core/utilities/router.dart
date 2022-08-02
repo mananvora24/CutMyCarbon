@@ -47,9 +47,10 @@ class Router {
           title: "Tip Status Update",
         );
       case tipSelectedViewRoute:
-        var tipCategory = settings.arguments as String;
-        var tip = settings.arguments as String;
-        return TipSelectedView(category: tipCategory, tip: tip);
+        Map<String, String> tipArgs = settings.arguments as Map<String, String>;
+        String tip = tipArgs['tip']!;
+        String category = tipArgs['category']!;
+        return TipSelectedView(category: category, tip: tip);
       case statsViewRoute:
         return StatsView(title: "Stats");
       case aboutForterraViewRoute:

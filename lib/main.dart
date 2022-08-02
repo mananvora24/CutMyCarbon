@@ -1,4 +1,5 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
+import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cut_my_carbon/core/utilities/router.dart' as router;
@@ -44,7 +45,8 @@ class _MyAppState extends State<MyApp> {
           onGenerateRoute: (settings) =>
               router.Router.generateRoute(context, settings),
           title: 'Cut My Carbon',
-          home: const AuthView(title: "Test"),
+          // home: const AuthView(title: "Test"),
+          home: const HomeView(title: "Test"),
           // tips: TipsView()
         ),
       );

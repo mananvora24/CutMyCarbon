@@ -50,7 +50,9 @@ class TipStatusUpdateView extends StatelessWidget {
               SizedBox(
                   width: width * 0.8,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      model.submitTipsData('user1234', 5);
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(10),
                     ),
