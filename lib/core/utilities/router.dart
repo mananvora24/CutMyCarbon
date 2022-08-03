@@ -36,12 +36,19 @@ class Router {
     routeName(tempSettings);
     switch (settings.name) {
       case homeViewRoute:
-        return const HomeView(title: "Test");
+        var user = settings.arguments as String;
+        return HomeView(user: user);
       case tipsViewRoute:
-        var tipCategory = settings.arguments as String;
-        return TipsView(category: tipCategory);
+        Map<String, dynamic> tipArgs =
+            settings.arguments as Map<String, dynamic>;
+        String user = tipArgs['user']!;
+        String tipCategory = tipArgs['category']!;
+        int skipCount = tipArgs['skipCount']! as int;
+        return TipsView(
+            user: user, category: tipCategory, skipCount: skipCount);
       case tipCategoriesViewRoute:
-        return const TipCategoriesView(title: "Tip Categories");
+        var user = settings.arguments as String;
+        return TipCategoriesView(user: user);
       case tipStatusUpdateViewRoute:
         return const TipStatusUpdateView(
           title: "Tip Status Update",

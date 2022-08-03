@@ -23,12 +23,16 @@ class SharedViewModel extends BaseViewModel {
     _navigationService.navigateTo(homeViewRoute);
   }
 
-  void routeToTipsView(String category) {
-    _navigationService.navigateTo(tipsViewRoute, arguments: category);
+  void routeToTipsView(String user, String category, int skipCount) {
+    _navigationService.navigateTo(tipsViewRoute, arguments: {
+      'user': user,
+      'category': category,
+      'skipCount': skipCount
+    });
   }
 
-  void routeToTipCategoriesView() {
-    _navigationService.navigateTo(tipCategoriesViewRoute);
+  void routeToTipCategoriesView(String user) {
+    _navigationService.navigateTo(tipCategoriesViewRoute, arguments: user);
   }
 
   void routeToStatsView() {

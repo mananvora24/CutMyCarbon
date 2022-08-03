@@ -6,8 +6,8 @@ import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const HomeView({Key? key, required this.user}) : super(key: key);
+  final String user;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class HomeView extends StatelessWidget {
                       if (tipStatusData.tipSelected) {
                         model.routeToTipStatusUpdateView();
                       } else {
-                        model.routeToTipCategoriesView();
+                        model.routeToTipCategoriesView('user1234');
                       }
                     },
                     onLongPress: () {
@@ -87,7 +87,7 @@ class HomeView extends StatelessWidget {
                       if (tipStatusData.tipSelected) {
                         model.routeToTipStatusUpdateView();
                       } else {
-                        model.routeToTipCategoriesView();
+                        model.routeToTipCategoriesView('user1234');
                       }
                     },
                     style: ElevatedButton.styleFrom(

@@ -46,8 +46,7 @@ class _MyAppState extends State<MyApp> {
               router.Router.generateRoute(context, settings),
           title: 'Cut My Carbon',
           // home: const AuthView(title: "Test"),
-          home: const HomeView(title: "Test"),
-          // tips: TipsView()
+          home: const HomeView(user: "user1234"),
         ),
       );
 }
