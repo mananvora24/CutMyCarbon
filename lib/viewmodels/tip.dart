@@ -10,4 +10,9 @@ class TipsData {
     required this.tipOrder,
     required this.tip,
   });
+
+  @override
+  String toString() {
+    return "{category: $category, user: $user, tipOrder: $tipOrder, tip: $tip";
+  }
 }
