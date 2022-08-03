@@ -20,11 +20,7 @@ class TipsView extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     String tip = "";
     int tipOrder = 0;
-    //TipsData tip = TipsData(
-    //  category: "",
-    //  user: "",
-    //  tipOrder: 0,
-    //);
+    TipsData tipsData = TipsData(category: "", user: "", tipOrder: 0, tip: "");
 
     return ChangeNotifierProvider(
       create: (context) => TipsViewModel(),
@@ -61,6 +57,45 @@ class TipsView extends StatelessWidget {
                   ),
                   SizedBox(
                     width: width * .8,
+                    child: FutureBuilder<TipsData>(
+                        future: model.getTipForUser(
+                            category, 'user1234', skipCount),
+                        builder: (
+                          BuildContext context,
+                          AsyncSnapshot<TipsData> snapshot,
+                        ) {
+                          //
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            if (snapshot.hasError) {
+                              return const Text('Error');
+                            } else if (snapshot.hasData) {
+                              tipsData = snapshot.data!;
+                              print(
+                                  "Tips View Model : getTipForUser :  TipsData - $tipsData");
+
+                              return Text(tipsData.tip,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25.0,
+                                    color: Colors.white,
+                                  ));
+                            } else {
+                              return const Text('Empty data');
+                            }
+                          } else {
+                            return Text('State: ${snapshot.connectionState}');
+                          }
+                        }),
+                  ),
+
+/*
+                  SizedBox(
+                    width: width * .8,
                     child: FutureBuilder<String>(
                         future: model.getTipForUser(
                             category, 'user1234', skipCount),
@@ -93,6 +128,8 @@ class TipsView extends StatelessWidget {
                           }
                         }),
                   ),
+*/
+
                   SizedBox(height: height * 0.07),
                   Image.asset(
                     'assets/Logo.png',
@@ -124,11 +161,11 @@ class TipsView extends StatelessWidget {
                   // Update Status
                   // Navigate to next page
                   // pass correct args
-                  print("Category - $category");
+                  print("Select Button Pressed: TipsData - $tipsData");
                   // Save that this tip was selected
                   // --- Update tipStatus - save this tip is selected
                   // --- Create / Update user tip
-                  model.selectTip('user1234', category, tipOrder);
+                  model.selectTip('user1234', category, tipsData.tipOrder);
 
                   model.routeToTipSelectedView(category, tip);
                 },
