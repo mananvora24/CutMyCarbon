@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TipsView extends StatelessWidget {
-  const TipsView(
-      {Key? key,
-      required this.user,
-      required this.category,
-      required this.skipCount})
-      : super(key: key);
+  const TipsView({
+    Key? key,
+    required this.user,
+    required this.category,
+    required this.skipCount,
+  }) : super(key: key);
   final String user;
   final String category;
   final int skipCount;
@@ -18,13 +18,13 @@ class TipsView extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    String tip;
+    String tip = "";
+    int tipOrder = 0;
     //TipsData tip = TipsData(
     //  category: "",
     //  user: "",
     //  tipOrder: 0,
     //);
-    int tipOrder = 0;
 
     return ChangeNotifierProvider(
       create: (context) => TipsViewModel(),
@@ -128,9 +128,9 @@ class TipsView extends StatelessWidget {
                   // Save that this tip was selected
                   // --- Update tipStatus - save this tip is selected
                   // --- Create / Update user tip
-                  model.saveSelectedTip('user1234', category, tipOrder);
+                  model.selectTip('user1234', category, tipOrder);
 
-                  model.routeToTipSelectedView(category, category);
+                  model.routeToTipSelectedView(category, tip);
                 },
                 onLongPress: () {
                   print("Category - $category");

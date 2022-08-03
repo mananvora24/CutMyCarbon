@@ -33,27 +33,42 @@ class TipsViewModel extends SharedViewModel {
   Future<void> saveSelectedTip(
       String user, String category, int tipOrder) async {
     await userTips
-        .doc("$tipData['User']$tipData['Category']$tipData['TipOrder']")
-        .set({
+        .doc("$user$category$tipOrder")
+        .update({
           'Category': category,
           'User': user,
-          'TipOrder': "$tipData['TipOrder']",
+          'TipOrder': tipOrder,
           'Days': 0,
           'Week': 0,
-        }, SetOptions(merge: true))
-        .then((value) => print("UserTips Updated"))
+        }
+            // , SetOptions(merge: true)
+            )
+        .then((value) => print(
+            "UserTips Updated with values: Category=>$category, User=>$user, TipOrder=>$tipOrder, Days: 0, Week: 0"))
         .catchError((error) => print("Failed to update user: $error"));
   }
 
-  Future<void> saveTipStatus(String category, String user) async {
+  Future<void> saveTipStatus(String category, String user, int tipOrder) async {
     await FirebaseFirestore.instance
         .collection('UserTipStatus')
         .doc("$user" "TipCheck")
-        .set({'Category': "", 'Selected': false, 'User': user},
-            SetOptions(merge: true))
+        .update({
+          'Category': category,
+          'Selected': true,
+          'User': user,
+          'Completed': false,
+          'TipOrder': tipOrder
+        }
+            // , SetOptions(merge: true)
+            )
         .then((value) => print("UserTipStatus Updated"))
         .catchError(
             (error) => print("Failed to update user tip status: $error"));
+  }
+
+  Future<void> selectTip(String user, String category, int tipOrder) async {
+    await saveSelectedTip(user, category, tipOrder);
+    await saveTipStatus(category, user, tipOrder);
   }
 
   Future<String> getTipForUser(
@@ -76,13 +91,13 @@ class TipsViewModel extends SharedViewModel {
       for (var snapshot in data) {
         Map<String, dynamic>? tipData = snapshot.data();
         print("getTipForUser tipData: $tipData");
-        tipData?.forEach((key, value) {
-          if (tipData['TipOrder'] > tipOrder && !tipFound) {
-            // Found the tip needed
-            tipFound = true;
-            userTip = "${tipData['Tip']}";
-          }
-        });
+        //tipData?.forEach((key, value) {
+        if (tipData!['TipOrder'] > tipOrder && !tipFound) {
+          // Found the tip needed
+          tipFound = true;
+          userTip = "${tipData!['Tip']}";
+        }
+        //});
         break;
       }
     });

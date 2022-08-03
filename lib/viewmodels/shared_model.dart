@@ -27,7 +27,7 @@ class SharedViewModel extends BaseViewModel {
     _navigationService.navigateTo(tipsViewRoute, arguments: {
       'user': user,
       'category': category,
-      'skipCount': skipCount
+      'skipCount': skipCount,
     });
   }
 
