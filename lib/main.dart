@@ -1,8 +1,11 @@
+import 'package:cut_my_carbon/google_sign_in.dart';
+import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cut_my_carbon/core/utilities/router.dart' as router;
-import 'package:cut_my_carbon/ui/home_view.dart';
+import 'package:cut_my_carbon/ui/auth_view.dart';
 import 'package:cut_my_carbon/core/services/navigation_service.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 import 'locator.dart';
@@ -34,15 +37,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      navigatorKey: locator<NavigationService>().navigationKey,
-      onGenerateRoute: (settings) =>
-          router.Router.generateRoute(context, settings),
-      title: 'Cut My Carbon',
-      home: const HomeView(title: "Test"),
-      // tips: TipsView()
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+        create: (context) => GoogleSigninProvider(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorKey: locator<NavigationService>().navigationKey,
+          onGenerateRoute: (settings) =>
+              router.Router.generateRoute(context, settings),
+          title: 'Cut My Carbon',
+          // home: const AuthView(title: "Test"),
+          home: const HomeView(user: "user1234"),
+        ),
+      );
 }

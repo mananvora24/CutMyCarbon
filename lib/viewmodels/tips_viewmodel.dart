@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
+import 'package:cut_my_carbon/viewmodels/tip.dart';
 
 class TipsViewModel extends SharedViewModel {
   TipsViewModel();
@@ -11,7 +12,7 @@ class TipsViewModel extends SharedViewModel {
 
   Future<int> getUserCategoryTipOrder(String category, String user) async {
     await FirebaseFirestore.instance
-        .collection('UserTips')
+        .collection('UserTipStatus')
         .where('User', isEqualTo: user)
         .where('Category', isEqualTo: category)
         .get()
@@ -30,12 +31,17 @@ class TipsViewModel extends SharedViewModel {
     return myTipOrder;
   }
 
-  Future<void> saveSelectedTip() async {
+  Future<void> saveSelectedTip(
+      String user, String category, int tipOrder) async {
     await userTips
         .doc("$tipData['User']$tipData['Category']$tipData['TipOrder']")
-        .update(
-          {'TipOrder': "$tipData['TipOrder']"},
-        )
+        .set({
+          'Category': category,
+          'User': user,
+          'TipOrder': "$tipData['TipOrder']",
+          'Days': 0,
+          'Week': 0,
+        }, SetOptions(merge: true))
         .then((value) => print("UserTips Updated"))
         .catchError((error) => print("Failed to update user: $error"));
   }
@@ -51,9 +57,12 @@ class TipsViewModel extends SharedViewModel {
             (error) => print("Failed to update user tip status: $error"));
   }
 
-  Future<String> getTipForUser(String category, String user) async {
+  Future<TipsData> getTipForUser(
+      String category, String user, int skipCount) async {
     bool tipFound = false;
-    int tipOrder = await getUserCategoryTipOrder(category, user);
+    TipsData tipsData = TipsData(category: "", user: "", tipOrder: 0, tip: "");
+    int tipOrder = await getUserCategoryTipOrder(category, user) + skipCount;
+    print("getTipForUser tipOrder: $tipOrder");
     await FirebaseFirestore.instance
         .collection('Tips')
         .where('Category', isEqualTo: category)
@@ -65,19 +74,26 @@ class TipsViewModel extends SharedViewModel {
       if (data.isEmpty) {
         print("Data is empty");
       }
+      print("getTipForUser snapshot list: $data");
       for (var snapshot in data) {
         Map<String, dynamic>? tipData = snapshot.data();
-        tipData?.forEach((key, value) {
-          if (tipData['TipOrder'] > tipOrder && !tipFound) {
-            // Found the tip needed
-            tipFound = true;
-            userTip = "${tipData['TipOrder']} => ${tipData['Tip']}";
-          }
-        });
+        print("getTipForUser tipData: $tipData");
+        tipsData = TipsData(
+            category: tipData!['Category'],
+            user: tipData['User']!,
+            tipOrder: tipData['TipOrder'],
+            tip: tipData['Tip']);
+        //tipData?.forEach((key, value) {
+        if (tipData['TipOrder'] > tipOrder && !tipFound) {
+          // Found the tip needed
+          tipFound = true;
+          userTip = "${tipData['Tip']}";
+        }
+        //});
         break;
       }
     });
-    return userTip;
+    return tipsData;
   }
 
   int getMyTipOrder() {

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TipCategoriesView extends StatelessWidget {
-  const TipCategoriesView({Key? key, required this.title}) : super(key: key);
-  final String title;
+  TipCategoriesView({Key? key, required this.user}) : super(key: key);
+  final String user;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class TipCategoriesView extends StatelessWidget {
                 "Pick one of the categories to get your tip of the week"),
             OutlinedButton(
                 onPressed: () {
-                  model.routeToTipsView("Home");
+                  model.routeToTipsView(user, "Home", 0); // skipCount = 0
                 },
                 child: const Text(
                   'Home',
@@ -41,7 +41,7 @@ class TipCategoriesView extends StatelessWidget {
                 )),
             OutlinedButton(
                 onPressed: () {
-                  model.routeToTipsView("Food");
+                  model.routeToTipsView(user, "Food", 0); // skipCount = 0
                 },
                 child: const Text(
                   'Food',
@@ -51,7 +51,7 @@ class TipCategoriesView extends StatelessWidget {
                 )),
             OutlinedButton(
                 onPressed: () {
-                  model.routeToTipsView("Shopping");
+                  model.routeToTipsView(user, "Shopping", 0); // skipCount = 0
                 },
                 child: const Text(
                   'Shopping',
@@ -61,7 +61,7 @@ class TipCategoriesView extends StatelessWidget {
                 )),
             OutlinedButton(
                 onPressed: () {
-                  model.routeToTipsView("Offsetting");
+                  model.routeToTipsView(user, "Offsetting", 0); // skipCount = 0
                 },
                 child: const Text(
                   'Offsetting',
@@ -71,7 +71,7 @@ class TipCategoriesView extends StatelessWidget {
                 )),
             OutlinedButton(
                 onPressed: () {
-                  model.routeToTipsView("Energy");
+                  model.routeToTipsView(user, "Energy", 0); // skipCount = 0
                 },
                 child: const Text(
                   'Energy',
@@ -81,7 +81,7 @@ class TipCategoriesView extends StatelessWidget {
                 )),
             OutlinedButton(
                 onPressed: () {
-                  model.routeToTipsView("Water");
+                  model.routeToTipsView(user, "Water", 0); // skipCount = 0
                 },
                 child: const Text(
                   'Water',
@@ -91,7 +91,8 @@ class TipCategoriesView extends StatelessWidget {
                 )),
             OutlinedButton(
                 onPressed: () {
-                  model.routeToTipsView("Transportation");
+                  model.routeToTipsView(
+                      user, "Transportation", 0); // skipCount = 0
                 },
                 child: const Text(
                   'Transportation',

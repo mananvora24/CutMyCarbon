@@ -1,15 +1,24 @@
+import 'package:cut_my_carbon/viewmodels/tip.dart';
 import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TipsView extends StatelessWidget {
-  const TipsView({Key? key, required this.category}) : super(key: key);
+  const TipsView(
+      {Key? key,
+      required this.user,
+      required this.category,
+      required this.skipCount})
+      : super(key: key);
+  final String user;
   final String category;
+  final int skipCount;
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    String tip = "";
+    TipsData tip = TipsData(category: "", user: "", tipOrder: 0, tip: "");
+    int tipOrder = 0;
 
     return ChangeNotifierProvider(
       create: (context) => TipsViewModel(),
@@ -29,49 +38,61 @@ class TipsView extends StatelessWidget {
               elevation: 0,
             ),
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-            body:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              FutureBuilder<String>(
-                  future: model.getTipForUser(category, 'user1234'),
-                  builder: (
-                    BuildContext context,
-                    AsyncSnapshot<String> snapshot,
-                  ) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return const Text('Error');
-                      } else if (snapshot.hasData) {
-                        tip = snapshot.data!;
-                        return Text(snapshot.data!,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25.0,
-                              color: Colors.white,
-                            ));
-                      } else {
-                        return const Text('Empty data');
-                      }
-                    } else {
-                      return Text('State: ${snapshot.connectionState}');
-                    }
-                  }),
-              SizedBox(height: height * 0.07),
-              Image.asset(
-                'assets/Logo.png',
-              ),
-            ]),
+            body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text("Carbon saving recommendation:",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 25.0)),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  FutureBuilder<TipsData>(
+                      future:
+                          model.getTipForUser(category, 'user1234', skipCount),
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<TipsData> snapshot,
+                      ) {
+                        //
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.done) {
+                          if (snapshot.hasError) {
+                            return const Text('Error');
+                          } else if (snapshot.hasData) {
+                            tip = snapshot.data!;
+                            return Text(tip.tip,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25.0,
+                                  color: Colors.white,
+                                ));
+                          } else {
+                            return const Text('Empty data');
+                          }
+                        } else {
+                          return Text('State: ${snapshot.connectionState}');
+                        }
+                      }),
+                  SizedBox(height: height * 0.07),
+                  Image.asset(
+                    'assets/Logo.png',
+                  ),
+                ]),
             persistentFooterButtons: [
               SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () {
-                  model.saveSelectedTip();
+                  model.routeToTipsView(user, category, skipCount + 1);
                 },
                 onLongPress: () {
-                  model.saveSelectedTip();
+                  model.routeToTipsView(user, category, skipCount + 1);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),
@@ -91,11 +112,16 @@ class TipsView extends StatelessWidget {
                   // Navigate to next page
                   // pass correct args
                   print("Category - $category");
-                  model.routeToTipSelectedView(category, tip);
+                  // Save that this tip was selected
+                  // --- Update tipStatus - save this tip is selected
+                  // --- Create / Update user tip
+                  model.saveSelectedTip('user1234', category, tipOrder);
+
+                  model.routeToTipSelectedView(category, tip.tip);
                 },
                 onLongPress: () {
                   print("Category - $category");
-                  model.routeToTipSelectedView(category, tip);
+                  model.routeToTipSelectedView(category, tip.tip);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),

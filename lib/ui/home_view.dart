@@ -1,3 +1,4 @@
+import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:cut_my_carbon/Forterra Icon/Ficon.dart';
@@ -5,12 +6,18 @@ import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const HomeView({Key? key, required this.user}) : super(key: key);
+  final String user;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    TipStatusData tipStatusData = TipStatusData(
+        category: "",
+        user: "",
+        tipOrder: 0,
+        tipSelected: false,
+        tipCompleted: false);
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -67,30 +74,30 @@ class HomeView extends StatelessWidget {
               SizedBox(
                   width: width * 0.8,
                   child: ElevatedButton(
-                    onPressed: () async {
-                      bool tipSelected = await model.checkTipStatus('user1234');
-                      if (tipSelected) {
+                    onPressed: () {
+                      //tipStatusData = await model.checkTipStatus('user1234');
+                      if (tipStatusData.tipSelected) {
                         model.routeToTipStatusUpdateView();
                       } else {
-                        model.routeToTipCategoriesView();
+                        model.routeToTipCategoriesView('user1234');
                       }
                     },
-                    onLongPress: () async {
-                      bool tipSelected = await model.checkTipStatus('user1234');
-                      if (tipSelected) {
+                    onLongPress: () {
+                      //tipStatusData = await model.checkTipStatus('user1234');
+                      if (tipStatusData.tipSelected) {
                         model.routeToTipStatusUpdateView();
                       } else {
-                        model.routeToTipCategoriesView();
+                        model.routeToTipCategoriesView('user1234');
                       }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(10),
                     ),
-                    child: FutureBuilder<String>(
-                        future: model.getTipsButtonText(),
+                    child: FutureBuilder<TipStatusData>(
+                        future: model.checkTipStatus('user1234'),
                         builder: (
                           BuildContext context,
-                          AsyncSnapshot<String> snapshot,
+                          AsyncSnapshot<TipStatusData> snapshot,
                         ) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
@@ -100,7 +107,9 @@ class HomeView extends StatelessWidget {
                             if (snapshot.hasError) {
                               return const Text('Error');
                             } else if (snapshot.hasData) {
-                              return Text(snapshot.data!,
+                              tipStatusData = snapshot.data!;
+                              return Text(
+                                  model.getTipsButtonText(tipStatusData),
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
