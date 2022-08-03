@@ -8,6 +8,7 @@ class TipStatusUpdateView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController daysController = TextEditingController();
     double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
@@ -37,11 +38,14 @@ class TipStatusUpdateView extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child: TextField(
+                  controller: daysController,
+                  obscureText: true,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: '1',
                   ),
@@ -69,4 +73,4 @@ class TipStatusUpdateView extends StatelessWidget {
       ),
     );
   }
-}
+}//daysController.text
