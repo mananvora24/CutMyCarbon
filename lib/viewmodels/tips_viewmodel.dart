@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
-import 'package:cut_my_carbon/viewmodels/tip.dart';
 
 class TipsViewModel extends SharedViewModel {
   TipsViewModel();
@@ -57,10 +56,9 @@ class TipsViewModel extends SharedViewModel {
             (error) => print("Failed to update user tip status: $error"));
   }
 
-  Future<TipsData> getTipForUser(
+  Future<String> getTipForUser(
       String category, String user, int skipCount) async {
     bool tipFound = false;
-    TipsData tipsData = TipsData(category: "", user: "", tipOrder: 0, tip: "");
     int tipOrder = await getUserCategoryTipOrder(category, user) + skipCount;
     print("getTipForUser tipOrder: $tipOrder");
     await FirebaseFirestore.instance
@@ -78,22 +76,17 @@ class TipsViewModel extends SharedViewModel {
       for (var snapshot in data) {
         Map<String, dynamic>? tipData = snapshot.data();
         print("getTipForUser tipData: $tipData");
-        tipsData = TipsData(
-            category: tipData!['Category'],
-            user: tipData['User']!,
-            tipOrder: tipData['TipOrder'],
-            tip: tipData['Tip']);
-        //tipData?.forEach((key, value) {
-        if (tipData['TipOrder'] > tipOrder && !tipFound) {
-          // Found the tip needed
-          tipFound = true;
-          userTip = "${tipData['Tip']}";
-        }
-        //});
+        tipData?.forEach((key, value) {
+          if (tipData['TipOrder'] > tipOrder && !tipFound) {
+            // Found the tip needed
+            tipFound = true;
+            userTip = "${tipData['Tip']}";
+          }
+        });
         break;
       }
     });
-    return tipsData;
+    return userTip;
   }
 
   int getMyTipOrder() {
