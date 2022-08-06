@@ -11,6 +11,7 @@ class TipSelectedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     print("Creating Selected View - category = $category, tip = $tip");
 
     return ChangeNotifierProvider(
@@ -32,21 +33,28 @@ class TipSelectedView extends StatelessWidget {
             ),
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             body: Column(children: [
-              SizedBox(height: height * 0.07),
-              const Text("Thank you. You selected: ",
-                  textAlign: TextAlign.center,
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
-              Text(tip,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 25.0)),
-              SizedBox(height: height * 0.07),
+              SizedBox(height: height * 0.03),
+              SizedBox(
+                width: width * 0.9,
+                child: const Text("Thank you. You selected: ",
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
+              ),
+              SizedBox(
+                width: width * 0.9,
+                child: Text(tip,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 25.0)),
+              ),
+              SizedBox(height: height * 0.04),
               Image.asset(
                 'assets/Logo.png',
               ),
-              SizedBox(height: height * 0.07),
-              Center(
+              SizedBox(height: height * 0.06),
+              SizedBox(
+                width: width * 0.9,
                 child: FutureBuilder<String>(
                     future: model.getCategoryFact(category),
                     builder: (
