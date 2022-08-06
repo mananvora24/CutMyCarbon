@@ -7,6 +7,7 @@ import 'package:cut_my_carbon/ui/auth_view.dart';
 import 'package:cut_my_carbon/core/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+import 'package:cut_my_carbon/ui/signin_view.dart';
 
 import 'locator.dart';
 import 'dart:io';
@@ -46,7 +47,9 @@ class _MyAppState extends State<MyApp> {
               router.Router.generateRoute(context, settings),
           title: 'Cut My Carbon',
           // home: const AuthView(title: "Test"),
-          home: const HomeView(user: "user1234"),
+          home: const SignInView(
+            title: 'home',
+          ),
         ),
       );
 }

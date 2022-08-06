@@ -52,23 +52,25 @@ class TipStatusUpdateView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                  width: width * 0.8,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      var days = int.parse(daysController.text);
-                      model.submitTipsData('user1234', days);
-                      print(days);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(10),
+                width: width * 0.8,
+                child: ElevatedButton(
+                  onPressed: () {
+                    var days = int.parse(daysController.text);
+                    model.submitTipsData('user1234', days);
+                    print(days);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(170, 30),
+                    padding: const EdgeInsets.all(10),
+                  ),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontSize: 20,
                     ),
-                    child: const Text(
-                      'Submit',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
-                    ),
-                  )),
+                  ),
+                ),
+              ),
             ]),
           ),
         ),
