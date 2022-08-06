@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert';
 
 class TipStatusUpdateView extends StatelessWidget {
   const TipStatusUpdateView({Key? key, required this.title}) : super(key: key);
@@ -44,7 +43,7 @@ class TipStatusUpdateView extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child: TextField(
                   controller: daysController,
-                  obscureText: true,
+                  obscureText: false,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -53,23 +52,25 @@ class TipStatusUpdateView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                  width: width * 0.8,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      var days = int.parse(daysController.text);
-                      model.submitTipsData('user1234', days);
-                      print(days);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(10),
+                width: width * 0.8,
+                child: ElevatedButton(
+                  onPressed: () {
+                    var days = int.parse(daysController.text);
+                    model.submitTipsData('user1234', days);
+                    print(days);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(170, 30),
+                    padding: const EdgeInsets.all(10),
+                  ),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontSize: 20,
                     ),
-                    child: const Text(
-                      'Submit',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
-                    ),
-                  )),
+                  ),
+                ),
+              ),
             ]),
           ),
         ),
