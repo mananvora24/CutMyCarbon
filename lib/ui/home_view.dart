@@ -6,7 +6,8 @@ import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key, required this.user}) : super(key: key);
+  const HomeView({Key? key, required this.user, required String title})
+      : super(key: key);
   final String user;
 
   @override

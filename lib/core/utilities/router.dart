@@ -38,7 +38,7 @@ class Router {
     switch (settings.name) {
       case homeViewRoute:
         var user = settings.arguments as String;
-        return HomeView(user: user);
+        return HomeView(title: "Home", user: user);
       case tipsViewRoute:
         Map<String, dynamic> tipArgs =
             settings.arguments as Map<String, dynamic>;
