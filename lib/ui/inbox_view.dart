@@ -72,10 +72,10 @@ class InboxView extends StatelessWidget {
               SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () {
-                  model.routeToHomeView();
+                  model.routeToHomeView('user1234');
                 },
                 onLongPress: () {
-                  model.routeToHomeView();
+                  model.routeToHomeView('user1234');
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 30),

@@ -54,6 +54,7 @@ class SignInView extends StatelessWidget {
               ]),
             ),
             persistentFooterButtons: [
+/*              
               SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () {
@@ -72,6 +73,7 @@ class SignInView extends StatelessWidget {
                   ),
                 ),
               ),
+*/
             ]),
       ),
     );

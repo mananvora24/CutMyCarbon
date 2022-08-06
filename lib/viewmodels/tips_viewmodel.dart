@@ -5,8 +5,7 @@ import 'package:cut_my_carbon/viewmodels/tip.dart';
 class TipsViewModel extends SharedViewModel {
   TipsViewModel();
   int myTipOrder = 0;
-  CollectionReference userTips =
-      FirebaseFirestore.instance.collection('UsertTips');
+
   String userTip = "";
   Map<String, dynamic>? tipData = {};
 
@@ -40,7 +39,7 @@ class TipsViewModel extends SharedViewModel {
         .update({
           //'Category': category,
           //'User': user,
-          //'TipOrder': tipOrder,
+          'TipOrder': tipOrder,
           'Days': 0,
           'Week': 0,
         }

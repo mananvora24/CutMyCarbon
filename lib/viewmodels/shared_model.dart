@@ -19,8 +19,8 @@ class SharedViewModel extends BaseViewModel {
 
   void _initMethod() {}
 
-  void routeToHomeView() {
-    _navigationService.navigateTo(homeViewRoute);
+  void routeToHomeView(String user) {
+    _navigationService.navigateTo(homeViewRoute, arguments: user);
   }
 
   void routeToTipsView(String user, String category, int skipCount) {
@@ -52,8 +52,9 @@ class SharedViewModel extends BaseViewModel {
         arguments: {'category': category, 'tip': tip});
   }
 
-  void routeToTipStatusUpdateView() {
-    _navigationService.navigateTo(tipStatusUpdateViewRoute);
+  void routeToTipStatusUpdateView(String user, String category, int tipOrder) {
+    _navigationService.navigateTo(tipStatusUpdateViewRoute,
+        arguments: {'user': user, 'category': category, 'tipOrder': tipOrder});
   }
 
   void routeToInboxView() {

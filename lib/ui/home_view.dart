@@ -78,7 +78,8 @@ class HomeView extends StatelessWidget {
                     onPressed: () {
                       //tipStatusData = await model.checkTipStatus('user1234');
                       if (tipStatusData.tipSelected) {
-                        model.routeToTipStatusUpdateView();
+                        model.routeToTipStatusUpdateView(tipStatusData.user,
+                            tipStatusData.category, tipStatusData.tipOrder);
                       } else {
                         model.routeToTipCategoriesView('user1234');
                       }
@@ -86,7 +87,8 @@ class HomeView extends StatelessWidget {
                     onLongPress: () {
                       //tipStatusData = await model.checkTipStatus('user1234');
                       if (tipStatusData.tipSelected) {
-                        model.routeToTipStatusUpdateView();
+                        model.routeToTipStatusUpdateView(tipStatusData.user,
+                            tipStatusData.category, tipStatusData.tipOrder);
                       } else {
                         model.routeToTipCategoriesView('user1234');
                       }

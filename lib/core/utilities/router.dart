@@ -51,9 +51,13 @@ class Router {
         var user = settings.arguments as String;
         return TipCategoriesView(user: user);
       case tipStatusUpdateViewRoute:
-        return const TipStatusUpdateView(
-          title: "Tip Status Update",
-        );
+        Map<String, dynamic> tipArgs =
+            settings.arguments as Map<String, dynamic>;
+        String user = tipArgs['user']!;
+        String category = tipArgs['category']!;
+        int tipOrder = tipArgs['tipOrder']! as int;
+        return TipStatusUpdateView(
+            user: user, category: category, tipOrder: tipOrder);
       case signInViewRoute:
         return const SignInView(
           title: "SignIn",
