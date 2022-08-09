@@ -74,8 +74,8 @@ class TipsView extends StatelessWidget {
                               return const Text('Error');
                             } else if (snapshot.hasData) {
                               tipsData = snapshot.data!;
-                              print(
-                                  "Tips View Model : getTipForUser :  TipsData - $tipsData");
+                              //print(
+                              //    "Tips View Model : getTipForUser :  TipsData - $tipsData");
 
                               return Text(tipsData.tip,
                                   textAlign: TextAlign.center,
@@ -92,44 +92,6 @@ class TipsView extends StatelessWidget {
                           }
                         }),
                   ),
-
-/*
-                  SizedBox(
-                    width: width * .8,
-                    child: FutureBuilder<String>(
-                        future: model.getTipForUser(
-                            category, 'user1234', skipCount),
-                        builder: (
-                          BuildContext context,
-                          AsyncSnapshot<String> snapshot,
-                        ) {
-                          //
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            if (snapshot.hasError) {
-                              return const Text('Error');
-                            } else if (snapshot.hasData) {
-                              tip = snapshot.data!;
-                              return Text(tip,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25.0,
-                                    color: Colors.white,
-                                  ));
-                            } else {
-                              return const Text('Empty data');
-                            }
-                          } else {
-                            return Text('State: ${snapshot.connectionState}');
-                          }
-                        }),
-                  ),
-*/
-
                   SizedBox(height: height * 0.07),
                   Image.asset(
                     'assets/Logo.png',
@@ -167,11 +129,11 @@ class TipsView extends StatelessWidget {
                   // --- Create / Update user tip
                   model.selectTip('user1234', category, tipsData.tipOrder);
 
-                  model.routeToTipSelectedView(category, tip);
+                  model.routeToTipSelectedView(category, tipsData.tip);
                 },
                 onLongPress: () {
                   print("Category - $category");
-                  model.routeToTipSelectedView(category, category);
+                  model.routeToTipSelectedView(category, tip);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),

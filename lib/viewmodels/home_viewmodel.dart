@@ -36,20 +36,19 @@ class HomeViewModel extends SharedViewModel {
             tipCompleted: tipData!['Completed']);
       }
     });
-    //print("Calling getCurrentTip next $tipStatusData");
-    //await getCurrentTip(user);
     return tipStatusData;
   }
 
-  Future<Map<String, dynamic>> getCurrentTip(String user) async {
+  Future<Map<String, dynamic>> getCurrentTip(
+      String user, String category, int tipOrder) async {
     List<dynamic> dataList = List.empty();
     Map<String, dynamic> currentTip = {};
     print("getCurrentTip - Before Query: $TipStatusData");
     await FirebaseFirestore.instance
         .collection('UserTips')
         .where('User', isEqualTo: user)
-        .where('Category', isEqualTo: "{$this.tipStatusData.category")
-        .where('TipOrder', isEqualTo: "{$this.tipStatusData.tipOrder")
+        .where('Category', isEqualTo: category)
+        .where('TipOrder', isEqualTo: tipOrder)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       dataList = querySnapshot.docs;
@@ -80,9 +79,10 @@ class HomeViewModel extends SharedViewModel {
     });
   }
 
-  submitTipsData(String user, int days) async {
-    Map<String, dynamic> currentTip = await getCurrentTip(user);
-    currentTip.forEach((key, value) {});
+  submitTipsData(String user, String category, int tipOrder, int days) async {
+    Map<String, dynamic> currentTip =
+        await getCurrentTip(user, category, tipOrder);
+    // currentTip.forEach((key, value) {});
     await saveTipsCarbonDays(
         user, currentTip['Category'], currentTip['TipOrder'], days, 25);
   }

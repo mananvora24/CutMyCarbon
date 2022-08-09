@@ -3,8 +3,15 @@ import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class TipStatusUpdateView extends StatelessWidget {
-  const TipStatusUpdateView({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const TipStatusUpdateView({
+    Key? key,
+    required this.user,
+    required this.category,
+    required this.tipOrder,
+  }) : super(key: key);
+  final String user;
+  final String category;
+  final int tipOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +63,7 @@ class TipStatusUpdateView extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     var days = int.parse(daysController.text);
-                    model.submitTipsData('user1234', days);
+                    model.submitTipsData('user1234', category, tipOrder, days);
                     print(days);
                   },
                   style: ElevatedButton.styleFrom(

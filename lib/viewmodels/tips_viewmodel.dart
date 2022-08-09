@@ -5,8 +5,7 @@ import 'package:cut_my_carbon/viewmodels/tip.dart';
 class TipsViewModel extends SharedViewModel {
   TipsViewModel();
   int myTipOrder = 0;
-  CollectionReference userTips =
-      FirebaseFirestore.instance.collection('UsertTips');
+
   String userTip = "";
   Map<String, dynamic>? tipData = {};
 
@@ -33,11 +32,13 @@ class TipsViewModel extends SharedViewModel {
 
   Future<void> saveSelectedTip(
       String user, String category, int tipOrder) async {
-    await userTips
+    print("User Tips Document key: $user$category$tipOrder");
+    await FirebaseFirestore.instance
+        .collection('UserTips')
         .doc("$user$category$tipOrder")
         .update({
-          'Category': category,
-          'User': user,
+          //'Category': category,
+          //'User': user,
           'TipOrder': tipOrder,
           'Days': 0,
           'Week': 0,
@@ -71,40 +72,6 @@ class TipsViewModel extends SharedViewModel {
     await saveSelectedTip(user, category, tipOrder);
     await saveTipStatus(category, user, tipOrder);
   }
-/*
-  Future<String> getTipForUser(
-      String category, String user, int skipCount) async {
-    bool tipFound = false;
-    int tipOrder = await getUserCategoryTipOrder(category, user) + skipCount;
-    print("getTipForUser tipOrder: $tipOrder");
-    await FirebaseFirestore.instance
-        .collection('Tips')
-        .where('Category', isEqualTo: category)
-        .where('TipOrder', isGreaterThan: tipOrder)
-        .orderBy('TipOrder')
-        .get()
-        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
-      List<dynamic> data = querySnapshot.docs;
-      if (data.isEmpty) {
-        print("Data is empty");
-      }
-      print("getTipForUser snapshot list: $data");
-      for (var snapshot in data) {
-        Map<String, dynamic>? tipData = snapshot.data();
-        print("getTipForUser tipData: $tipData");
-        //tipData?.forEach((key, value) {
-        if (tipData!['TipOrder'] > tipOrder && !tipFound) {
-          // Found the tip needed
-          tipFound = true;
-          userTip = "${tipData['Tip']}";
-        }
-        //});
-        break;
-      }
-    });
-    return userTip;
-  }
-  */
 
   Future<TipsData> getTipForUser(
       String category, String user, int skipCount) async {

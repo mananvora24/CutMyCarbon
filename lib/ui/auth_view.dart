@@ -35,7 +35,7 @@ class AuthView extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasData) {
-                  model.routeToHomeView();
+                  model.routeToHomeView('user1234');
                   return Text('');
                 } else if (snapshot.hasError) {
                   return Center(child: Text("Error"));
