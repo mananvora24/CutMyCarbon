@@ -1,4 +1,4 @@
-import 'package:cut_my_carbon/viewmodels/tip_selected_viewmodel.dart';
+import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,8 +15,8 @@ class TipSelectedView extends StatelessWidget {
     print("Creating Selected View - category = $category, tip = $tip");
 
     return ChangeNotifierProvider(
-      create: (context) => TipSelectedViewModel(),
-      child: Consumer<TipSelectedViewModel>(
+      create: (context) => HomeViewModel(),
+      child: Consumer<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
               leading: IconButton(

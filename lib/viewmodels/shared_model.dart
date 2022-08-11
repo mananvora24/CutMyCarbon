@@ -57,6 +57,16 @@ class SharedViewModel extends BaseViewModel {
         arguments: {'user': user, 'category': category, 'tipOrder': tipOrder});
   }
 
+  void routeToTipStatusResultView(
+      String user, String category, int tipOrder, int days) {
+    _navigationService.navigateTo(tipStatusResultsViewRoute, arguments: {
+      'user': user,
+      'category': category,
+      'tipOrder': tipOrder,
+      'days': days
+    });
+  }
+
   void routeToInboxView() {
     _navigationService.navigateTo(inboxViewRoute);
   }
