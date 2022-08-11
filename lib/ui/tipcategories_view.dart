@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TipCategoriesView extends StatelessWidget {
-  TipCategoriesView({Key? key, required this.user}) : super(key: key);
+  const TipCategoriesView({Key? key, required this.user}) : super(key: key);
   final String user;
 
   @override
