@@ -36,15 +36,13 @@ class TipsViewModel extends SharedViewModel {
     await FirebaseFirestore.instance
         .collection('UserTips')
         .doc("$user$category$tipOrder")
-        .update({
-          //'Category': category,
-          //'User': user,
+        .set({
+          'Category': category,
+          'User': user,
           'TipOrder': tipOrder,
           'Days': 0,
           'Week': 0,
-        }
-            // , SetOptions(merge: true)
-            )
+        }, SetOptions(merge: true))
         .then((value) => print(
             "UserTips Updated with values: Category=>$category, User=>$user, TipOrder=>$tipOrder, Days: 0, Week: 0"))
         .catchError((error) => print("Failed to update user: $error"));
@@ -55,15 +53,13 @@ class TipsViewModel extends SharedViewModel {
     await FirebaseFirestore.instance
         .collection('UserTipStatus')
         .doc("$user" "TipCheck")
-        .update({
+        .set({
           'Category': category,
           'Selected': true,
           'User': user,
           'Completed': false,
           'TipOrder': tipOrder
-        }
-            // , SetOptions(merge: true)
-            )
+        }, SetOptions(merge: true))
         .then((value) => print("UserTipStatus Updated"))
         .catchError(
             (error) => print("Failed to update user tip status: $error"));

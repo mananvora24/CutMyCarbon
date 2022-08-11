@@ -50,7 +50,8 @@ class TipStatusResultsView extends StatelessWidget {
                 SizedBox(
                   width: width * 0.9,
                   child: FutureBuilder<int>(
-                      future: model.getTipCarbon(category, tipOrder, days),
+                      future:
+                          model.getTipCarbon(user, category, tipOrder, days),
                       builder: (
                         BuildContext context,
                         AsyncSnapshot<int> snapshot,
