@@ -50,7 +50,8 @@ class TipsViewModel extends SharedViewModel {
         .catchError((error) => print("Failed to update user: $error"));
   }
 
-  Future<void> saveTipStatus(String category, String user, int tipOrder) async {
+  Future<void> saveTipStatusSelected(
+      String category, String user, int tipOrder) async {
     await FirebaseFirestore.instance
         .collection('UserTipStatus')
         .doc("$user" "TipCheck")
@@ -70,7 +71,7 @@ class TipsViewModel extends SharedViewModel {
 
   Future<void> selectTip(String user, String category, int tipOrder) async {
     await saveSelectedTip(user, category, tipOrder);
-    await saveTipStatus(category, user, tipOrder);
+    await saveTipStatusSelected(category, user, tipOrder);
   }
 
   Future<TipsData> getTipForUser(
