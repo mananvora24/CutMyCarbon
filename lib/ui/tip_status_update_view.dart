@@ -65,6 +65,8 @@ class TipStatusUpdateView extends StatelessWidget {
                     var days = int.parse(daysController.text);
                     model.submitTipsData('user1234', category, tipOrder, days);
                     print(days);
+                    model.routeToTipStatusResultView(
+                        user, category, tipOrder, days);
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(170, 30),

@@ -1,6 +1,4 @@
-import 'package:cut_my_carbon/core/utilities/route_names.dart';
 import 'package:cut_my_carbon/google_sign_in.dart';
-import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/viewmodels/auth_viewmodel.dart';
@@ -13,7 +11,6 @@ class AuthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
         create: (context) => AuthViewModel(),
         child: Consumer<AuthViewModel>(

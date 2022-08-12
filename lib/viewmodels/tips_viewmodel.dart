@@ -36,33 +36,30 @@ class TipsViewModel extends SharedViewModel {
     await FirebaseFirestore.instance
         .collection('UserTips')
         .doc("$user$category$tipOrder")
-        .update({
-          //'Category': category,
-          //'User': user,
+        .set({
+          'Category': category,
+          'User': user,
           'TipOrder': tipOrder,
           'Days': 0,
           'Week': 0,
-        }
-            // , SetOptions(merge: true)
-            )
+        }, SetOptions(merge: true))
         .then((value) => print(
             "UserTips Updated with values: Category=>$category, User=>$user, TipOrder=>$tipOrder, Days: 0, Week: 0"))
         .catchError((error) => print("Failed to update user: $error"));
   }
 
-  Future<void> saveTipStatus(String category, String user, int tipOrder) async {
+  Future<void> saveTipStatusSelected(
+      String category, String user, int tipOrder) async {
     await FirebaseFirestore.instance
         .collection('UserTipStatus')
         .doc("$user" "TipCheck")
-        .update({
+        .set({
           'Category': category,
           'Selected': true,
           'User': user,
           'Completed': false,
           'TipOrder': tipOrder
-        }
-            // , SetOptions(merge: true)
-            )
+        }, SetOptions(merge: true))
         .then((value) => print("UserTipStatus Updated"))
         .catchError(
             (error) => print("Failed to update user tip status: $error"));
@@ -70,7 +67,7 @@ class TipsViewModel extends SharedViewModel {
 
   Future<void> selectTip(String user, String category, int tipOrder) async {
     await saveSelectedTip(user, category, tipOrder);
-    await saveTipStatus(category, user, tipOrder);
+    await saveTipStatusSelected(category, user, tipOrder);
   }
 
   Future<TipsData> getTipForUser(

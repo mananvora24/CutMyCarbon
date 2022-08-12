@@ -7,6 +7,8 @@ class HomeViewModel extends SharedViewModel {
   // This is a hacky way to do.
   // There is a better way - create a POJO and then instance of POJO
   Map<String, dynamic>? tipData = {};
+  String fact = "";
+  Map<String, dynamic>? factsData = {};
 
   Future<TipStatusData> checkTipStatus(String user) async {
     TipStatusData tipStatusData = TipStatusData(
@@ -82,9 +84,10 @@ class HomeViewModel extends SharedViewModel {
   submitTipsData(String user, String category, int tipOrder, int days) async {
     Map<String, dynamic> currentTip =
         await getCurrentTip(user, category, tipOrder);
-    // currentTip.forEach((key, value) {});
+    print("Submit Tips Data => Save carbon days");
     await saveTipsCarbonDays(
         user, currentTip['Category'], currentTip['TipOrder'], days, 25);
+    await saveTipStatusCompleted(category, user, tipOrder);
   }
 
   String getTipsButtonText(TipStatusData tipStatusData) {
@@ -92,5 +95,106 @@ class HomeViewModel extends SharedViewModel {
       return 'Submit Your Tip Update';
     }
     return 'Select Your Tip';
+  }
+
+  Future<String> getCategoryFact(String category) async {
+    await FirebaseFirestore.instance
+        .collection('CategoryFacts')
+        .where('Category', isEqualTo: category)
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      List<dynamic> data = querySnapshot.docs;
+      if (data.isEmpty) {
+        print("Data is empty");
+      }
+      for (var snapshot in data) {
+        factsData = snapshot.data();
+        factsData?.forEach((key, value) {
+          fact = factsData!["Fact"];
+        });
+      }
+    });
+    return fact;
+  }
+
+  Future<int> getTipCarbon(
+      String user, String category, int tipOrder, int days) async {
+    int carbon = 0;
+    await FirebaseFirestore.instance
+        .collection('Tips')
+        .where('Category', isEqualTo: category)
+        .where('TipOrder', isEqualTo: tipOrder)
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      List<dynamic> data = querySnapshot.docs;
+      if (data.isEmpty) {
+        print("Data is empty");
+      }
+      Map<String, dynamic> tipsData;
+      for (var snapshot in data) {
+        tipsData = snapshot.data();
+        carbon = tipsData["Carbon"] * days;
+      }
+    });
+
+    // Get current Tip Stats and update them
+    Map<String, dynamic> statsData = {
+      'lastWeekCarbon': 0,
+      'lastWeekPossibleCarbon': 0,
+      'totalCarbon': 0,
+      'totalPossibleCarbon': 0,
+      'totalTons': 0,
+      'user': user,
+      'userID': 0,
+    };
+    await FirebaseFirestore.instance
+        .collection('UserStatistics')
+        .where('user', isEqualTo: user)
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      List<dynamic> data = querySnapshot.docs;
+      if (data.isEmpty) {
+        print("User Statistics: Data is empty");
+      }
+      for (var snapshot in data) {
+        statsData = snapshot.data();
+      }
+    });
+
+    // Set Tip Carbon Stats now
+    await FirebaseFirestore.instance
+        .collection('UserStatistics')
+        .doc("$user" "TipStats")
+        .set({
+          'lastWeekCarbon': carbon,
+          'lastWeekPossibleCarbon': carbon,
+          'totalCarbon': carbon + statsData['totalCarbon'],
+          'totalPossibleCarbon': carbon + statsData['totalPossibleCarbon'],
+          'totalTons': (carbon + statsData['totalPossibleCarbon']) / 1000,
+          'user': user,
+          'userID': 0,
+        }, SetOptions(merge: true))
+        .then((value) => print("UserStatistics complete Updated"))
+        .catchError(
+            (error) => print("Failed to update user tip status: $error"));
+
+    return carbon;
+  }
+
+  Future<void> saveTipStatusCompleted(
+      String category, String user, int tipOrder) async {
+    await FirebaseFirestore.instance
+        .collection('UserTipStatus')
+        .doc("$user" "TipCheck")
+        .set({
+          'Category': category,
+          'Selected': true,
+          'User': user,
+          'Completed': true,
+          'TipOrder': tipOrder
+        }, SetOptions(merge: true))
+        .then((value) => print("UserTipStatus complete Updated"))
+        .catchError(
+            (error) => print("Failed to update user tip status: $error"));
   }
 }

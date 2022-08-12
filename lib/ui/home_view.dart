@@ -44,10 +44,6 @@ class HomeView extends StatelessWidget {
                   backgroundColor: Colors.green,
                   onTap: () {}),
               SpeedDialChild(
-                  child: const Icon(Icons.tips_and_updates_rounded),
-                  backgroundColor: Colors.green,
-                  onTap: () {}),
-              SpeedDialChild(
                   child: const Icon(Icons.info_rounded),
                   backgroundColor: Colors.green,
                   onTap: () {
@@ -108,15 +104,13 @@ class HomeView extends StatelessWidget {
                           } else if (snapshot.connectionState ==
                               ConnectionState.done) {
                             if (snapshot.hasError) {
-                              return const Text('Error');
+                              return Text('Error: ${snapshot.error}');
                             } else if (snapshot.hasData) {
                               tipStatusData = snapshot.data!;
                               return Text(
                                   model.getTipsButtonText(tipStatusData),
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30.0));
+                                  style: const TextStyle(fontSize: 30.0));
                             } else {
                               return const Text('Empty data');
                             }

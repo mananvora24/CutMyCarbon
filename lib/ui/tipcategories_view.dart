@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TipCategoriesView extends StatelessWidget {
-  TipCategoriesView({Key? key, required this.user}) : super(key: key);
+  const TipCategoriesView({Key? key, required this.user}) : super(key: key);
   final String user;
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return ChangeNotifierProvider(
       create: (context) => TipsViewModel(),
       child: Consumer<TipsViewModel>(
@@ -27,8 +29,16 @@ class TipCategoriesView extends StatelessWidget {
           body: Center(
               child: Column(children: [
             const SizedBox(height: 70),
-            const Text(
-                "Pick one of the categories to get your tip of the week"),
+            SizedBox(
+              width: width * 0.8,
+              child: const Text(
+                "Pick one of the categories to get your tip of the week",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
             OutlinedButton(
                 onPressed: () {
                   model.routeToTipsView(user, "Home", 0); // skipCount = 0
