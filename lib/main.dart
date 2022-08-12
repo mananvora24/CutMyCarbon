@@ -1,5 +1,6 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
 import 'package:cut_my_carbon/ui/home_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cut_my_carbon/core/utilities/router.dart' as router;
@@ -48,9 +49,19 @@ class _MyAppState extends State<MyApp> {
           title: 'Cut My Carbon',
           // home: const AuthView(title: "Test"),
           // home: const SignInView(title: 'home'),
-          home: const HomeView(
-            user: 'user1234',
-            title: 'Home',
+          home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: Text("Error"));
+              } else if (snapshot.hasData) {
+                return const HomeView(title: 'title', user: 'user1234');
+              } else if (snapshot.hasError) {
+                return const Center(child: Text("Error"));
+              } else {
+                return AuthView(title: 'title');
+              }
+            },
           ),
         ),
       );

@@ -15,38 +15,29 @@ class AuthView extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
-      create: (context) => AuthViewModel(),
-      child: Consumer<AuthViewModel>(
-        builder: (context, model, child) => Scaffold(
-          appBar: AppBar(),
-          backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-          body: Column(children: [
-            ElevatedButton.icon(
-                onPressed: () {
-                  final provider =
-                      Provider.of<GoogleSigninProvider>(context, listen: false);
-                  provider.googleLogin();
-                },
-                icon: FaIcon(FontAwesomeIcons.google, color: Colors.black),
-                label: Text('Sign Up with Google')),
-            StreamBuilder(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasData) {
-                  model.routeToHomeView('user1234');
-                  return Text('');
-                } else if (snapshot.hasError) {
-                  return Center(child: Text("Error"));
-                } else {
-                  return Text('');
-                }
-              },
-            ),
-          ]),
-        ),
-      ),
-    );
+        create: (context) => AuthViewModel(),
+        child: Consumer<AuthViewModel>(
+          builder: (context, model, child) => Scaffold(
+              appBar: AppBar(),
+              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+              body: SizedBox(
+                height: 200,
+                child: Container(
+                  height: (MediaQuery.of(context).size.height),
+                  child: Column(children: [
+                    ElevatedButton.icon(
+                        onPressed: () {
+                          final provider = Provider.of<GoogleSigninProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin();
+                        },
+                        icon: FaIcon(FontAwesomeIcons.google,
+                            color: Colors.black),
+                        label: Text('Sign Up with Google')),
+                  ]),
+                ),
+              )),
+        ));
   }
 }
