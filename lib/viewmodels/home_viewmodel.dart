@@ -149,14 +149,13 @@ class HomeViewModel extends SharedViewModel {
     };
     await FirebaseFirestore.instance
         .collection('UserStatistics')
-        .where('User', isEqualTo: user)
+        .where('user', isEqualTo: user)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;
       if (data.isEmpty) {
-        print("Data is empty");
+        print("User Statistics: Data is empty");
       }
-      Map<String, dynamic> statsData;
       for (var snapshot in data) {
         statsData = snapshot.data();
       }
@@ -178,6 +177,7 @@ class HomeViewModel extends SharedViewModel {
         .then((value) => print("UserStatistics complete Updated"))
         .catchError(
             (error) => print("Failed to update user tip status: $error"));
+
     return carbon;
   }
 
