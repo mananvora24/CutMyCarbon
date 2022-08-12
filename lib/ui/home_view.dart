@@ -44,10 +44,6 @@ class HomeView extends StatelessWidget {
                   backgroundColor: Colors.green,
                   onTap: () {}),
               SpeedDialChild(
-                  child: const Icon(Icons.tips_and_updates_rounded),
-                  backgroundColor: Colors.green,
-                  onTap: () {}),
-              SpeedDialChild(
                   child: const Icon(Icons.info_rounded),
                   backgroundColor: Colors.green,
                   onTap: () {
