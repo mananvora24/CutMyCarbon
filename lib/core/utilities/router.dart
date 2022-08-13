@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/ui/about_forterra.dart';
 import 'package:cut_my_carbon/ui/about_us.dart';
 import 'package:cut_my_carbon/ui/stats_view.dart';
@@ -57,8 +58,14 @@ class Router {
         String user = tipArgs['user']!;
         String category = tipArgs['category']!;
         int tipOrder = tipArgs['tipOrder']! as int;
+        Timestamp tipStartTime = tipArgs['tipStartTime'] as Timestamp;
+        String message = tipArgs['message'];
         return TipStatusUpdateView(
-            user: user, category: category, tipOrder: tipOrder);
+            user: user,
+            category: category,
+            tipOrder: tipOrder,
+            tipStartTime: tipStartTime,
+            message: message);
       case tipStatusResultsViewRoute:
         Map<String, dynamic> tipArgs =
             settings.arguments as Map<String, dynamic>;

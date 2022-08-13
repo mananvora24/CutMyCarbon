@@ -47,7 +47,6 @@ class TipsView extends StatelessWidget {
                     width: width * .8,
                     child: const Text("Carbon saving recommendation:",
                         textAlign: TextAlign.center,
-                        // textWidthBasis: width,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 25.0)),
                   ),

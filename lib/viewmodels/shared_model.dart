@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/route_names.dart';
 import 'package:cut_my_carbon/viewmodels/base_viewmodel.dart';
 import 'package:cut_my_carbon/core/enums/view_state.dart';
@@ -52,9 +53,15 @@ class SharedViewModel extends BaseViewModel {
         arguments: {'category': category, 'tip': tip});
   }
 
-  void routeToTipStatusUpdateView(String user, String category, int tipOrder) {
-    _navigationService.navigateTo(tipStatusUpdateViewRoute,
-        arguments: {'user': user, 'category': category, 'tipOrder': tipOrder});
+  void routeToTipStatusUpdateView(String user, String category, int tipOrder,
+      Timestamp tipStartTime, String message) {
+    _navigationService.navigateTo(tipStatusUpdateViewRoute, arguments: {
+      'user': user,
+      'category': category,
+      'tipOrder': tipOrder,
+      'tipStartTime': tipStartTime,
+      'message': message
+    });
   }
 
   void routeToTipStatusResultView(

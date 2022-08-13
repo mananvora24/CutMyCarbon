@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -18,7 +19,8 @@ class HomeView extends StatelessWidget {
         user: "",
         tipOrder: 0,
         tipSelected: false,
-        tipCompleted: false);
+        tipCompleted: false,
+        tipStartTime: Timestamp.now());
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -72,19 +74,25 @@ class HomeView extends StatelessWidget {
                   width: width * 0.8,
                   child: ElevatedButton(
                     onPressed: () {
-                      //tipStatusData = await model.checkTipStatus('user1234');
                       if (tipStatusData.tipSelected) {
-                        model.routeToTipStatusUpdateView(tipStatusData.user,
-                            tipStatusData.category, tipStatusData.tipOrder);
+                        model.routeToTipStatusUpdateView(
+                            tipStatusData.user,
+                            tipStatusData.category,
+                            tipStatusData.tipOrder,
+                            tipStatusData.tipStartTime,
+                            "");
                       } else {
                         model.routeToTipCategoriesView('user1234');
                       }
                     },
                     onLongPress: () {
-                      //tipStatusData = await model.checkTipStatus('user1234');
                       if (tipStatusData.tipSelected) {
-                        model.routeToTipStatusUpdateView(tipStatusData.user,
-                            tipStatusData.category, tipStatusData.tipOrder);
+                        model.routeToTipStatusUpdateView(
+                            tipStatusData.user,
+                            tipStatusData.category,
+                            tipStatusData.tipOrder,
+                            tipStatusData.tipStartTime,
+                            "");
                       } else {
                         model.routeToTipCategoriesView('user1234');
                       }

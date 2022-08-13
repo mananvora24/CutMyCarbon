@@ -16,7 +16,9 @@ class HomeViewModel extends SharedViewModel {
         user: "",
         tipOrder: 0,
         tipSelected: false,
-        tipCompleted: false);
+        tipCompleted: false,
+        tipStartTime: Timestamp.now());
+    // Read UserTipStatus to get Tip Status Data
     await FirebaseFirestore.instance
         .collection('UserTipStatus')
         .where('User', isEqualTo: user)
@@ -35,9 +37,11 @@ class HomeViewModel extends SharedViewModel {
             user: tipData!['User'],
             tipOrder: tipData!['TipOrder'],
             tipSelected: tipData!['Selected'],
-            tipCompleted: tipData!['Completed']);
+            tipCompleted: tipData!['Completed'],
+            tipStartTime: tipData!['TipStartTime']);
       }
     });
+
     return tipStatusData;
   }
 
