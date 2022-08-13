@@ -41,7 +41,8 @@ class TipsViewModel extends SharedViewModel {
           'User': user,
           'TipOrder': tipOrder,
           'Days': 0,
-          'Week': 0,
+          'Start': Timestamp.now(),
+          'End': Timestamp.now()
         }, SetOptions(merge: true))
         .then((value) => print(
             "UserTips Updated with values: Category=>$category, User=>$user, TipOrder=>$tipOrder, Days: 0, Week: 0"))

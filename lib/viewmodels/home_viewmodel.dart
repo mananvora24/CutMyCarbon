@@ -72,13 +72,7 @@ class HomeViewModel extends SharedViewModel {
     await FirebaseFirestore.instance
         .collection('UserTips')
         .doc("$user" "$category" "$tipOrder")
-        .set({
-      'User': user,
-      'Category': category,
-      'TipOrder': tipOrder,
-      'Days': days,
-      'Week': week
-    });
+        .update({'Days': days, 'End': Timestamp.now()});
   }
 
   submitTipsData(String user, String category, int tipOrder, int days) async {

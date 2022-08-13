@@ -1,4 +1,5 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/viewmodels/auth_viewmodel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,20 +19,19 @@ class AuthView extends StatelessWidget {
               backgroundColor: const Color.fromARGB(255, 119, 188, 63),
               body: SizedBox(
                 height: 200,
-                child: SizedBox(
+                child: Container(
                   height: (MediaQuery.of(context).size.height),
                   child: Column(children: [
                     ElevatedButton.icon(
-                        onPressed: () async {
+                        onPressed: () {
                           final provider = Provider.of<GoogleSigninProvider>(
                               context,
                               listen: false);
-                          await provider.googleLogin();
-                          model.routeToHomeView('user1234');
+                          provider.googleLogin();
                         },
-                        icon: const FaIcon(FontAwesomeIcons.google,
+                        icon: FaIcon(FontAwesomeIcons.google,
                             color: Colors.black),
-                        label: const Text('Sign Up with Google')),
+                        label: Text('Sign Up with Google')),
                   ]),
                 ),
               )),

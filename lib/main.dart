@@ -46,8 +46,10 @@ class _MyAppState extends State<MyApp> {
           onGenerateRoute: (settings) =>
               router.Router.generateRoute(context, settings),
           title: 'Cut My Carbon',
-          //home: const AuthView(title: "Test"),
+          home: const HomeView(title: "home", user: "user1234"),
+          // home: const AuthView(title: "Test"),
           // home: const SignInView(title: 'home'),
+          /*
           home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
@@ -62,6 +64,7 @@ class _MyAppState extends State<MyApp> {
               }
             },
           ),
+          */
         ),
       );
 }
