@@ -1,5 +1,4 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
-import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/viewmodels/auth_viewmodel.dart';
@@ -19,19 +18,22 @@ class AuthView extends StatelessWidget {
               appBar: AppBar(),
               backgroundColor: const Color.fromARGB(255, 119, 188, 63),
               body: SizedBox(
-                height: (MediaQuery.of(context).size.height),
-                child: Column(children: [
-                  ElevatedButton.icon(
-                      onPressed: () {
-                        final provider = Provider.of<GoogleSigninProvider>(
-                            context,
-                            listen: false);
-                        provider.googleLogin();
-                      },
-                      icon: const FaIcon(FontAwesomeIcons.google,
-                          color: Colors.black),
-                      label: const Text('Sign Up with Google')),
-                ]),
+                height: 200,
+                child: Container(
+                  height: (MediaQuery.of(context).size.height),
+                  child: Column(children: [
+                    ElevatedButton.icon(
+                        onPressed: () {
+                          final provider = Provider.of<GoogleSigninProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin();
+                        },
+                        icon: FaIcon(FontAwesomeIcons.google,
+                            color: Colors.black),
+                        label: Text('Sign Up with Google')),
+                  ]),
+                ),
               )),
         ));
   }

@@ -8,7 +8,6 @@ import 'package:cut_my_carbon/ui/auth_view.dart';
 import 'package:cut_my_carbon/core/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'package:cut_my_carbon/ui/signin_view.dart';
 
 import 'locator.dart';
 import 'dart:io';
