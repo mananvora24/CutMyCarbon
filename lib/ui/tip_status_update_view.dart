@@ -52,7 +52,7 @@ class TipStatusUpdateView extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 17.0,
+                      fontSize: 16.0,
                       color: Colors.red),
                 ),
               ),
