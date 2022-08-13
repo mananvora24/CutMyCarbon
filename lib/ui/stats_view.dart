@@ -10,7 +10,7 @@ class StatsView extends StatelessWidget {
   StatsView({Key? key, required this.title}) : super(key: key);
   final String title;
   final Stream<QuerySnapshot> _statStream =
-      FirebaseFirestore.instance.collection('Statistics').snapshots();
+      FirebaseFirestore.instance.collection('UserStatistics').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +47,12 @@ class StatsView extends StatelessWidget {
                   Map<String, dynamic> data =
                       document.data()! as Map<String, dynamic>;
                   return ListTile(
-                    title: Text(data['metric1'].toString()),
-                    subtitle: Text(data['metric2'].toString()),
+                    title: Text('Last week carbon savings: ' +
+                        data['lastWeekCarbon'].toString() +
+                        ' lbs'),
+                    subtitle: Text('Total carbon savings: ' +
+                        data['totalCarbon'].toString() +
+                        ' lbs'),
                   );
                 }).toList(),
               );
