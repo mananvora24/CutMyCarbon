@@ -47,12 +47,10 @@ class StatsView extends StatelessWidget {
                   Map<String, dynamic> data =
                       document.data()! as Map<String, dynamic>;
                   return ListTile(
-                    title: Text('Last week carbon savings: ' +
-                        data['lastWeekCarbon'].toString() +
-                        ' lbs'),
-                    subtitle: Text('Total carbon savings: ' +
-                        data['totalCarbon'].toString() +
-                        ' lbs'),
+                    title: Text(
+                        'Last week carbon savings: ${data['lastWeekCarbon']} lbs'),
+                    subtitle: Text(
+                        'Total carbon savings: ${data['totalCarbon']} lbs'),
                   );
                 }).toList(),
               );
