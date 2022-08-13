@@ -8,7 +8,6 @@ import 'package:cut_my_carbon/ui/auth_view.dart';
 import 'package:cut_my_carbon/core/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'package:cut_my_carbon/ui/signin_view.dart';
 
 import 'locator.dart';
 import 'dart:io';
@@ -42,14 +41,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => GoogleSigninProvider(),
         child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          navigatorKey: locator<NavigationService>().navigationKey,
-          onGenerateRoute: (settings) =>
-              router.Router.generateRoute(context, settings),
-          title: 'Cut My Carbon',
-          //home: const AuthView(title: "Test"),
-          // home: const SignInView(title: 'home'),
-          home: StreamBuilder(
+            debugShowCheckedModeBanner: false,
+            navigatorKey: locator<NavigationService>().navigationKey,
+            onGenerateRoute: (settings) =>
+                router.Router.generateRoute(context, settings),
+            title: 'Cut My Carbon',
+            //home: const AuthView(title: "Test"),
+            // home: const SignInView(title: 'home'),
+            home: AuthView(title: 'title')
+            /* StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -59,10 +59,10 @@ class _MyAppState extends State<MyApp> {
               } else if (snapshot.hasError) {
                 return const Center(child: Text("Error"));
               } else {
-                return AuthView(title: 'title');
+                return const AuthView(title: 'title');
               }
             },
-          ),
-        ),
+          ),*/
+            ),
       );
 }
