@@ -41,15 +41,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => GoogleSigninProvider(),
         child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            navigatorKey: locator<NavigationService>().navigationKey,
-            onGenerateRoute: (settings) =>
-                router.Router.generateRoute(context, settings),
-            title: 'Cut My Carbon',
-            //home: const AuthView(title: "Test"),
-            // home: const SignInView(title: 'home'),
-            home: AuthView(title: 'title')
-            /* StreamBuilder(
+          debugShowCheckedModeBanner: false,
+          navigatorKey: locator<NavigationService>().navigationKey,
+          onGenerateRoute: (settings) =>
+              router.Router.generateRoute(context, settings),
+          title: 'Cut My Carbon',
+          //home: const AuthView(title: "Test"),
+          // home: const SignInView(title: 'home'),
+          home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -62,7 +61,7 @@ class _MyAppState extends State<MyApp> {
                 return const AuthView(title: 'title');
               }
             },
-          ),*/
-            ),
+          ),
+        ),
       );
 }
