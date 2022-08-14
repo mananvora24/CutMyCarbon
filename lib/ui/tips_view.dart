@@ -91,9 +91,6 @@ class TipsView extends StatelessWidget {
                         }),
                   ),
                   SizedBox(height: height * 0.07),
-                  Image.asset(
-                    'assets/Logo.png',
-                  ),
                 ]),
             persistentFooterButtons: [
               SizedBox(height: height * 0.04),

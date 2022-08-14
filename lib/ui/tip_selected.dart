@@ -74,9 +74,6 @@ class TipSelectedView extends StatelessWidget {
                       }
                     }),
               ),
-              Image.asset(
-                'assets/Logo.png',
-              ),
               SizedBox(height: height * 0.03),
               SizedBox(
                 width: width * 0.9,
