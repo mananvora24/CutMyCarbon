@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/ui/about_forterra.dart';
 import 'package:cut_my_carbon/ui/about_us.dart';
 import 'package:cut_my_carbon/ui/stats_view.dart';
@@ -58,8 +59,14 @@ class Router {
         String user = tipArgs['user']!;
         String category = tipArgs['category']!;
         int tipOrder = tipArgs['tipOrder']! as int;
+        Timestamp tipStartTime = tipArgs['tipStartTime'] as Timestamp;
+        String message = tipArgs['message'];
         return TipStatusUpdateView(
-            user: user, category: category, tipOrder: tipOrder);
+            user: user,
+            category: category,
+            tipOrder: tipOrder,
+            tipStartTime: tipStartTime,
+            message: message);
       case tipStatusResultsViewRoute:
         Map<String, dynamic> tipArgs =
             settings.arguments as Map<String, dynamic>;
@@ -74,10 +81,14 @@ class Router {
           title: "SignIn",
         );
       case tipSelectedViewRoute:
-        Map<String, String> tipArgs = settings.arguments as Map<String, String>;
-        String tip = tipArgs['tip']!;
+        Map<String, dynamic> tipArgs =
+            settings.arguments as Map<String, dynamic>;
         String category = tipArgs['category']!;
-        return TipSelectedView(category: category, tip: tip);
+        int tipOrder = tipArgs['tipOrder']! as int;
+        return TipSelectedView(
+          category: category,
+          tipOrder: tipOrder,
+        );
       case statsViewRoute:
         return StatsView(title: "Stats");
       case aboutForterraViewRoute:

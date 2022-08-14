@@ -10,45 +10,12 @@ class HomeViewModel extends SharedViewModel {
   String fact = "";
   Map<String, dynamic>? factsData = {};
 
-  Future<TipStatusData> checkTipStatus(String user) async {
-    TipStatusData tipStatusData = TipStatusData(
-        category: "",
-        user: "",
-        tipOrder: 0,
-        tipSelected: false,
-        tipCompleted: false);
-    await FirebaseFirestore.instance
-        .collection('UserTipStatus')
-        .where('User', isEqualTo: user)
-        .where('Completed', isEqualTo: false)
-        .get()
-        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
-      List<dynamic> data = querySnapshot.docs;
-      if (data.isEmpty) {
-        print("Data is empty");
-      }
-      for (var snapshot in data) {
-        tipData = snapshot.data();
-        print("Check Tip Status => Found Data => tipData: $tipData");
-        tipStatusData = TipStatusData(
-            category: tipData!['Category'],
-            user: tipData!['User'],
-            tipOrder: tipData!['TipOrder'],
-            tipSelected: tipData!['Selected'],
-            tipCompleted: tipData!['Completed']);
-      }
-    });
-    return tipStatusData;
-  }
-
   Future<Map<String, dynamic>> getCurrentTip(
-      String user, String category, int tipOrder) async {
+      String category, int tipOrder) async {
     List<dynamic> dataList = List.empty();
     Map<String, dynamic> currentTip = {};
-    print("getCurrentTip - Before Query: $TipStatusData");
     await FirebaseFirestore.instance
-        .collection('UserTips')
-        .where('User', isEqualTo: user)
+        .collection('Tips')
         .where('Category', isEqualTo: category)
         .where('TipOrder', isEqualTo: tipOrder)
         .get()
@@ -67,6 +34,67 @@ class HomeViewModel extends SharedViewModel {
     return currentTip;
   }
 
+  Future<TipStatusData> checkTipStatus(String user) async {
+    TipStatusData tipStatusData = TipStatusData(
+        category: "",
+        user: "",
+        tipOrder: 0,
+        tipSelected: false,
+        tipCompleted: false,
+        tipStartTime: Timestamp.now());
+    // Read UserTipStatus to get Tip Status Data
+    await FirebaseFirestore.instance
+        .collection('UserTipStatus')
+        .where('User', isEqualTo: user)
+        .where('Completed', isEqualTo: false)
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      List<dynamic> data = querySnapshot.docs;
+      if (data.isEmpty) {
+        print("Data is empty");
+      }
+      for (var snapshot in data) {
+        tipData = snapshot.data();
+        print("Check Tip Status => Found Data => tipData: $tipData");
+        tipStatusData = TipStatusData(
+            category: tipData!['Category'],
+            user: tipData!['User'],
+            tipOrder: tipData!['TipOrder'],
+            tipSelected: tipData!['Selected'],
+            tipCompleted: tipData!['Completed'],
+            tipStartTime: tipData!['TipStartTime']);
+      }
+    });
+
+    return tipStatusData;
+  }
+
+  Future<Map<String, dynamic>> getCurrentTipStatus(
+      String user, String category, int tipOrder) async {
+    List<dynamic> dataList = List.empty();
+    Map<String, dynamic> currentTip = {};
+    // print("getCurrentTipStatus - Before Query: $TipStatusData");
+    await FirebaseFirestore.instance
+        .collection('UserTips')
+        .where('User', isEqualTo: user)
+        .where('Category', isEqualTo: category)
+        .where('TipOrder', isEqualTo: tipOrder)
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      dataList = querySnapshot.docs;
+      //if (dataList.isEmpty) {
+      // print("getCurrentTipStatus: Data is empty");
+      //} else {
+      // print("getCurrentTipStatus: Data Found");
+      //}
+      for (var snapshot in dataList) {
+        currentTip = snapshot.data();
+        break;
+      }
+    });
+    return currentTip;
+  }
+
   saveTipsCarbonDays(
       String user, String category, int tipOrder, int days, int week) async {
     await FirebaseFirestore.instance
@@ -77,7 +105,7 @@ class HomeViewModel extends SharedViewModel {
 
   submitTipsData(String user, String category, int tipOrder, int days) async {
     Map<String, dynamic> currentTip =
-        await getCurrentTip(user, category, tipOrder);
+        await getCurrentTipStatus(user, category, tipOrder);
     print("Submit Tips Data => Save carbon days");
     await saveTipsCarbonDays(
         user, currentTip['Category'], currentTip['TipOrder'], days, 25);

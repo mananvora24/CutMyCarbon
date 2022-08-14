@@ -1,5 +1,4 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/viewmodels/auth_viewmodel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

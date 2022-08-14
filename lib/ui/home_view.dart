@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -18,7 +19,8 @@ class HomeView extends StatelessWidget {
         user: "",
         tipOrder: 0,
         tipSelected: false,
-        tipCompleted: false);
+        tipCompleted: false,
+        tipStartTime: Timestamp.now());
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -74,18 +76,18 @@ class HomeView extends StatelessWidget {
                   width: width * 0.8,
                   child: ElevatedButton(
                     onPressed: () {
-                      //tipStatusData = await model.checkTipStatus('user1234');
-                      if (tipStatusData.tipSelected) {
-                        model.routeToTipStatusUpdateView(tipStatusData.user,
-                            tipStatusData.category, tipStatusData.tipOrder);
-                      } else {
-                        model.routeToTipCategoriesView('user1234');
-                      }
-                    },
-                    onLongPress: () {
-                      //tipStatusData = await model.checkTipStatus('user1234');
-                      if (tipStatusData.tipSelected) {
-                        model.routeToTipStatusUpdateView(tipStatusData.user,
+                      int days = DateTime.now()
+                          .difference(tipStatusData.tipStartTime.toDate())
+                          .inDays;
+                      if (tipStatusData.tipSelected && days > 6) {
+                        model.routeToTipStatusUpdateView(
+                            tipStatusData.user,
+                            tipStatusData.category,
+                            tipStatusData.tipOrder,
+                            tipStatusData.tipStartTime,
+                            "");
+                      } else if (tipStatusData.tipSelected && days < 7) {
+                        model.routeToTipSelectedView(
                             tipStatusData.category, tipStatusData.tipOrder);
                       } else {
                         model.routeToTipCategoriesView('user1234');
@@ -109,10 +111,10 @@ class HomeView extends StatelessWidget {
                               return Text('Error: ${snapshot.error}');
                             } else if (snapshot.hasData) {
                               tipStatusData = snapshot.data!;
-                              return Text(
-                                  model.getTipsButtonText(tipStatusData),
+                              return const Text("Tip",
+                                  //model.getTipsButtonText(tipStatusData),
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 30.0));
+                                  style: TextStyle(fontSize: 30.0));
                             } else {
                               return const Text('Empty data');
                             }
