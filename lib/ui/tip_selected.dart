@@ -103,27 +103,7 @@ class TipSelectedView extends StatelessWidget {
                     }),
               ),
             ]),
-            persistentFooterButtons: [
-              SizedBox(height: height * 0.04),
-              ElevatedButton(
-                onPressed: () {
-                  model.routeToHomeView('user1234');
-                },
-                onLongPress: () {
-                  model.routeToHomeView('user1234');
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(170, 30),
-                  padding: const EdgeInsets.all(10),
-                ),
-                child: const Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ]),
+            ),
       ),
     );
   }
