@@ -74,25 +74,19 @@ class HomeView extends StatelessWidget {
                   width: width * 0.8,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (tipStatusData.tipSelected) {
+                      int days = DateTime.now()
+                          .difference(tipStatusData.tipStartTime.toDate())
+                          .inDays;
+                      if (tipStatusData.tipSelected && days > 6) {
                         model.routeToTipStatusUpdateView(
                             tipStatusData.user,
                             tipStatusData.category,
                             tipStatusData.tipOrder,
                             tipStatusData.tipStartTime,
                             "");
-                      } else {
-                        model.routeToTipCategoriesView('user1234');
-                      }
-                    },
-                    onLongPress: () {
-                      if (tipStatusData.tipSelected) {
-                        model.routeToTipStatusUpdateView(
-                            tipStatusData.user,
-                            tipStatusData.category,
-                            tipStatusData.tipOrder,
-                            tipStatusData.tipStartTime,
-                            "");
+                      } else if (tipStatusData.tipSelected && days < 7) {
+                        model.routeToTipSelectedView(
+                            tipStatusData.category, tipStatusData.tipOrder);
                       } else {
                         model.routeToTipCategoriesView('user1234');
                       }
@@ -115,10 +109,10 @@ class HomeView extends StatelessWidget {
                               return Text('Error: ${snapshot.error}');
                             } else if (snapshot.hasData) {
                               tipStatusData = snapshot.data!;
-                              return Text(
-                                  model.getTipsButtonText(tipStatusData),
+                              return const Text("Tip",
+                                  //model.getTipsButtonText(tipStatusData),
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 30.0));
+                                  style: TextStyle(fontSize: 30.0));
                             } else {
                               return const Text('Empty data');
                             }

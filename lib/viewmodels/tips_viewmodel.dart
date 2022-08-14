@@ -81,7 +81,7 @@ class TipsViewModel extends SharedViewModel {
     await FirebaseFirestore.instance
         .collection('Tips')
         .where('Category', isEqualTo: category)
-        .where('TipOrder', isGreaterThan: tipOrder)
+        //.where('TipOrder', isGreaterThan: tipOrder)
         .orderBy('TipOrder')
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
@@ -90,18 +90,22 @@ class TipsViewModel extends SharedViewModel {
         print("Data is empty");
       }
       print("getTipForUser snapshot list: $data");
+      int myTipOrder = tipOrder;
+      if (myTipOrder >= data.length) {
+        myTipOrder = 0;
+      }
       for (var snapshot in data) {
         Map<String, dynamic>? tipData = snapshot.data();
         print("getTipForUser tipData: $tipData");
         //tipData?.forEach((key, value) {
-        if (tipData!['TipOrder'] > tipOrder && !tipFound) {
+        if (tipData!['TipOrder'] > myTipOrder && !tipFound) {
           // Found the tip needed
           tipFound = true;
           userTip = "${tipData['Tip']}";
           tipOrder = int.parse("${tipData['TipOrder']}");
+          break;
         }
         //});
-        break;
       }
     });
     TipsData tipsData = TipsData(

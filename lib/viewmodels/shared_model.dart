@@ -48,9 +48,9 @@ class SharedViewModel extends BaseViewModel {
     _navigationService.navigateTo(aboutUsViewRoute);
   }
 
-  void routeToTipSelectedView(String category, String tip) {
+  void routeToTipSelectedView(String category, int tipOrder) {
     _navigationService.navigateTo(tipSelectedViewRoute,
-        arguments: {'category': category, 'tip': tip});
+        arguments: {'category': category, 'tipOrder': tipOrder});
   }
 
   void routeToTipStatusUpdateView(String user, String category, int tipOrder,

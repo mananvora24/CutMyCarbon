@@ -80,10 +80,14 @@ class Router {
           title: "SignIn",
         );
       case tipSelectedViewRoute:
-        Map<String, String> tipArgs = settings.arguments as Map<String, String>;
-        String tip = tipArgs['tip']!;
+        Map<String, dynamic> tipArgs =
+            settings.arguments as Map<String, dynamic>;
         String category = tipArgs['category']!;
-        return TipSelectedView(category: category, tip: tip);
+        int tipOrder = tipArgs['tipOrder']! as int;
+        return TipSelectedView(
+          category: category,
+          tipOrder: tipOrder,
+        );
       case statsViewRoute:
         return StatsView(title: "Stats");
       case aboutForterraViewRoute:

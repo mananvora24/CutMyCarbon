@@ -127,11 +127,7 @@ class TipsView extends StatelessWidget {
                   // --- Create / Update user tip
                   model.selectTip('user1234', category, tipsData.tipOrder);
 
-                  model.routeToTipSelectedView(category, tipsData.tip);
-                },
-                onLongPress: () {
-                  print("Category - $category");
-                  model.routeToTipSelectedView(category, tip);
+                  model.routeToTipSelectedView(category, tipsData.tipOrder);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),
