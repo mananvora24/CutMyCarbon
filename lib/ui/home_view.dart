@@ -44,7 +44,9 @@ class HomeView extends StatelessWidget {
               SpeedDialChild(
                   child: const Icon(Icons.feedback_rounded),
                   backgroundColor: Colors.green,
-                  onTap: () {}),
+                  onTap: () {
+                    model.routeToFeedbackView();
+                  }),
               SpeedDialChild(
                   child: const Icon(Icons.info_rounded),
                   backgroundColor: Colors.green,

@@ -77,4 +77,8 @@ class SharedViewModel extends BaseViewModel {
   void routeToInboxView() {
     _navigationService.navigateTo(inboxViewRoute);
   }
+
+  void routeToFeedbackView() {
+    _navigationService.navigateTo(feedbackViewRoute);
+  }
 }

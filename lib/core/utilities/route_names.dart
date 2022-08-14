@@ -10,3 +10,4 @@ const String tipStatusResultsViewRoute = 'TipStatusResultsView';
 const String inboxViewRoute = 'InboxView';
 const String authViewRoute = 'AuthView';
 const String signInViewRoute = 'SignInView';
+const String feedbackViewRoute = 'FeedbackViewRoute';

@@ -30,8 +30,37 @@ class StatsView extends StatelessWidget {
             elevation: 0,
           ),
           backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-          body: StreamBuilder<QuerySnapshot>(
-            stream: _statStream,
+          body: FutureBuilder<Map<String, dynamic>>(
+              future: model.getUserStatistics('user1234'),
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<Map<String, dynamic>> snapshot,
+              ) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else if (snapshot.hasData) {
+                    int lastWeekCarbon =
+                        snapshot.data!['lastWeekCarbon'] as int;
+                    int totalCarbon = snapshot.data!['totalCarbon'] as int;
+                    double totalTons = snapshot.data!['totalTons'];
+                    return Text(
+                        "Last Week: $lastWeekCarbon lbs\n\n        Total Carbon: $totalCarbon lbs\n\n     Total Tons: $totalTons tons",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20.0));
+                  } else {
+                    return const Text('Error');
+                  }
+                } else {
+                  return Text('State: ${snapshot.connectionState}');
+                }
+              }),
+          /*
+          FutureBuilder<QuerySnapshot>(
+            future: _statStream,
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
@@ -55,7 +84,7 @@ class StatsView extends StatelessWidget {
                 }).toList(),
               );
             },
-          ),
+          ),*/
         ),
       ),
     );
