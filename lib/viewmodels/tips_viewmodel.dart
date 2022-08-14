@@ -31,46 +31,46 @@ class TipsViewModel extends SharedViewModel {
   }
 
   Future<void> saveSelectedTip(
-      String user, String category, int tipOrder) async {
+      String user, String category, int tipOrder, DateTime startTime) async {
     print("User Tips Document key: $user$category$tipOrder");
     await FirebaseFirestore.instance
         .collection('UserTips')
         .doc("$user$category$tipOrder")
-        .update({
-          //'Category': category,
-          //'User': user,
+        .set({
+          'Category': category,
+          'User': user,
           'TipOrder': tipOrder,
           'Days': 0,
-          'Week': 0,
-        }
-            // , SetOptions(merge: true)
-            )
+          'Start': startTime,
+          'End': startTime
+        }, SetOptions(merge: true))
         .then((value) => print(
             "UserTips Updated with values: Category=>$category, User=>$user, TipOrder=>$tipOrder, Days: 0, Week: 0"))
         .catchError((error) => print("Failed to update user: $error"));
   }
 
-  Future<void> saveTipStatus(String category, String user, int tipOrder) async {
+  Future<void> saveTipStatusSelected(
+      String category, String user, int tipOrder, DateTime startTime) async {
     await FirebaseFirestore.instance
         .collection('UserTipStatus')
         .doc("$user" "TipCheck")
-        .update({
+        .set({
           'Category': category,
           'Selected': true,
           'User': user,
           'Completed': false,
-          'TipOrder': tipOrder
-        }
-            // , SetOptions(merge: true)
-            )
+          'TipOrder': tipOrder,
+          'TipStartTime': startTime
+        }, SetOptions(merge: true))
         .then((value) => print("UserTipStatus Updated"))
         .catchError(
             (error) => print("Failed to update user tip status: $error"));
   }
 
   Future<void> selectTip(String user, String category, int tipOrder) async {
-    await saveSelectedTip(user, category, tipOrder);
-    await saveTipStatus(category, user, tipOrder);
+    DateTime startTime = DateTime.now();
+    await saveSelectedTip(user, category, tipOrder, startTime);
+    await saveTipStatusSelected(category, user, tipOrder, startTime);
   }
 
   Future<TipsData> getTipForUser(
@@ -81,7 +81,7 @@ class TipsViewModel extends SharedViewModel {
     await FirebaseFirestore.instance
         .collection('Tips')
         .where('Category', isEqualTo: category)
-        .where('TipOrder', isGreaterThan: tipOrder)
+        //.where('TipOrder', isGreaterThan: tipOrder)
         .orderBy('TipOrder')
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
@@ -90,18 +90,22 @@ class TipsViewModel extends SharedViewModel {
         print("Data is empty");
       }
       print("getTipForUser snapshot list: $data");
+      int myTipOrder = tipOrder;
+      if (myTipOrder >= data.length) {
+        myTipOrder = 0;
+      }
       for (var snapshot in data) {
         Map<String, dynamic>? tipData = snapshot.data();
         print("getTipForUser tipData: $tipData");
         //tipData?.forEach((key, value) {
-        if (tipData!['TipOrder'] > tipOrder && !tipFound) {
+        if (tipData!['TipOrder'] > myTipOrder && !tipFound) {
           // Found the tip needed
           tipFound = true;
           userTip = "${tipData['Tip']}";
           tipOrder = int.parse("${tipData['TipOrder']}");
+          break;
         }
         //});
-        break;
       }
     });
     TipsData tipsData = TipsData(

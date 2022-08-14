@@ -9,8 +9,6 @@ class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController usernameController = TextEditingController();
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -53,7 +51,7 @@ class SignInView extends StatelessWidget {
                 ),
               ]),
             ),
-            persistentFooterButtons: [
+            persistentFooterButtons: const [
 /*              
               SizedBox(height: height * 0.04),
               ElevatedButton(

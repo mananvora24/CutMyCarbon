@@ -19,7 +19,6 @@ class TipsView extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     String tip = "";
-    int tipOrder = 0;
     TipsData tipsData = TipsData(category: "", user: "", tipOrder: 0, tip: "");
 
     return ChangeNotifierProvider(
@@ -48,7 +47,6 @@ class TipsView extends StatelessWidget {
                     width: width * .8,
                     child: const Text("Carbon saving recommendation:",
                         textAlign: TextAlign.center,
-                        // textWidthBasis: width,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 25.0)),
                   ),
@@ -129,11 +127,7 @@ class TipsView extends StatelessWidget {
                   // --- Create / Update user tip
                   model.selectTip('user1234', category, tipsData.tipOrder);
 
-                  model.routeToTipSelectedView(category, tipsData.tip);
-                },
-                onLongPress: () {
-                  print("Category - $category");
-                  model.routeToTipSelectedView(category, tip);
+                  model.routeToTipSelectedView(category, tipsData.tipOrder);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 40),

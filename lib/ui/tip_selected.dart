@@ -1,22 +1,26 @@
-import 'package:cut_my_carbon/viewmodels/tip_selected_viewmodel.dart';
+import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TipSelectedView extends StatelessWidget {
-  const TipSelectedView({Key? key, required this.category, required this.tip})
+  const TipSelectedView(
+      {Key? key, required this.category, required this.tipOrder})
       : super(key: key);
   final String category;
-  final String tip;
+  final int tipOrder;
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    print("Creating Selected View - category = $category, tip = $tip");
+    String tip = "";
+    String tipDescription = "";
+    print(
+        "Creating Selected View - category = $category, tipOrder = $tipOrder");
 
     return ChangeNotifierProvider(
-      create: (context) => TipSelectedViewModel(),
-      child: Consumer<TipSelectedViewModel>(
+      create: (context) => HomeViewModel(),
+      child: Consumer<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
               leading: IconButton(
@@ -36,23 +40,44 @@ class TipSelectedView extends StatelessWidget {
               SizedBox(height: height * 0.03),
               SizedBox(
                 width: width * 0.9,
-                child: const Text("Thank you. You selected: ",
+                child: const Text("You selected: ",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
               ),
               SizedBox(
                 width: width * 0.9,
-                child: Text(tip,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 25.0)),
+                child: FutureBuilder<Map<String, dynamic>>(
+                    future: model.getCurrentTip(category, tipOrder),
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<Map<String, dynamic>> snapshot,
+                    ) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Error');
+                        } else if (snapshot.hasData) {
+                          tip = snapshot.data!['Tip'];
+                          tipDescription = snapshot.data!['Description'];
+                          return Text("Tip: $tip\n\nInfo: $tipDescription",
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20.0));
+                        } else {
+                          return const Text('Empty data');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    }),
               ),
-              SizedBox(height: height * 0.04),
               Image.asset(
                 'assets/Logo.png',
               ),
-              SizedBox(height: height * 0.06),
+              SizedBox(height: height * 0.03),
               SizedBox(
                 width: width * 0.9,
                 child: FutureBuilder<String>(
@@ -71,7 +96,7 @@ class TipSelectedView extends StatelessWidget {
                           return Text(snapshot.data!,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 25.0));
+                                  fontWeight: FontWeight.bold, fontSize: 20.0));
                         } else {
                           return const Text('Empty data');
                         }
@@ -80,7 +105,6 @@ class TipSelectedView extends StatelessWidget {
                       }
                     }),
               ),
-              SizedBox(height: height * 0.07),
             ]),
             persistentFooterButtons: [
               SizedBox(height: height * 0.04),

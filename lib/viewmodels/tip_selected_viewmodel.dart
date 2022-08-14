@@ -14,7 +14,7 @@ class TipSelectedViewModel extends SharedViewModel {
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;
       if (data.isEmpty) {
-        print("Data is empty");
+        print("GetCategoryFact: Data is empty");
       }
       for (var snapshot in data) {
         factsData = snapshot.data();

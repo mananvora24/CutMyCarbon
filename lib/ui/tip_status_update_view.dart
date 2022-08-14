@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -8,15 +9,20 @@ class TipStatusUpdateView extends StatelessWidget {
     required this.user,
     required this.category,
     required this.tipOrder,
+    required this.tipStartTime,
+    required this.message,
   }) : super(key: key);
   final String user;
   final String category;
   final int tipOrder;
+  final Timestamp tipStartTime;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
     TextEditingController daysController = TextEditingController();
     double width = MediaQuery.of(context).size.width;
+
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -38,17 +44,29 @@ class TipStatusUpdateView extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
                 alignment: Alignment.topRight,
               ),
+              SizedBox(
+                height: 120,
+                width: width * 0.9,
+                child: Text(
+                  message,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      color: Colors.red),
+                ),
+              ),
               const Text('Enter the number of days you completed the activity',
                   textAlign: TextAlign.center,
                   style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
               const SizedBox(
-                height: 50,
+                height: 30,
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextField(
+                child: TextFormField(
                   controller: daysController,
                   obscureText: false,
                   keyboardType: TextInputType.number,
@@ -62,9 +80,26 @@ class TipStatusUpdateView extends StatelessWidget {
                 width: width * 0.8,
                 child: ElevatedButton(
                   onPressed: () {
+                    String input = daysController.text;
                     var days = int.parse(daysController.text);
-                    model.submitTipsData('user1234', category, tipOrder, days);
-                    print(days);
+                    final now = Timestamp.now();
+                    final int selectedDays =
+                        now.toDate().difference(tipStartTime.toDate()).inDays;
+                    print(
+                        "Validator: input: $input, current time: $now, startTime: $tipStartTime, selectedDays: $selectedDays, days: $days");
+
+                    String errorMessage =
+                        "Please enter days less than total duration since ${tipStartTime.toDate()}";
+                    if (days > selectedDays) {
+                      model.routeToTipStatusUpdateView(
+                          user, category, tipOrder, tipStartTime, errorMessage);
+                    } else {
+                      model.submitTipsData(
+                          'user1234', category, tipOrder, days);
+                      print(days);
+                      model.routeToTipStatusResultView(
+                          user, category, tipOrder, days);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(170, 30),

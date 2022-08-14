@@ -1,5 +1,6 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
 import 'package:cut_my_carbon/ui/home_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cut_my_carbon/core/utilities/router.dart' as router;
@@ -7,7 +8,6 @@ import 'package:cut_my_carbon/ui/auth_view.dart';
 import 'package:cut_my_carbon/core/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'package:cut_my_carbon/ui/signin_view.dart';
 
 import 'locator.dart';
 import 'dart:io';
@@ -46,11 +46,23 @@ class _MyAppState extends State<MyApp> {
           onGenerateRoute: (settings) =>
               router.Router.generateRoute(context, settings),
           title: 'Cut My Carbon',
+          // home: const HomeView(title: "home", user: "user1234"),
           // home: const AuthView(title: "Test"),
           // home: const SignInView(title: 'home'),
-          home: const HomeView(
-            user: 'user1234',
-            title: 'Home',
+
+          home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: Text("Error"));
+              } else if (snapshot.hasData) {
+                return const HomeView(title: 'title', user: 'user1234');
+              } else if (snapshot.hasError) {
+                return const Center(child: Text("Error"));
+              } else {
+                return const AuthView(title: 'title');
+              }
+            },
           ),
         ),
       );
