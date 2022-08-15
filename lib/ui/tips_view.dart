@@ -39,59 +39,61 @@ class TipsView extends StatelessWidget {
               elevation: 0,
             ),
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-            body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: width * .8,
-                    child: const Text("Carbon saving recommendation:",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 25.0)),
-                  ),
-                  SizedBox(
-                    height: height * 0.05,
-                  ),
-                  SizedBox(
-                    width: width * .8,
-                    child: FutureBuilder<TipsData>(
-                        future: model.getTipForUser(
-                            category, 'user1234', skipCount),
-                        builder: (
-                          BuildContext context,
-                          AsyncSnapshot<TipsData> snapshot,
-                        ) {
-                          //
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            if (snapshot.hasError) {
-                              return const Text('Error');
-                            } else if (snapshot.hasData) {
-                              tipsData = snapshot.data!;
-                              //print(
-                              //    "Tips View Model : getTipForUser :  TipsData - $tipsData");
+            body: Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: width * .8,
+                      child: const Text("Carbon saving recommendation:",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 25.0)),
+                    ),
+                    SizedBox(
+                      height: height * 0.05,
+                    ),
+                    SizedBox(
+                      width: width * .8,
+                      child: FutureBuilder<TipsData>(
+                          future: model.getTipForUser(
+                              category, 'user1234', skipCount),
+                          builder: (
+                            BuildContext context,
+                            AsyncSnapshot<TipsData> snapshot,
+                          ) {
+                            //
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            } else if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasError) {
+                                return const Text('Error');
+                              } else if (snapshot.hasData) {
+                                tipsData = snapshot.data!;
+                                //print(
+                                //    "Tips View Model : getTipForUser :  TipsData - $tipsData");
 
-                              return Text(tipsData.tip,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25.0,
-                                    color: Colors.white,
-                                  ));
+                                return Text(tipsData.tip,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25.0,
+                                      color: Colors.white,
+                                    ));
+                              } else {
+                                return const Text('Empty data');
+                              }
                             } else {
-                              return const Text('Empty data');
+                              return Text('State: ${snapshot.connectionState}');
                             }
-                          } else {
-                            return Text('State: ${snapshot.connectionState}');
-                          }
-                        }),
-                  ),
-                  SizedBox(height: height * 0.07),
-                ]),
+                          }),
+                    ),
+                    SizedBox(height: height * 0.07),
+                  ]),
+            ),
             persistentFooterButtons: [
               SizedBox(height: height * 0.04),
               ElevatedButton(
