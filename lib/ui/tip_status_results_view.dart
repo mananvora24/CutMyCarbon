@@ -17,6 +17,7 @@ class TipStatusResultsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
@@ -35,16 +36,16 @@ class TipStatusResultsView extends StatelessWidget {
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             body: Center(
               child: Column(children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
-                  alignment: Alignment.topRight,
+                SizedBox(
+                  height: height * 0.06,
+                  width: width * 0.8,
+                  child: const Text('Congratulations! Your saved carbon is: ',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20.0)),
                 ),
-                const Text('Congratulations! Your saved carbon is: ',
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-                const SizedBox(
-                  height: 50,
+                SizedBox(
+                  height: height * 0.06,
                 ),
                 // Get the carbon calculation
                 SizedBox(
@@ -68,7 +69,7 @@ class TipStatusResultsView extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 25.0));
+                                    fontSize: 30.0));
                           } else {
                             return const Text('Empty data');
                           }
@@ -76,6 +77,9 @@ class TipStatusResultsView extends StatelessWidget {
                           return Text('State: ${snapshot.connectionState}');
                         }
                       }),
+                ),
+                SizedBox(
+                  height: height * 0.06,
                 ),
                 // Get the fun fact
                 SizedBox(
@@ -98,7 +102,7 @@ class TipStatusResultsView extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 25.0));
+                                    fontSize: 20.0));
                           } else {
                             return const Text('Empty data');
                           }
@@ -111,21 +115,23 @@ class TipStatusResultsView extends StatelessWidget {
               ]),
             ),
             persistentFooterButtons: [
-              ElevatedButton(
-                onPressed: () {
-                  model.routeToHomeView('user1234');
-                },
-                onLongPress: () {
-                  model.routeToHomeView('user1234');
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(170, 30),
-                  padding: const EdgeInsets.all(10),
-                ),
-                child: const Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 20,
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    model.routeToHomeView('user1234');
+                  },
+                  onLongPress: () {
+                    model.routeToHomeView('user1234');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(170, 30),
+                    padding: const EdgeInsets.all(10),
+                  ),
+                  child: const Text(
+                    'Home',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),

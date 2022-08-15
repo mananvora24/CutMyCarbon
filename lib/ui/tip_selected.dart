@@ -74,55 +74,57 @@ class TipSelectedView extends StatelessWidget {
                       }
                     }),
               ),
-              Image.asset(
-                'assets/Logo.png',
-              ),
               SizedBox(height: height * 0.03),
-              SizedBox(
-                width: width * 0.9,
-                child: FutureBuilder<String>(
-                    future: model.getCategoryFact(category),
-                    builder: (
-                      BuildContext context,
-                      AsyncSnapshot<String> snapshot,
-                    ) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.done) {
-                        if (snapshot.hasError) {
-                          return const Text('Error');
-                        } else if (snapshot.hasData) {
-                          return Text(snapshot.data!,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20.0));
+              Center(
+                child: SizedBox(
+                  width: width * 0.8,
+                  child: FutureBuilder<String>(
+                      future: model.getCategoryFact(category),
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<String> snapshot,
+                      ) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.done) {
+                          if (snapshot.hasError) {
+                            return const Text('Error');
+                          } else if (snapshot.hasData) {
+                            return Text(snapshot.data!,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0));
+                          } else {
+                            return const Text('Empty data');
+                          }
                         } else {
-                          return const Text('Empty data');
+                          return Text('State: ${snapshot.connectionState}');
                         }
-                      } else {
-                        return Text('State: ${snapshot.connectionState}');
-                      }
-                    }),
+                      }),
+                ),
               ),
             ]),
             persistentFooterButtons: [
-              SizedBox(height: height * 0.04),
-              ElevatedButton(
-                onPressed: () {
-                  model.routeToHomeView('user1234');
-                },
-                onLongPress: () {
-                  model.routeToHomeView('user1234');
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(170, 30),
-                  padding: const EdgeInsets.all(10),
-                ),
-                child: const Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 20,
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    model.routeToHomeView('user1234');
+                  },
+                  onLongPress: () {
+                    model.routeToHomeView('user1234');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(170, 30),
+                    padding: const EdgeInsets.all(10),
+                  ),
+                  child: const Text(
+                    'Home',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
