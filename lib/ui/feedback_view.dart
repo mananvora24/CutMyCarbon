@@ -56,7 +56,7 @@ class FeedbackView extends StatelessWidget {
                           'user1234', model.reason, model.feedback);
                       model.routeToHomeView('user1234');
                     },
-                    child: Text('Submit'))
+                    child: const Text('Submit'))
               ],
             ))),
       ),

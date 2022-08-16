@@ -29,6 +29,7 @@ class MailGenerator extends SharedViewModel {
         String message = mail['body'];
         print("$subject, $sender, $time, $message");
         MailContent mailContent = MailContent(subject, sender, time, message);
+        mailList.add(mailContent);
       }
     });
 

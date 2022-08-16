@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
-import 'package:cut_my_carbon/ui/feedback_view.dart';
 
 class FeedbackViewModel extends SharedViewModel {
   FeedbackViewModel();

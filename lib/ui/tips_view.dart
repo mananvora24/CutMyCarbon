@@ -18,7 +18,6 @@ class TipsView extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    String tip = "";
     TipsData tipsData = TipsData(category: "", user: "", tipOrder: 0, tip: "");
 
     return ChangeNotifierProvider(
