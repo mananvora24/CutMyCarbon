@@ -40,8 +40,9 @@ class TipShowCurrentView extends StatelessWidget {
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             body: Column(children: [
               SizedBox(
+                height: height * 0.1,
                 width: width * 0.9,
-                child: const Text("You selected:",
+                child: const Text("\nYou selected:",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
@@ -68,7 +69,7 @@ class TipShowCurrentView extends StatelessWidget {
                           int today = Timestamp.now().toDate().day;
                           int days = today - dayStart;
                           return Text(
-                              "Days: $days\nTip: $tip\nInfo: $tipDescription\nCarbon Save: $carbon",
+                              "Days: $days\n\nTip: $tip\n\nInfo: $tipDescription\n\nCarbon Save: $carbon",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0));
