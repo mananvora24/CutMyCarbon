@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
+import 'package:cut_my_carbon/viewmodels/signin_viewmodel.dart';
 import 'package:provider/provider.dart';
+
+import '../models/User.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({Key? key, required this.title}) : super(key: key);
@@ -8,10 +11,12 @@ class SignInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     TextEditingController usernameController = TextEditingController();
+    double height = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
-      create: (context) => HomeViewModel(),
-      child: Consumer<HomeViewModel>(
+      create: (context) => SignInViewModel(),
+      child: Consumer<SignInViewModel>(
         builder: (context, model, child) => Scaffold(
             /*appBar: AppBar(
               leading: IconButton(
@@ -26,6 +31,9 @@ class SignInView extends StatelessWidget {
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             body: Center(
               child: Column(children: [
+                SizedBox(
+                  height: height * 0.25,
+                ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
                   alignment: Alignment.topRight,
@@ -41,8 +49,9 @@ class SignInView extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextField(
-                    controller: usernameController,
-                    obscureText: true,
+                    onChanged: (String value) {
+                      model.username = value;
+                    },
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'username',
@@ -51,14 +60,14 @@ class SignInView extends StatelessWidget {
                 ),
               ]),
             ),
-            persistentFooterButtons: const [
-/*              
+            persistentFooterButtons: [
               SizedBox(height: height * 0.04),
               ElevatedButton(
-                onPressed: () {
-                  var username = int.parse(usernameController.text);
-                  model.submitTipsData('user1234', username);
-                  print(username);
+                onPressed: () async {
+                  await model.saveUsername(user!.uid, user.displayName ?? '',
+                      user.email ?? '', model.username);
+                  print(model.username);
+                  model.routeToHomeView('user1234');
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 30),
@@ -71,7 +80,6 @@ class SignInView extends StatelessWidget {
                   ),
                 ),
               ),
-*/
             ]),
       ),
     );
