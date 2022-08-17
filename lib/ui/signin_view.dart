@@ -64,10 +64,16 @@ class SignInView extends StatelessWidget {
               SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () async {
-                  await model.saveUsername(user!.uid, user.displayName ?? '',
-                      user.email ?? '', model.username);
-                  print(model.username);
-                  model.routeToHomeView('user1234');
+                  String checkingNewUser =
+                      await model.getUsername(model.username);
+                  if (model.username == checkingNewUser) {
+                    print('This username is taken');
+                  } else {
+                    await model.saveUsername(user!.uid, user.displayName ?? '',
+                        user.email ?? '', model.username);
+                    print(model.username + checkingNewUser);
+                    model.routeToHomeView('user1234');
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(170, 30),
