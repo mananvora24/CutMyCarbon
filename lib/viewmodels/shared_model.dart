@@ -81,4 +81,8 @@ class SharedViewModel extends BaseViewModel {
   void routeToFeedbackView() {
     _navigationService.navigateTo(feedbackViewRoute);
   }
+
+  void routeToSignInView() {
+    _navigationService.navigateTo(signInViewRoute);
+  }
 }

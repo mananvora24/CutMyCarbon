@@ -1,4 +1,7 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
+import 'package:cut_my_carbon/ui/home_view.dart';
+import 'package:cut_my_carbon/ui/signin_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/viewmodels/auth_viewmodel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,13 +13,14 @@ class AuthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     return ChangeNotifierProvider(
         create: (context) => AuthViewModel(),
         child: Consumer<AuthViewModel>(
           builder: (context, model, child) => Scaffold(
-              appBar: AppBar(),
               backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-              body: SizedBox(
+              body: Center(
+                  child: SizedBox(
                 height: 200,
                 child: SizedBox(
                   height: (MediaQuery.of(context).size.height),
@@ -27,14 +31,24 @@ class AuthView extends StatelessWidget {
                               context,
                               listen: false);
                           await provider.googleLogin();
-                          model.routeToHomeView('user1234');
+                          print('user is logged in');
+                          user = FirebaseAuth.instance.currentUser;
+                          String uID1;
+                          uID1 = await model.getUsername(user!.uid);
+                          if (uID1 == '') {
+                            print('Matched empty string $uID1 this is uID');
+                            model.routeToSignInView();
+                          } else {
+                            print('$uID1 this is uID');
+                            model.routeToHomeView('user1234');
+                          }
                         },
                         icon: const FaIcon(FontAwesomeIcons.google,
                             color: Colors.black),
                         label: const Text('Sign Up with Google')),
                   ]),
                 ),
-              )),
+              ))),
         ));
   }
 }
