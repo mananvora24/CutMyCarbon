@@ -22,29 +22,17 @@ class TipSelectedView extends StatelessWidget {
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              title: Text(category,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 25.0)),
-              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-              elevation: 0,
-            ),
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             body: Column(children: [
-              SizedBox(height: height * 0.03),
+              SizedBox(height: height * 0.15),
               SizedBox(
                 width: width * 0.9,
-                child: const Text("You selected: ",
+                child: Text("You selected: \n\nCategory: $category",
                     textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 25.0)),
               ),
+              SizedBox(height: height * 0.05),
               SizedBox(
                 width: width * 0.9,
                 child: FutureBuilder<Map<String, dynamic>>(

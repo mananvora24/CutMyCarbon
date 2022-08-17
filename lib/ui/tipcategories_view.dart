@@ -71,16 +71,6 @@ class TipCategoriesView extends StatelessWidget {
                 )),
             OutlinedButton(
                 onPressed: () {
-                  model.routeToTipsView(user, "Offsetting", 0); // skipCount = 0
-                },
-                child: const Text(
-                  'Offsetting',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                )),
-            OutlinedButton(
-                onPressed: () {
                   model.routeToTipsView(user, "Energy", 0); // skipCount = 0
                 },
                 child: const Text(
