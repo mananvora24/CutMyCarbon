@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -102,6 +104,7 @@ class TipStatusUpdateView extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
                     minimumSize: const Size(170, 30),
                     padding: const EdgeInsets.all(10),
                   ),

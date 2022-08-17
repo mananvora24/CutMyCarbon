@@ -1,6 +1,8 @@
 import 'package:cut_my_carbon/viewmodels/mail_content.dart';
 import 'package:cut_my_carbon/viewmodels/mail_generator.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 class InboxView extends StatefulWidget {

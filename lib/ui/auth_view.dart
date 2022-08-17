@@ -1,8 +1,11 @@
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/google_sign_in.dart';
 import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:cut_my_carbon/ui/signin_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:cut_my_carbon/viewmodels/auth_viewmodel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +21,7 @@ class AuthView extends StatelessWidget {
         create: (context) => AuthViewModel(),
         child: Consumer<AuthViewModel>(
           builder: (context, model, child) => Scaffold(
-              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+              backgroundColor: backgroundColor,
               body: Center(
                   child: SizedBox(
                 height: 200,

@@ -1,5 +1,7 @@
 import 'package:cut_my_carbon/viewmodels/fun_fact_viewmodel.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 class FunFactView extends StatelessWidget {

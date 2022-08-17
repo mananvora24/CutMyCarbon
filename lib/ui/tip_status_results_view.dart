@@ -1,4 +1,6 @@
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -124,6 +126,7 @@ class TipStatusResultsView extends StatelessWidget {
                     model.routeToHomeView('user1234');
                   },
                   style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
                     minimumSize: const Size(170, 30),
                     padding: const EdgeInsets.all(10),
                   ),

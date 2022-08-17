@@ -1,6 +1,8 @@
 import 'package:cut_my_carbon/viewmodels/stats_viewmodel.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 //import '../models/Stat.dart';

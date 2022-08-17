@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:cut_my_carbon/viewmodels/signin_viewmodel.dart';
 import 'package:provider/provider.dart';
-
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import '../models/User.dart';
 
 class SignInView extends StatelessWidget {
@@ -70,6 +72,7 @@ class SignInView extends StatelessWidget {
                   model.routeToHomeView('user1234');
                 },
                 style: ElevatedButton.styleFrom(
+                  primary: primaryColor,
                   minimumSize: const Size(170, 30),
                   padding: const EdgeInsets.all(10),
                 ),

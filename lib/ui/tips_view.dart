@@ -1,6 +1,8 @@
 import 'package:cut_my_carbon/viewmodels/tip.dart';
 import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 class TipsView extends StatelessWidget {
@@ -103,6 +105,7 @@ class TipsView extends StatelessWidget {
                   model.routeToTipsView(user, category, skipCount + 1);
                 },
                 style: ElevatedButton.styleFrom(
+                  primary: primaryColor,
                   minimumSize: const Size(170, 40),
                   padding: const EdgeInsets.all(10),
                 ),
@@ -128,6 +131,7 @@ class TipsView extends StatelessWidget {
                   model.routeToTipSelectedView(category, tipsData.tipOrder);
                 },
                 style: ElevatedButton.styleFrom(
+                  primary: primaryColor,
                   minimumSize: const Size(170, 40),
                   padding: const EdgeInsets.all(10),
                 ),

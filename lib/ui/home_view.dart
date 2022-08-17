@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:cut_my_carbon/Forterra Icon/Ficon.dart';
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
@@ -25,37 +28,52 @@ class HomeView extends StatelessWidget {
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
-          backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+          backgroundColor: backgroundColor,
           floatingActionButton: SpeedDial(
             animatedIcon: AnimatedIcons.menu_close,
-            backgroundColor: Colors.green,
+            backgroundColor: primaryColor,
             spacing: 15,
             children: [
               SpeedDialChild(
-                  child: const Icon(Icons.settings_rounded),
-                  backgroundColor: Colors.green,
+                  child: const Icon(
+                    Icons.settings_rounded,
+                    color: primaryColor,
+                  ),
+                  backgroundColor: backgroundColor,
                   onTap: () {}),
               SpeedDialChild(
-                  child: const Icon(Icons.mail_rounded),
-                  backgroundColor: Colors.green,
+                  child: const Icon(
+                    Icons.mail_rounded,
+                    color: primaryColor,
+                  ),
+                  backgroundColor: backgroundColor,
                   onTap: () {
                     model.routeToInboxView();
                   }),
               SpeedDialChild(
-                  child: const Icon(Icons.feedback_rounded),
-                  backgroundColor: Colors.green,
+                  child: const Icon(
+                    Icons.feedback_rounded,
+                    color: primaryColor,
+                  ),
+                  backgroundColor: backgroundColor,
                   onTap: () {
                     model.routeToFeedbackView();
                   }),
               SpeedDialChild(
-                  child: const Icon(Icons.info_rounded),
-                  backgroundColor: Colors.green,
+                  child: const Icon(
+                    Icons.info_rounded,
+                    color: primaryColor,
+                  ),
+                  backgroundColor: backgroundColor,
                   onTap: () {
                     model.routeToAboutUSView();
                   }),
               SpeedDialChild(
-                  child: const Icon(Forterra.logo),
-                  backgroundColor: Colors.green,
+                  child: const Icon(
+                    Forterra.logo,
+                    color: primaryColor,
+                  ),
+                  backgroundColor: backgroundColor,
                   onTap: () {
                     model.routeToAboutForterraView();
                   }),
@@ -94,6 +112,7 @@ class HomeView extends StatelessWidget {
                       }
                     },
                     style: ElevatedButton.styleFrom(
+                      primary: primaryColor,
                       padding: const EdgeInsets.all(10),
                     ),
                     child: FutureBuilder<TipStatusData>(
@@ -134,8 +153,8 @@ class HomeView extends StatelessWidget {
                       model.routeToStatsView();
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(10),
-                    ),
+                        primary: primaryColor,
+                        padding: const EdgeInsets.all(10)),
                     child: const Text(
                       'Statistics',
                       style: TextStyle(
