@@ -5,8 +5,8 @@ class MailContent {
   String message;
 
   MailContent(this.subject, this.sender, this.time, this.message);
-  String getSubject() => this.subject;
-  String getSender() => this.sender;
-  String getTime() => this.time;
-  String getMessage() => this.message;
+  String getSubject() => subject;
+  String getSender() => sender;
+  String getTime() => time;
+  String getMessage() => message;
 }

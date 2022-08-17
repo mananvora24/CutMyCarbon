@@ -96,7 +96,7 @@ class Router {
       case aboutUsViewRoute:
         return const AboutUsView(title: "About Cut My Carbon");
       case inboxViewRoute:
-        return InboxView(title: "Inbox");
+        return const InboxView();
       case authViewRoute:
         return const AuthView(title: "Auth");
       case feedbackViewRoute:

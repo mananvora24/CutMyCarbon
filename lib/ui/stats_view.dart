@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/stats_viewmodel.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +6,8 @@ import 'package:provider/provider.dart';
 //import '../models/Stat.dart';
 
 class StatsView extends StatelessWidget {
-  StatsView({Key? key, required this.title}) : super(key: key);
+  const StatsView({Key? key, required this.title}) : super(key: key);
   final String title;
-  final Stream<QuerySnapshot> _statStream =
-      FirebaseFirestore.instance.collection('UserStatistics').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -58,33 +55,6 @@ class StatsView extends StatelessWidget {
                   return Text('State: ${snapshot.connectionState}');
                 }
               }),
-          /*
-          FutureBuilder<QuerySnapshot>(
-            future: _statStream,
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasError) {
-                return const Text('Something went wrong');
-              }
-
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Text("Loading");
-              }
-
-              return ListView(
-                children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                  Map<String, dynamic> data =
-                      document.data()! as Map<String, dynamic>;
-                  return ListTile(
-                    title: Text(
-                        'Last week carbon savings: ${data['lastWeekCarbon']} lbs'),
-                    subtitle: Text(
-                        'Total carbon savings: ${data['totalCarbon']} lbs'),
-                  );
-                }).toList(),
-              );
-            },
-          ),*/
         ),
       ),
     );
