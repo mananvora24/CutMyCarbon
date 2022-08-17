@@ -16,17 +16,19 @@ class FeedbackView extends StatelessWidget {
       child: Consumer<FeedbackViewModel>(
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
-              /*automaticallyImplyLeading: true,*/
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: primaryColor,
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+              backgroundColor: backgroundColor,
               elevation: 0,
             ),
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            backgroundColor: backgroundColor,
             body: Center(
                 child: Column(
               children: [
@@ -52,13 +54,19 @@ class FeedbackView extends StatelessWidget {
                     labelText: 'Feedback',
                   ),
                 ),
-                ElevatedButton(
+                SizedBox(
+                  child: ElevatedButton(
                     onPressed: () async {
                       await model.saveFeedbackData(
                           'user1234', model.reason, model.feedback);
                       model.routeToHomeView('user1234');
                     },
-                    child: const Text('Submit'))
+                    style: ElevatedButton.styleFrom(
+                        primary: primaryColor,
+                        padding: const EdgeInsets.all(10)),
+                    child: const Text('Submit'),
+                  ),
+                ),
               ],
             ))),
       ),

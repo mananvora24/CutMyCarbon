@@ -27,6 +27,19 @@ class HomeView extends StatelessWidget {
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: primaryColor,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            backgroundColor: backgroundColor,
+            elevation: 0,
+          ),
           backgroundColor: backgroundColor,
           floatingActionButton: SpeedDial(
             animatedIcon: AnimatedIcons.menu_close,
@@ -134,7 +147,8 @@ class HomeView extends StatelessWidget {
                               tipStatusData = snapshot.data!;
                               return const Text("Tip",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 30.0));
+                                  style: TextStyle(
+                                      color: whiteColor, fontSize: 30.0));
                             } else {
                               return const Text('Empty data');
                             }
@@ -159,6 +173,7 @@ class HomeView extends StatelessWidget {
                     child: const Text(
                       'Statistics',
                       style: TextStyle(
+                        color: whiteColor,
                         fontSize: 30,
                       ),
                     ),

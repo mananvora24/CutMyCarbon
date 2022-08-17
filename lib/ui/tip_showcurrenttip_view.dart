@@ -29,23 +29,35 @@ class TipShowCurrentView extends StatelessWidget {
       child: Consumer<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
-              //automaticallyImplyLeading: false,
-              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: primaryColor,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              backgroundColor: backgroundColor,
               elevation: 0,
               title: Text("Category: $category",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 25.0)),
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0)),
             ),
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            backgroundColor: backgroundColor,
             body: Column(children: [
               SizedBox(
                 height: height * 0.1,
                 width: width * 0.9,
                 child: const Text("\nYou selected:",
                     textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
+                    style: TextStyle(
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0)),
               ),
               SizedBox(
                 width: width * 0.9,
@@ -72,7 +84,9 @@ class TipShowCurrentView extends StatelessWidget {
                               "Days: $days\n\nTip: $tip\n\nInfo: $tipDescription\n\nCarbon Save: $carbon",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20.0));
+                                  color: primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0));
                         } else {
                           return const Text('Empty data');
                         }
@@ -102,6 +116,7 @@ class TipShowCurrentView extends StatelessWidget {
                             return Text(snapshot.data!,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
+                                    color: primaryColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.0));
                           } else {
@@ -131,6 +146,7 @@ class TipShowCurrentView extends StatelessWidget {
                   child: const Text(
                     'Home',
                     style: TextStyle(
+                      color: whiteColor,
                       fontSize: 20,
                     ),
                   ),

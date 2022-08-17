@@ -17,17 +17,21 @@ class TipCategoriesView extends StatelessWidget {
       child: Consumer<TipsViewModel>(
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
-            /*automaticallyImplyLeading: true,*/
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded),
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: primaryColor,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            /*automaticallyImplyLeading: true,*/
+
+            backgroundColor: backgroundColor,
             elevation: 0,
           ),
-          backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+          backgroundColor: backgroundColor,
           body: Center(
               child: Column(children: [
             const SizedBox(height: 70),
@@ -36,6 +40,7 @@ class TipCategoriesView extends StatelessWidget {
               child: const Text(
                 "Pick one of the categories to get your tip of the week",
                 style: TextStyle(
+                  color: primaryColor,
                   fontSize: 20,
                 ),
               ),
@@ -48,6 +53,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   'Home',
                   style: TextStyle(
+                    color: primaryColor,
                     fontSize: 20,
                   ),
                 )),
@@ -58,6 +64,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   'Food',
                   style: TextStyle(
+                    color: primaryColor,
                     fontSize: 20,
                   ),
                 )),
@@ -68,6 +75,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   'Shopping',
                   style: TextStyle(
+                    color: primaryColor,
                     fontSize: 20,
                   ),
                 )),
@@ -78,6 +86,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   'Energy',
                   style: TextStyle(
+                    color: primaryColor,
                     fontSize: 20,
                   ),
                 )),
@@ -88,6 +97,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   'Water',
                   style: TextStyle(
+                    color: primaryColor,
                     fontSize: 20,
                   ),
                 )),
@@ -99,6 +109,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   'Transportation',
                   style: TextStyle(
+                    color: primaryColor,
                     fontSize: 20,
                   ),
                 )),

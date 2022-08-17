@@ -27,15 +27,18 @@ class TipStatusResultsView extends StatelessWidget {
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: primaryColor,
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+              backgroundColor: backgroundColor,
               elevation: 0,
             ),
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            backgroundColor: backgroundColor,
             body: Center(
               child: Column(children: [
                 SizedBox(
@@ -44,7 +47,9 @@ class TipStatusResultsView extends StatelessWidget {
                   child: const Text('Congratulations! Your saved carbon is: ',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0)),
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0)),
                 ),
                 SizedBox(
                   height: height * 0.06,
@@ -70,6 +75,7 @@ class TipStatusResultsView extends StatelessWidget {
                             return Text(snapshot.data!.toString(),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
+                                    color: primaryColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 30.0));
                           } else {
@@ -103,6 +109,7 @@ class TipStatusResultsView extends StatelessWidget {
                             return Text(snapshot.data!,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
+                                    color: primaryColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.0));
                           } else {
@@ -133,6 +140,7 @@ class TipStatusResultsView extends StatelessWidget {
                   child: const Text(
                     'Home',
                     style: TextStyle(
+                      color: primaryColor,
                       fontSize: 20,
                     ),
                   ),

@@ -19,15 +19,18 @@ class StatsView extends StatelessWidget {
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded),
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: primaryColor,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            backgroundColor: backgroundColor,
             elevation: 0,
           ),
-          backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+          backgroundColor: backgroundColor,
           body: FutureBuilder<Map<String, dynamic>>(
               future: model.getUserStatistics('user1234'),
               builder: (
@@ -48,7 +51,9 @@ class StatsView extends StatelessWidget {
                         "Last Week: $lastWeekCarbon lbs\n\n        Total Carbon: $totalCarbon lbs\n\n     Total Tons: $totalTons tons",
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20.0));
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0));
                   } else {
                     return const Text('Error');
                   }

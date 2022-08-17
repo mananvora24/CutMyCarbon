@@ -31,15 +31,18 @@ class TipStatusUpdateView extends StatelessWidget {
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded),
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: primaryColor,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            backgroundColor: backgroundColor,
             elevation: 0,
           ),
-          backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+          backgroundColor: backgroundColor,
           body: Center(
             child: Column(children: [
               Container(
@@ -60,8 +63,10 @@ class TipStatusUpdateView extends StatelessWidget {
               ),
               const Text('Enter the number of days you completed the activity',
                   textAlign: TextAlign.center,
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                  style: TextStyle(
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0)),
               const SizedBox(
                 height: 30,
               ),
@@ -111,6 +116,7 @@ class TipStatusUpdateView extends StatelessWidget {
                   child: const Text(
                     'Submit',
                     style: TextStyle(
+                      color: primaryColor,
                       fontSize: 20,
                     ),
                   ),

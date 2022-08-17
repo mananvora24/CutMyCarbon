@@ -28,18 +28,23 @@ class TipsView extends StatelessWidget {
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: primaryColor,
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               title: Text(category,
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 25.0)),
-              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0)),
+              backgroundColor: primaryColor,
               elevation: 0,
             ),
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            backgroundColor: backgroundColor,
             body: Center(
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +55,9 @@ class TipsView extends StatelessWidget {
                       child: const Text("Carbon saving recommendation:",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25.0)),
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25.0)),
                     ),
                     SizedBox(
                       height: height * 0.05,
@@ -82,7 +89,7 @@ class TipsView extends StatelessWidget {
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25.0,
-                                      color: Colors.white,
+                                      color: whiteColor,
                                     ));
                               } else {
                                 return const Text('Empty data');
@@ -112,6 +119,7 @@ class TipsView extends StatelessWidget {
                 child: const Text(
                   'Skip',
                   style: TextStyle(
+                    color: primaryColor,
                     fontSize: 20,
                   ),
                 ),
@@ -138,6 +146,7 @@ class TipsView extends StatelessWidget {
                 child: const Text(
                   'Select',
                   style: TextStyle(
+                    color: primaryColor,
                     fontSize: 20,
                   ),
                 ),

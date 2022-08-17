@@ -18,7 +18,20 @@ class SignInView extends StatelessWidget {
       create: (context) => SignInViewModel(),
       child: Consumer<SignInViewModel>(
         builder: (context, model, child) => Scaffold(
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            appBar: AppBar(
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: primaryColor,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              backgroundColor: backgroundColor,
+              elevation: 0,
+            ),
+            backgroundColor: backgroundColor,
             body: Center(
               child: Column(children: [
                 SizedBox(
@@ -30,8 +43,10 @@ class SignInView extends StatelessWidget {
                 ),
                 const Text('Enter your username',
                     textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                    style: TextStyle(
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0)),
                 const SizedBox(
                   height: 50,
                 ),
@@ -73,6 +88,7 @@ class SignInView extends StatelessWidget {
                 child: const Text(
                   'Submit',
                   style: TextStyle(
+                    color: primaryColor,
                     fontSize: 20,
                   ),
                 ),

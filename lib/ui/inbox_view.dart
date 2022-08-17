@@ -25,15 +25,18 @@ class _InboxViewState extends State<InboxView> {
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded),
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: primaryColor,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+            backgroundColor: backgroundColor,
             elevation: 0,
           ),
-          backgroundColor: const Color.fromARGB(255, 119, 188, 63),
+          backgroundColor: backgroundColor,
           body: Column(children: [
             SizedBox(
               height: height * 0.8,
@@ -83,9 +86,9 @@ class _InboxViewState extends State<InboxView> {
                                                   Text(
                                                     mailContent.subject,
                                                     style: const TextStyle(
+                                                        color: primaryColor,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        color: Colors.black87,
                                                         fontSize: 17.0),
                                                   ),
                                                   Text(
