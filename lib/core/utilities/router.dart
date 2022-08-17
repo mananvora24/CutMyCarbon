@@ -3,6 +3,7 @@ import 'package:cut_my_carbon/ui/about_forterra.dart';
 import 'package:cut_my_carbon/ui/about_us.dart';
 import 'package:cut_my_carbon/ui/stats_view.dart';
 import 'package:cut_my_carbon/ui/tip_selected.dart';
+import 'package:cut_my_carbon/ui/tip_showcurrenttip_view.dart';
 import 'package:cut_my_carbon/ui/tip_status_results_view.dart';
 import 'package:cut_my_carbon/ui/tip_status_update_view.dart';
 import 'package:cut_my_carbon/ui/tipcategories_view.dart';
@@ -88,6 +89,17 @@ class Router {
         return TipSelectedView(
           category: category,
           tipOrder: tipOrder,
+        );
+      case tipShowCurrentViewRoute:
+        Map<String, dynamic> tipArgs =
+            settings.arguments as Map<String, dynamic>;
+        String category = tipArgs['category']!;
+        int tipOrder = tipArgs['tipOrder']! as int;
+        Timestamp tipStartTime = tipArgs['tipStartTime'] as Timestamp;
+        return TipShowCurrentView(
+          category: category,
+          tipOrder: tipOrder,
+          tipStartTime: tipStartTime,
         );
       case statsViewRoute:
         return StatsView(title: "Stats");

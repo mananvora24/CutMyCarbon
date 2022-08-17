@@ -53,6 +53,15 @@ class SharedViewModel extends BaseViewModel {
         arguments: {'category': category, 'tipOrder': tipOrder});
   }
 
+  void routeToTipShowCurrentView(
+      String category, int tipOrder, Timestamp tipStartTime) {
+    _navigationService.navigateTo(tipShowCurrentViewRoute, arguments: {
+      'category': category,
+      'tipOrder': tipOrder,
+      'tipStartTime': tipStartTime,
+    });
+  }
+
   void routeToTipStatusUpdateView(String user, String category, int tipOrder,
       Timestamp tipStartTime, String message) {
     _navigationService.navigateTo(tipStatusUpdateViewRoute, arguments: {

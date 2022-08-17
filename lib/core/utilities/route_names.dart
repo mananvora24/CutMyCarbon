@@ -5,6 +5,7 @@ const String statsViewRoute = 'StatsView';
 const String aboutForterraViewRoute = 'AboutForterraView';
 const String aboutUsViewRoute = 'AboutUsView';
 const String tipSelectedViewRoute = 'TipSelectedView';
+const String tipShowCurrentViewRoute = 'TipShowCurrentView';
 const String tipStatusUpdateViewRoute = 'TipStatusUpdateView';
 const String tipStatusResultsViewRoute = 'TipStatusResultsView';
 const String inboxViewRoute = 'InboxView';

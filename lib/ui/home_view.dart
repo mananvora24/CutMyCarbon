@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
-import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -105,8 +104,11 @@ class HomeView extends StatelessWidget {
                             tipStatusData.tipStartTime,
                             "");
                       } else if (tipStatusData.tipSelected && days < 7) {
-                        model.routeToTipSelectedView(
-                            tipStatusData.category, tipStatusData.tipOrder);
+                        model.routeToTipShowCurrentView(
+                          tipStatusData.category,
+                          tipStatusData.tipOrder,
+                          tipStatusData.tipStartTime,
+                        );
                       } else {
                         model.routeToTipCategoriesView('user1234');
                       }
@@ -131,7 +133,6 @@ class HomeView extends StatelessWidget {
                             } else if (snapshot.hasData) {
                               tipStatusData = snapshot.data!;
                               return const Text("Tip",
-                                  //model.getTipsButtonText(tipStatusData),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontSize: 30.0));
                             } else {

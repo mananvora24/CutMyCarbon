@@ -1,15 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-class TipSelectedView extends StatelessWidget {
-  const TipSelectedView(
-      {Key? key, required this.category, required this.tipOrder})
+class TipShowCurrentView extends StatelessWidget {
+  const TipShowCurrentView(
+      {Key? key,
+      required this.category,
+      required this.tipOrder,
+      required this.tipStartTime})
       : super(key: key);
   final String category;
   final int tipOrder;
+  final Timestamp tipStartTime;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +22,7 @@ class TipSelectedView extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     String tip = "";
     String tipDescription = "";
+    int carbon = 0;
 
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
@@ -33,7 +39,6 @@ class TipSelectedView extends StatelessWidget {
             ),
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             body: Column(children: [
-              SizedBox(height: height * 0.15),
               SizedBox(
                 width: width * 0.9,
                 child: const Text("You selected:",
@@ -41,7 +46,6 @@ class TipSelectedView extends StatelessWidget {
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0)),
               ),
-              SizedBox(height: height * 0.05),
               SizedBox(
                 width: width * 0.9,
                 child: FutureBuilder<Map<String, dynamic>>(
@@ -59,7 +63,12 @@ class TipSelectedView extends StatelessWidget {
                         } else if (snapshot.hasData) {
                           tip = snapshot.data!['Tip'];
                           tipDescription = snapshot.data!['Description'];
-                          return Text("Tip: $tip\n\nInfo: $tipDescription",
+                          carbon = snapshot.data!['Carbon'] as int;
+                          int dayStart = tipStartTime.toDate().day;
+                          int today = Timestamp.now().toDate().day;
+                          int days = today - dayStart;
+                          return Text(
+                              "Days: $days\nTip: $tip\nInfo: $tipDescription\nCarbon Save: $carbon",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0));

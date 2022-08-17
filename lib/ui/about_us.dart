@@ -13,7 +13,6 @@ class AboutUsView extends StatelessWidget {
       child: Consumer<AboutUsViewModel>(
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
-            /*automaticallyImplyLeading: true,*/
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_rounded),
               onPressed: () {

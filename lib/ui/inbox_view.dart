@@ -24,7 +24,6 @@ class _InboxViewState extends State<InboxView> {
       child: Consumer<MailGenerator>(
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
-            /*: true,*/
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_rounded),
               onPressed: () {

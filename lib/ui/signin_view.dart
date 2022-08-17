@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:cut_my_carbon/viewmodels/signin_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
-import '../models/User.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({Key? key, required this.title}) : super(key: key);
@@ -14,22 +13,11 @@ class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
-    TextEditingController usernameController = TextEditingController();
     double height = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
       create: (context) => SignInViewModel(),
       child: Consumer<SignInViewModel>(
         builder: (context, model, child) => Scaffold(
-            /*appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              backgroundColor: const Color.fromARGB(255, 119, 188, 63),
-              elevation: 0,
-            ),*/
             backgroundColor: const Color.fromARGB(255, 119, 188, 63),
             body: Center(
               child: Column(children: [
