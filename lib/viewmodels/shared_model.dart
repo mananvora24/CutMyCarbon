@@ -94,4 +94,12 @@ class SharedViewModel extends BaseViewModel {
   void routeToSignInView() {
     _navigationService.navigateTo(signInViewRoute);
   }
+
+  void routeToSettingsView() {
+    _navigationService.navigateTo(settingsViewRoute);
+  }
+
+  void routeToAuthView() {
+    _navigationService.navigateTo(authViewRoute);
+  }
 }

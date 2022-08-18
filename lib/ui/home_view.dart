@@ -27,19 +27,6 @@ class HomeView extends StatelessWidget {
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: primaryColor,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            backgroundColor: backgroundColor,
-            elevation: 0,
-          ),
           backgroundColor: backgroundColor,
           floatingActionButton: SpeedDial(
             animatedIcon: AnimatedIcons.menu_close,
@@ -52,7 +39,9 @@ class HomeView extends StatelessWidget {
                     color: primaryColor,
                   ),
                   backgroundColor: backgroundColor,
-                  onTap: () {}),
+                  onTap: () {
+                    model.routeToSettingsView();
+                  }),
               SpeedDialChild(
                   child: const Icon(
                     Icons.mail_rounded,
