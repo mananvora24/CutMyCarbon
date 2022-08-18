@@ -15,12 +15,20 @@ class StatsViewModel extends SharedViewModel {
       dataList = querySnapshot.docs;
       if (dataList.isEmpty) {
         print("getUserStatistics: Data is empty");
+        currentUserStatistics['lastWeekCarbon'] = 0;
+        currentUserStatistics['lastWeekPossibleCarbon'] = 0;
+        currentUserStatistics['totalCarbon'] = 0;
+        currentUserStatistics['totalPossibleCarbon'] = 0;
+        currentUserStatistics['totalTons'] = 0.0;
+        currentUserStatistics['user'] = user;
+        currentUserStatistics['userID'] = 0;
       } else {
-        print("getCurrentTip: Data Found");
-      }
-      for (var snapshot in dataList) {
-        currentUserStatistics = snapshot.data();
-        break;
+        for (var snapshot in dataList) {
+          currentUserStatistics = snapshot.data();
+          break;
+        }
+        print(
+            "getUserStatistics: User is $user, Data Found $currentUserStatistics");
       }
     });
     return currentUserStatistics;

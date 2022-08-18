@@ -9,6 +9,25 @@ class TipsViewModel extends SharedViewModel {
   String userTip = "";
   Map<String, dynamic>? tipData = {};
 
+  Future<Map<String, dynamic>?> getMaxCategoryTipOrder(String category) async {
+    await FirebaseFirestore.instance
+        .collection('TipCounts')
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      List<dynamic> data = querySnapshot.docs;
+      if (data.isEmpty) {
+        print("Data is empty");
+      }
+      for (var snapshot in data) {
+        tipData = snapshot.data();
+        tipData?.forEach((key, value) {
+          myTipOrder = tipData!['TipOrder'];
+        });
+      }
+    });
+    return tipData;
+  }
+
   Future<int> getUserCategoryTipOrder(String category, String user) async {
     await FirebaseFirestore.instance
         .collection('UserTipStatus')

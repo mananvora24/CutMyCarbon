@@ -10,17 +10,11 @@ import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key, required this.username, required String title})
-      : super(key: key);
-  final String username;
+  HomeView({Key? key, required String title}) : super(key: key);
+  String username = '';
 
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
-    currentUserUID = user!.uid;
-    currentUserDisplayName = user.displayName!;
-    currentUserUserEmail = user.email!;
-    currentUserUsername = username;
     double width = MediaQuery.of(context).size.width;
     TipStatusData tipStatusData = TipStatusData(
         category: "",
@@ -29,6 +23,12 @@ class HomeView extends StatelessWidget {
         tipSelected: false,
         tipCompleted: false,
         tipStartTime: Timestamp.now());
+
+    User? user = FirebaseAuth.instance.currentUser;
+    currentUserUID = user!.uid;
+    currentUserDisplayName = user.displayName!;
+    currentUserUserEmail = user.email!;
+
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -91,6 +91,36 @@ class HomeView extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
                 alignment: Alignment.topRight,
+              ),
+              SizedBox(
+                height: 30,
+                child: FutureBuilder<String>(
+                    future: model.getUsername(currentUserUID),
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<String> snapshot,
+                    ) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else if (snapshot.hasData) {
+                          username = snapshot.data!;
+                          print("HomeView: User - $username");
+                          currentUserUsername = username;
+                          return Text(username,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: primaryColor, fontSize: 25.0));
+                        } else {
+                          return const Text('Empty data');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    }),
               ),
               const SizedBox(height: 80),
               Image.asset(

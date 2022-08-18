@@ -59,7 +59,7 @@ class FeedbackView extends StatelessWidget {
                     onPressed: () async {
                       await model.saveFeedbackData(
                           'user1234', model.reason, model.feedback);
-                      model.routeToHomeView('user1234');
+                      model.routeToHomeView();
                     },
                     style: ElevatedButton.styleFrom(
                         primary: primaryColor,
