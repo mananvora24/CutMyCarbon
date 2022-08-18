@@ -81,9 +81,6 @@ class TipsView extends StatelessWidget {
                                 return const Text('Error');
                               } else if (snapshot.hasData) {
                                 tipsData = snapshot.data!;
-                                //print(
-                                //    "Tips View Model : getTipForUser :  TipsData - $tipsData");
-
                                 return Text(tipsData.tip,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
@@ -108,9 +105,6 @@ class TipsView extends StatelessWidget {
                 onPressed: () {
                   model.routeToTipsView(user, category, skipCount + 1);
                 },
-                onLongPress: () {
-                  model.routeToTipsView(user, category, skipCount + 1);
-                },
                 style: ElevatedButton.styleFrom(
                   primary: primaryColor,
                   minimumSize: const Size(170, 40),
@@ -119,7 +113,7 @@ class TipsView extends StatelessWidget {
                 child: const Text(
                   'Skip',
                   style: TextStyle(
-                    color: primaryColor,
+                    color: whiteColor,
                     fontSize: 20,
                   ),
                 ),
@@ -146,7 +140,7 @@ class TipsView extends StatelessWidget {
                 child: const Text(
                   'Select',
                   style: TextStyle(
-                    color: primaryColor,
+                    color: whiteColor,
                     fontSize: 20,
                   ),
                 ),

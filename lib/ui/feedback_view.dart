@@ -64,7 +64,8 @@ class FeedbackView extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         primary: primaryColor,
                         padding: const EdgeInsets.all(10)),
-                    child: const Text('Submit'),
+                    child: const Text('Submit',
+                        style: TextStyle(color: whiteColor)),
                   ),
                 ),
               ],
