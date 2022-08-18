@@ -40,7 +40,7 @@ class AuthView extends StatelessWidget {
                           model.routeToSignInView();
                         } else {
                           print('$uID1 this is uID');
-                          model.routeToHomeView('user1234');
+                          model.routeToHomeView(uID1);
                         }
                       },
                       icon: const FaIcon(FontAwesomeIcons.google,

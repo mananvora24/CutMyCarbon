@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: Text("Error"));
               } else if (snapshot.hasData) {
-                return const HomeView(title: 'title', user: 'user1234');
+                return const HomeView(title: 'title', username: 'user1234');
               } else if (snapshot.hasError) {
                 return const Center(child: Text("Error"));
               } else {

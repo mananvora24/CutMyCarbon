@@ -77,7 +77,7 @@ class SignInView extends StatelessWidget {
                     await model.saveUsername(user!.uid, user.displayName ?? '',
                         user.email ?? '', model.username);
                     print(model.username + checkingNewUser);
-                    model.routeToHomeView('user1234');
+                    model.routeToHomeView(model.username);
                   }
                 },
                 style: ElevatedButton.styleFrom(

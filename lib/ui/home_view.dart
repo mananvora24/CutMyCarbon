@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -9,12 +10,17 @@ import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key, required this.user, required String title})
+  const HomeView({Key? key, required this.username, required String title})
       : super(key: key);
-  final String user;
+  final String username;
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+    currentUserUID = user!.uid;
+    currentUserDisplayName = user.displayName!;
+    currentUserUserEmail = user.email!;
+    currentUserUsername = username;
     double width = MediaQuery.of(context).size.width;
     TipStatusData tipStatusData = TipStatusData(
         category: "",

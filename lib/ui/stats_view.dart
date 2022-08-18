@@ -32,7 +32,7 @@ class StatsView extends StatelessWidget {
             ),
             backgroundColor: backgroundColor,
             body: FutureBuilder<Map<String, dynamic>>(
-                future: model.getUserStatistics('user1234'),
+                future: model.getUserStatistics(currentUserUsername),
                 builder: (
                   BuildContext context,
                   AsyncSnapshot<Map<String, dynamic>> snapshot,
