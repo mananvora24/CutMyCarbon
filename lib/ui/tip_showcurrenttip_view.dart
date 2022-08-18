@@ -23,6 +23,9 @@ class TipShowCurrentView extends StatelessWidget {
     String tip = "";
     String tipDescription = "";
     int carbon = 0;
+    int dayStart = tipStartTime.toDate().day;
+    int today = Timestamp.now().toDate().day;
+    int days = 7 - (today - dayStart);
 
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
@@ -49,6 +52,12 @@ class TipShowCurrentView extends StatelessWidget {
           ),
           backgroundColor: backgroundColor,
           body: Column(children: [
+            Text("\nSubmit your progress in $days days",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: primaryColor,
+                    fontSize: 20.0)),
             SizedBox(
               height: height * 0.1,
               width: width * 0.9,
@@ -77,11 +86,8 @@ class TipShowCurrentView extends StatelessWidget {
                         tip = snapshot.data!['Tip'];
                         tipDescription = snapshot.data!['Description'];
                         carbon = snapshot.data!['Carbon'] as int;
-                        int dayStart = tipStartTime.toDate().day;
-                        int today = Timestamp.now().toDate().day;
-                        int days = today - dayStart;
                         return Text(
-                            "Days: $days\n\nTip: $tip\n\nInfo: $tipDescription\n\nCarbon Save: $carbon",
+                            "Tip: $tip\n\nInfo: $tipDescription\n\nCarbon Saving per day: $carbon",
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                                 color: primaryColor,

@@ -5,10 +5,10 @@ class MyUser {
   String displayName;
 
   MyUser(this.username, this.userEmail, this.uID, this.displayName);
-  String getUsername() => this.username;
-  String getUserEmail() => this.userEmail;
-  String getFirstName() => this.uID;
-  String getLastName() => this.displayName;
+  String getUsername() => username;
+  String getUserEmail() => userEmail;
+  String getFirstName() => uID;
+  String getLastName() => displayName;
 
   void setUsername(String username) {
     this.username = username;
