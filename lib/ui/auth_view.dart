@@ -26,6 +26,9 @@ class AuthView extends StatelessWidget {
                   height: (MediaQuery.of(context).size.height),
                   child: Column(children: [
                     ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        primary: primaryColor,
+                        padding: const EdgeInsets.all(10)),
                       onPressed: () async {
                         final provider = Provider.of<GoogleSigninProvider>(
                             context,
@@ -45,7 +48,7 @@ class AuthView extends StatelessWidget {
                         }
                       },
                       icon: const FaIcon(FontAwesomeIcons.google,
-                          color: primaryColor),
+                          color: whiteColor),
                       label: const Text('Sign Up with Google',
                           style: TextStyle(color: whiteColor)),
                     ),
