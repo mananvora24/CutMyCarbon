@@ -122,10 +122,7 @@ class TipSelectedView extends StatelessWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    model.routeToHomeView('user1234');
-                  },
-                  onLongPress: () {
-                    model.routeToHomeView('user1234');
+                    model.routeToHomeView();
                   },
                   style: ElevatedButton.styleFrom(
                     primary: primaryColor,

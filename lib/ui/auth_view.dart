@@ -35,12 +35,13 @@ class AuthView extends StatelessWidget {
                         user = FirebaseAuth.instance.currentUser;
                         String uID1;
                         uID1 = await model.getUsername(user!.uid);
+                        currentUserUsername = uID1;
                         if (uID1 == '') {
                           print('Matched empty string $uID1 this is uID');
                           model.routeToSignInView();
                         } else {
                           print('$uID1 this is uID');
-                          model.routeToHomeView(uID1);
+                          model.routeToHomeView();
                         }
                       },
                       icon: const FaIcon(FontAwesomeIcons.google,

@@ -20,8 +20,8 @@ class SharedViewModel extends BaseViewModel {
 
   void _initMethod() {}
 
-  void routeToHomeView(String user) {
-    _navigationService.navigateTo(homeViewRoute, arguments: user);
+  void routeToHomeView() {
+    _navigationService.navigateTo(homeViewRoute);
   }
 
   void routeToTipsView(String user, String category, int skipCount) {
