@@ -124,7 +124,7 @@ class HomeView extends StatelessWidget {
               ),
               const SizedBox(height: 80),
               Image.asset(
-                'assets/Logo.png',
+                'assets/Logo1.png',
               ),
               const SizedBox(height: 60),
               SizedBox(
