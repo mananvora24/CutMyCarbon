@@ -96,7 +96,7 @@ class TipStatusUpdateView extends StatelessWidget {
                         "Validator: input: $input, current time: $now, startTime: $tipStartTime, selectedDays: $selectedDays, days: $days");
 
                     String errorMessage =
-                        "Please enter days less than total duration since ${tipStartTime.toDate()}";
+                        "You started this tip $selectedDays days ago. You entered $days days.";
                     if (days > selectedDays) {
                       model.routeToTipStatusUpdateView(
                           user, category, tipOrder, tipStartTime, errorMessage);
@@ -116,7 +116,7 @@ class TipStatusUpdateView extends StatelessWidget {
                   child: const Text(
                     'Submit',
                     style: TextStyle(
-                      color: primaryColor,
+                      color: whiteColor,
                       fontSize: 20,
                     ),
                   ),

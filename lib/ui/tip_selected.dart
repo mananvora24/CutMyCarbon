@@ -23,15 +23,7 @@ class TipSelectedView extends StatelessWidget {
       child: Consumer<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: primaryColor,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+              automaticallyImplyLeading: false,
               backgroundColor: backgroundColor,
               elevation: 0,
               title: Text("Category: $category",
@@ -43,7 +35,7 @@ class TipSelectedView extends StatelessWidget {
             ),
             backgroundColor: backgroundColor,
             body: Column(children: [
-              SizedBox(height: height * 0.15),
+              SizedBox(height: height * 0.1),
               SizedBox(
                 width: width * 0.9,
                 child: const Text("You selected:",
@@ -86,6 +78,13 @@ class TipSelectedView extends StatelessWidget {
                     }),
               ),
               SizedBox(height: height * 0.03),
+              const Text("Come back in 7 days to report your progress",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0)),
+              SizedBox(height: height * 0.1),
               Center(
                 child: SizedBox(
                   width: width * 0.8,
@@ -103,7 +102,7 @@ class TipSelectedView extends StatelessWidget {
                           if (snapshot.hasError) {
                             return const Text('Error');
                           } else if (snapshot.hasData) {
-                            return Text(snapshot.data!,
+                            return Text("Fun Fact: ${snapshot.data!}",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     color: primaryColor,
@@ -136,7 +135,7 @@ class TipSelectedView extends StatelessWidget {
                   child: const Text(
                     'Home',
                     style: TextStyle(
-                      color: primaryColor,
+                      color: whiteColor,
                       fontSize: 20,
                     ),
                   ),

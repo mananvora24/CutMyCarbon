@@ -26,15 +26,7 @@ class TipStatusResultsView extends StatelessWidget {
       child: Consumer<HomeViewModel>(
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: primaryColor,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+              automaticallyImplyLeading: false,
               backgroundColor: backgroundColor,
               elevation: 0,
             ),

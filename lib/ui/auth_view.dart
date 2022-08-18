@@ -26,26 +26,28 @@ class AuthView extends StatelessWidget {
                   height: (MediaQuery.of(context).size.height),
                   child: Column(children: [
                     ElevatedButton.icon(
-                        onPressed: () async {
-                          final provider = Provider.of<GoogleSigninProvider>(
-                              context,
-                              listen: false);
-                          await provider.googleLogin();
-                          print('user is logged in');
-                          user = FirebaseAuth.instance.currentUser;
-                          String uID1;
-                          uID1 = await model.getUsername(user!.uid);
-                          if (uID1 == '') {
-                            print('Matched empty string $uID1 this is uID');
-                            model.routeToSignInView();
-                          } else {
-                            print('$uID1 this is uID');
-                            model.routeToHomeView('user1234');
-                          }
-                        },
-                        icon: const FaIcon(FontAwesomeIcons.google,
-                            color: Colors.black),
-                        label: const Text('Sign Up with Google')),
+                      onPressed: () async {
+                        final provider = Provider.of<GoogleSigninProvider>(
+                            context,
+                            listen: false);
+                        await provider.googleLogin();
+                        print('user is logged in');
+                        user = FirebaseAuth.instance.currentUser;
+                        String uID1;
+                        uID1 = await model.getUsername(user!.uid);
+                        if (uID1 == '') {
+                          print('Matched empty string $uID1 this is uID');
+                          model.routeToSignInView();
+                        } else {
+                          print('$uID1 this is uID');
+                          model.routeToHomeView('user1234');
+                        }
+                      },
+                      icon: const FaIcon(FontAwesomeIcons.google,
+                          color: primaryColor),
+                      label: const Text('Sign Up with Google',
+                          style: TextStyle(color: whiteColor)),
+                    ),
                   ]),
                 ),
               ))),
