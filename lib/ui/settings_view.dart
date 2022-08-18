@@ -39,22 +39,26 @@ class SettingsView extends StatelessWidget {
                   radius: 40,
                   backgroundImage: NetworkImage(user!.photoURL!),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Text(user.displayName!),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Text(user.email!),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                        primary: primaryColor,
+                        padding: const EdgeInsets.all(10)),
                 onPressed: () async {
                   final provider =
                       Provider.of<GoogleSigninProvider>(context, listen: false);
                   await provider.logout();
                   model.routeToAuthView();
                 },
-                child: Text('Logout'))
+                child: const Text('Logout', style: TextStyle(color: whiteColor),
+                ))
           ])),
         ),
       ),
