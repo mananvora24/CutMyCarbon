@@ -78,7 +78,7 @@ class StatsView extends StatelessWidget {
                   child: const Text(
                     'Home',
                     style: TextStyle(
-                      color: primaryColor,
+                      color: whiteColor,
                       fontSize: 20,
                     ),
                   ),

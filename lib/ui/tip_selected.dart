@@ -35,7 +35,7 @@ class TipSelectedView extends StatelessWidget {
             ),
             backgroundColor: backgroundColor,
             body: Column(children: [
-              SizedBox(height: height * 0.1),
+              SizedBox(height: height * 0.03),
               SizedBox(
                 width: width * 0.9,
                 child: const Text("You selected:",
@@ -45,7 +45,7 @@ class TipSelectedView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: 25.0)),
               ),
-              SizedBox(height: height * 0.05),
+              SizedBox(height: height * 0.03),
               SizedBox(
                 width: width * 0.9,
                 child: FutureBuilder<Map<String, dynamic>>(
@@ -84,7 +84,7 @@ class TipSelectedView extends StatelessWidget {
                       color: primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0)),
-              SizedBox(height: height * 0.1),
+              SizedBox(height: height * 0.05),
               Center(
                 child: SizedBox(
                   width: width * 0.8,

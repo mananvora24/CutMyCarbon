@@ -105,9 +105,6 @@ class TipsView extends StatelessWidget {
                 onPressed: () {
                   model.routeToTipsView(user, category, skipCount + 1);
                 },
-                onLongPress: () {
-                  model.routeToTipsView(user, category, skipCount + 1);
-                },
                 style: ElevatedButton.styleFrom(
                   primary: primaryColor,
                   minimumSize: const Size(170, 40),
