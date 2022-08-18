@@ -13,10 +13,13 @@ class StatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
       create: (context) => StatsViewModel(),
       child: Consumer<StatsViewModel>(
         builder: (context, model, child) => Scaffold(
+          
             appBar: AppBar(
               leading: IconButton(
                 icon: const Icon(
@@ -32,11 +35,12 @@ class StatsView extends StatelessWidget {
             ),
             backgroundColor: backgroundColor,
             body: FutureBuilder<Map<String, dynamic>>(
+              
                 future: model.getUserStatistics(currentUserUsername),
                 builder: (
                   BuildContext context,
                   AsyncSnapshot<Map<String, dynamic>> snapshot,
-                ) {
+                ) {       
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   } else if (snapshot.connectionState == ConnectionState.done) {
@@ -47,13 +51,85 @@ class StatsView extends StatelessWidget {
                           snapshot.data!['lastWeekCarbon'] as int;
                       int totalCarbon = snapshot.data!['totalCarbon'] as int;
                       double totalTons = snapshot.data!['totalTons'];
-                      return Text(
-                          "Last Week: $lastWeekCarbon lbs\n\n        Total Carbon: $totalCarbon lbs\n\n     Total Tons: $totalTons tons",
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              color: primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0));
+                      return Container(
+                        width: width,
+                        height: height,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: height*0.02),
+                            SizedBox(
+                              child: Text(
+                                "$totalCarbon lbs ",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 60.0
+                                )
+                              ),
+                            ),
+                            const SizedBox(
+                              child: Text(
+                                "Total Carbon Saved",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25.0
+                                )
+                              ),
+                            ),
+                            SizedBox(height: height*0.1),
+                            Row(
+                              children: [
+                                Column(
+                                  children:  [
+                                    SizedBox(
+                                      width: width*0.5,
+                                      child: Text(
+                                        "Last Week: \n $lastWeekCarbon lbs",
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25.0
+                                        )
+                                      ),
+                                    ),
+                                    SizedBox(height: height*0.02,),
+                                    SizedBox(
+                                      width: width*0.5,
+                                      child: Text(
+                                        "Total Tons: \n $totalTons tons",
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25.0
+                                        )
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children:  [
+                                    SizedBox(
+                                      width: width*0.5,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                        ],),
+                          /*
+                          Last Week: $lastWeekCarbon lbs\n\n        
+                          Total Carbon: $totalCarbon lbs\n\n     
+                          Total Tons: $totalTons tons
+                          */
+                        
+                      );
                     } else {
                       return const Text('Error');
                     }
@@ -84,7 +160,8 @@ class StatsView extends StatelessWidget {
                   ),
                 ),
               ),
-            ]),
+            ]
+          ),
       ),
     );
   }
