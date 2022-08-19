@@ -175,7 +175,7 @@ class HomeView extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontFamily: "Forterra",
-                                      color: whiteColor, fontSize: 10.0));
+                                      color: whiteColor, fontSize: 25.0));
                             } else {
                               return const Text('Empty data');
                             }
