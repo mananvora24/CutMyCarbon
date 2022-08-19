@@ -78,32 +78,39 @@ class StatsView extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25.0)),
                             ),
-                            SizedBox(height: height * 0.1),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: width * 0.425,
-                                  child: Text(
-                                      "Last Week: \n $lastWeekCarbon lbs",
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                          fontFamily: primaryFont,
-                                          color: primaryColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25.0)),
-                                ),
-                                SizedBox(
-                                  width: width * 0.425,
-                                  child: Text("Total Tons: \n $totalTons tons",
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                          fontFamily: primaryFont,
-                                          color: primaryColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25.0)),
-                                ),
-                              ],
+                            SizedBox(height: height * 0.07),
+                            Container(
+                              margin: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(3.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: primaryColor)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.45,
+                                    child: Text(
+                                        "Last Week: \n $lastWeekCarbon lbs",
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                            fontFamily: primaryFont,
+                                            color: primaryColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25.0)),
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.45,
+                                    child: Text(
+                                        "Total Tons: \n $totalTons tons",
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                            fontFamily: primaryFont,
+                                            color: primaryColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25.0)),
+                                  ),
+                                ],
+                              ),
                             ),
                             Row(
                               children: [
