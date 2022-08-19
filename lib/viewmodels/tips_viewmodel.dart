@@ -1,49 +1,66 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 import 'package:cut_my_carbon/viewmodels/tip.dart';
 
 class TipsViewModel extends SharedViewModel {
   TipsViewModel();
-  int myTipOrder = 0;
 
   String userTip = "";
   Map<String, dynamic>? tipData = {};
 
-  Future<Map<String, dynamic>?> getMaxCategoryTipOrder(String category) async {
-    await FirebaseFirestore.instance
-        .collection('TipCounts')
-        .get()
-        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
-      List<dynamic> data = querySnapshot.docs;
-      if (data.isEmpty) {
-        print("Data is empty");
+  Future<int> getMaxCategoryTipOrder(String category) async {
+    Map<String, dynamic> tipCategoryCount = {};
+    int count = 0;
+
+    if (tipCountList.isEmpty) {
+      List<dynamic> dataList = List.empty();
+      Map<String, dynamic> tipCountMap = {};
+
+      await FirebaseFirestore.instance
+          .collection('TipCounts')
+          .get()
+          .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+        dataList = querySnapshot.docs;
+        if (dataList.isEmpty) {
+          print("getMaxCategoryTipOrder: Data is empty");
+        }
+        for (var snapshot in dataList) {
+          tipCountMap = snapshot.data();
+          tipCountList.add(tipCountMap);
+          print("getMaxCategoryTipOrder: $tipCountMap");
+        }
+      });
+    }
+    for (var tipCount in tipCountList) {
+      print("Second Loop: $tipCount");
+    }
+    for (var tipCount in tipCountList) {
+      print("tipCountLoop:  ${tipCount['Category']}  ${tipCount['Count']}");
+      if (tipCount['Category'] == category) {
+        count = tipCount['Count'] as int;
+      } else {
+        print("Tip Category - $category not matched");
       }
-      for (var snapshot in data) {
-        tipData = snapshot.data();
-        tipData?.forEach((key, value) {
-          myTipOrder = tipData!['TipOrder'];
-        });
-      }
-    });
-    return tipData;
+    }
+    return count;
   }
 
   Future<int> getUserCategoryTipOrder(String category, String user) async {
+    int myTipOrder = 0;
+
     await FirebaseFirestore.instance
-        .collection('UserTipStatus')
+        .collection('UserTips')
         .where('User', isEqualTo: user)
         .where('Category', isEqualTo: category)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;
       if (data.isEmpty) {
-        print("Data is empty");
-      }
-      for (var snapshot in data) {
-        tipData = snapshot.data();
-        tipData?.forEach((key, value) {
-          myTipOrder = tipData!['TipOrder'];
-        });
+        print("getUserCategoryTipOrder: Data is empty");
+      } else {
+        tipData = data.last.data();
+        myTipOrder = tipData!['TipOrder'];
       }
     });
     return myTipOrder;
@@ -93,10 +110,14 @@ class TipsViewModel extends SharedViewModel {
   }
 
   Future<TipsData> getTipForUser(
-      String category, String user, int skipCount) async {
+      String category, String user, bool skip, int tipOverride) async {
     bool tipFound = false;
-    int tipOrder = await getUserCategoryTipOrder(category, user) + skipCount;
-    print("getTipForUser tipOrder: $tipOrder");
+    int tipOrder = 0;
+    if (skip) {
+      tipOrder = tipOverride;
+    } else {
+      tipOrder = await getUserCategoryTipOrder(category, user);
+    }
     await FirebaseFirestore.instance
         .collection('Tips')
         .where('Category', isEqualTo: category)
@@ -106,25 +127,23 @@ class TipsViewModel extends SharedViewModel {
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;
       if (data.isEmpty) {
-        print("Data is empty");
+        print("getTipForUser: Data is empty");
       }
-      print("getTipForUser snapshot list: $data");
       int myTipOrder = tipOrder;
       if (myTipOrder >= data.length) {
         myTipOrder = 0;
       }
       for (var snapshot in data) {
         Map<String, dynamic>? tipData = snapshot.data();
+        int dataTipOrder = tipData!['TipOrder'] as int;
         print("getTipForUser tipData: $tipData");
-        //tipData?.forEach((key, value) {
-        if (tipData!['TipOrder'] > myTipOrder && !tipFound) {
+        if (dataTipOrder > myTipOrder && !tipFound) {
           // Found the tip needed
           tipFound = true;
-          userTip = "${tipData['Tip']}";
-          tipOrder = int.parse("${tipData['TipOrder']}");
+          userTip = tipData['Tip'];
+          tipOrder = tipData['TipOrder'] as int;
           break;
         }
-        //});
       }
     });
     TipsData tipsData = TipsData(
@@ -133,7 +152,7 @@ class TipsViewModel extends SharedViewModel {
     return tipsData;
   }
 
-  int getMyTipOrder() {
-    return myTipOrder;
-  }
+//  int getMyTipOrder() {
+//    return myTipOrder;
+//  }
 }

@@ -48,9 +48,15 @@ class Router {
             settings.arguments as Map<String, dynamic>;
         String user = tipArgs['user']!;
         String tipCategory = tipArgs['category']!;
-        int skipCount = tipArgs['skipCount']! as int;
+        bool skip = tipArgs['skip']! as bool;
+        int tipOverride = tipArgs['tipOverride']! as int;
+        int tipMax = tipArgs['tipMax']! as int;
         return TipsView(
-            user: user, category: tipCategory, skipCount: skipCount);
+            user: user,
+            category: tipCategory,
+            skip: skip,
+            tipOverride: tipOverride,
+            tipMax: tipMax);
       case tipCategoriesViewRoute:
         var user = settings.arguments as String;
         return TipCategoriesView(user: user);

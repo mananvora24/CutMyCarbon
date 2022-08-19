@@ -26,8 +26,6 @@ class TipCategoriesView extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            /*automaticallyImplyLeading: true,*/
-
             backgroundColor: backgroundColor,
             elevation: 0,
           ),
@@ -47,67 +45,82 @@ class TipCategoriesView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             OutlinedButton(
-                onPressed: () {
-                  model.routeToTipsView(user, "Home", 0); // skipCount = 0
-                },
-                child: const Text(
-                  'Home',
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 20,
-                  ),
-                )),
-            OutlinedButton(
-                onPressed: () {
-                  model.routeToTipsView(user, "Food", 0); // skipCount = 0
-                },
-                child: const Text(
-                  'Food',
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 20,
-                  ),
-                )),
-            OutlinedButton(
-                onPressed: () {
-                  model.routeToTipsView(user, "Shopping", 0); // skipCount = 0
-                },
-                child: const Text(
-                  'Shopping',
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 20,
-                  ),
-                )),
-            OutlinedButton(
-                onPressed: () {
-                  model.routeToTipsView(user, "Energy", 0); // skipCount = 0
-                },
-                child: const Text(
-                  'Energy',
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 20,
-                  ),
-                )),
-            OutlinedButton(
-                onPressed: () {
-                  model.routeToTipsView(user, "Water", 0); // skipCount = 0
-                },
-                child: const Text(
-                  'Water',
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 20,
-                  ),
-                )),
-            OutlinedButton(
-                onPressed: () {
+                onPressed: () async {
+                  int tipMax = await model.getMaxCategoryTipOrder(categoryHome);
                   model.routeToTipsView(
-                      user, "Transportation", 0); // skipCount = 0
+                      user, categoryHome, false, 0, tipMax); // tipOverride = 0
                 },
                 child: const Text(
-                  'Transportation',
+                  categoryHome,
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 20,
+                  ),
+                )),
+            OutlinedButton(
+                onPressed: () async {
+                  int tipMax = await model.getMaxCategoryTipOrder(categoryFood);
+                  model.routeToTipsView(
+                      user, categoryFood, false, 0, tipMax); // tipOverride = 0
+                },
+                child: const Text(
+                  categoryFood,
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 20,
+                  ),
+                )),
+            OutlinedButton(
+                onPressed: () async {
+                  int tipMax =
+                      await model.getMaxCategoryTipOrder(categoryShopping);
+                  model.routeToTipsView(user, categoryShopping, false, 0,
+                      tipMax); // tipOverride = 0
+                },
+                child: const Text(
+                  categoryShopping,
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 20,
+                  ),
+                )),
+            OutlinedButton(
+                onPressed: () async {
+                  int tipMax =
+                      await model.getMaxCategoryTipOrder(categoryEnergy);
+                  model.routeToTipsView(user, categoryEnergy, false, 0,
+                      tipMax); // tipOverride = 0
+                },
+                child: const Text(
+                  categoryEnergy,
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 20,
+                  ),
+                )),
+            OutlinedButton(
+                onPressed: () async {
+                  int tipMax =
+                      await model.getMaxCategoryTipOrder(categoryWater);
+                  model.routeToTipsView(
+                      user, categoryWater, false, 0, tipMax); // tipOverride = 0
+                },
+                child: const Text(
+                  categoryWater,
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 20,
+                  ),
+                )),
+            OutlinedButton(
+                onPressed: () async {
+                  int tipMax = await model
+                      .getMaxCategoryTipOrder(categoryTransportation);
+                  model.routeToTipsView(user, categoryTransportation, false, 0,
+                      tipMax); // tipOverride = 0
+                },
+                child: const Text(
+                  categoryTransportation,
                   style: TextStyle(
                     color: primaryColor,
                     fontSize: 20,

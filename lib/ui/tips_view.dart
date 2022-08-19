@@ -10,17 +10,22 @@ class TipsView extends StatelessWidget {
     Key? key,
     required this.user,
     required this.category,
-    required this.skipCount,
+    required this.skip,
+    required this.tipOverride,
+    required this.tipMax,
   }) : super(key: key);
   final String user;
   final String category;
-  final int skipCount;
+  final bool skip;
+  final int tipOverride;
+  final int tipMax;
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     TipsData tipsData = TipsData(category: "", user: "", tipOrder: 0, tip: "");
+    int tipOrder = 0;
 
     return ChangeNotifierProvider(
       create: (context) => TipsViewModel(),
@@ -30,7 +35,7 @@ class TipsView extends StatelessWidget {
               leading: IconButton(
                 icon: const Icon(
                   Icons.arrow_back_ios_new_rounded,
-                  color: primaryColor,
+                  color: whiteColor,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -38,7 +43,7 @@ class TipsView extends StatelessWidget {
               ),
               title: Text(category,
                   style: const TextStyle(
-                      color: primaryColor,
+                      color: whiteColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 25.0)),
               backgroundColor: primaryColor,
@@ -66,27 +71,29 @@ class TipsView extends StatelessWidget {
                       width: width * .8,
                       child: FutureBuilder<TipsData>(
                           future: model.getTipForUser(
-                              category, 'user1234', skipCount),
+                              category, currentUserUsername, skip, tipOverride),
                           builder: (
                             BuildContext context,
                             AsyncSnapshot<TipsData> snapshot,
                           ) {
-                            //
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
                               return const CircularProgressIndicator();
                             } else if (snapshot.connectionState ==
                                 ConnectionState.done) {
                               if (snapshot.hasError) {
-                                return const Text('Error');
+                                return const Text(
+                                    'getTipForUser returned Error');
                               } else if (snapshot.hasData) {
                                 tipsData = snapshot.data!;
+                                tipOrder = tipsData.tipOrder;
+                                print("TipsData: $tipsData");
                                 return Text(tipsData.tip,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25.0,
-                                      color: whiteColor,
+                                      color: primaryColor,
                                     ));
                               } else {
                                 return const Text('Empty data');
@@ -103,7 +110,15 @@ class TipsView extends StatelessWidget {
               SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () {
-                  model.routeToTipsView(user, category, skipCount + 1);
+                  int override = tipOverride + 1;
+                  if (tipOrder > override && !skip) {
+                    override = tipOrder;
+                  }
+
+                  if (override >= tipMax) {
+                    override = 0;
+                  }
+                  model.routeToTipsView(user, category, true, override, tipMax);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: primaryColor,
@@ -128,7 +143,8 @@ class TipsView extends StatelessWidget {
                   // Save that this tip was selected
                   // --- Update tipStatus - save this tip is selected
                   // --- Create / Update user tip
-                  model.selectTip('user1234', category, tipsData.tipOrder);
+                  model.selectTip(
+                      currentUserUsername, category, tipsData.tipOrder);
 
                   model.routeToTipSelectedView(category, tipsData.tipOrder);
                 },
