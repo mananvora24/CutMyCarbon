@@ -10,6 +10,30 @@ class HomeViewModel extends SharedViewModel {
   String fact = "";
   Map<String, dynamic>? factsData = {};
 
+  Future<List<Map<String, dynamic>>?> getTipCount(
+      String category, int tipOrder) async {
+    List<dynamic> dataList = List.empty();
+    List<Map<String, dynamic>> tipCounts = List.empty();
+    Map<String, dynamic> tipCountMap = {};
+    await FirebaseFirestore.instance
+        .collection('TipCounts')
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      dataList = querySnapshot.docs;
+      if (dataList.isEmpty) {
+        print("getTipCount: Data is empty");
+      } else {
+        print("getTipCount: Data Found");
+      }
+      for (var snapshot in dataList) {
+        tipCountMap = snapshot.data();
+        tipCounts.add(tipCountMap);
+        break;
+      }
+    });
+    return tipCounts;
+  }
+
   Future<Map<String, dynamic>> getCurrentTip(
       String category, int tipOrder) async {
     List<dynamic> dataList = List.empty();
