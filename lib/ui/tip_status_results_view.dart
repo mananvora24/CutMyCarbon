@@ -39,6 +39,7 @@ class TipStatusResultsView extends StatelessWidget {
                   child: const Text('Congratulations! Your saved carbon is: ',
                       textAlign: TextAlign.center,
                       style: TextStyle(
+                          fontFamily: primaryFont,
                           color: primaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0)),
@@ -62,19 +63,32 @@ class TipStatusResultsView extends StatelessWidget {
                         } else if (snapshot.connectionState ==
                             ConnectionState.done) {
                           if (snapshot.hasError) {
-                            return const Text('Error');
+                            return const Text('Error',
+                                style: TextStyle(
+                                  fontFamily: primaryFont,
+                                  color: primaryColor,
+                                ));
                           } else if (snapshot.hasData) {
                             return Text(snapshot.data!.toString(),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
+                                    fontFamily: primaryFont,
                                     color: primaryColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 30.0));
                           } else {
-                            return const Text('Empty data');
+                            return const Text('Empty data',
+                                style: TextStyle(
+                                  fontFamily: primaryFont,
+                                  color: primaryColor,
+                                ));
                           }
                         } else {
-                          return Text('State: ${snapshot.connectionState}');
+                          return Text('State: ${snapshot.connectionState}',
+                              style: const TextStyle(
+                                fontFamily: primaryFont,
+                                color: primaryColor,
+                              ));
                         }
                       }),
                 ),
@@ -96,19 +110,32 @@ class TipStatusResultsView extends StatelessWidget {
                         } else if (snapshot.connectionState ==
                             ConnectionState.done) {
                           if (snapshot.hasError) {
-                            return const Text('Error');
+                            return const Text('Error',
+                                style: TextStyle(
+                                  fontFamily: primaryFont,
+                                  color: primaryColor,
+                                ));
                           } else if (snapshot.hasData) {
                             return Text(snapshot.data!,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
+                                    fontFamily: primaryFont,
                                     color: primaryColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.0));
                           } else {
-                            return const Text('Empty data');
+                            return const Text('Empty data',
+                                style: TextStyle(
+                                  fontFamily: primaryFont,
+                                  color: primaryColor,
+                                ));
                           }
                         } else {
-                          return Text('State: ${snapshot.connectionState}');
+                          return Text('State: ${snapshot.connectionState}',
+                              style: const TextStyle(
+                                fontFamily: primaryFont,
+                                color: primaryColor,
+                              ));
                         }
                       }),
                 ),
@@ -132,6 +159,7 @@ class TipStatusResultsView extends StatelessWidget {
                   child: const Text(
                     'Home',
                     style: TextStyle(
+                      fontFamily: primaryFont,
                       color: whiteColor,
                       fontSize: 20,
                     ),

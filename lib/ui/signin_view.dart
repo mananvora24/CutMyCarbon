@@ -44,6 +44,7 @@ class SignInView extends StatelessWidget {
                 const Text('Enter your username',
                     textAlign: TextAlign.center,
                     style: TextStyle(
+                        fontFamily: primaryFont,
                         color: primaryColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 20.0)),
@@ -58,8 +59,16 @@ class SignInView extends StatelessWidget {
                       model.username = value;
                     },
                     decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'username',
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: secondaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      labelText: 'username',
+                      labelStyle: TextStyle(
+                        color: primaryColor,
+                      ),
                     ),
                   ),
                 ),
@@ -91,6 +100,7 @@ class SignInView extends StatelessWidget {
                   'Submit',
                   style: TextStyle(
                     color: primaryColor,
+                    fontFamily: primaryFont,
                     fontSize: 20,
                   ),
                 ),

@@ -9,6 +9,7 @@ class AboutFView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
       create: (context) => AboutForterraViewModel(),
       child: Consumer<AboutForterraViewModel>(
@@ -27,9 +28,26 @@ class AboutFView extends StatelessWidget {
             elevation: 0,
           ),
           backgroundColor: backgroundColor,
-          body: const Center(
-              child: Text(
-                  "This is about Forterra. It is the sponsor of this App")),
+          body: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  padding: const EdgeInsets.all(20),
+                  child: const Text(
+                    "This is about Forterra. It is the sponsor of this App",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: primaryFont,
+                      color: primaryColor,
+                      fontSize: 20,
+                    ),
+                  )),
+              SizedBox(
+                height: height * 0.13,
+              ),
+            ],
+          )),
         ),
       ),
     );

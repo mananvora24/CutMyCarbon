@@ -24,35 +24,38 @@ class AuthView extends StatelessWidget {
                 height: 200,
                 child: SizedBox(
                   height: (MediaQuery.of(context).size.height),
-                  child: Column(children: [
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        primary: primaryColor,
-                        padding: const EdgeInsets.all(10)),
-                      onPressed: () async {
-                        final provider = Provider.of<GoogleSigninProvider>(
-                            context,
-                            listen: false);
-                        await provider.googleLogin();
-                        print('user is logged in');
-                        user = FirebaseAuth.instance.currentUser;
-                        String uID1;
-                        uID1 = await model.getUsername(user!.uid);
-                        currentUserUsername = uID1;
-                        if (uID1 == '') {
-                          print('Matched empty string $uID1 this is uID');
-                          model.routeToSignInView();
-                        } else {
-                          print('$uID1 this is uID');
-                          model.routeToHomeView();
-                        }
-                      },
-                      icon: const FaIcon(FontAwesomeIcons.google,
-                          color: whiteColor),
-                      label: const Text('Sign Up with Google',
-                          style: TextStyle(color: whiteColor)),
-                    ),
-                  ]),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                              primary: primaryColor,
+                              padding: const EdgeInsets.all(10)),
+                          onPressed: () async {
+                            final provider = Provider.of<GoogleSigninProvider>(
+                                context,
+                                listen: false);
+                            await provider.googleLogin();
+                            print('user is logged in');
+                            user = FirebaseAuth.instance.currentUser;
+                            String uID1;
+                            uID1 = await model.getUsername(user!.uid);
+                            currentUserUsername = uID1;
+                            if (uID1 == '') {
+                              print('Matched empty string $uID1 this is uID');
+                              model.routeToSignInView();
+                            } else {
+                              print('$uID1 this is uID');
+                              model.routeToHomeView();
+                            }
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.google,
+                              color: whiteColor),
+                          label: const Text('Sign Up with Google',
+                              style: TextStyle(
+                                  fontFamily: primaryFont, color: whiteColor)),
+                        ),
+                      ]),
                 ),
               ))),
         ));

@@ -56,6 +56,7 @@ class TipStatusUpdateView extends StatelessWidget {
                   message,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
+                      fontFamily: primaryFont,
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
                       color: Colors.red),
@@ -64,6 +65,7 @@ class TipStatusUpdateView extends StatelessWidget {
               const Text('Enter the number of days you completed the activity',
                   textAlign: TextAlign.center,
                   style: TextStyle(
+                      fontFamily: primaryFont,
                       color: primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0)),
@@ -73,13 +75,22 @@ class TipStatusUpdateView extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
+                child: TextField(
                   controller: daysController,
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: secondaryColor),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryColor),
+                    ),
                     hintText: '1',
+                    hintStyle: TextStyle(
+                      fontFamily: primaryFont,
+                      color: primaryColor,
+                    ),
                   ),
                 ),
               ),
@@ -116,6 +127,7 @@ class TipStatusUpdateView extends StatelessWidget {
                   child: const Text(
                     'Submit',
                     style: TextStyle(
+                      fontFamily: primaryFont,
                       color: whiteColor,
                       fontSize: 20,
                     ),

@@ -19,7 +19,6 @@ class StatsView extends StatelessWidget {
       create: (context) => StatsViewModel(),
       child: Consumer<StatsViewModel>(
         builder: (context, model, child) => Scaffold(
-          
             appBar: AppBar(
               leading: IconButton(
                 icon: const Icon(
@@ -35,106 +34,106 @@ class StatsView extends StatelessWidget {
             ),
             backgroundColor: backgroundColor,
             body: FutureBuilder<Map<String, dynamic>>(
-              
                 future: model.getUserStatistics(currentUserUsername),
                 builder: (
                   BuildContext context,
                   AsyncSnapshot<Map<String, dynamic>> snapshot,
-                ) {       
+                ) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   } else if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
-                      return const Text('Error');
+                      return const Text('Error',
+                          style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                          ));
                     } else if (snapshot.hasData) {
                       int lastWeekCarbon =
                           snapshot.data!['lastWeekCarbon'] as int;
                       int totalCarbon = snapshot.data!['totalCarbon'] as int;
                       double totalTons = snapshot.data!['totalTons'];
-                      return Container(
-                        width: width,
-                        height: height,
+                      return SizedBox(
+                        width: width * 95,
+                        height: height * 0.8,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          //mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(height: height*0.02),
                             SizedBox(
-                              child: Text(
-                                "$totalCarbon lbs ",
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 60.0
-                                )
-                              ),
+                              child: Text("$totalCarbon lbs",
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 60.0)),
                             ),
                             const SizedBox(
-                              child: Text(
-                                "Total Carbon Saved",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25.0
-                                )
-                              ),
+                              child: Text("Total Carbon Saved",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25.0)),
                             ),
-                            SizedBox(height: height*0.1),
+                            SizedBox(height: height * 0.1),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Column(
-                                  children:  [
-                                    SizedBox(
-                                      width: width*0.5,
-                                      child: Text(
-                                        "Last Week: \n $lastWeekCarbon lbs",
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
+                                SizedBox(
+                                  width: width * 0.425,
+                                  child: Text(
+                                      "Last Week: \n $lastWeekCarbon lbs",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          fontFamily: primaryFont,
                                           color: primaryColor,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 25.0
-                                        )
-                                      ),
-                                    ),
-                                    SizedBox(height: height*0.02,),
-                                    SizedBox(
-                                      width: width*0.5,
-                                      child: Text(
-                                        "Total Tons: \n $totalTons tons",
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          color: primaryColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25.0
-                                        )
-                                      ),
-                                    ),
-                                  ],
+                                          fontSize: 25.0)),
                                 ),
-                                Column(
-                                  children:  [
-                                    SizedBox(
-                                      width: width*0.5,
-                                    ),
-                                  ],
+                                SizedBox(
+                                  width: width * 0.425,
+                                  child: Text("Total Tons: \n $totalTons tons",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          fontFamily: primaryFont,
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25.0)),
                                 ),
                               ],
                             ),
-                        ],),
-                          /*
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: width,
+                                  height: height * 0.2,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        /*
                           Last Week: $lastWeekCarbon lbs\n\n        
                           Total Carbon: $totalCarbon lbs\n\n     
                           Total Tons: $totalTons tons
                           */
-                        
                       );
                     } else {
-                      return const Text('Error');
+                      return const Text('Error',
+                          style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                          ));
                     }
                   } else {
-                    return Text('State: ${snapshot.connectionState}');
+                    return Text('State: ${snapshot.connectionState}',
+                        style: const TextStyle(
+                          fontFamily: primaryFont,
+                          color: primaryColor,
+                        ));
                   }
                 }),
             persistentFooterButtons: [
@@ -151,14 +150,14 @@ class StatsView extends StatelessWidget {
                   child: const Text(
                     'Home',
                     style: TextStyle(
+                      fontFamily: primaryFont,
                       color: whiteColor,
                       fontSize: 20,
                     ),
                   ),
                 ),
               ),
-            ]
-          ),
+            ]),
       ),
     );
   }

@@ -15,7 +15,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //ThemeData(fontFamily: 'Forterra');
     double width = MediaQuery.of(context).size.width;
     TipStatusData tipStatusData = TipStatusData(
         category: "",
@@ -114,12 +113,26 @@ class HomeView extends StatelessWidget {
                           return Text(username,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                  color: primaryColor, fontSize: 25.0));
+                                  fontFamily: primaryFont,
+                                  color: primaryColor,
+                                  fontSize: 25.0));
                         } else {
-                          return const Text('Empty data');
+                          return const Text(
+                            'Empty data',
+                            style: const TextStyle(
+                              fontFamily: primaryFont,
+                              color: primaryColor,
+                            ),
+                          );
                         }
                       } else {
-                        return Text('State: ${snapshot.connectionState}');
+                        return Text(
+                          'State: ${snapshot.connectionState}',
+                          style: const TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                          ),
+                        );
                       }
                     }),
               ),
@@ -176,13 +189,26 @@ class HomeView extends StatelessWidget {
                               return const Text("Tip",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontFamily: "Forterra",
-                                      color: whiteColor, fontSize: 30.0));
+                                      fontFamily: primaryFont,
+                                      color: whiteColor,
+                                      fontSize: 30.0));
                             } else {
-                              return const Text('Empty data');
+                              return const Text(
+                                'Empty data',
+                                style: TextStyle(
+                                  fontFamily: primaryFont,
+                                  color: primaryColor,
+                                ),
+                              );
                             }
                           } else {
-                            return Text('State: ${snapshot.connectionState}');
+                            return Text(
+                              'State: ${snapshot.connectionState}',
+                              style: const TextStyle(
+                                fontFamily: primaryFont,
+                                color: primaryColor,
+                              ),
+                            );
                           }
                         }),
                   )),
@@ -202,6 +228,7 @@ class HomeView extends StatelessWidget {
                     child: const Text(
                       'Statistics',
                       style: TextStyle(
+                        fontFamily: primaryFont,
                         color: whiteColor,
                         fontSize: 30,
                       ),

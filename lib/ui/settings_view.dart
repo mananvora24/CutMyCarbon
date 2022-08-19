@@ -11,6 +11,7 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     User? user = FirebaseAuth.instance.currentUser;
     return ChangeNotifierProvider(
       create: (context) => SettingsViewModel(),
@@ -31,35 +32,56 @@ class SettingsView extends StatelessWidget {
           ),
           backgroundColor: backgroundColor,
           body: Center(
-              child: Column(children: [
-            CircleAvatar(
-                radius: 43,
-                backgroundColor: primaryColor,
-                child: CircleAvatar(
-                  radius: 40,
-                  backgroundImage: NetworkImage(user!.photoURL!),
-                )),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(user.displayName!),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(user.email!),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                CircleAvatar(
+                    radius: 43,
+                    backgroundColor: primaryColor,
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundImage: NetworkImage(user!.photoURL!),
+                    )),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  user.displayName!,
+                  style: const TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  user.email!,
+                  style: const TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                  ),
+                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
                         primary: primaryColor,
                         padding: const EdgeInsets.all(10)),
-                onPressed: () async {
-                  final provider =
-                      Provider.of<GoogleSigninProvider>(context, listen: false);
-                  await provider.logout();
-                  model.routeToAuthView();
-                },
-                child: const Text('Logout', style: TextStyle(color: whiteColor),
-                ))
-          ])),
+                    onPressed: () async {
+                      final provider = Provider.of<GoogleSigninProvider>(
+                          context,
+                          listen: false);
+                      await provider.logout();
+                      model.routeToAuthView();
+                    },
+                    child: const Text(
+                      'Logout',
+                      style:
+                          TextStyle(fontFamily: primaryFont, color: whiteColor),
+                    )),
+                SizedBox(
+                  height: height * 0.2,
+                ),
+              ])),
         ),
       ),
     );

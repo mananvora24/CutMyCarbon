@@ -9,6 +9,7 @@ class AboutUsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
       create: (context) => AboutUsViewModel(),
       child: Consumer<AboutUsViewModel>(
@@ -27,7 +28,24 @@ class AboutUsView extends StatelessWidget {
             elevation: 0,
           ),
           backgroundColor: backgroundColor,
-          body: const Center(child: Text("This is about Cut My Carbon.")),
+          body: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                  child: Text(
+                "This is about Cut My Carbon.",
+                style: TextStyle(
+                  fontFamily: primaryFont,
+                  color: primaryColor,
+                  fontSize: 20,
+                ),
+              )),
+              SizedBox(
+                height: height * 0.13,
+              ),
+            ],
+          )),
         ),
       ),
     );

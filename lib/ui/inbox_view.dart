@@ -51,7 +51,13 @@ class _InboxViewState extends State<InboxView> {
                     } else if (snapshot.connectionState ==
                         ConnectionState.done) {
                       if (snapshot.hasError) {
-                        return const Text('Error');
+                        return const Text(
+                          'Error',
+                          style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                          ),
+                        );
                       } else if (snapshot.hasData) {
                         mailList = snapshot.data!;
                         print("Mails = ${mailList.length}");
@@ -86,6 +92,7 @@ class _InboxViewState extends State<InboxView> {
                                                   Text(
                                                     mailContent.subject,
                                                     style: const TextStyle(
+                                                        fontFamily: primaryFont,
                                                         color: primaryColor,
                                                         fontWeight:
                                                             FontWeight.w400,
@@ -94,9 +101,10 @@ class _InboxViewState extends State<InboxView> {
                                                   Text(
                                                     mailContent.time,
                                                     style: const TextStyle(
+                                                        fontFamily: primaryFont,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        color: Colors.black54,
+                                                        color: primaryColor,
                                                         fontSize: 13.5),
                                                   ),
                                                 ],
@@ -118,11 +126,13 @@ class _InboxViewState extends State<InboxView> {
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: const TextStyle(
+                                                                fontFamily:
+                                                                    primaryFont,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
-                                                                color: Colors
-                                                                    .black54,
+                                                                color:
+                                                                    primaryColor,
                                                                 fontSize: 15),
                                                           ))
                                                     ],
@@ -140,10 +150,22 @@ class _InboxViewState extends State<InboxView> {
                               ]);
                             });
                       } else {
-                        return const Text('Empty data');
+                        return const Text(
+                          'Empty data',
+                          style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                          ),
+                        );
                       }
                     } else {
-                      return Text('State: ${snapshot.connectionState}');
+                      return Text(
+                        'State: ${snapshot.connectionState}',
+                        style: const TextStyle(
+                          fontFamily: primaryFont,
+                          color: primaryColor,
+                        ),
+                      );
                     }
                   }),
             ),

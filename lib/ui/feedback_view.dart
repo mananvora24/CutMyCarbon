@@ -32,16 +32,33 @@ class FeedbackView extends StatelessWidget {
             body: Center(
                 child: Column(
               children: [
+                const SizedBox(
+                  height: 10,
+                ),
                 TextField(
                   onChanged: (String value) {
                     model.reason = value;
                     print(value);
                   },
                   controller: reasonController,
+                  style: const TextStyle(
+                      fontFamily: primaryFont, color: primaryColor),
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: secondaryColor),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryColor),
+                    ),
                     labelText: 'Reason',
+                    labelStyle: TextStyle(
+                      fontFamily: primaryFont,
+                      color: primaryColor,
+                    ),
                   ),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 TextField(
                   onChanged: (String value) {
@@ -49,9 +66,19 @@ class FeedbackView extends StatelessWidget {
                     print(value);
                   },
                   controller: feedbackController,
+                  style: const TextStyle(
+                      fontFamily: primaryFont, color: primaryColor),
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: secondaryColor),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryColor),
+                    ),
                     labelText: 'Feedback',
+                    labelStyle: TextStyle(
+                      color: primaryColor,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -65,7 +92,8 @@ class FeedbackView extends StatelessWidget {
                         primary: primaryColor,
                         padding: const EdgeInsets.all(10)),
                     child: const Text('Submit',
-                        style: TextStyle(color: whiteColor)),
+                        style: TextStyle(
+                            fontFamily: primaryFont, color: whiteColor)),
                   ),
                 ),
               ],

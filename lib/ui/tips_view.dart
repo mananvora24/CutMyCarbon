@@ -43,6 +43,7 @@ class TipsView extends StatelessWidget {
               ),
               title: Text(category,
                   style: const TextStyle(
+                      fontFamily: primaryFont,
                       color: whiteColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 25.0)),
@@ -60,6 +61,7 @@ class TipsView extends StatelessWidget {
                       child: const Text("Carbon saving recommendation:",
                           textAlign: TextAlign.center,
                           style: TextStyle(
+                              fontFamily: primaryFont,
                               color: primaryColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 25.0)),
@@ -83,7 +85,12 @@ class TipsView extends StatelessWidget {
                                 ConnectionState.done) {
                               if (snapshot.hasError) {
                                 return const Text(
-                                    'getTipForUser returned Error');
+                                  'getTipForUser returned Error',
+                                  style: TextStyle(
+                                    fontFamily: primaryFont,
+                                    color: primaryColor,
+                                  ),
+                                );
                               } else if (snapshot.hasData) {
                                 tipsData = snapshot.data!;
                                 tipOrder = tipsData.tipOrder;
@@ -91,15 +98,28 @@ class TipsView extends StatelessWidget {
                                 return Text(tipsData.tip,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
+                                      fontFamily: primaryFont,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25.0,
                                       color: primaryColor,
                                     ));
                               } else {
-                                return const Text('Empty data');
+                                return const Text(
+                                  'Empty data',
+                                  style: TextStyle(
+                                    fontFamily: primaryFont,
+                                    color: primaryColor,
+                                  ),
+                                );
                               }
                             } else {
-                              return Text('State: ${snapshot.connectionState}');
+                              return Text(
+                                'State: ${snapshot.connectionState}',
+                                style: const TextStyle(
+                                  fontFamily: primaryFont,
+                                  color: primaryColor,
+                                ),
+                              );
                             }
                           }),
                     ),
@@ -128,6 +148,7 @@ class TipsView extends StatelessWidget {
                 child: const Text(
                   'Skip',
                   style: TextStyle(
+                    fontFamily: primaryFont,
                     color: whiteColor,
                     fontSize: 20,
                   ),
@@ -156,6 +177,7 @@ class TipsView extends StatelessWidget {
                 child: const Text(
                   'Select',
                   style: TextStyle(
+                    fontFamily: primaryFont,
                     color: whiteColor,
                     fontSize: 20,
                   ),

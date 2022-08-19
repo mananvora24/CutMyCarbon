@@ -38,6 +38,7 @@ class TipCategoriesView extends StatelessWidget {
               child: const Text(
                 "Pick one of the categories to get your tip of the week",
                 style: TextStyle(
+                  fontFamily: primaryFont,
                   color: primaryColor,
                   fontSize: 20,
                 ),
@@ -53,6 +54,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   categoryHome,
                   style: TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                     fontSize: 20,
                   ),
@@ -66,6 +68,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   categoryFood,
                   style: TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                     fontSize: 20,
                   ),
@@ -80,6 +83,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   categoryShopping,
                   style: TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                     fontSize: 20,
                   ),
@@ -94,6 +98,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   categoryEnergy,
                   style: TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                     fontSize: 20,
                   ),
@@ -108,6 +113,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   categoryWater,
                   style: TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                     fontSize: 20,
                   ),
@@ -122,6 +128,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: const Text(
                   categoryTransportation,
                   style: TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                     fontSize: 20,
                   ),

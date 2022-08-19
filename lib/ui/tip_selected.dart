@@ -29,18 +29,21 @@ class TipSelectedView extends StatelessWidget {
               title: Text("Category: $category",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
+                      fontFamily: primaryFont,
                       color: primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 25.0)),
             ),
             backgroundColor: backgroundColor,
-            body: Column(children: [
+            body:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               SizedBox(height: height * 0.03),
               SizedBox(
                 width: width * 0.9,
                 child: const Text("You selected:",
                     textAlign: TextAlign.center,
                     style: TextStyle(
+                        fontFamily: primaryFont,
                         color: primaryColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 25.0)),
@@ -59,21 +62,34 @@ class TipSelectedView extends StatelessWidget {
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         if (snapshot.hasError) {
-                          return const Text('Error');
+                          return const Text('Error',
+                              style: TextStyle(
+                                fontFamily: primaryFont,
+                                color: primaryColor,
+                              ));
                         } else if (snapshot.hasData) {
                           tip = snapshot.data!['Tip'];
                           tipDescription = snapshot.data!['Description'];
                           return Text("Tip: $tip\n\nInfo: $tipDescription",
                               textAlign: TextAlign.center,
                               style: const TextStyle(
+                                  fontFamily: primaryFont,
                                   color: primaryColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0));
                         } else {
-                          return const Text('Empty data');
+                          return const Text('Empty data',
+                              style: TextStyle(
+                                fontFamily: primaryFont,
+                                color: primaryColor,
+                              ));
                         }
                       } else {
-                        return Text('State: ${snapshot.connectionState}');
+                        return Text('State: ${snapshot.connectionState}',
+                            style: const TextStyle(
+                              fontFamily: primaryFont,
+                              color: primaryColor,
+                            ));
                       }
                     }),
               ),
@@ -81,6 +97,7 @@ class TipSelectedView extends StatelessWidget {
               const Text("Come back in 7 days to report your progress",
                   textAlign: TextAlign.center,
                   style: TextStyle(
+                      fontFamily: primaryFont,
                       color: primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0)),
@@ -100,22 +117,38 @@ class TipSelectedView extends StatelessWidget {
                         } else if (snapshot.connectionState ==
                             ConnectionState.done) {
                           if (snapshot.hasError) {
-                            return const Text('Error');
+                            return const Text('Error',
+                                style: TextStyle(
+                                  fontFamily: primaryFont,
+                                  color: primaryColor,
+                                ));
                           } else if (snapshot.hasData) {
                             return Text("Fun Fact: ${snapshot.data!}",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
+                                    fontFamily: primaryFont,
                                     color: primaryColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.0));
                           } else {
-                            return const Text('Empty data');
+                            return const Text('Empty data',
+                                style: TextStyle(
+                                  fontFamily: primaryFont,
+                                  color: primaryColor,
+                                ));
                           }
                         } else {
-                          return Text('State: ${snapshot.connectionState}');
+                          return Text('State: ${snapshot.connectionState}',
+                              style: const TextStyle(
+                                fontFamily: primaryFont,
+                                color: primaryColor,
+                              ));
                         }
                       }),
                 ),
+              ),
+              SizedBox(
+                height: height * 0.1,
               ),
             ]),
             persistentFooterButtons: [
@@ -132,6 +165,7 @@ class TipSelectedView extends StatelessWidget {
                   child: const Text(
                     'Home',
                     style: TextStyle(
+                      fontFamily: primaryFont,
                       color: whiteColor,
                       fontSize: 20,
                     ),
