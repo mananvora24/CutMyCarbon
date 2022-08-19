@@ -99,7 +99,10 @@ flutter:
   # example:
   fonts:
     - family: Forterra
-      fonts:
+      fonts: 
+        - asset: assets/korinth-serial-bold.ttf
+          weight: 700
+         
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

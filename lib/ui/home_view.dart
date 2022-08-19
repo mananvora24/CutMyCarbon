@@ -15,6 +15,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //ThemeData(fontFamily: 'Forterra');
     double width = MediaQuery.of(context).size.width;
     TipStatusData tipStatusData = TipStatusData(
         category: "",
@@ -173,7 +174,8 @@ class HomeView extends StatelessWidget {
                               return const Text("Tip",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: whiteColor, fontSize: 30.0));
+                                      fontFamily: "Forterra",
+                                      color: whiteColor, fontSize: 10.0));
                             } else {
                               return const Text('Empty data');
                             }
