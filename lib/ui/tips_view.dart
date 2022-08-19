@@ -66,7 +66,7 @@ class TipsView extends StatelessWidget {
                       width: width * .8,
                       child: FutureBuilder<TipsData>(
                           future: model.getTipForUser(
-                              category, 'user1234', skipCount),
+                              category, currentUserUsername, skipCount),
                           builder: (
                             BuildContext context,
                             AsyncSnapshot<TipsData> snapshot,
@@ -81,12 +81,13 @@ class TipsView extends StatelessWidget {
                                 return const Text('Error');
                               } else if (snapshot.hasData) {
                                 tipsData = snapshot.data!;
+                                print("TipsData: $tipsData");
                                 return Text(tipsData.tip,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25.0,
-                                      color: whiteColor,
+                                      color: primaryColor,
                                     ));
                               } else {
                                 return const Text('Empty data');
@@ -128,7 +129,8 @@ class TipsView extends StatelessWidget {
                   // Save that this tip was selected
                   // --- Update tipStatus - save this tip is selected
                   // --- Create / Update user tip
-                  model.selectTip('user1234', category, tipsData.tipOrder);
+                  model.selectTip(
+                      currentUserUsername, category, tipsData.tipOrder);
 
                   model.routeToTipSelectedView(category, tipsData.tipOrder);
                 },

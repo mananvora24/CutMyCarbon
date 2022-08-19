@@ -135,6 +135,8 @@ class HomeView extends StatelessWidget {
                       int days = DateTime.now()
                           .difference(tipStatusData.tipStartTime.toDate())
                           .inDays;
+                      print(
+                          "tipStartTime: ${tipStatusData.tipStartTime.toDate()}");
                       if (tipStatusData.tipSelected && days > 6) {
                         model.routeToTipStatusUpdateView(
                             tipStatusData.user,
@@ -149,7 +151,7 @@ class HomeView extends StatelessWidget {
                           tipStatusData.tipStartTime,
                         );
                       } else {
-                        model.routeToTipCategoriesView('user1234');
+                        model.routeToTipCategoriesView(currentUserUsername);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -157,7 +159,7 @@ class HomeView extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                     ),
                     child: FutureBuilder<TipStatusData>(
-                        future: model.checkTipStatus('user1234'),
+                        future: model.checkTipStatus(currentUserUsername),
                         builder: (
                           BuildContext context,
                           AsyncSnapshot<TipStatusData> snapshot,
@@ -175,7 +177,8 @@ class HomeView extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontFamily: "Forterra",
-                                      color: whiteColor, fontSize: 10.0));
+                                      color: whiteColor,
+                                      fontSize: 30.0));
                             } else {
                               return const Text('Empty data');
                             }

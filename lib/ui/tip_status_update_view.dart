@@ -102,7 +102,7 @@ class TipStatusUpdateView extends StatelessWidget {
                           user, category, tipOrder, tipStartTime, errorMessage);
                     } else {
                       model.submitTipsData(
-                          'user1234', category, tipOrder, days);
+                          currentUserUsername, category, tipOrder, days);
                       print(days);
                       model.routeToTipStatusResultView(
                           user, category, tipOrder, days);
