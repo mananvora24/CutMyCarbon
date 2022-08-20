@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:cut_my_carbon/viewmodels/signin_viewmodel.dart';
 import 'package:provider/provider.dart';
-import 'package:cut_my_carbon/core/utilities/constants.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({Key? key, required this.title}) : super(key: key);

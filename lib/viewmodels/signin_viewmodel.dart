@@ -9,7 +9,7 @@ class SignInViewModel extends SharedViewModel {
       String username) async {
     await FirebaseFirestore.instance
         .collection('Users')
-        .doc("$username")
+        .doc(username)
         .set({
           'uID': uID,
           'userDisplayName': userDisplayName,

@@ -1,4 +1,3 @@
-import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/google_sign_in.dart';
 import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -59,7 +58,7 @@ class _MyAppState extends State<MyApp> {
               } else if (snapshot.hasData) {
                 //return const AuthView(title: 'title');
 
-                return HomeView(title: 'Home');
+                return const HomeView(title: 'Home');
               } else if (snapshot.hasError) {
                 return const Center(child: Text("Error"));
               } else {

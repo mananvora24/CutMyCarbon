@@ -10,8 +10,8 @@ import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
-  HomeView({Key? key, required String title}) : super(key: key);
-  String username = '';
+  const HomeView({Key? key, required String title}) : super(key: key);
+  //String username = '';
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +126,7 @@ class HomeView extends StatelessWidget {
                       BuildContext context,
                       AsyncSnapshot<String> snapshot,
                     ) {
+                      String username;
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const CircularProgressIndicator();
                       } else if (snapshot.connectionState ==
@@ -145,7 +146,7 @@ class HomeView extends StatelessWidget {
                         } else {
                           return const Text(
                             'Empty data',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontFamily: primaryFont,
                               color: primaryColor,
                             ),
