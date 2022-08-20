@@ -42,7 +42,7 @@ class Router {
     routeName(tempSettings);
     switch (settings.name) {
       case homeViewRoute:
-        return HomeView(title: "Home");
+        return const HomeView(title: "Home");
       case tipsViewRoute:
         Map<String, dynamic> tipArgs =
             settings.arguments as Map<String, dynamic>;
@@ -108,7 +108,7 @@ class Router {
           tipStartTime: tipStartTime,
         );
       case statsViewRoute:
-        return StatsView(title: "Stats");
+        return const StatsView(title: "Stats");
       case aboutForterraViewRoute:
         return const AboutFView(title: "About Forterra");
       case aboutUsViewRoute:
@@ -116,11 +116,11 @@ class Router {
       case inboxViewRoute:
         return const InboxView();
       case authViewRoute:
-        return AuthView(title: "Auth");
+        return const AuthView(title: "Auth");
       case feedbackViewRoute:
         return FeedbackView(title: "Feedback");
       case settingsViewRoute:
-        return SettingsView(title: "Settings");
+        return const SettingsView(title: "Settings");
       default:
         return Scaffold(
           body: Center(child: Text('No route defined for ${settings.name}')),

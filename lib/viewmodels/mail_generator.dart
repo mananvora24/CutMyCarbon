@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/mail_content.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 
@@ -25,7 +26,8 @@ class MailGenerator extends SharedViewModel {
         String subject = mail!['subject'];
         String sender = mail['from'];
         Timestamp mailTime = mail['timestamp'] as Timestamp;
-        String time = "${mailTime.toDate().month} ${mailTime.toDate().day}";
+        String time =
+            "${months[mailTime.toDate().month - 1]} ${mailTime.toDate().day}";
         String message = mail['body'];
         print("$subject, $sender, $time, $message");
         MailContent mailContent = MailContent(subject, sender, time, message);

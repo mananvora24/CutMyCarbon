@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:cut_my_carbon/viewmodels/signin_viewmodel.dart';
 import 'package:provider/provider.dart';
-import 'package:cut_my_carbon/core/utilities/constants.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({Key? key, required this.title}) : super(key: key);
@@ -75,13 +74,19 @@ class SignInView extends StatelessWidget {
               ]),
             ),
             persistentFooterButtons: [
-              SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () async {
                   String checkingNewUser =
                       await model.getUsername(model.username);
                   if (model.username == checkingNewUser) {
                     print('This username is taken');
+                    const Text('This username is taken',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: whiteColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0));
                   } else {
                     await model.saveUsername(user!.uid, user.displayName ?? '',
                         user.email ?? '', model.username);

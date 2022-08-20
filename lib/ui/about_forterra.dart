@@ -24,6 +24,12 @@ class AboutFView extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+            title: const Text('Green Seattle Project',
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0)),
             backgroundColor: backgroundColor,
             elevation: 0,
           ),

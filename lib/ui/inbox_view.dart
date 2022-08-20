@@ -33,6 +33,12 @@ class _InboxViewState extends State<InboxView> {
                 Navigator.pop(context);
               },
             ),
+            title: const Text('Inbox',
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0)),
             backgroundColor: backgroundColor,
             elevation: 0,
           ),
@@ -60,8 +66,6 @@ class _InboxViewState extends State<InboxView> {
                         );
                       } else if (snapshot.hasData) {
                         mailList = snapshot.data!;
-                        print("Mails = ${mailList.length}");
-                        print("Subject = ${mailList[0].subject}");
                         return ListView.builder(
                             itemCount: mailList.length,
                             scrollDirection: Axis.vertical,
@@ -75,13 +79,13 @@ class _InboxViewState extends State<InboxView> {
                                       top: 5.0,
                                       bottom: 5.0),
                                   child: Row(
-                                    //crossAxisAlignment:
-                                    //    CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Expanded(
                                         child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10.0),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 0, 0, 5),
                                           child: Column(
                                             children: <Widget>[
                                               Row(
@@ -89,14 +93,17 @@ class _InboxViewState extends State<InboxView> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: <Widget>[
-                                                  Text(
-                                                    mailContent.subject,
-                                                    style: const TextStyle(
-                                                        fontFamily: primaryFont,
-                                                        color: primaryColor,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 17.0),
+                                                  Flexible(
+                                                    child: Text(
+                                                      mailContent.subject,
+                                                      style: const TextStyle(
+                                                          fontFamily:
+                                                              primaryFont,
+                                                          color: primaryColor,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 20.0),
+                                                    ),
                                                   ),
                                                   Text(
                                                     mailContent.time,
@@ -105,7 +112,7 @@ class _InboxViewState extends State<InboxView> {
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         color: primaryColor,
-                                                        fontSize: 13.5),
+                                                        fontSize: 15.0),
                                                   ),
                                                 ],
                                               ),
@@ -127,13 +134,10 @@ class _InboxViewState extends State<InboxView> {
                                                                 TextAlign.left,
                                                             style: const TextStyle(
                                                                 fontFamily:
-                                                                    primaryFont,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
+                                                                    primaryFont0,
                                                                 color:
                                                                     primaryColor,
-                                                                fontSize: 15),
+                                                                fontSize: 18),
                                                           ))
                                                     ],
                                                   ),

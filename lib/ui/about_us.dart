@@ -24,6 +24,12 @@ class AboutUsView extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+            title: const Text('About Us',
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0)),
             backgroundColor: backgroundColor,
             elevation: 0,
           ),

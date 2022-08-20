@@ -10,7 +10,6 @@ class TipsViewModel extends SharedViewModel {
   Map<String, dynamic>? tipData = {};
 
   Future<int> getMaxCategoryTipOrder(String category) async {
-    Map<String, dynamic> tipCategoryCount = {};
     int count = 0;
 
     if (tipCountList.isEmpty) {
