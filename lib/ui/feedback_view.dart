@@ -11,6 +11,7 @@ class FeedbackView extends StatelessWidget {
   final feedbackController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
       create: (context) => FeedbackViewModel(),
       child: Consumer<FeedbackViewModel>(
@@ -31,6 +32,7 @@ class FeedbackView extends StatelessWidget {
             backgroundColor: backgroundColor,
             body: Center(
                 child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
                   height: 10,
@@ -95,6 +97,9 @@ class FeedbackView extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: primaryFont, color: whiteColor)),
                   ),
+                ),
+                SizedBox(
+                  height: height * 0.13,
                 ),
               ],
             ))),

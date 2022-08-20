@@ -38,49 +38,75 @@ class HomeView extends StatelessWidget {
             animatedIcon: AnimatedIcons.menu_close,
             backgroundColor: primaryColor,
             spacing: 15,
+            overlayOpacity: 0.95,
             children: [
               SpeedDialChild(
                   child: const Icon(
                     Icons.settings_rounded,
+                    color: backgroundColor,
+                  ),
+                  label: 'Settings',
+                  labelStyle: const TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                   ),
-                  backgroundColor: backgroundColor,
+                  backgroundColor: primaryColor,
                   onTap: () {
                     model.routeToSettingsView();
                   }),
               SpeedDialChild(
                   child: const Icon(
                     Icons.mail_rounded,
+                    color: backgroundColor,
+                  ),
+                  label: 'Inbox',
+                  labelStyle: const TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                   ),
-                  backgroundColor: backgroundColor,
+                  backgroundColor: primaryColor,
                   onTap: () {
                     model.routeToInboxView();
                   }),
               SpeedDialChild(
                   child: const Icon(
                     Icons.feedback_rounded,
+                    color: backgroundColor,
+                  ),
+                  label: 'Feedback',
+                  labelStyle: const TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                   ),
-                  backgroundColor: backgroundColor,
+                  backgroundColor: primaryColor,
                   onTap: () {
                     model.routeToFeedbackView();
                   }),
               SpeedDialChild(
                   child: const Icon(
                     Icons.info_rounded,
+                    color: backgroundColor,
+                  ),
+                  label: 'About Us',
+                  labelStyle: const TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                   ),
-                  backgroundColor: backgroundColor,
+                  backgroundColor: primaryColor,
                   onTap: () {
                     model.routeToAboutUSView();
                   }),
               SpeedDialChild(
                   child: const Icon(
                     Forterra.logo,
+                    color: backgroundColor,
+                  ),
+                  label: 'Green Seattle Project',
+                  labelStyle: const TextStyle(
+                    fontFamily: primaryFont,
                     color: primaryColor,
                   ),
-                  backgroundColor: backgroundColor,
+                  backgroundColor: primaryColor,
                   onTap: () {
                     model.routeToAboutForterraView();
                   }),

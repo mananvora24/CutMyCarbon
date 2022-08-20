@@ -80,8 +80,8 @@ class _InboxViewState extends State<InboxView> {
                                     children: <Widget>[
                                       Expanded(
                                         child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10.0),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 0, 0, 5),
                                           child: Column(
                                             children: <Widget>[
                                               Row(
@@ -96,7 +96,7 @@ class _InboxViewState extends State<InboxView> {
                                                         color: primaryColor,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        fontSize: 17.0),
+                                                        fontSize: 22.0),
                                                   ),
                                                   Text(
                                                     mailContent.time,
@@ -105,7 +105,7 @@ class _InboxViewState extends State<InboxView> {
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         color: primaryColor,
-                                                        fontSize: 13.5),
+                                                        fontSize: 17),
                                                   ),
                                                 ],
                                               ),
@@ -133,7 +133,7 @@ class _InboxViewState extends State<InboxView> {
                                                                         .w400,
                                                                 color:
                                                                     primaryColor,
-                                                                fontSize: 15),
+                                                                fontSize: 20),
                                                           ))
                                                     ],
                                                   ),

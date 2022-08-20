@@ -60,15 +60,6 @@ class StatsView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              child: Text("$totalCarbon lbs",
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontFamily: primaryFont,
-                                      color: primaryColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 60.0)),
-                            ),
                             const SizedBox(
                               child: Text("Total Carbon Saved",
                                   textAlign: TextAlign.center,
@@ -77,6 +68,18 @@ class StatsView extends StatelessWidget {
                                       color: primaryColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25.0)),
+                            ),
+                            SizedBox(
+                              height: height * 0.02,
+                            ),
+                            SizedBox(
+                              child: Text("$totalCarbon lbs",
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 80.0)),
                             ),
                             SizedBox(height: height * 0.07),
                             Container(
