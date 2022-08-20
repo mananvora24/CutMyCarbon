@@ -24,7 +24,7 @@ class AboutFView extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            title: const Text('Green Seattle Project',
+            title: const Text('About Green Seattle Partnership: The Green Seattle Partnership is a collaboration between the City of Seattle, Forterra, community groups and non-profits, businesses, schools, and thousands of volunteers working together to restore and actively maintain the City’s forested parklands. The Green Seattle Partnership coordinates restoration projects to care for our urban forest and bring people into the parks to build community through hands-on volunteerism. Volunteering with the Green Seattle Partnership is a great way to give back to your community, get outside, and improve the health of a local park. Everyone can help keep our forested parks healthy and green! No experience necessary. Find a community event at the map and calendar linked below. Questions? Please email us at info@greenseattle.org. Volunteering with the Green Seattle Partnership: \nhttps://greenseattle.org/get-involved/volunteer/ \n\nLink to Events Calendar: \nhttps://seattle.greencitypartnerships.org/event/map/',
                 style: TextStyle(
                     fontFamily: primaryFont,
                     color: primaryColor,
