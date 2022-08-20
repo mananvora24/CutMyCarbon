@@ -18,60 +18,53 @@ class SignInView extends StatelessWidget {
       child: Consumer<SignInViewModel>(
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: primaryColor,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
               backgroundColor: backgroundColor,
               elevation: 0,
             ),
             backgroundColor: backgroundColor,
-            body: Center(
-              child: Column(children: [
-                SizedBox(
-                  height: height * 0.25,
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
-                  alignment: Alignment.topRight,
-                ),
-                const Text('Enter your username',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: primaryFont,
-                        color: primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0)),
-                const SizedBox(
-                  height: 50,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextField(
-                    onChanged: (String value) {
-                      model.username = value;
-                    },
-                    decoration: const InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: secondaryColor),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor),
-                      ),
-                      labelText: 'username',
-                      labelStyle: TextStyle(
-                        color: primaryColor,
+            body: SingleChildScrollView(
+              child: Center(
+                child: Column(children: [
+                  SizedBox(
+                    height: height * 0.25,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
+                    alignment: Alignment.topRight,
+                  ),
+                  const Text('Enter your username',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: primaryFont,
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0)),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextField(
+                      onChanged: (String value) {
+                        model.username = value;
+                      },
+                      decoration: const InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: secondaryColor),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
+                        labelText: 'username',
+                        labelStyle: TextStyle(
+                          color: primaryColor,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ]),
+                ]),
+              ),
             ),
             persistentFooterButtons: [
               ElevatedButton(

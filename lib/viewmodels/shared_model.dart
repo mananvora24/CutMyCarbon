@@ -105,4 +105,8 @@ class SharedViewModel extends BaseViewModel {
   void routeToAuthView() {
     _navigationService.navigateTo(authViewRoute);
   }
+
+  void routeToSuggestATipView() {
+    _navigationService.navigateTo(suggestATipViewRoute);
+  }
 }

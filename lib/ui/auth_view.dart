@@ -32,9 +32,11 @@ class AuthView extends StatelessWidget {
                               primary: primaryColor,
                               padding: const EdgeInsets.all(10)),
                           onPressed: () async {
+                            print('a');
                             final provider = Provider.of<GoogleSigninProvider>(
                                 context,
                                 listen: false);
+                            print('b');
                             await provider.googleLogin();
                             print('user is logged in');
                             user = FirebaseAuth.instance.currentUser;

@@ -47,9 +47,10 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'Settings',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
@@ -61,9 +62,10 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'Inbox',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
@@ -75,9 +77,10 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'Feedback',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
@@ -87,14 +90,20 @@ class HomeView extends StatelessWidget {
                   child: Transform(
                     alignment: Alignment.center,
                     transform: Matrix4.rotationY(math.pi),
-                    child: Icon(
+                    child: const Icon(
                       Icons.add_comment,
-                      size: 25,
+                      color: whiteColor,
                     ),
                   ),
-                  backgroundColor: backgroundColor,
+                  label: 'Suggest a Tip',
+                  labelBackgroundColor: primaryColor,
+                  labelStyle: const TextStyle(
+                    fontFamily: primaryFont,
+                    color: whiteColor,
+                  ),
+                  backgroundColor: primaryColor,
                   onTap: () {
-                    model.routeToFeedbackView();
+                    model.routeToSuggestATipView();
                   }),
               SpeedDialChild(
                   child: const Icon(
@@ -102,9 +111,10 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'About Us',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
@@ -116,9 +126,10 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'Green Seattle Project',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
