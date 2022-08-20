@@ -3,7 +3,7 @@ import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:math' as math;
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:cut_my_carbon/Forterra Icon/Ficon.dart';
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
@@ -61,6 +61,19 @@ class HomeView extends StatelessWidget {
                   child: const Icon(
                     Icons.feedback_rounded,
                     color: primaryColor,
+                  ),
+                  backgroundColor: backgroundColor,
+                  onTap: () {
+                    model.routeToFeedbackView();
+                  }),
+              SpeedDialChild(
+                  child: Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationY(math.pi),
+                    child: Icon(
+                      Icons.add_comment,
+                      size: 25,
+                    ),
                   ),
                   backgroundColor: backgroundColor,
                   onTap: () {
