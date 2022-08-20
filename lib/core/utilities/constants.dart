@@ -20,3 +20,17 @@ const String categoryFood = 'Food';
 const String categoryWater = 'Water';
 const String categoryShopping = 'Shopping';
 const String categoryTransportation = 'Transportation';
+const months = <String>[
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];

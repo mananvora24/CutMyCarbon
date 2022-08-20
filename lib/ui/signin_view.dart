@@ -82,6 +82,13 @@ class SignInView extends StatelessWidget {
                       await model.getUsername(model.username);
                   if (model.username == checkingNewUser) {
                     print('This username is taken');
+                    const Text('This username is taken',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0));
                   } else {
                     await model.saveUsername(user!.uid, user.displayName ?? '',
                         user.email ?? '', model.username);

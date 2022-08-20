@@ -60,8 +60,6 @@ class _InboxViewState extends State<InboxView> {
                         );
                       } else if (snapshot.hasData) {
                         mailList = snapshot.data!;
-                        print("Mails = ${mailList.length}");
-                        print("Subject = ${mailList[0].subject}");
                         return ListView.builder(
                             itemCount: mailList.length,
                             scrollDirection: Axis.vertical,
@@ -75,8 +73,8 @@ class _InboxViewState extends State<InboxView> {
                                       top: 5.0,
                                       bottom: 5.0),
                                   child: Row(
-                                    //crossAxisAlignment:
-                                    //    CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Expanded(
                                         child: Padding(
@@ -89,14 +87,17 @@ class _InboxViewState extends State<InboxView> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: <Widget>[
-                                                  Text(
-                                                    mailContent.subject,
-                                                    style: const TextStyle(
-                                                        fontFamily: primaryFont,
-                                                        color: primaryColor,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 22.0),
+                                                  Flexible(
+                                                    child: Text(
+                                                      mailContent.subject,
+                                                      style: const TextStyle(
+                                                          fontFamily:
+                                                              primaryFont,
+                                                          color: primaryColor,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 20.0),
+                                                    ),
                                                   ),
                                                   Text(
                                                     mailContent.time,
@@ -105,7 +106,7 @@ class _InboxViewState extends State<InboxView> {
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         color: primaryColor,
-                                                        fontSize: 17),
+                                                        fontSize: 15.0),
                                                   ),
                                                 ],
                                               ),
