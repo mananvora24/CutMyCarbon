@@ -27,6 +27,12 @@ class SettingsView extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+            title: const Text('Settings',
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0)),
             backgroundColor: backgroundColor,
             elevation: 0,
           ),
