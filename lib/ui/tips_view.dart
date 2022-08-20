@@ -35,7 +35,7 @@ class TipsView extends StatelessWidget {
               leading: IconButton(
                 icon: const Icon(
                   Icons.arrow_back_ios_new_rounded,
-                  color: whiteColor,
+                  color: primaryColor,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -44,10 +44,10 @@ class TipsView extends StatelessWidget {
               title: Text(category,
                   style: const TextStyle(
                       fontFamily: primaryFont,
-                      color: whiteColor,
+                      color: primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 25.0)),
-              backgroundColor: primaryColor,
+              backgroundColor: backgroundColor,
               elevation: 0,
             ),
             backgroundColor: backgroundColor,

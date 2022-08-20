@@ -12,6 +12,7 @@ class FeedbackView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
       create: (context) => FeedbackViewModel(),
       child: Consumer<FeedbackViewModel>(
@@ -26,62 +27,108 @@ class FeedbackView extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
+              title: const Text('Feedback',
+                  style: TextStyle(
+                      fontFamily: primaryFont,
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0)),
               backgroundColor: backgroundColor,
               elevation: 0,
             ),
             backgroundColor: backgroundColor,
-            body: Center(
-                child: Column(
+            body: SingleChildScrollView(
+                child: Center(
+                    child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: height * 0.08,
                 ),
-                TextField(
-                  onChanged: (String value) {
-                    model.reason = value;
-                    print(value);
-                  },
-                  controller: reasonController,
-                  style: const TextStyle(
-                      fontFamily: primaryFont, color: primaryColor),
-                  decoration: const InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: secondaryColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: primaryColor),
-                    ),
-                    labelText: 'Reason',
-                    labelStyle: TextStyle(
-                      fontFamily: primaryFont,
-                      color: primaryColor,
+                SizedBox(
+                    width: width * 0.85,
+                    child: const Text(
+                      "Reason",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 20,
+                      ),
+                    )),
+                SizedBox(
+                  height: height * 0.01,
+                ),
+                SizedBox(
+                  width: width * 0.85,
+                  child: TextField(
+                    onChanged: (String value) {
+                      model.reason = value;
+                      print(value);
+                    },
+                    controller: reasonController,
+                    style: const TextStyle(
+                        fontFamily: primaryFont, color: primaryColor),
+                    decoration: const InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: secondaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      labelText: 'Reason',
+                      labelStyle: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: height * 0.02,
                 ),
-                TextField(
-                  onChanged: (String value) {
-                    model.feedback = value;
-                    print(value);
-                  },
-                  controller: feedbackController,
-                  style: const TextStyle(
-                      fontFamily: primaryFont, color: primaryColor),
-                  decoration: const InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: secondaryColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: primaryColor),
-                    ),
-                    labelText: 'Feedback',
-                    labelStyle: TextStyle(
-                      color: primaryColor,
+                SizedBox(
+                    width: width * 0.85,
+                    child: const Text(
+                      "Feedback",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 20,
+                      ),
+                    )),
+                SizedBox(
+                  height: height * 0.01,
+                ),
+                SizedBox(
+                  width: width * 0.85,
+                  child: TextField(
+                    maxLines: 10,
+                    onChanged: (String value) {
+                      model.feedback = value;
+                      print(value);
+                    },
+                    controller: feedbackController,
+                    style: const TextStyle(
+                        fontFamily: primaryFont, color: primaryColor),
+                    decoration: const InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: secondaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      labelText: 'Feedback',
+                      alignLabelWithHint: true,
+                      labelStyle: TextStyle(
+                        color: primaryColor,
+                      ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: height * 0.03,
                 ),
                 SizedBox(
                   child: ElevatedButton(
@@ -95,14 +142,14 @@ class FeedbackView extends StatelessWidget {
                         padding: const EdgeInsets.all(10)),
                     child: const Text('Submit',
                         style: TextStyle(
-                            fontFamily: primaryFont, color: whiteColor)),
+                          fontFamily: primaryFont,
+                          color: whiteColor,
+                          fontSize: 20,
+                        )),
                   ),
                 ),
-                SizedBox(
-                  height: height * 0.13,
-                ),
               ],
-            ))),
+            )))),
       ),
     );
   }

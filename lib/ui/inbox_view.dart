@@ -33,6 +33,12 @@ class _InboxViewState extends State<InboxView> {
                 Navigator.pop(context);
               },
             ),
+            title: const Text('Inbox',
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0)),
             backgroundColor: backgroundColor,
             elevation: 0,
           ),
@@ -128,13 +134,10 @@ class _InboxViewState extends State<InboxView> {
                                                                 TextAlign.left,
                                                             style: const TextStyle(
                                                                 fontFamily:
-                                                                    primaryFont,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
+                                                                    primaryFont0,
                                                                 color:
                                                                     primaryColor,
-                                                                fontSize: 20),
+                                                                fontSize: 18),
                                                           ))
                                                     ],
                                                   ),

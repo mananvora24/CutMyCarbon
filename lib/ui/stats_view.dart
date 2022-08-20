@@ -29,6 +29,12 @@ class StatsView extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+            title: const Text('Statistics',
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0)),
             backgroundColor: backgroundColor,
             elevation: 0,
           ),
@@ -53,9 +59,7 @@ class StatsView extends StatelessWidget {
                         snapshot.data!['lastWeekCarbon'] as int;
                     int totalCarbon = snapshot.data!['totalCarbon'] as int;
                     double totalTons = snapshot.data!['totalTons'];
-                    return SizedBox(
-                      width: width,
-                      height: height * 0.8,
+                    return SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         //mainAxisAlignment: MainAxisAlignment.center,
@@ -86,7 +90,6 @@ class StatsView extends StatelessWidget {
                           ),
                           SizedBox(height: height * 0.005),
                           Container(
-                            height: height * 0.24,
                             margin: const EdgeInsets.all(20.0),
                             padding: const EdgeInsets.all(9.0),
                             decoration: BoxDecoration(
@@ -234,8 +237,7 @@ class StatsView extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            height: height * 0.24,
-                            margin: const EdgeInsets.all(20.0),
+                            margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                             padding: const EdgeInsets.all(9.0),
                             decoration: BoxDecoration(
                               color: whiteColor,
@@ -255,7 +257,7 @@ class StatsView extends StatelessWidget {
                                     SizedBox(
                                       width: width * 0.8,
                                       child: const Text(
-                                        "Carbon Info",
+                                        "Tip Info",
                                         style: TextStyle(
                                             fontFamily: primaryFont,
                                             color: primaryColor,

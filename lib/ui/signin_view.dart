@@ -74,7 +74,6 @@ class SignInView extends StatelessWidget {
               ]),
             ),
             persistentFooterButtons: [
-              SizedBox(height: height * 0.04),
               ElevatedButton(
                 onPressed: () async {
                   String checkingNewUser =
@@ -85,7 +84,7 @@ class SignInView extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: primaryFont,
-                            color: primaryColor,
+                            color: whiteColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0));
                   } else {
