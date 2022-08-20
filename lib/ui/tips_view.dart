@@ -51,80 +51,82 @@ class TipsView extends StatelessWidget {
               elevation: 0,
             ),
             backgroundColor: backgroundColor,
-            body: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: width * .8,
-                      child: const Text("Carbon saving recommendation:",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: primaryFont,
-                              color: primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25.0)),
-                    ),
-                    SizedBox(
-                      height: height * 0.05,
-                    ),
-                    SizedBox(
-                      width: width * .8,
-                      child: FutureBuilder<TipsData>(
-                          future: model.getTipForUser(
-                              category, currentUserUsername, skip, tipOverride),
-                          builder: (
-                            BuildContext context,
-                            AsyncSnapshot<TipsData> snapshot,
-                          ) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
-                            } else if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasError) {
-                                return const Text(
-                                  'getTipForUser returned Error',
-                                  style: TextStyle(
-                                    fontFamily: primaryFont,
-                                    color: primaryColor,
-                                  ),
-                                );
-                              } else if (snapshot.hasData) {
-                                tipsData = snapshot.data!;
-                                tipOrder = tipsData.tipOrder;
-                                print("TipsData: $tipsData");
-                                return Text(tipsData.tip,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
+            body: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: width * .8,
+                        child: const Text("Carbon saving recommendation:",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: primaryFont,
+                                color: primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25.0)),
+                      ),
+                      SizedBox(
+                        height: height * 0.05,
+                      ),
+                      SizedBox(
+                        width: width * .8,
+                        child: FutureBuilder<TipsData>(
+                            future: model.getTipForUser(category,
+                                currentUserUsername, skip, tipOverride),
+                            builder: (
+                              BuildContext context,
+                              AsyncSnapshot<TipsData> snapshot,
+                            ) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasError) {
+                                  return const Text(
+                                    'getTipForUser returned Error',
+                                    style: TextStyle(
                                       fontFamily: primaryFont,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25.0,
                                       color: primaryColor,
-                                    ));
+                                    ),
+                                  );
+                                } else if (snapshot.hasData) {
+                                  tipsData = snapshot.data!;
+                                  tipOrder = tipsData.tipOrder;
+                                  print("TipsData: $tipsData");
+                                  return Text(tipsData.tip,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontFamily: primaryFont,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25.0,
+                                        color: primaryColor,
+                                      ));
+                                } else {
+                                  return const Text(
+                                    'Empty data',
+                                    style: TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                    ),
+                                  );
+                                }
                               } else {
-                                return const Text(
-                                  'Empty data',
-                                  style: TextStyle(
+                                return Text(
+                                  'State: ${snapshot.connectionState}',
+                                  style: const TextStyle(
                                     fontFamily: primaryFont,
                                     color: primaryColor,
                                   ),
                                 );
                               }
-                            } else {
-                              return Text(
-                                'State: ${snapshot.connectionState}',
-                                style: const TextStyle(
-                                  fontFamily: primaryFont,
-                                  color: primaryColor,
-                                ),
-                              );
-                            }
-                          }),
-                    ),
-                    SizedBox(height: height * 0.07),
-                  ]),
+                            }),
+                      ),
+                      SizedBox(height: height * 0.07),
+                    ]),
+              ),
             ),
             persistentFooterButtons: [
               SizedBox(height: height * 0.04),
