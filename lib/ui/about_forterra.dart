@@ -34,26 +34,28 @@ class AboutFView extends StatelessWidget {
             elevation: 0,
           ),
           backgroundColor: backgroundColor,
-          body: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                  padding: const EdgeInsets.all(20),
-                  child: const Text(
-                    "This is about Forterra. It is the sponsor of this App",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: primaryFont,
-                      color: primaryColor,
-                      fontSize: 20,
-                    ),
-                  )),
-              SizedBox(
-                height: height * 0.13,
-              ),
-            ],
-          )),
+          body: SingleChildScrollView(
+            child: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    padding: const EdgeInsets.all(20),
+                    child: const Text(
+                      "This is about Forterra. It is the sponsor of this App",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 20,
+                      ),
+                    )),
+                SizedBox(
+                  height: height * 0.13,
+                ),
+              ],
+            )),
+          ),
         ),
       ),
     );

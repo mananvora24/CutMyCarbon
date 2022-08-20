@@ -97,7 +97,7 @@ class SignInView extends StatelessWidget {
                 child: const Text(
                   'Submit',
                   style: TextStyle(
-                    color: primaryColor,
+                    color: whiteColor,
                     fontFamily: primaryFont,
                     fontSize: 20,
                   ),

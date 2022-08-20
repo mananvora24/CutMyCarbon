@@ -34,24 +34,26 @@ class AboutUsView extends StatelessWidget {
             elevation: 0,
           ),
           backgroundColor: backgroundColor,
-          body: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                  child: Text(
-                "This is about Cut My Carbon.",
-                style: TextStyle(
-                  fontFamily: primaryFont,
-                  color: primaryColor,
-                  fontSize: 20,
+          body: SingleChildScrollView(
+            child: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                    child: Text(
+                  "This is about Cut My Carbon.",
+                  style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontSize: 20,
+                  ),
+                )),
+                SizedBox(
+                  height: height * 0.13,
                 ),
-              )),
-              SizedBox(
-                height: height * 0.13,
-              ),
-            ],
-          )),
+              ],
+            )),
+          ),
         ),
       ),
     );
