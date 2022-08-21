@@ -273,7 +273,7 @@ class HomeView extends StatelessWidget {
                                     fontFamily: primaryFont,
                                     color: primaryColor,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 25.0),
+                                    fontSize: 23.0),
                               ),
                             ),
                           ],
@@ -281,10 +281,6 @@ class HomeView extends StatelessWidget {
                         const Divider(
                           color: primaryColor,
                         ),
-                        //Row(
-                        //crossAxisAlignment: CrossAxisAlignment.center,
-                        //mainAxisAlignment: MainAxisAlignment.center,
-                        //children: [
                         SizedBox(
                           width: width * 0.8,
                           child: const Text(
@@ -294,11 +290,9 @@ class HomeView extends StatelessWidget {
                                   fontFamily: primaryFont0,
                                   color: primaryColor,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20.0)),
+                                  fontSize: 18.0)),
                         ),
                       ],
-                      //),
-                      //],
                     ),
                   ),
                 ]),
