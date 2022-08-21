@@ -19,21 +19,28 @@ class StatsView extends StatelessWidget {
       create: (context) => StatsViewModel(),
       child: Consumer<StatsViewModel>(
         builder: (context, model, child) => Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: primaryColor,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: primaryColor,
               ),
-              backgroundColor: backgroundColor,
-              elevation: 0,
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
+            title: const Text('Statistics',
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0)),
             backgroundColor: backgroundColor,
-            body: FutureBuilder<Map<String, dynamic>>(
+            elevation: 0,
+          ),
+          backgroundColor: backgroundColor,
+          body: SingleChildScrollView(
+            child: FutureBuilder<Map<String, dynamic>>(
                 future: model.getUserStatistics(currentUserUsername),
                 builder: (
                   BuildContext context,
@@ -53,21 +60,13 @@ class StatsView extends StatelessWidget {
                           snapshot.data!['lastWeekCarbon'] as int;
                       int totalCarbon = snapshot.data!['totalCarbon'] as int;
                       double totalTons = snapshot.data!['totalTons'];
-                      return SizedBox(
-                        width: width * 95,
-                        height: height * 0.8,
+                      return SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          //mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              child: Text("$totalCarbon lbs",
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontFamily: primaryFont,
-                                      color: primaryColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 60.0)),
+                              height: height * 0.02,
                             ),
                             const SizedBox(
                               child: Text("Total Carbon Saved",
@@ -76,57 +75,319 @@ class StatsView extends StatelessWidget {
                                       fontFamily: primaryFont,
                                       color: primaryColor,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 25.0)),
+                                      fontSize: 24.0)),
                             ),
-                            SizedBox(height: height * 0.07),
+                            SizedBox(
+                              height: height * 0.03,
+                            ),
+                            SizedBox(
+                              child: Text("$totalCarbon lbs",
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 80.0)),
+                            ),
+                            SizedBox(height: height * 0.005),
                             Container(
-                              margin: const EdgeInsets.all(15.0),
-                              padding: const EdgeInsets.all(3.0),
+                              margin: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.all(9.0),
                               decoration: BoxDecoration(
-                                  border: Border.all(color: primaryColor)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                color: whiteColor,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.shade400,
+                                      spreadRadius: 1,
+                                      blurRadius: 15),
+                                ],
+                              ),
+                              child: Column(
                                 children: [
-                                  SizedBox(
-                                    width: width * 0.45,
-                                    child: Text(
-                                        "Last Week: \n $lastWeekCarbon lbs",
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                            fontFamily: primaryFont,
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 25.0)),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.8,
+                                        child: const Text(
+                                          "Carbon Info",
+                                          style: TextStyle(
+                                              fontFamily: primaryFont,
+                                              color: primaryColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 25.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(
+                                    color: primaryColor,
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("Last Week:",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: Text("$lastWeekCarbon lbs",
+                                            textAlign: TextAlign.right,
+                                            style: const TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(
-                                    width: width * 0.45,
-                                    child: Text(
-                                        "Total Tons: \n $totalTons tons",
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                            fontFamily: primaryFont,
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 25.0)),
+                                    height: height * 0.005,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("Total Tons:",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: Text("$totalTons tons",
+                                            textAlign: TextAlign.right,
+                                            style: const TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.005,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("X",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("Y",
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.005,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("X",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("Y",
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                             ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: width,
-                                  height: height * 0.2,
-                                ),
-                              ],
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                              padding: const EdgeInsets.all(9.0),
+                              decoration: BoxDecoration(
+                                color: whiteColor,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.shade400,
+                                      spreadRadius: 1,
+                                      blurRadius: 15),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.8,
+                                        child: const Text(
+                                          "Tip Info",
+                                          style: TextStyle(
+                                              fontFamily: primaryFont,
+                                              color: primaryColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 25.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(
+                                    color: primaryColor,
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("X",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("Y",
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.005,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("X",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("Y",
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.005,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("X",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("Y",
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.005,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("X",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.4,
+                                        child: const Text("Y",
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                                fontFamily: primaryFont,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25.0)),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
-                        /*
-                          Last Week: $lastWeekCarbon lbs\n\n        
-                          Total Carbon: $totalCarbon lbs\n\n     
-                          Total Tons: $totalTons tons
-                          */
                       );
                     } else {
                       return const Text('Error',
@@ -143,28 +404,8 @@ class StatsView extends StatelessWidget {
                         ));
                   }
                 }),
-            persistentFooterButtons: [
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    model.routeToHomeView();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                    minimumSize: const Size(170, 30),
-                    padding: const EdgeInsets.all(10),
-                  ),
-                  child: const Text(
-                    'Home',
-                    style: TextStyle(
-                      fontFamily: primaryFont,
-                      color: whiteColor,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              ),
-            ]),
+          ),
+        ),
       ),
     );
   }

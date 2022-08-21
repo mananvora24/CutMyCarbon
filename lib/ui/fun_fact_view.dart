@@ -27,11 +27,13 @@ class FunFactView extends StatelessWidget {
             elevation: 0,
           ),
           backgroundColor: backgroundColor,
-          body: const Center(
-              child: Text(
-            "This is a fun fact and how much carbon u saved.",
-            style: TextStyle(fontFamily: primaryFont, color: primaryColor),
-          )),
+          body: const SingleChildScrollView(
+            child: Center(
+                child: Text(
+              "This is a fun fact and how much carbon u saved.",
+              style: TextStyle(fontFamily: primaryFont, color: primaryColor),
+            )),
+          ),
         ),
       ),
     );

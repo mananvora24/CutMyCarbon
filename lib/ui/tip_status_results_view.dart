@@ -31,116 +31,118 @@ class TipStatusResultsView extends StatelessWidget {
               elevation: 0,
             ),
             backgroundColor: backgroundColor,
-            body: Center(
-              child: Column(children: [
-                SizedBox(
-                  height: height * 0.06,
-                  width: width * 0.8,
-                  child: const Text('Congratulations! Your saved carbon is: ',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: primaryFont,
-                          color: primaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0)),
-                ),
-                SizedBox(
-                  height: height * 0.06,
-                ),
-                // Get the carbon calculation
-                SizedBox(
-                  width: width * 0.9,
-                  child: FutureBuilder<int>(
-                      future:
-                          model.getTipCarbon(user, category, tipOrder, days),
-                      builder: (
-                        BuildContext context,
-                        AsyncSnapshot<int> snapshot,
-                      ) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.connectionState ==
-                            ConnectionState.done) {
-                          if (snapshot.hasError) {
-                            return const Text('Error',
-                                style: TextStyle(
-                                  fontFamily: primaryFont,
-                                  color: primaryColor,
-                                ));
-                          } else if (snapshot.hasData) {
-                            return Text(snapshot.data!.toString(),
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
+            body: SingleChildScrollView(
+              child: Center(
+                child: Column(children: [
+                  SizedBox(
+                    height: height * 0.06,
+                    width: width * 0.8,
+                    child: const Text('Congratulations! Your saved carbon is: ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0)),
+                  ),
+                  SizedBox(
+                    height: height * 0.06,
+                  ),
+                  // Get the carbon calculation
+                  SizedBox(
+                    width: width * 0.9,
+                    child: FutureBuilder<int>(
+                        future:
+                            model.getTipCarbon(user, category, tipOrder, days),
+                        builder: (
+                          BuildContext context,
+                          AsyncSnapshot<int> snapshot,
+                        ) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            if (snapshot.hasError) {
+                              return const Text('Error',
+                                  style: TextStyle(
                                     fontFamily: primaryFont,
                                     color: primaryColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30.0));
+                                  ));
+                            } else if (snapshot.hasData) {
+                              return Text(snapshot.data!.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30.0));
+                            } else {
+                              return const Text('Empty data',
+                                  style: TextStyle(
+                                    fontFamily: primaryFont,
+                                    color: primaryColor,
+                                  ));
+                            }
                           } else {
-                            return const Text('Empty data',
-                                style: TextStyle(
+                            return Text('State: ${snapshot.connectionState}',
+                                style: const TextStyle(
                                   fontFamily: primaryFont,
                                   color: primaryColor,
                                 ));
                           }
-                        } else {
-                          return Text('State: ${snapshot.connectionState}',
-                              style: const TextStyle(
-                                fontFamily: primaryFont,
-                                color: primaryColor,
-                              ));
-                        }
-                      }),
-                ),
-                SizedBox(
-                  height: height * 0.06,
-                ),
-                // Get the fun fact
-                SizedBox(
-                  width: width * 0.9,
-                  child: FutureBuilder<String>(
-                      future: model.getCategoryFact(category),
-                      builder: (
-                        BuildContext context,
-                        AsyncSnapshot<String> snapshot,
-                      ) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.connectionState ==
-                            ConnectionState.done) {
-                          if (snapshot.hasError) {
-                            return const Text('Error',
-                                style: TextStyle(
-                                  fontFamily: primaryFont,
-                                  color: primaryColor,
-                                ));
-                          } else if (snapshot.hasData) {
-                            return Text(snapshot.data!,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
+                        }),
+                  ),
+                  SizedBox(
+                    height: height * 0.06,
+                  ),
+                  // Get the fun fact
+                  SizedBox(
+                    width: width * 0.9,
+                    child: FutureBuilder<String>(
+                        future: model.getCategoryFact(category),
+                        builder: (
+                          BuildContext context,
+                          AsyncSnapshot<String> snapshot,
+                        ) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            if (snapshot.hasError) {
+                              return const Text('Error',
+                                  style: TextStyle(
                                     fontFamily: primaryFont,
                                     color: primaryColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20.0));
+                                  ));
+                            } else if (snapshot.hasData) {
+                              return Text(snapshot.data!,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0));
+                            } else {
+                              return const Text('Empty data',
+                                  style: TextStyle(
+                                    fontFamily: primaryFont,
+                                    color: primaryColor,
+                                  ));
+                            }
                           } else {
-                            return const Text('Empty data',
-                                style: TextStyle(
+                            return Text('State: ${snapshot.connectionState}',
+                                style: const TextStyle(
                                   fontFamily: primaryFont,
                                   color: primaryColor,
                                 ));
                           }
-                        } else {
-                          return Text('State: ${snapshot.connectionState}',
-                              style: const TextStyle(
-                                fontFamily: primaryFont,
-                                color: primaryColor,
-                              ));
-                        }
-                      }),
-                ),
-                // Save stats data
-              ]),
+                        }),
+                  ),
+                  // Save stats data
+                ]),
+              ),
             ),
             persistentFooterButtons: [
               Center(
