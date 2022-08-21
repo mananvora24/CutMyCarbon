@@ -43,98 +43,101 @@ class TipStatusUpdateView extends StatelessWidget {
             elevation: 0,
           ),
           backgroundColor: backgroundColor,
-          body: Center(
-            child: Column(children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
-                alignment: Alignment.topRight,
-              ),
-              SizedBox(
-                height: 120,
-                width: width * 0.9,
-                child: Text(
-                  message,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontFamily: primaryFont,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      color: Colors.red),
+          body: SingleChildScrollView(
+            child: Center(
+              child: Column(children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
+                  alignment: Alignment.topRight,
                 ),
-              ),
-              const Text('Enter the number of days you completed the activity',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: primaryFont,
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0)),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextField(
-                  controller: daysController,
-                  obscureText: false,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: secondaryColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: primaryColor),
-                    ),
-                    hintText: '1',
-                    hintStyle: TextStyle(
-                      fontFamily: primaryFont,
-                      color: primaryColor,
-                    ),
+                SizedBox(
+                  height: 120,
+                  width: width * 0.9,
+                  child: Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontFamily: primaryFont,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: Colors.red),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: width * 0.8,
-                child: ElevatedButton(
-                  onPressed: () {
-                    String input = daysController.text;
-                    var days = int.parse(daysController.text);
-                    final now = Timestamp.now();
-                    final int selectedDays =
-                        now.toDate().difference(tipStartTime.toDate()).inDays;
-                    print(
-                        "Validator: input: $input, current time: $now, startTime: $tipStartTime, selectedDays: $selectedDays, days: $days");
-
-                    String errorMessage =
-                        "You started this tip $selectedDays days ago. You entered $days days.";
-                    if (days > selectedDays) {
-                      model.routeToTipStatusUpdateView(
-                          user, category, tipOrder, tipStartTime, errorMessage);
-                    } else {
-                      model.submitTipsData(
-                          currentUserUsername, category, tipOrder, days);
-                      print(days);
-                      model.routeToTipStatusResultView(
-                          user, category, tipOrder, days);
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                    minimumSize: const Size(170, 30),
-                    padding: const EdgeInsets.all(10),
-                  ),
-                  child: const Text(
-                    'Submit',
+                const Text(
+                    'Enter the number of days you completed the activity',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: primaryFont,
-                      color: whiteColor,
-                      fontSize: 20,
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0)),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextField(
+                    controller: daysController,
+                    obscureText: false,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: secondaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      hintText: '1',
+                      hintStyle: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ]),
+                SizedBox(
+                  width: width * 0.8,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      String input = daysController.text;
+                      var days = int.parse(daysController.text);
+                      final now = Timestamp.now();
+                      final int selectedDays =
+                          now.toDate().difference(tipStartTime.toDate()).inDays;
+                      print(
+                          "Validator: input: $input, current time: $now, startTime: $tipStartTime, selectedDays: $selectedDays, days: $days");
+
+                      String errorMessage =
+                          "You started this tip $selectedDays days ago. You entered $days days.";
+                      if (days > selectedDays) {
+                        model.routeToTipStatusUpdateView(user, category,
+                            tipOrder, tipStartTime, errorMessage);
+                      } else {
+                        model.submitTipsData(
+                            currentUserUsername, category, tipOrder, days);
+                        print(days);
+                        model.routeToTipStatusResultView(
+                            user, category, tipOrder, days);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: primaryColor,
+                      minimumSize: const Size(170, 30),
+                      padding: const EdgeInsets.all(10),
+                    ),
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: whiteColor,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+            ),
           ),
         ),
       ),

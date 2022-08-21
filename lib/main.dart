@@ -8,7 +8,6 @@ import 'package:cut_my_carbon/ui/auth_view.dart';
 import 'package:cut_my_carbon/core/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-
 import 'locator.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -57,7 +56,6 @@ class _MyAppState extends State<MyApp> {
                 return const Center(child: Text("Error"));
               } else if (snapshot.hasData) {
                 //return const AuthView(title: 'title');
-
                 return const HomeView(title: 'Home');
               } else if (snapshot.hasError) {
                 return const Center(child: Text("Error"));

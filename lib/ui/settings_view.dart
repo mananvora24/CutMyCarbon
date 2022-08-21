@@ -27,61 +27,69 @@ class SettingsView extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+            title: const Text('Settings',
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0)),
             backgroundColor: backgroundColor,
             elevation: 0,
           ),
           backgroundColor: backgroundColor,
-          body: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                CircleAvatar(
-                    radius: 43,
-                    backgroundColor: primaryColor,
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: NetworkImage(user!.photoURL!),
-                    )),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  user.displayName!,
-                  style: const TextStyle(
-                    fontFamily: primaryFont,
-                    color: primaryColor,
+          body: SingleChildScrollView(
+            child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  CircleAvatar(
+                      radius: 43,
+                      backgroundColor: primaryColor,
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage: NetworkImage(user!.photoURL!),
+                      )),
+                  const SizedBox(
+                    height: 8,
                   ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  user.email!,
-                  style: const TextStyle(
-                    fontFamily: primaryFont,
-                    color: primaryColor,
+                  Text(
+                    user.displayName!,
+                    style: const TextStyle(
+                      fontFamily: primaryFont,
+                      color: primaryColor,
+                    ),
                   ),
-                ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: primaryColor,
-                        padding: const EdgeInsets.all(10)),
-                    onPressed: () async {
-                      final provider = Provider.of<GoogleSigninProvider>(
-                          context,
-                          listen: false);
-                      await provider.logout();
-                      model.routeToAuthView();
-                    },
-                    child: const Text(
-                      'Logout',
-                      style:
-                          TextStyle(fontFamily: primaryFont, color: whiteColor),
-                    )),
-                SizedBox(
-                  height: height * 0.2,
-                ),
-              ])),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    user.email!,
+                    style: const TextStyle(
+                      fontFamily: primaryFont,
+                      color: primaryColor,
+                    ),
+                  ),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: primaryColor,
+                          padding: const EdgeInsets.all(10)),
+                      onPressed: () async {
+                        final provider = Provider.of<GoogleSigninProvider>(
+                            context,
+                            listen: false);
+                        await provider.logout();
+                        model.routeToAuthView();
+                      },
+                      child: const Text(
+                        'Logout',
+                        style: TextStyle(
+                            fontFamily: primaryFont, color: whiteColor),
+                      )),
+                  SizedBox(
+                    height: height * 0.2,
+                  ),
+                ])),
+          ),
         ),
       ),
     );

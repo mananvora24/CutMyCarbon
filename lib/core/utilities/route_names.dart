@@ -13,3 +13,4 @@ const String authViewRoute = 'AuthView';
 const String signInViewRoute = 'SignInView';
 const String feedbackViewRoute = 'FeedbackViewRoute';
 const String settingsViewRoute = 'SettingsViewRoute';
+const String suggestATipViewRoute = 'SuggestATipViewRoute';

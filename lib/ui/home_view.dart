@@ -3,7 +3,7 @@ import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:math' as math;
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:cut_my_carbon/Forterra Icon/Ficon.dart';
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
@@ -16,6 +16,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     TipStatusData tipStatusData = TipStatusData(
         category: "",
         user: "",
@@ -46,9 +47,10 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'Settings',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
@@ -60,9 +62,10 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'Inbox',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
@@ -74,13 +77,33 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'Feedback',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
                     model.routeToFeedbackView();
+                  }),
+              SpeedDialChild(
+                  child: Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationY(math.pi),
+                    child: const Icon(
+                      Icons.add_comment,
+                      color: whiteColor,
+                    ),
+                  ),
+                  label: 'Suggest a Tip',
+                  labelBackgroundColor: primaryColor,
+                  labelStyle: const TextStyle(
+                    fontFamily: primaryFont,
+                    color: whiteColor,
+                  ),
+                  backgroundColor: primaryColor,
+                  onTap: () {
+                    model.routeToSuggestATipView();
                   }),
               SpeedDialChild(
                   child: const Icon(
@@ -88,9 +111,10 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'About Us',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
@@ -102,9 +126,10 @@ class HomeView extends StatelessWidget {
                     color: backgroundColor,
                   ),
                   label: 'Green Seattle Project',
+                  labelBackgroundColor: primaryColor,
                   labelStyle: const TextStyle(
                     fontFamily: primaryFont,
-                    color: primaryColor,
+                    color: whiteColor,
                   ),
                   backgroundColor: primaryColor,
                   onTap: () {
@@ -112,156 +137,165 @@ class HomeView extends StatelessWidget {
                   }),
             ],
           ),
-          body: Center(
-            child: Column(children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
-                alignment: Alignment.topRight,
-              ),
-              SizedBox(
-                height: 30,
-                child: FutureBuilder<String>(
-                    future: model.getUsername(currentUserUID),
-                    builder: (
-                      BuildContext context,
-                      AsyncSnapshot<String> snapshot,
-                    ) {
-                      String username;
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.done) {
-                        if (snapshot.hasError) {
-                          return Text('Error: ${snapshot.error}');
-                        } else if (snapshot.hasData) {
-                          username = snapshot.data!;
-                          print("HomeView: User - $username");
-                          currentUserUsername = username;
-                          return Text(username,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontFamily: primaryFont,
-                                  color: primaryColor,
-                                  fontSize: 25.0));
-                        } else {
-                          return const Text(
-                            'Empty data',
-                            style: TextStyle(
-                              fontFamily: primaryFont,
-                              color: primaryColor,
-                            ),
-                          );
-                        }
-                      } else {
-                        return Text(
-                          'State: ${snapshot.connectionState}',
-                          style: const TextStyle(
-                            fontFamily: primaryFont,
-                            color: primaryColor,
-                          ),
-                        );
-                      }
-                    }),
-              ),
-              const SizedBox(height: 80),
-              Image.asset(
-                'assets/Logo1.png',
-              ),
-              const SizedBox(height: 60),
-              SizedBox(
-                  width: width * 0.8,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      int days = DateTime.now()
-                          .difference(tipStatusData.tipStartTime.toDate())
-                          .inDays;
-                      print(
-                          "tipStartTime: ${tipStatusData.tipStartTime.toDate()}");
-                      if (tipStatusData.tipSelected && days > 6) {
-                        model.routeToTipStatusUpdateView(
-                            tipStatusData.user,
-                            tipStatusData.category,
-                            tipStatusData.tipOrder,
-                            tipStatusData.tipStartTime,
-                            "");
-                      } else if (tipStatusData.tipSelected && days < 7) {
-                        model.routeToTipShowCurrentView(
-                          tipStatusData.category,
-                          tipStatusData.tipOrder,
-                          tipStatusData.tipStartTime,
-                        );
-                      } else {
-                        model.routeToTipCategoriesView(currentUserUsername);
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: primaryColor,
-                      padding: const EdgeInsets.all(10),
-                    ),
-                    child: FutureBuilder<TipStatusData>(
-                        future: model.checkTipStatus(currentUserUsername),
-                        builder: (
-                          BuildContext context,
-                          AsyncSnapshot<TipStatusData> snapshot,
-                        ) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            if (snapshot.hasError) {
-                              return Text('Error: ${snapshot.error}');
-                            } else if (snapshot.hasData) {
-                              tipStatusData = snapshot.data!;
-                              return const Text("Tip",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontFamily: primaryFont,
-                                      color: whiteColor,
-                                      fontSize: 30.0));
-                            } else {
-                              return const Text(
-                                'Empty data',
-                                style: TextStyle(
-                                  fontFamily: primaryFont,
-                                  color: primaryColor,
-                                ),
-                              );
-                            }
-                          } else {
-                            return Text(
-                              'State: ${snapshot.connectionState}',
-                              style: const TextStyle(
-                                fontFamily: primaryFont,
-                                color: primaryColor,
-                              ),
+          body: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
+                    alignment: Alignment.topRight,
+                  ),
+                  SizedBox(height: height * 0.1),
+                  Image.asset(
+                    'assets/Logo1.png',
+                  ),
+                  SizedBox(height: height * 0.07),
+                  SizedBox(
+                      width: width * 0.8,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          int days = DateTime.now()
+                              .difference(tipStatusData.tipStartTime.toDate())
+                              .inDays;
+                          print(
+                              "tipStartTime: ${tipStatusData.tipStartTime.toDate()}");
+                          if (tipStatusData.tipSelected && days > 6) {
+                            model.routeToTipStatusUpdateView(
+                                tipStatusData.user,
+                                tipStatusData.category,
+                                tipStatusData.tipOrder,
+                                tipStatusData.tipStartTime,
+                                "");
+                          } else if (tipStatusData.tipSelected && days < 7) {
+                            model.routeToTipShowCurrentView(
+                              tipStatusData.category,
+                              tipStatusData.tipOrder,
+                              tipStatusData.tipStartTime,
                             );
+                          } else {
+                            model.routeToTipCategoriesView(currentUserUsername);
                           }
-                        }),
-                  )),
-              const SizedBox(height: 40),
-              SizedBox(
-                  width: width * 0.8,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      model.routeToStatsView();
-                    },
-                    onLongPress: () {
-                      model.routeToStatsView();
-                    },
-                    style: ElevatedButton.styleFrom(
-                        primary: primaryColor,
-                        padding: const EdgeInsets.all(10)),
-                    child: const Text(
-                      'Statistics',
-                      style: TextStyle(
-                        fontFamily: primaryFont,
-                        color: whiteColor,
-                        fontSize: 30,
-                      ),
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: primaryColor,
+                          padding: const EdgeInsets.all(10),
+                        ),
+                        child: FutureBuilder<TipStatusData>(
+                            future: model.checkTipStatus(currentUserUsername),
+                            builder: (
+                              BuildContext context,
+                              AsyncSnapshot<TipStatusData> snapshot,
+                            ) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else if (snapshot.hasData) {
+                                  tipStatusData = snapshot.data!;
+                                  return const Text("Tip",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: primaryFont,
+                                          color: whiteColor,
+                                          fontSize: 30.0));
+                                } else {
+                                  return const Text(
+                                    'Empty data',
+                                    style: TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                    ),
+                                  );
+                                }
+                              } else {
+                                return Text(
+                                  'State: ${snapshot.connectionState}',
+                                  style: const TextStyle(
+                                    fontFamily: primaryFont,
+                                    color: primaryColor,
+                                  ),
+                                );
+                              }
+                            }),
+                      )),
+                  SizedBox(height: height * 0.05),
+                  SizedBox(
+                      width: width * 0.8,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          model.routeToStatsView();
+                        },
+                        onLongPress: () {
+                          model.routeToStatsView();
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: primaryColor,
+                            padding: const EdgeInsets.all(10)),
+                        child: const Text(
+                          'Statistics',
+                          style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: whiteColor,
+                            fontSize: 30,
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: height * 0.06,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                    padding: const EdgeInsets.all(9.0),
+                    decoration: BoxDecoration(
+                      color: whiteColor,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.shade400,
+                            spreadRadius: 1,
+                            blurRadius: 15),
+                      ],
                     ),
-                  )),
-            ]),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: width * 0.8,
+                              child: const Text(
+                                "Fun Fact of the Day",
+                                style: TextStyle(
+                                    fontFamily: primaryFont,
+                                    color: primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 23.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(
+                          color: primaryColor,
+                        ),
+                        SizedBox(
+                          width: width * 0.8,
+                          child: const Text(
+                              "The footprint of a pair of jeans is approximately 15 - 20 kg CO2",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  fontFamily: primaryFont0,
+                                  color: primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ]),
           ),
         ),
       ),

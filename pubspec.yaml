@@ -116,6 +116,18 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/Montserrat-VariableFont_wght.ttf
+    - family: Poppins-SemiBold
+      fonts:
+        - asset: assets/Poppins-SemiBold.ttf
+    - family: Poppins-Medium
+      fonts:
+        - asset: assets/Poppins-Medium.ttf
+    - family: Poppins-Regular
+      fonts:
+        - asset: assets/Poppins-Regular.ttf
+    - family: Poppins-Light
+      fonts:
+        - asset: assets/Poppins-Light.ttf
     
          
   #
