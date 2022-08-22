@@ -38,5 +38,6 @@ const double largeButtonFontSize = 30;
 const double regularButtonFontSize = 24;
 const double appBarFontSize = 25;
 const double textTitleFontSize = 25;
+const double textNormalFontSize = 20;
 const double boxTitleFontSize = 23;
 const double boxTextFontSize = 20;

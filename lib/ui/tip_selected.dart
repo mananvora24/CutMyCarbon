@@ -32,7 +32,7 @@ class TipSelectedView extends StatelessWidget {
               automaticallyImplyLeading: false,
               backgroundColor: backgroundColor,
               elevation: 0,
-              title: Text("Category: $category",
+              title: Text(category,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontFamily: primaryFont,
@@ -45,7 +45,7 @@ class TipSelectedView extends StatelessWidget {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: height * 0.05),
+                    SizedBox(height: height * 0.06),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                       padding: const EdgeInsets.all(9.0),
