@@ -24,6 +24,7 @@ class TipStatusUpdateView extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController daysController = TextEditingController();
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
@@ -41,6 +42,13 @@ class TipStatusUpdateView extends StatelessWidget {
             ),
             backgroundColor: backgroundColor,
             elevation: 0,
+            title: const Text("Tip Progress",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: appBarFontSize)),
           ),
           backgroundColor: backgroundColor,
           body: SingleChildScrollView(
@@ -63,41 +71,50 @@ class TipStatusUpdateView extends StatelessWidget {
                         color: Colors.red),
                   ),
                 ),
-                const Text(
-                    'Enter the number of days you completed the activity',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: primaryFont,
-                        color: primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0)),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  width: width * 0.8,
+                  child: const Text(
+                      'How many days did you successfully complete your tip?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: primaryFont,
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: textNormalFontSize)),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextField(
-                    controller: daysController,
-                    obscureText: false,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: secondaryColor),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor),
-                      ),
-                      hintText: '1',
-                      hintStyle: TextStyle(
-                        fontFamily: primaryFont,
-                        color: primaryColor,
+                SizedBox(
+                  height: height * 0.01,
+                ),
+                SizedBox(
+                  width: width * 0.5,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextField(
+                      controller: daysController,
+                      obscureText: false,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: secondaryColor),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
+                        //hintText: '1',
+                        hintStyle: TextStyle(
+                          fontFamily: primaryFont,
+                          color: primaryColor,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: width * 0.8,
+                  height: height * 0.01,
+                ),
+                SizedBox(
+                  width: width * 0.5,
                   child: ElevatedButton(
                     onPressed: () {
                       String input = daysController.text;
@@ -131,7 +148,7 @@ class TipStatusUpdateView extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: whiteColor,
-                        fontSize: 20,
+                        fontSize: regularButtonFontSize,
                       ),
                     ),
                   ),

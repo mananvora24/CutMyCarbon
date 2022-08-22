@@ -311,7 +311,7 @@ class TipSelectedView extends StatelessWidget {
                             fontFamily: primaryFont,
                             color: primaryColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 20.0)),
+                            fontSize: textNormalFontSize)),
                   ]),
             ),
             persistentFooterButtons: [
@@ -330,7 +330,7 @@ class TipSelectedView extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: primaryFont,
                       color: whiteColor,
-                      fontSize: 20,
+                      fontSize: regularButtonFontSize,
                     ),
                   ),
                 ),

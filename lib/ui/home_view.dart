@@ -240,7 +240,7 @@ class HomeView extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: primaryFont,
                             color: whiteColor,
-                            fontSize: 30,
+                            fontSize: largeButtonFontSize,
                           ),
                         ),
                       )),

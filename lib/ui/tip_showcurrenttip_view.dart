@@ -29,10 +29,6 @@ class TipShowCurrentView extends StatelessWidget {
         description: "",
         carbon: 0);
 
-    String user = currentUserUsername;
-    String tip = "";
-    String tipDescription = "";
-    int carbon = 0;
     int dayStart = tipStartTime.toDate().day;
     int today = Timestamp.now().toDate().day;
     int days = 7 - (today - dayStart);
@@ -59,7 +55,7 @@ class TipShowCurrentView extends StatelessWidget {
                     fontFamily: primaryFont,
                     color: primaryColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: 25.0)),
+                    fontSize: appBarFontSize)),
           ),
           backgroundColor: backgroundColor,
           body: SingleChildScrollView(
