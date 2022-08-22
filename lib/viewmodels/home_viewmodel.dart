@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
+import 'package:intl/intl.dart';
 
 class HomeViewModel extends SharedViewModel {
   HomeViewModel();
-  // This is a hacky way to do.
   // There is a better way - create a POJO and then instance of POJO
   Map<String, dynamic>? tipData = {};
   String fact = "";
@@ -146,19 +148,16 @@ class HomeViewModel extends SharedViewModel {
   Future<String> getCategoryFact(String category) async {
     await FirebaseFirestore.instance
         .collection('CategoryFacts')
-        .where('Category', isEqualTo: category)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;
       if (data.isEmpty) {
         print("Data is empty");
       }
-      for (var snapshot in data) {
-        factsData = snapshot.data();
-        factsData?.forEach((key, value) {
-          fact = factsData!["Fact"];
-        });
-      }
+      int size = data.length;
+      int day = int.parse(DateFormat("D").format(Timestamp.now().toDate()));
+      int factIndex = day % size;
+      fact = data[factIndex]!["Fact"];
     });
     return fact;
   }
