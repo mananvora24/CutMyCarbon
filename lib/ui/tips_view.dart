@@ -24,7 +24,13 @@ class TipsView extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    TipsData tipsData = TipsData(category: "", user: "", tipOrder: 0, tip: "");
+    TipsData tipsData = TipsData(
+        category: "",
+        user: "",
+        tipOrder: 0,
+        tip: "",
+        description: "",
+        carbon: 0);
     int tipOrder = 0;
 
     return ChangeNotifierProvider(
@@ -46,7 +52,7 @@ class TipsView extends StatelessWidget {
                       fontFamily: primaryFont,
                       color: primaryColor,
                       fontWeight: FontWeight.bold,
-                      fontSize: 25.0)),
+                      fontSize: appBarFontSize)),
               backgroundColor: backgroundColor,
               elevation: 0,
             ),
@@ -58,73 +64,279 @@ class TipsView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
+                        height: height * 0.07,
+                      ),
+                      SizedBox(
                         width: width * .8,
-                        child: const Text("Carbon saving recommendation:",
+                        child: const Text("Choose your tip",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontFamily: primaryFont,
                                 color: primaryColor,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 25.0)),
+                                fontSize: textTitleFontSize)),
                       ),
                       SizedBox(
                         height: height * 0.05,
                       ),
-                      SizedBox(
-                        width: width * .8,
-                        child: FutureBuilder<TipsData>(
-                            future: model.getTipForUser(category,
-                                currentUserUsername, skip, tipOverride),
-                            builder: (
-                              BuildContext context,
-                              AsyncSnapshot<TipsData> snapshot,
-                            ) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const CircularProgressIndicator();
-                              } else if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                if (snapshot.hasError) {
-                                  return const Text(
-                                    'getTipForUser returned Error',
-                                    style: TextStyle(
-                                      fontFamily: primaryFont,
-                                      color: primaryColor,
-                                    ),
-                                  );
-                                } else if (snapshot.hasData) {
-                                  tipsData = snapshot.data!;
-                                  tipOrder = tipsData.tipOrder;
-                                  print("TipsData: $tipsData");
-                                  return Text(tipsData.tip,
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        fontFamily: primaryFont,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 25.0,
-                                        color: primaryColor,
-                                      ));
-                                } else {
-                                  return const Text(
-                                    'Empty data',
-                                    style: TextStyle(
-                                      fontFamily: primaryFont,
-                                      color: primaryColor,
-                                    ),
-                                  );
-                                }
-                              } else {
-                                return Text(
-                                  'State: ${snapshot.connectionState}',
-                                  style: const TextStyle(
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                        padding: const EdgeInsets.all(9.0),
+                        decoration: BoxDecoration(
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.shade400,
+                                spreadRadius: 1,
+                                blurRadius: 15),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: width * 0.8,
+                              child: const Text(
+                                "Tip",
+                                style: TextStyle(
                                     fontFamily: primaryFont,
                                     color: primaryColor,
-                                  ),
-                                );
-                              }
-                            }),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: boxTitleFontSize),
+                              ),
+                            ),
+                            const Divider(
+                              color: primaryColor,
+                            ),
+                            SizedBox(
+                              width: width * 0.8,
+                              child: FutureBuilder<TipsData>(
+                                  future: model.getTipForUser(category,
+                                      currentUserUsername, skip, tipOverride),
+                                  builder: (
+                                    BuildContext context,
+                                    AsyncSnapshot<TipsData> snapshot,
+                                  ) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return const CircularProgressIndicator();
+                                    } else if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      if (snapshot.hasError) {
+                                        return const Text(
+                                          'getTipForUser returned Error',
+                                          style: TextStyle(
+                                            fontFamily: primaryFont,
+                                            color: primaryColor,
+                                          ),
+                                        );
+                                      } else if (snapshot.hasData) {
+                                        tipsData = snapshot.data!;
+                                        tipOrder = tipsData.tipOrder;
+                                        print("TipsData: $tipsData");
+                                        return Text(tipsData.tip,
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                              fontFamily: primaryFont,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: boxTextFontSize,
+                                              color: primaryColor,
+                                            ));
+                                      } else {
+                                        return const Text(
+                                          'Empty data',
+                                          style: TextStyle(
+                                            fontFamily: primaryFont,
+                                            color: primaryColor,
+                                          ),
+                                        );
+                                      }
+                                    } else {
+                                      return Text(
+                                        'State: ${snapshot.connectionState}',
+                                        style: const TextStyle(
+                                          fontFamily: primaryFont,
+                                          color: primaryColor,
+                                        ),
+                                      );
+                                    }
+                                  }),
+                            ),
+                          ],
+                        ),
                       ),
-                      SizedBox(height: height * 0.07),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                        padding: const EdgeInsets.all(9.0),
+                        decoration: BoxDecoration(
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.shade400,
+                                spreadRadius: 1,
+                                blurRadius: 15),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: width * 0.8,
+                              child: const Text(
+                                "Details",
+                                style: TextStyle(
+                                    fontFamily: primaryFont,
+                                    color: primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: boxTitleFontSize),
+                              ),
+                            ),
+                            const Divider(
+                              color: primaryColor,
+                            ),
+                            SizedBox(
+                              width: width * 0.8,
+                              child: FutureBuilder<TipsData>(
+                                  future: model.getTipForUser(category,
+                                      currentUserUsername, skip, tipOverride),
+                                  builder: (
+                                    BuildContext context,
+                                    AsyncSnapshot<TipsData> snapshot,
+                                  ) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return const CircularProgressIndicator();
+                                    } else if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      if (snapshot.hasError) {
+                                        return const Text(
+                                          'getTipForUser returned Error',
+                                          style: TextStyle(
+                                            fontFamily: primaryFont,
+                                            color: primaryColor,
+                                          ),
+                                        );
+                                      } else if (snapshot.hasData) {
+                                        tipsData = snapshot.data!;
+                                        tipOrder = tipsData.tipOrder;
+                                        print("TipsData: $tipsData");
+                                        return Text(tipsData.description,
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                              fontFamily: primaryFont,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: boxTextFontSize,
+                                              color: primaryColor,
+                                            ));
+                                      } else {
+                                        return const Text(
+                                          'Empty data',
+                                          style: TextStyle(
+                                            fontFamily: primaryFont,
+                                            color: primaryColor,
+                                          ),
+                                        );
+                                      }
+                                    } else {
+                                      return Text(
+                                        'State: ${snapshot.connectionState}',
+                                        style: const TextStyle(
+                                          fontFamily: primaryFont,
+                                          color: primaryColor,
+                                        ),
+                                      );
+                                    }
+                                  }),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                        padding: const EdgeInsets.all(9.0),
+                        decoration: BoxDecoration(
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.shade400,
+                                spreadRadius: 1,
+                                blurRadius: 15),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: width * 0.8,
+                              child: const Text(
+                                "Carbon saved per day",
+                                style: TextStyle(
+                                    fontFamily: primaryFont,
+                                    color: primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: boxTitleFontSize),
+                              ),
+                            ),
+                            const Divider(
+                              color: primaryColor,
+                            ),
+                            SizedBox(
+                              width: width * 0.8,
+                              child: FutureBuilder<TipsData>(
+                                  future: model.getTipForUser(category,
+                                      currentUserUsername, skip, tipOverride),
+                                  builder: (
+                                    BuildContext context,
+                                    AsyncSnapshot<TipsData> snapshot,
+                                  ) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return const CircularProgressIndicator();
+                                    } else if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      if (snapshot.hasError) {
+                                        return const Text(
+                                          'getTipForUser returned Error',
+                                          style: TextStyle(
+                                            fontFamily: primaryFont,
+                                            color: primaryColor,
+                                          ),
+                                        );
+                                      } else if (snapshot.hasData) {
+                                        tipsData = snapshot.data!;
+                                        tipOrder = tipsData.tipOrder;
+                                        print("TipsData: $tipsData");
+                                        return Text("${tipsData.carbon} lbs",
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                              fontFamily: primaryFont,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: boxTextFontSize,
+                                              color: primaryColor,
+                                            ));
+                                      } else {
+                                        return const Text(
+                                          'Empty data',
+                                          style: TextStyle(
+                                            fontFamily: primaryFont,
+                                            color: primaryColor,
+                                          ),
+                                        );
+                                      }
+                                    } else {
+                                      return Text(
+                                        'State: ${snapshot.connectionState}',
+                                        style: const TextStyle(
+                                          fontFamily: primaryFont,
+                                          color: primaryColor,
+                                        ),
+                                      );
+                                    }
+                                  }),
+                            ),
+                          ],
+                        ),
+                      ),
                     ]),
               ),
             ),

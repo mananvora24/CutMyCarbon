@@ -7,6 +7,8 @@ class TipsViewModel extends SharedViewModel {
   TipsViewModel();
 
   String userTip = "";
+  String tipDescription = "";
+  int carbon = 0;
   Map<String, dynamic>? tipData = {};
 
   Future<int> getMaxCategoryTipOrder(String category) async {
@@ -120,7 +122,6 @@ class TipsViewModel extends SharedViewModel {
     await FirebaseFirestore.instance
         .collection('Tips')
         .where('Category', isEqualTo: category)
-        //.where('TipOrder', isGreaterThan: tipOrder)
         .orderBy('TipOrder')
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
@@ -141,12 +142,19 @@ class TipsViewModel extends SharedViewModel {
           tipFound = true;
           userTip = tipData['Tip'];
           tipOrder = tipData['TipOrder'] as int;
+          tipDescription = tipData['Description'];
+          carbon = tipData['Carbon'];
           break;
         }
       }
     });
     TipsData tipsData = TipsData(
-        category: category, user: user, tipOrder: tipOrder, tip: userTip);
+        category: category,
+        user: user,
+        tipOrder: tipOrder,
+        tip: userTip,
+        description: tipDescription,
+        carbon: carbon);
 
     return tipsData;
   }

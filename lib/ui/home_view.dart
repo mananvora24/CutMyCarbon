@@ -201,7 +201,7 @@ class HomeView extends StatelessWidget {
                                       style: TextStyle(
                                           fontFamily: primaryFont,
                                           color: whiteColor,
-                                          fontSize: 30.0));
+                                          fontSize: largeButtonFontSize));
                                 } else {
                                   return const Text(
                                     'Empty data',
