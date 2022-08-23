@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +12,13 @@ class TipStatusResultsView extends StatelessWidget {
     required this.category,
     required this.tipOrder,
     required this.days,
+    required this.tipStartTime,
   }) : super(key: key);
   final String user;
   final String category;
   final int tipOrder;
   final int days;
+  final Timestamp tipStartTime;
 
   @override
   Widget build(BuildContext context) {
@@ -39,26 +42,22 @@ class TipStatusResultsView extends StatelessWidget {
                 child: Center(
                   child: Column(children: [
                     SizedBox(
-                      height: height * 0.06,
+                      height: height * 0.11,
                       width: width * 0.8,
-                      child: const Text(
-                          'Congratulations! Your saved carbon is: ',
+                      child: const Text('Well done! \n Carbon Saved',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: primaryFont,
                               color: primaryColor,
                               fontWeight: FontWeight.bold,
-                              fontSize: 20.0)),
-                    ),
-                    SizedBox(
-                      height: height * 0.06,
+                              fontSize: textNormalFontSize)),
                     ),
                     // Get the carbon calculation
                     SizedBox(
                       width: width * 0.9,
                       child: FutureBuilder<int>(
                           future: model.getTipCarbon(
-                              user, category, tipOrder, days),
+                              user, category, tipOrder, days, tipStartTime),
                           builder: (
                             BuildContext context,
                             AsyncSnapshot<int> snapshot,
@@ -75,13 +74,13 @@ class TipStatusResultsView extends StatelessWidget {
                                       color: primaryColor,
                                     ));
                               } else if (snapshot.hasData) {
-                                return Text(snapshot.data!.toString(),
+                                return Text("${snapshot.data!} lbs",
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                         fontFamily: primaryFont,
                                         color: primaryColor,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 30.0));
+                                        fontSize: 80.0));
                               } else {
                                 return const Text('Empty data',
                                     style: TextStyle(
@@ -101,51 +100,18 @@ class TipStatusResultsView extends StatelessWidget {
                     SizedBox(
                       height: height * 0.06,
                     ),
-                    // Get the fun fact
+                    // Save stats data
+
                     SizedBox(
                       width: width * 0.9,
-                      child: FutureBuilder<String>(
-                          future: model.getCategoryFact(category),
-                          builder: (
-                            BuildContext context,
-                            AsyncSnapshot<String> snapshot,
-                          ) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
-                            } else if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasError) {
-                                return const Text('Error',
-                                    style: TextStyle(
-                                      fontFamily: primaryFont,
-                                      color: primaryColor,
-                                    ));
-                              } else if (snapshot.hasData) {
-                                return Text(snapshot.data!,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                        fontFamily: primaryFont,
-                                        color: primaryColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0));
-                              } else {
-                                return const Text('Empty data',
-                                    style: TextStyle(
-                                      fontFamily: primaryFont,
-                                      color: primaryColor,
-                                    ));
-                              }
-                            } else {
-                              return Text('State: ${snapshot.connectionState}',
-                                  style: const TextStyle(
-                                    fontFamily: primaryFont,
-                                    color: primaryColor,
-                                  ));
-                            }
-                          }),
+                      child: const Text('Click on Home to get your next Tip',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: primaryFont,
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: textNormalFontSize)),
                     ),
-                    // Save stats data
                   ]),
                 ),
               ),

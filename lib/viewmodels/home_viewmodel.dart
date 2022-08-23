@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
+import 'package:cut_my_carbon/models/Stats.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 import 'package:cut_my_carbon/viewmodels/tip.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
@@ -172,9 +174,12 @@ class HomeViewModel extends SharedViewModel {
     return fact;
   }
 
-  Future<int> getTipCarbon(
-      String user, String category, int tipOrder, int days) async {
+  Future<int> getTipCarbon(String user, String category, int tipOrder, int days,
+      Timestamp tipStartTime) async {
     int carbon = 0;
+    int startDays =
+        Timestamp.now().toDate().difference(tipStartTime.toDate()).inDays;
+    int possibleCarbon = 0;
     await FirebaseFirestore.instance
         .collection('Tips')
         .where('Category', isEqualTo: category)
@@ -189,6 +194,7 @@ class HomeViewModel extends SharedViewModel {
       for (var snapshot in data) {
         tipsData = snapshot.data();
         carbon = tipsData["Carbon"] * days;
+        possibleCarbon = tipsData['Carbon'] * startDays;
       }
     });
 
@@ -222,10 +228,11 @@ class HomeViewModel extends SharedViewModel {
         .doc("$user" "TipStats")
         .set({
           'lastWeekCarbon': carbon,
-          'lastWeekPossibleCarbon': carbon,
+          'lastWeekPossibleCarbon': possibleCarbon,
           'totalCarbon': carbon + statsData['totalCarbon'],
-          'totalPossibleCarbon': carbon + statsData['totalPossibleCarbon'],
-          'totalTons': (carbon + statsData['totalPossibleCarbon']) / 1000,
+          'totalPossibleCarbon':
+              possibleCarbon + statsData['totalPossibleCarbon'],
+          'totalTons': (carbon + statsData['totalPossibleCarbon']) / 2000,
           'user': user,
           'userID': 0,
         }, SetOptions(merge: true))
@@ -233,6 +240,13 @@ class HomeViewModel extends SharedViewModel {
         .catchError(
             (error) => print("Failed to update user tip status: $error"));
 
+    userStats = UserStats(
+        user: user,
+        lastWeekCarbon: carbon,
+        lastWeekPossibleCarbon: carbon,
+        totalCarbon: carbon + statsData['totalCarbon'] as int,
+        totalPossibleCarbon: carbon + statsData['totalCarbon'] as int,
+        totalTons: (carbon + statsData['totalPossibleCarbon']) / 2000);
     return carbon;
   }
 

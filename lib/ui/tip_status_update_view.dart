@@ -232,7 +232,7 @@ class TipStatusUpdateView extends StatelessWidget {
                             currentUserUsername, category, tipOrder, days);
                         print(days);
                         model.routeToTipStatusResultView(
-                            user, category, tipOrder, days);
+                            user, category, tipOrder, days, tipStartTime);
                       }
                     },
                     style: ElevatedButton.styleFrom(

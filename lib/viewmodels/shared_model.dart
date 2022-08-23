@@ -76,13 +76,14 @@ class SharedViewModel extends BaseViewModel {
     });
   }
 
-  void routeToTipStatusResultView(
-      String user, String category, int tipOrder, int days) {
+  void routeToTipStatusResultView(String user, String category, int tipOrder,
+      int days, Timestamp tipStartTime) {
     _navigationService.navigateTo(tipStatusResultsViewRoute, arguments: {
       'user': user,
       'category': category,
       'tipOrder': tipOrder,
-      'days': days
+      'days': days,
+      'tipStartTime': tipStartTime,
     });
   }
 
