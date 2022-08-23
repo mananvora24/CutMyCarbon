@@ -39,11 +39,12 @@ class AuthView extends StatelessWidget {
                               listen: false);
                           print('b');
                           await provider.googleLogin();
-                          print('user is logged in');
                           user = FirebaseAuth.instance.currentUser;
                           String username;
                           username = await model.getUsername(user!.uid);
                           currentUserUsername = username;
+                          print(
+                              'user is logged in - User name is: $currentUserUsername');
                           if (username == '') {
                             print('Matched empty string $username this is uID');
                             model.routeToSignInView();

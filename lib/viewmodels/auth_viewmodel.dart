@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 
 class AuthViewModel extends SharedViewModel {
@@ -19,7 +20,8 @@ class AuthViewModel extends SharedViewModel {
         print("getCurrentUser: Data Found");
         for (var snapshot in data) {
           currentUser = snapshot.data();
-          user = currentUser['uID'];
+          user = currentUser['username'];
+          currentUserUsername = user;
           break;
         }
       }
