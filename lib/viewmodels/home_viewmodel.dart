@@ -1,14 +1,22 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
+import 'package:cut_my_carbon/models/Stats.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
+import 'package:cut_my_carbon/viewmodels/tip.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
+import 'package:intl/intl.dart';
 
 class HomeViewModel extends SharedViewModel {
   HomeViewModel();
-  // This is a hacky way to do.
   // There is a better way - create a POJO and then instance of POJO
   Map<String, dynamic>? tipData = {};
   String fact = "";
   Map<String, dynamic>? factsData = {};
+  String userTip = "";
+  String tipDescription = "";
+  int carbon = 0;
 
   Future<List<Map<String, dynamic>>?> getTipCount(
       String category, int tipOrder) async {
@@ -34,8 +42,8 @@ class HomeViewModel extends SharedViewModel {
     return tipCounts;
   }
 
-  Future<Map<String, dynamic>> getCurrentTip(
-      String category, int tipOrder) async {
+  Future<TipsData> getCurrentTip(
+      String category, int tipOrder, String user) async {
     List<dynamic> dataList = List.empty();
     Map<String, dynamic> currentTip = {};
     await FirebaseFirestore.instance
@@ -52,10 +60,21 @@ class HomeViewModel extends SharedViewModel {
       }
       for (var snapshot in dataList) {
         currentTip = snapshot.data();
+        userTip = currentTip['Tip'];
+        tipDescription = currentTip['Description'];
+        carbon = currentTip['Carbon'];
         break;
       }
     });
-    return currentTip;
+    TipsData tipsData = TipsData(
+        category: category,
+        user: user,
+        tipOrder: tipOrder,
+        tip: userTip,
+        description: tipDescription,
+        carbon: carbon);
+
+    return tipsData;
   }
 
   Future<TipStatusData> checkTipStatus(String user) async {
@@ -106,11 +125,6 @@ class HomeViewModel extends SharedViewModel {
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       dataList = querySnapshot.docs;
-      //if (dataList.isEmpty) {
-      // print("getCurrentTipStatus: Data is empty");
-      //} else {
-      // print("getCurrentTipStatus: Data Found");
-      //}
       for (var snapshot in dataList) {
         currentTip = snapshot.data();
         break;
@@ -146,26 +160,26 @@ class HomeViewModel extends SharedViewModel {
   Future<String> getCategoryFact(String category) async {
     await FirebaseFirestore.instance
         .collection('CategoryFacts')
-        .where('Category', isEqualTo: category)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;
       if (data.isEmpty) {
         print("Data is empty");
       }
-      for (var snapshot in data) {
-        factsData = snapshot.data();
-        factsData?.forEach((key, value) {
-          fact = factsData!["Fact"];
-        });
-      }
+      int size = data.length;
+      int day = int.parse(DateFormat("D").format(Timestamp.now().toDate()));
+      int factIndex = day % size;
+      fact = data[factIndex]!["Fact"];
     });
     return fact;
   }
 
-  Future<int> getTipCarbon(
-      String user, String category, int tipOrder, int days) async {
+  Future<int> getTipCarbon(String user, String category, int tipOrder, int days,
+      Timestamp tipStartTime) async {
     int carbon = 0;
+    int startDays =
+        Timestamp.now().toDate().difference(tipStartTime.toDate()).inDays;
+    int possibleCarbon = 0;
     await FirebaseFirestore.instance
         .collection('Tips')
         .where('Category', isEqualTo: category)
@@ -180,6 +194,7 @@ class HomeViewModel extends SharedViewModel {
       for (var snapshot in data) {
         tipsData = snapshot.data();
         carbon = tipsData["Carbon"] * days;
+        possibleCarbon = tipsData['Carbon'] * startDays;
       }
     });
 
@@ -213,10 +228,11 @@ class HomeViewModel extends SharedViewModel {
         .doc("$user" "TipStats")
         .set({
           'lastWeekCarbon': carbon,
-          'lastWeekPossibleCarbon': carbon,
+          'lastWeekPossibleCarbon': possibleCarbon,
           'totalCarbon': carbon + statsData['totalCarbon'],
-          'totalPossibleCarbon': carbon + statsData['totalPossibleCarbon'],
-          'totalTons': (carbon + statsData['totalPossibleCarbon']) / 1000,
+          'totalPossibleCarbon':
+              possibleCarbon + statsData['totalPossibleCarbon'],
+          'totalTons': (carbon + statsData['totalPossibleCarbon']) / 2000,
           'user': user,
           'userID': 0,
         }, SetOptions(merge: true))
@@ -224,6 +240,13 @@ class HomeViewModel extends SharedViewModel {
         .catchError(
             (error) => print("Failed to update user tip status: $error"));
 
+    userStats = UserStats(
+        user: user,
+        lastWeekCarbon: carbon,
+        lastWeekPossibleCarbon: carbon,
+        totalCarbon: carbon + statsData['totalCarbon'] as int,
+        totalPossibleCarbon: carbon + statsData['totalCarbon'] as int,
+        totalTons: (carbon + statsData['totalPossibleCarbon']) / 2000);
     return carbon;
   }
 
@@ -266,5 +289,74 @@ class HomeViewModel extends SharedViewModel {
       }
     });
     return user;
+  }
+
+  Future<int> getUserCategoryTipOrder(String category, String user) async {
+    int myTipOrder = 0;
+
+    await FirebaseFirestore.instance
+        .collection('UserTips')
+        .where('User', isEqualTo: user)
+        .where('Category', isEqualTo: category)
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      List<dynamic> data = querySnapshot.docs;
+      if (data.isEmpty) {
+        print("getUserCategoryTipOrder: Data is empty");
+      } else {
+        tipData = data.last.data();
+        myTipOrder = tipData!['TipOrder'];
+      }
+    });
+    return myTipOrder;
+  }
+
+  Future<TipsData> getTipForUser(
+      String category, String user, bool skip, int tipOverride) async {
+    bool tipFound = false;
+    int tipOrder = 0;
+    if (skip) {
+      tipOrder = tipOverride;
+    } else {
+      tipOrder = await getUserCategoryTipOrder(category, user);
+    }
+    await FirebaseFirestore.instance
+        .collection('Tips')
+        .where('Category', isEqualTo: category)
+        .orderBy('TipOrder')
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      List<dynamic> data = querySnapshot.docs;
+      if (data.isEmpty) {
+        print("getTipForUser: Data is empty");
+      }
+      int myTipOrder = tipOrder;
+      if (myTipOrder >= data.length) {
+        myTipOrder = 0;
+      }
+      for (var snapshot in data) {
+        Map<String, dynamic>? tipData = snapshot.data();
+        int dataTipOrder = tipData!['TipOrder'] as int;
+        print("getTipForUser tipData: $tipData");
+        if (dataTipOrder > myTipOrder && !tipFound) {
+          // Found the tip needed
+          tipFound = true;
+          userTip = tipData['Tip'];
+          tipOrder = tipData['TipOrder'] as int;
+          tipDescription = tipData['Description'];
+          carbon = tipData['Carbon'];
+          break;
+        }
+      }
+    });
+    TipsData tipsData = TipsData(
+        category: category,
+        user: user,
+        tipOrder: tipOrder,
+        tip: userTip,
+        description: tipDescription,
+        carbon: carbon);
+
+    return tipsData;
   }
 }

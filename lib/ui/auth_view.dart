@@ -39,16 +39,17 @@ class AuthView extends StatelessWidget {
                               listen: false);
                           print('b');
                           await provider.googleLogin();
-                          print('user is logged in');
                           user = FirebaseAuth.instance.currentUser;
-                          String uID1;
-                          uID1 = await model.getUsername(user!.uid);
-                          currentUserUsername = uID1;
-                          if (uID1 == '') {
-                            print('Matched empty string $uID1 this is uID');
+                          String username;
+                          username = await model.getUsername(user!.uid);
+                          currentUserUsername = username;
+                          print(
+                              'user is logged in - User name is: $currentUserUsername');
+                          if (username == '') {
+                            print('Matched empty string $username this is uID');
                             model.routeToSignInView();
                           } else {
-                            print('$uID1 this is uID');
+                            print('$username this is uID');
                             model.routeToHomeView();
                           }
                         },

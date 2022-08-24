@@ -82,8 +82,14 @@ class Router {
         String category = tipArgs['category']!;
         int tipOrder = tipArgs['tipOrder']! as int;
         int days = tipArgs['days']! as int;
+        Timestamp tipStartTime = tipArgs['tipStartTime'] as Timestamp;
         return TipStatusResultsView(
-            user: user, category: category, tipOrder: tipOrder, days: days);
+          user: user,
+          category: category,
+          tipOrder: tipOrder,
+          days: days,
+          tipStartTime: tipStartTime,
+        );
       case signInViewRoute:
         return const SignInView(
           title: "SignIn",

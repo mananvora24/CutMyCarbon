@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
+import 'package:cut_my_carbon/viewmodels/tip.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
@@ -24,6 +25,14 @@ class TipStatusUpdateView extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController daysController = TextEditingController();
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    TipsData tipsData = TipsData(
+        category: "",
+        user: "",
+        tipOrder: 0,
+        tip: "",
+        description: "",
+        carbon: 0);
 
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
@@ -41,6 +50,13 @@ class TipStatusUpdateView extends StatelessWidget {
             ),
             backgroundColor: backgroundColor,
             elevation: 0,
+            title: const Text("Tip Progress",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: primaryFont,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: appBarFontSize)),
           ),
           backgroundColor: backgroundColor,
           body: SingleChildScrollView(
@@ -50,9 +66,98 @@ class TipStatusUpdateView extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 50, 10, 0),
                   alignment: Alignment.topRight,
                 ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  padding: const EdgeInsets.all(9.0),
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.shade400,
+                          spreadRadius: 1,
+                          blurRadius: 15),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: width * 0.8,
+                        child: const Text(
+                          "Tip",
+                          style: TextStyle(
+                              fontFamily: primaryFont,
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: boxTitleFontSize),
+                        ),
+                      ),
+                      const Divider(
+                        color: primaryColor,
+                      ),
+                      SizedBox(
+                        width: width * 0.8,
+                        child: FutureBuilder<TipsData>(
+                            future: model.getCurrentTip(
+                                category, tipOrder, currentUserUsername),
+                            builder: (
+                              BuildContext context,
+                              AsyncSnapshot<TipsData> snapshot,
+                            ) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasError) {
+                                  return const Text(
+                                    'getTipForUser returned Error',
+                                    style: TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                    ),
+                                  );
+                                } else if (snapshot.hasData) {
+                                  tipsData = snapshot.data!;
+                                  //tipOrder = tipsData.tipOrder;
+                                  print("TipsData: $tipsData");
+                                  return Text(tipsData.tip,
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                        fontFamily: primaryFont,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: boxTextFontSize,
+                                        color: primaryColor,
+                                      ));
+                                } else {
+                                  return const Text(
+                                    'Empty data',
+                                    style: TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                    ),
+                                  );
+                                }
+                              } else {
+                                return Text(
+                                  'State: ${snapshot.connectionState}',
+                                  style: const TextStyle(
+                                    fontFamily: primaryFont,
+                                    color: primaryColor,
+                                  ),
+                                );
+                              }
+                            }),
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(
-                  height: 120,
-                  width: width * 0.9,
+                  height: height * 0.02,
+                ),
+                SizedBox(
+                  height: height * 0.08,
+                  width: width * 0.8,
                   child: Text(
                     message,
                     textAlign: TextAlign.center,
@@ -63,41 +168,50 @@ class TipStatusUpdateView extends StatelessWidget {
                         color: Colors.red),
                   ),
                 ),
-                const Text(
-                    'Enter the number of days you completed the activity',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: primaryFont,
-                        color: primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0)),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  width: width * 0.9,
+                  child: const Text(
+                      'How many days did you successfully complete your tip?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: primaryFont,
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: textNormalFontSize)),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextField(
-                    controller: daysController,
-                    obscureText: false,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: secondaryColor),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor),
-                      ),
-                      hintText: '1',
-                      hintStyle: TextStyle(
-                        fontFamily: primaryFont,
-                        color: primaryColor,
+                SizedBox(
+                  height: height * 0.01,
+                ),
+                SizedBox(
+                  width: width * 0.5,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: TextField(
+                      controller: daysController,
+                      obscureText: false,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: secondaryColor),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
+                        //hintText: '1',
+                        hintStyle: TextStyle(
+                          fontFamily: primaryFont,
+                          color: primaryColor,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: width * 0.8,
+                  height: height * 0.01,
+                ),
+                SizedBox(
+                  width: width * 0.5,
                   child: ElevatedButton(
                     onPressed: () {
                       String input = daysController.text;
@@ -118,7 +232,7 @@ class TipStatusUpdateView extends StatelessWidget {
                             currentUserUsername, category, tipOrder, days);
                         print(days);
                         model.routeToTipStatusResultView(
-                            user, category, tipOrder, days);
+                            user, category, tipOrder, days, tipStartTime);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -131,7 +245,7 @@ class TipStatusUpdateView extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: whiteColor,
-                        fontSize: 20,
+                        fontSize: regularButtonFontSize,
                       ),
                     ),
                   ),

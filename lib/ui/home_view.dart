@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -11,7 +12,6 @@ import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key, required String title}) : super(key: key);
-  //String username = '';
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +201,7 @@ class HomeView extends StatelessWidget {
                                       style: TextStyle(
                                           fontFamily: primaryFont,
                                           color: whiteColor,
-                                          fontSize: 30.0));
+                                          fontSize: largeButtonFontSize));
                                 } else {
                                   return const Text(
                                     'Empty data',
@@ -240,7 +240,7 @@ class HomeView extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: primaryFont,
                             color: whiteColor,
-                            fontSize: 30,
+                            fontSize: largeButtonFontSize,
                           ),
                         ),
                       )),
@@ -283,14 +283,46 @@ class HomeView extends StatelessWidget {
                         ),
                         SizedBox(
                           width: width * 0.8,
-                          child: const Text(
-                              "The footprint of a pair of jeans is approximately 15 - 20 kg CO2",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontFamily: primaryFont0,
-                                  color: primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0)),
+                          child: FutureBuilder<String>(
+                              future: model.getCategoryFact('Energy'),
+                              builder: (
+                                BuildContext context,
+                                AsyncSnapshot<String> snapshot,
+                              ) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const CircularProgressIndicator();
+                                } else if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  if (snapshot.hasError) {
+                                    return Text('Error: ${snapshot.error}');
+                                  } else if (snapshot.hasData) {
+                                    String funFact = snapshot.data!;
+                                    return Text(funFact,
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                            fontFamily: primaryFont,
+                                            color: primaryColor,
+                                            fontSize: 20.0));
+                                  } else {
+                                    return const Text(
+                                      'Empty data',
+                                      style: TextStyle(
+                                        fontFamily: primaryFont,
+                                        color: primaryColor,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  return Text(
+                                    'State: ${snapshot.connectionState}',
+                                    style: const TextStyle(
+                                      fontFamily: primaryFont,
+                                      color: primaryColor,
+                                    ),
+                                  );
+                                }
+                              }),
                         ),
                       ],
                     ),
