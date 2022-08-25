@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/ui/about_forterra.dart';
 import 'package:cut_my_carbon/ui/about_us.dart';
 import 'package:cut_my_carbon/ui/feedback_thanks_view.dart';
+import 'package:cut_my_carbon/ui/help_view.dart';
 import 'package:cut_my_carbon/ui/stats_view.dart';
 import 'package:cut_my_carbon/ui/tip_selected.dart';
 import 'package:cut_my_carbon/ui/tip_showcurrenttip_view.dart';
@@ -151,6 +152,8 @@ class Router {
         );
       case settingsViewRoute:
         return const SettingsView(title: "Settings");
+      case helpViewRoute:
+        return const HelpView(title: "Help");
 
       default:
         return Scaffold(

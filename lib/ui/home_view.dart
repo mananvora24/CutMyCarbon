@@ -57,6 +57,21 @@ class HomeView extends StatelessWidget {
                   }),
               SpeedDialChild(
                   child: const Icon(
+                    Icons.help,
+                    color: backgroundColor,
+                  ),
+                  label: 'Help',
+                  labelBackgroundColor: primaryColor,
+                  labelStyle: const TextStyle(
+                    fontFamily: primaryFont,
+                    color: whiteColor,
+                  ),
+                  backgroundColor: primaryColor,
+                  onTap: () {
+                    model.routeToHelpView();
+                  }),
+              SpeedDialChild(
+                  child: const Icon(
                     Icons.mail_rounded,
                     color: backgroundColor,
                   ),

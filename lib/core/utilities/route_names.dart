@@ -16,3 +16,4 @@ const String feedbackThanksViewRoute = 'FeedbackThanksViewRoute';
 const String settingsViewRoute = 'SettingsViewRoute';
 const String suggestATipViewRoute = 'SuggestATipViewRoute';
 const String suggestATipThanksViewRoute = 'SuggestATipThanksViewRoute';
+const String helpViewRoute = 'HelpViewRoute';

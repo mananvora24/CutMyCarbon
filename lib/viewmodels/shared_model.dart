@@ -128,4 +128,8 @@ class SharedViewModel extends BaseViewModel {
       'message': message,
     });
   }
+
+  void routeToHelpView() {
+    _navigationService.navigateTo(helpViewRoute);
+  }
 }

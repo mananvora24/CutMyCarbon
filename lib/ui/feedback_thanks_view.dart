@@ -93,7 +93,6 @@ class FeedbackThanksView extends StatelessWidget {
                         borderSide: BorderSide(color: primaryColor),
                       ),
                       labelText: reason,
-                      //hintText: reason,
                       labelStyle: const TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
