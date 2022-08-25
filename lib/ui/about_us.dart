@@ -10,6 +10,7 @@ class AboutUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
       create: (context) => AboutUsViewModel(),
       child: Consumer<AboutUsViewModel>(
@@ -39,18 +40,32 @@ class AboutUsView extends StatelessWidget {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                    child: Text(
-                  "This is about Cut My Carbon.",
-                  style: TextStyle(
-                    fontFamily: primaryFont,
-                    color: primaryColor,
-                    fontSize: 20,
-                  ),
-                )),
                 SizedBox(
-                  height: height * 0.13,
+                  height: height * 0.01,
                 ),
+                SizedBox(
+                    width: width * 0.85,
+                    child: const Text(
+                      "Cut My Carbon helps to reduce carbon footprints. Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity. Cut My Carbon will aid the Green Seattle Project, in partnership with Forterra.",
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 20,
+                      ),
+                    )),
+                SizedBox(
+                  height: height * 0.03,
+                ),
+                SizedBox(
+                    width: width * 0.85,
+                    child: const Text(
+                      "Cut My Carbon App provides users quick and easy tips to lower their carbon footprints. Are you ready to cat your carbon? Cut My Carbon will lower trash going to landfills, promote recycling, help clean the atmosphere and oceans, and work towards the global mission on reversing the effects of climate change",
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 20,
+                      ),
+                    )),
               ],
             )),
           ),

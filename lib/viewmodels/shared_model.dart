@@ -95,6 +95,15 @@ class SharedViewModel extends BaseViewModel {
     _navigationService.navigateTo(feedbackViewRoute);
   }
 
+  void routeToFeedbackThanksView(
+      String reason, String feedback, String message) {
+    _navigationService.navigateTo(feedbackThanksViewRoute, arguments: {
+      'reason': reason,
+      'feedback': feedback,
+      'message': message,
+    });
+  }
+
   void routeToSignInView() {
     _navigationService.navigateTo(signInViewRoute);
   }
@@ -109,5 +118,14 @@ class SharedViewModel extends BaseViewModel {
 
   void routeToSuggestATipView() {
     _navigationService.navigateTo(suggestATipViewRoute);
+  }
+
+  void routeToSuggestATipThanksView(
+      String category, String tip, String message) {
+    _navigationService.navigateTo(suggestATipThanksViewRoute, arguments: {
+      'category': category,
+      'tip': tip,
+      'message': message,
+    });
   }
 }

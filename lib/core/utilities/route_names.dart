@@ -12,5 +12,7 @@ const String inboxViewRoute = 'InboxView';
 const String authViewRoute = 'AuthView';
 const String signInViewRoute = 'SignInView';
 const String feedbackViewRoute = 'FeedbackViewRoute';
+const String feedbackThanksViewRoute = 'FeedbackThanksViewRoute';
 const String settingsViewRoute = 'SettingsViewRoute';
 const String suggestATipViewRoute = 'SuggestATipViewRoute';
+const String suggestATipThanksViewRoute = 'SuggestATipThanksViewRoute';

@@ -4,11 +4,17 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-class FeedbackView extends StatelessWidget {
-  FeedbackView({Key? key}) : super(key: key);
+class FeedbackThanksView extends StatelessWidget {
+  const FeedbackThanksView(
+      {Key? key,
+      required this.reason,
+      required this.feedback,
+      required this.message})
+      : super(key: key);
+  final String reason;
+  final String feedback;
+  final String message;
 
-  final reasonController = TextEditingController();
-  final feedbackController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -43,7 +49,21 @@ class FeedbackView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: height * 0.08,
+                  height: height * 0.03,
+                ),
+                SizedBox(
+                    width: width * 0.85,
+                    child: Text(
+                      message,
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 20,
+                      ),
+                    )),
+                SizedBox(
+                  height: height * 0.03,
                 ),
                 SizedBox(
                     width: width * 0.85,
@@ -62,21 +82,19 @@ class FeedbackView extends StatelessWidget {
                 SizedBox(
                   width: width * 0.85,
                   child: TextField(
-                    onChanged: (String value) {
-                      model.reason = value;
-                    },
-                    controller: reasonController,
+                    enabled: false,
                     style: const TextStyle(
                         fontFamily: primaryFont, color: primaryColor),
-                    decoration: const InputDecoration(
-                      focusedBorder: OutlineInputBorder(
+                    decoration: InputDecoration(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: secondaryColor),
                       ),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: primaryColor),
                       ),
-                      labelText: 'Reason',
-                      labelStyle: TextStyle(
+                      labelText: reason,
+                      //hintText: reason,
+                      labelStyle: const TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
                       ),
@@ -104,22 +122,20 @@ class FeedbackView extends StatelessWidget {
                   width: width * 0.85,
                   child: TextField(
                     maxLines: 10,
-                    onChanged: (String value) {
-                      model.feedback = value;
-                    },
-                    controller: feedbackController,
+                    enabled: false,
                     style: const TextStyle(
                         fontFamily: primaryFont, color: primaryColor),
-                    decoration: const InputDecoration(
-                      focusedBorder: OutlineInputBorder(
+                    decoration: InputDecoration(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: secondaryColor),
                       ),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: primaryColor),
                       ),
-                      labelText: 'Feedback',
+                      labelText: feedback,
+                      //hintText: feedback,
                       alignLabelWithHint: true,
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                         color: primaryColor,
                       ),
                     ),
@@ -130,23 +146,22 @@ class FeedbackView extends StatelessWidget {
                 ),
                 SizedBox(
                   child: ElevatedButton(
-                    onPressed: () async {
-                      await model.saveFeedbackData(
-                          currentUserUsername, model.reason, model.feedback);
-                      String msg = "Thank you for your submission";
-                      model.routeToFeedbackThanksView(
-                          model.reason, model.feedback, msg);
+                    onPressed: () {
+                      model.routeToHomeView();
                     },
                     style: ElevatedButton.styleFrom(
                         primary: primaryColor,
                         padding: const EdgeInsets.all(10)),
-                    child: const Text('Submit',
+                    child: const Text('Home',
                         style: TextStyle(
                           fontFamily: primaryFont,
                           color: whiteColor,
                           fontSize: 20,
                         )),
                   ),
+                ),
+                SizedBox(
+                  height: height * 0.03,
                 ),
               ],
             )))),

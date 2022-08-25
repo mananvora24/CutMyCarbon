@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-class suggestATipView extends StatelessWidget {
-  suggestATipView({Key? key, required this.title}) : super(key: key);
+// ignore: camel_case_types
+class SuggestATipView extends StatelessWidget {
+  SuggestATipView({Key? key, required this.title}) : super(key: key);
   final String title;
   final categoryController = TextEditingController();
   final tipController = TextEditingController();
@@ -135,7 +136,9 @@ class suggestATipView extends StatelessWidget {
                     onPressed: () async {
                       await model.saveTipSuggestionData(
                           currentUserUsername, model.category, model.tip);
-                      model.routeToHomeView();
+                      String message = "Thank you for your submission";
+                      model.routeToSuggestATipThanksView(
+                          model.category, model.tip, message);
                     },
                     style: ElevatedButton.styleFrom(
                         primary: primaryColor,

@@ -2,11 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:cut_my_carbon/Forterra Icon/Ficon.dart';
+import 'package:cut_my_carbon/core/utilities/green_seattle_project_icons.dart';
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -122,7 +121,7 @@ class HomeView extends StatelessWidget {
                   }),
               SpeedDialChild(
                   child: const Icon(
-                    Forterra.logo,
+                    GreenSeattleProject.greenSeattle,
                     color: backgroundColor,
                   ),
                   label: 'Green Seattle Project',
@@ -148,7 +147,7 @@ class HomeView extends StatelessWidget {
                   ),
                   SizedBox(height: height * 0.1),
                   Image.asset(
-                    'assets/Logo1.png',
+                    'assets/finalLogo.png',
                   ),
                   SizedBox(height: height * 0.07),
                   SizedBox(

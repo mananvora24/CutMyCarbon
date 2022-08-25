@@ -14,6 +14,7 @@ class AuthView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
+    double height = (MediaQuery.of(context).size.height);
     return ChangeNotifierProvider(
         create: (context) => AuthViewModel(),
         child: Consumer<AuthViewModel>(
@@ -22,12 +23,48 @@ class AuthView extends StatelessWidget {
             body: SingleChildScrollView(
                 child: Center(
                     child: SizedBox(
-              height: 200,
               child: SizedBox(
-                height: (MediaQuery.of(context).size.height),
+                height: height,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.85,
+                        child: const Text(
+                          "Welcome to Cut My Carbon!",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.85,
+                          child: const Text(
+                            "Cut My Carbon helps to reduce carbon footprints. Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity.",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontFamily: primaryFont,
+                              color: primaryColor,
+                              fontSize: 20,
+                            ),
+                          )),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.85,
+                          child: const Text(
+                            "Cut My Carbon App provides users quick and easy tips to lower their carbon footprints. Are you ready to cat your carbon?",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontFamily: primaryFont,
+                              color: primaryColor,
+                              fontSize: 20,
+                            ),
+                          )),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
