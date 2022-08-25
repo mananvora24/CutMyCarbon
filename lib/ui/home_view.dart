@@ -299,7 +299,7 @@ class HomeView extends StatelessWidget {
                                   } else if (snapshot.hasData) {
                                     String funFact = snapshot.data!;
                                     return Text(funFact,
-                                        textAlign: TextAlign.center,
+                                        textAlign: TextAlign.left,
                                         style: const TextStyle(
                                             fontFamily: primaryFont,
                                             color: primaryColor,

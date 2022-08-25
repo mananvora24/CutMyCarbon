@@ -189,7 +189,6 @@ class TipSelectedView extends StatelessWidget {
                                         );
                                       } else if (snapshot.hasData) {
                                         tipsData = snapshot.data!;
-                                        // tipOrder = tipsData.tipOrder;
                                         print("TipsData: $tipsData");
                                         return Text(tipsData.description,
                                             textAlign: TextAlign.left,
@@ -275,7 +274,6 @@ class TipSelectedView extends StatelessWidget {
                                         );
                                       } else if (snapshot.hasData) {
                                         tipsData = snapshot.data!;
-                                        // tipOrder = tipsData.tipOrder;
                                         print("TipsData: $tipsData");
                                         return Text("${tipsData.carbon} lbs",
                                             textAlign: TextAlign.left,

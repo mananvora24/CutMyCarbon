@@ -2,6 +2,7 @@ import 'package:cut_my_carbon/viewmodels/aboutforterra_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
+import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/gestures.dart';
 
@@ -97,64 +98,33 @@ class AboutFView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                          text: "Please email us at info@greenseattle.org",
-                          style: const TextStyle(
-                            fontFamily: primaryFont,
-                            color: secondaryColor,
-                            decoration: TextDecoration.underline,
-                            fontSize: 17,
-                            height: 1.2,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              String url =
-                                  "https://greenseattle.org/get-involved/volunteer/";
-                              var urllaunchable = await canLaunch(
-                                  url); //canLaunch is from url_launcher package
-                              if (urllaunchable) {
-                                await launch(
-                                    url); //launch is from url_launcher package to launch URL
-                              } else {
-                                print("URL can't be launched.");
-                              }
-                            })
-                    ],
+                Link(
+                  uri: Uri.parse(
+                      'https://greenseattle.org/get-involved/volunteer/'),
+                  builder: (context, followLink) => GestureDetector(
+                    onTap: followLink,
+                    child: const Text(
+                      'Volunteering with the Green Seattle Partnership',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline),
+                    ),
                   ),
                 ),
-                const Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text:
-                            "Volunteering with the Green Seattle Partnership\nhttps://greenseattle.org/get-involved/volunteer/",
-                        style: TextStyle(
-                          fontFamily: primaryFont,
-                          color: primaryColor,
-                          fontSize: 17,
-                          height: 1.2,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text:
-                            "Events Calendar\nhttps://seattle.greencitypartnerships.org/event/map/",
-                        style: TextStyle(
-                          fontFamily: primaryFont,
-                          color: primaryColor,
-                          fontSize: 17,
-                          height: 1.2,
-                        ),
-                      )
-                    ],
+                Link(
+                  uri: Uri.parse(
+                      'https://seattle.greencitypartnerships.org/event/map/'),
+                  builder: (context, followLink) => GestureDetector(
+                    onTap: followLink,
+                    child: const Text(
+                      'Events Calendar',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline),
+                    ),
                   ),
                 ),
               ],
