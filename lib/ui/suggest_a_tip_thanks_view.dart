@@ -25,15 +25,7 @@ class SuggestATipThanksView extends StatelessWidget {
       child: Consumer<SuggestATipViewModel>(
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: primaryColor,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+              automaticallyImplyLeading: false,
               title: const Text('Suggest A Tip',
                   style: TextStyle(
                       fontFamily: primaryFont,
@@ -66,78 +58,91 @@ class SuggestATipThanksView extends StatelessWidget {
                 SizedBox(
                   height: height * 0.03,
                 ),
-                SizedBox(
-                    width: width * 0.85,
-                    child: const Text(
-                      "Category",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontFamily: primaryFont,
-                        color: primaryColor,
-                        fontSize: 20,
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  padding: const EdgeInsets.all(9.0),
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.shade400,
+                          spreadRadius: 1,
+                          blurRadius: 15),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: width * 0.8,
+                        child: const Text(
+                          "Category",
+                          style: TextStyle(
+                              fontFamily: primaryFont,
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23.0),
+                        ),
                       ),
-                    )),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                SizedBox(
-                  width: width * 0.85,
-                  child: TextField(
-                    enabled: false,
-                    style: const TextStyle(
-                        fontFamily: primaryFont, color: primaryColor),
-                    decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: secondaryColor),
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor),
-                      ),
-                      labelText: category,
-                      labelStyle: const TextStyle(
-                        fontFamily: primaryFont,
+                      const Divider(
                         color: primaryColor,
                       ),
-                    ),
+                      SizedBox(
+                        width: width * 0.8,
+                        child: Text(
+                          category,
+                          style: const TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
-                  height: height * 0.02,
+                  height: height * 0.03,
                 ),
-                SizedBox(
-                    width: width * 0.85,
-                    child: const Text(
-                      "Tip",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontFamily: primaryFont,
-                        color: primaryColor,
-                        fontSize: 20,
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  padding: const EdgeInsets.all(9.0),
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.shade400,
+                          spreadRadius: 1,
+                          blurRadius: 15),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: width * 0.8,
+                        child: const Text(
+                          "Tip",
+                          style: TextStyle(
+                              fontFamily: primaryFont,
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23.0),
+                        ),
                       ),
-                    )),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                SizedBox(
-                  width: width * 0.85,
-                  child: TextField(
-                    maxLines: 10,
-                    enabled: false,
-                    style: const TextStyle(
-                        fontFamily: primaryFont, color: primaryColor),
-                    decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: secondaryColor),
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor),
-                      ),
-                      labelText: tip,
-                      alignLabelWithHint: true,
-                      labelStyle: const TextStyle(
+                      const Divider(
                         color: primaryColor,
                       ),
-                    ),
+                      SizedBox(
+                        width: width * 0.8,
+                        child: Text(
+                          tip,
+                          style: const TextStyle(
+                            fontFamily: primaryFont,
+                            color: primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(

@@ -276,21 +276,16 @@ class HomeView extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: width * 0.8,
-                              child: const Text(
-                                "Fun Fact of the Day",
-                                style: TextStyle(
-                                    fontFamily: primaryFont,
-                                    color: primaryColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23.0),
-                              ),
-                            ),
-                          ],
+                        SizedBox(
+                          width: width * 0.8,
+                          child: const Text(
+                            "Fun Fact of the Day",
+                            style: TextStyle(
+                                fontFamily: primaryFont,
+                                color: primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 23.0),
+                          ),
                         ),
                         const Divider(
                           color: primaryColor,

@@ -59,70 +59,87 @@ class AboutFView extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        const TextSpan(
-                          text:
-                              "The Green Seattle Partnership is a collaboration between the City of Seattle, Forterra, community groups and non-profits, businesses, schools, and thousands of volunteers working together to restore and actively maintain the City’s forested parklands.\n\nThe Green Seattle Partnership coordinates restoration projects to care for our urban forest and bring people into the parks to build community through hands-on volunteerism.\n\nVolunteering with the Green Seattle Partnership is a great way to give back to your community, get outside, and improve the health of a local park. Everyone can help keep our forested parks healthy and green! No experience necessary. Find a community event at the map and calendar linked below. Questions?",
-                          style: TextStyle(
-                            fontFamily: primaryFont,
-                            color: primaryColor,
+                  child: const Text(
+                    "The Green Seattle Partnership is a collaboration between the City of Seattle, Forterra, community groups and non-profits, businesses, schools, and thousands of volunteers working together to restore and actively maintain the City’s forested parklands.\n\nThe Green Seattle Partnership coordinates restoration projects to care for our urban forest and bring people into the parks to build community through hands-on volunteerism.\n\nVolunteering with the Green Seattle Partnership is a great way to give back to your community, get outside, and improve the health of a local park. Everyone can help keep our forested parks healthy and green! No experience necessary. Find a community event at the map and calendar linked below. Questions? Please email us at ",
+                    style: TextStyle(
+                      fontFamily: primaryFont,
+                      color: primaryColor,
+                      fontSize: 17,
+                      height: 1.2,
+                    ),
+                  ),
+                ),
+                /*Container(
+                  width: width,
+                  alignment: Alignment.topLeft,
+                  child: TextButton(
+                    onPressed: () async {
+                      if (await canLaunch('mailto:info@greenseattle.org')) {
+                        // ignore: deprecated_member_use
+                        await launch('mailto:info@greenseattle.org');
+                      }
+                    },
+                    child: const Text(
+                      'info@greenseattle.org',
+                      style: TextStyle(
+                          fontSize: 17,
+                          height: 1.2,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline),
+                    ),
+                  ),
+                ),*/
+                SizedBox(
+                  width: width,
+                  child: Link(
+                    uri: Uri.parse('mailto:info@greenseattle.org'),
+                    builder: (context, followLink) => GestureDetector(
+                      onTap: followLink,
+                      child: const Text(
+                        'info@greenseattle.org',
+                        style: TextStyle(
                             fontSize: 17,
                             height: 1.2,
-                          ),
-                        ),
-                        TextSpan(
-                            text: "Please email us at info@greenseattle.org",
-                            style: const TextStyle(
-                              fontFamily: primaryFont,
-                              color: secondaryColor,
-                              decoration: TextDecoration.underline,
-                              fontSize: 17,
-                              height: 1.2,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                String url = "mailto:info@greenseattle.org";
-                                var urllaunchable = await canLaunch(
-                                    url); //canLaunch is from url_launcher package
-                                if (urllaunchable) {
-                                  await launch(
-                                      url); //launch is from url_launcher package to launch URL
-                                } else {
-                                  print("URL can't be launched.");
-                                }
-                              })
-                      ],
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline),
+                      ),
                     ),
                   ),
                 ),
-                Link(
-                  uri: Uri.parse(
-                      'https://greenseattle.org/get-involved/volunteer/'),
-                  builder: (context, followLink) => GestureDetector(
-                    onTap: followLink,
-                    child: const Text(
-                      'Volunteering with the Green Seattle Partnership',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline),
+                SizedBox(
+                  width: width,
+                  child: Link(
+                    uri: Uri.parse(
+                        'https://greenseattle.org/get-involved/volunteer/'),
+                    builder: (context, followLink) => GestureDetector(
+                      onTap: followLink,
+                      child: const Text(
+                        'Volunteering with the Green Seattle Partnership',
+                        style: TextStyle(
+                            fontSize: 17,
+                            height: 1.2,
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline),
+                      ),
                     ),
                   ),
                 ),
-                Link(
-                  uri: Uri.parse(
-                      'https://seattle.greencitypartnerships.org/event/map/'),
-                  builder: (context, followLink) => GestureDetector(
-                    onTap: followLink,
-                    child: const Text(
-                      'Events Calendar',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline),
+                SizedBox(
+                  width: width,
+                  child: Link(
+                    uri: Uri.parse(
+                        'https://seattle.greencitypartnerships.org/event/map/'),
+                    builder: (context, followLink) => GestureDetector(
+                      onTap: followLink,
+                      child: const Text(
+                        'Events Calendar',
+                        //textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 17,
+                            height: 1.2,
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline),
+                      ),
                     ),
                   ),
                 ),
