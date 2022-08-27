@@ -120,6 +120,14 @@ class SharedViewModel extends BaseViewModel {
     _navigationService.navigateTo(suggestATipViewRoute);
   }
 
+  void routeToTermsView() {
+    _navigationService.navigateTo(termsViewRoute);
+  }
+
+  void routeToAcceptTermsView() {
+    _navigationService.navigateTo(acceptTermsViewRoute);
+  }
+
   void routeToSuggestATipThanksView(
       String category, String tip, String message) {
     _navigationService.navigateTo(suggestATipThanksViewRoute, arguments: {

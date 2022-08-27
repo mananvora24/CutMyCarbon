@@ -43,7 +43,7 @@ class TipCategoriesView extends StatelessWidget {
                     children: [
                   SizedBox(height: height * 0.05),
                   SizedBox(
-                    width: width * 0.8,
+                    width: width * 0.9,
                     child: const Text(
                       "Pick one of the categories to get your tip of the week",
                       textAlign: TextAlign.center,
@@ -56,11 +56,11 @@ class TipCategoriesView extends StatelessWidget {
                   ),
                   SizedBox(height: height * 0.03),
                   SizedBox(
-                    width: width * 0.6,
+                    width: width * 0.8,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
-                            padding: const EdgeInsets.all(10)),
+                            padding: const EdgeInsets.all(7)),
                         onPressed: () async {
                           int tipMax =
                               await model.getMaxCategoryTipOrder(categoryHome);
@@ -80,11 +80,11 @@ class TipCategoriesView extends StatelessWidget {
                     height: height * 0.01,
                   ),
                   SizedBox(
-                    width: width * 0.6,
+                    width: width * 0.8,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
-                            padding: const EdgeInsets.all(10)),
+                            padding: const EdgeInsets.all(7)),
                         onPressed: () async {
                           int tipMax =
                               await model.getMaxCategoryTipOrder(categoryFood);
@@ -104,11 +104,11 @@ class TipCategoriesView extends StatelessWidget {
                     height: height * 0.01,
                   ),
                   SizedBox(
-                    width: width * 0.6,
+                    width: width * 0.8,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
-                            padding: const EdgeInsets.all(10)),
+                            padding: const EdgeInsets.all(7)),
                         onPressed: () async {
                           int tipMax = await model
                               .getMaxCategoryTipOrder(categoryShopping);
@@ -128,11 +128,11 @@ class TipCategoriesView extends StatelessWidget {
                     height: height * 0.01,
                   ),
                   SizedBox(
-                    width: width * 0.6,
+                    width: width * 0.8,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
-                            padding: const EdgeInsets.all(10)),
+                            padding: const EdgeInsets.all(7)),
                         onPressed: () async {
                           int tipMax = await model
                               .getMaxCategoryTipOrder(categoryEnergy);
@@ -152,11 +152,11 @@ class TipCategoriesView extends StatelessWidget {
                     height: height * 0.01,
                   ),
                   SizedBox(
-                    width: width * 0.6,
+                    width: width * 0.8,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
-                            padding: const EdgeInsets.all(10)),
+                            padding: const EdgeInsets.all(7)),
                         onPressed: () async {
                           int tipMax =
                               await model.getMaxCategoryTipOrder(categoryWater);
@@ -176,11 +176,11 @@ class TipCategoriesView extends StatelessWidget {
                     height: height * 0.01,
                   ),
                   SizedBox(
-                    width: width * 0.6,
+                    width: width * 0.8,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
-                            padding: const EdgeInsets.all(10)),
+                            padding: const EdgeInsets.all(7)),
                         onPressed: () async {
                           int tipMax = await model
                               .getMaxCategoryTipOrder(categoryTransportation);

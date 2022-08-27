@@ -244,7 +244,7 @@ class HomeView extends StatelessWidget {
                           model.routeToStatsView();
                         },
                         onLongPress: () {
-                          model.routeToStatsView();
+                          model.routeToAcceptTermsView();
                         },
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
@@ -336,6 +336,7 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 10),
                 ]),
           ),
         ),

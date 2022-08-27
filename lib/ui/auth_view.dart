@@ -43,7 +43,7 @@ class AuthView extends StatelessWidget {
                       SizedBox(
                           width: MediaQuery.of(context).size.width * 0.85,
                           child: const Text(
-                            "Cut My Carbon helps to reduce carbon footprints. Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity.",
+                            "Cut My Carbon helps to reduce carbon footprints.", // Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity.",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: primaryFont,
@@ -65,36 +65,78 @@ class AuthView extends StatelessWidget {
                       SizedBox(
                         height: height * 0.03,
                       ),
-                      ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                            primary: primaryColor,
-                            padding: const EdgeInsets.all(10)),
-                        onPressed: () async {
-                          print('a');
-                          final provider = Provider.of<GoogleSigninProvider>(
-                              context,
-                              listen: false);
-                          print('b');
-                          await provider.googleLogin();
-                          user = FirebaseAuth.instance.currentUser;
-                          String username;
-                          username = await model.getUsername(user!.uid);
-                          currentUserUsername = username;
-                          print(
-                              'user is logged in - User name is: $currentUserUsername');
-                          if (username == '') {
-                            print('Matched empty string $username this is uID');
-                            model.routeToSignInView();
-                          } else {
-                            print('$username this is uID');
-                            model.routeToHomeView();
-                          }
-                        },
-                        icon: const FaIcon(FontAwesomeIcons.google,
-                            color: whiteColor),
-                        label: const Text('Sign Up with Google',
-                            style: TextStyle(
-                                fontFamily: primaryFont, color: whiteColor)),
+                      SizedBox(
+                        width: 185,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                              primary: primaryColor,
+                              padding: const EdgeInsets.all(10)),
+                          onPressed: () async {
+                            print('a');
+                            final provider = Provider.of<GoogleSigninProvider>(
+                                context,
+                                listen: false);
+                            print('b');
+                            await provider.googleLogin();
+                            user = FirebaseAuth.instance.currentUser;
+                            String username;
+                            username = await model.getUsername(user!.uid);
+                            currentUserUsername = username;
+                            print(
+                                'user is logged in - User name is: $currentUserUsername');
+                            if (username == '') {
+                              print(
+                                  'Matched empty string $username this is uID');
+                              model.routeToAcceptTermsView();
+                            } else {
+                              print('$username this is uID');
+                              model.routeToHomeView();
+                            }
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.google,
+                              color: whiteColor),
+                          label: const Text('Sign In with Google',
+                              style: TextStyle(
+                                  fontFamily: primaryFont, color: whiteColor)),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 185,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                              primary: primaryColor,
+                              padding: const EdgeInsets.all(10)),
+                          onPressed: () async {
+                            print('a');
+                            final provider = Provider.of<GoogleSigninProvider>(
+                                context,
+                                listen: false);
+                            print('b');
+                            await provider.googleLogin();
+                            user = FirebaseAuth.instance.currentUser;
+                            String username;
+                            username = await model.getUsername(user!.uid);
+                            currentUserUsername = username;
+                            print(
+                                'user is logged in - User name is: $currentUserUsername');
+                            if (username == '') {
+                              print(
+                                  'Matched empty string $username this is uID');
+                              model.routeToAcceptTermsView();
+                            } else {
+                              print('$username this is uID');
+                              model.routeToHomeView();
+                            }
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.apple,
+                              color: whiteColor),
+                          label: const Text('Sign Up with Apple',
+                              style: TextStyle(
+                                  fontFamily: primaryFont, color: whiteColor)),
+                        ),
                       ),
                     ]),
               ),

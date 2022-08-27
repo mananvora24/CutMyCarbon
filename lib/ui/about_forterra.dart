@@ -43,6 +43,9 @@ class AboutFView extends StatelessWidget {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 15,
+                ),
                 SizedBox(
                   width: width,
                   child: const Text(
@@ -57,38 +60,35 @@ class AboutFView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: const Text(
-                    "The Green Seattle Partnership is a collaboration between the City of Seattle, Forterra, community groups and non-profits, businesses, schools, and thousands of volunteers working together to restore and actively maintain the City’s forested parklands.\n\nThe Green Seattle Partnership coordinates restoration projects to care for our urban forest and bring people into the parks to build community through hands-on volunteerism.\n\nVolunteering with the Green Seattle Partnership is a great way to give back to your community, get outside, and improve the health of a local park. Everyone can help keep our forested parks healthy and green! No experience necessary. Find a community event at the map and calendar linked below. Questions? Please email us at ",
-                    style: TextStyle(
-                      fontFamily: primaryFont,
-                      color: primaryColor,
-                      fontSize: 17,
-                      height: 1.2,
+                SizedBox(
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: const Text(
+                      "The Green Seattle Partnership is a collaboration between the City of Seattle, Forterra, community groups and non-profits, businesses, schools, and thousands of volunteers working together to restore and actively maintain the City’s forested parklands.\n\nThe Green Seattle Partnership coordinates restoration projects to care for our urban forest and bring people into the parks to build community through hands-on volunteerism.\n\nVolunteering with the Green Seattle Partnership is a great way to give back to your community, get outside, and improve the health of a local park. Everyone can help keep our forested parks healthy and green! No experience necessary. Find a community event at the map and calendar linked below. Questions?",
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 17,
+                        height: 1.2,
+                      ),
                     ),
                   ),
                 ),
-                /*Container(
+                SizedBox(
                   width: width,
-                  alignment: Alignment.topLeft,
-                  child: TextButton(
-                    onPressed: () async {
-                      if (await canLaunch('mailto:info@greenseattle.org')) {
-                        // ignore: deprecated_member_use
-                        await launch('mailto:info@greenseattle.org');
-                      }
-                    },
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 10),
                     child: const Text(
-                      'info@greenseattle.org',
+                      "Please email us at:",
                       style: TextStyle(
-                          fontSize: 17,
-                          height: 1.2,
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline),
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 17,
+                        height: 1.2,
+                      ),
                     ),
                   ),
-                ),*/
+                ),
                 SizedBox(
                   width: width,
                   child: Link(
@@ -102,6 +102,21 @@ class AboutFView extends StatelessWidget {
                             height: 1.2,
                             color: Colors.blue,
                             decoration: TextDecoration.underline),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: width,
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: const Text(
+                      "Volunteering Information:",
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 17,
+                        height: 1.2,
                       ),
                     ),
                   ),
@@ -143,6 +158,7 @@ class AboutFView extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(height: 10),
               ],
             )),
           ),

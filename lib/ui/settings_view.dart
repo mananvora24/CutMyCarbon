@@ -12,6 +12,7 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     User? user = FirebaseAuth.instance.currentUser;
     return ChangeNotifierProvider(
       create: (context) => SettingsViewModel(),
@@ -69,24 +70,49 @@ class SettingsView extends StatelessWidget {
                       color: primaryColor,
                     ),
                   ),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: primaryColor,
-                          padding: const EdgeInsets.all(10)),
-                      onPressed: () async {
-                        final provider = Provider.of<GoogleSigninProvider>(
-                            context,
-                            listen: false);
-                        await provider.logout();
-                        model.routeToAuthView();
-                      },
-                      child: const Text(
-                        'Logout',
-                        style: TextStyle(
-                            fontFamily: primaryFont, color: whiteColor),
-                      )),
                   SizedBox(
-                    height: height * 0.2,
+                    height: height * 0.05,
+                  ),
+                  SizedBox(
+                    width: width * 0.8,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: primaryColor,
+                            padding: const EdgeInsets.all(10)),
+                        onPressed: () async {
+                          final provider = Provider.of<GoogleSigninProvider>(
+                              context,
+                              listen: false);
+                          await provider.logout();
+                          model.routeToAuthView();
+                        },
+                        child: const Text(
+                          'Logout',
+                          style: TextStyle(
+                              fontFamily: primaryFont,
+                              color: whiteColor,
+                              fontSize: largeButtonFontSize),
+                        )),
+                  ),
+                  SizedBox(
+                    height: height * 0.05,
+                  ),
+                  SizedBox(
+                    width: width * 0.8,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: primaryColor,
+                            padding: const EdgeInsets.all(10)),
+                        onPressed: () async {
+                          model.routeToTermsView();
+                        },
+                        child: const Text(
+                          'Terms',
+                          style: TextStyle(
+                              fontFamily: primaryFont,
+                              color: whiteColor,
+                              fontSize: largeButtonFontSize),
+                        )),
                   ),
                 ])),
           ),

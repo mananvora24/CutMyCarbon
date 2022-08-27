@@ -345,63 +345,73 @@ class TipsView extends StatelessWidget {
                 ),
               ),
               persistentFooterButtons: [
-                SizedBox(height: height * 0.04),
-                ElevatedButton(
-                  onPressed: () {
-                    int override = tipOverride + 1;
-                    if (tipOrder > override && !skip) {
-                      override = tipOrder;
-                    }
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: width * 0.45,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          int override = tipOverride + 1;
+                          if (tipOrder > override && !skip) {
+                            override = tipOrder;
+                          }
 
-                    if (override >= tipMax) {
-                      override = 0;
-                    }
-                    model.routeToTipsView(
-                        user, category, true, override, tipMax);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                    minimumSize: const Size(170, 40),
-                    padding: const EdgeInsets.all(10),
-                  ),
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(
-                      fontFamily: primaryFont,
-                      color: whiteColor,
-                      fontSize: 20,
+                          if (override >= tipMax) {
+                            override = 0;
+                          }
+                          model.routeToTipsView(
+                              user, category, true, override, tipMax);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: primaryColor,
+                          padding: const EdgeInsets.all(10),
+                        ),
+                        child: const Text(
+                          'Skip',
+                          style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: whiteColor,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    SizedBox(width: width * 0.03),
+                    SizedBox(
+                        width: width * 0.45,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // Update Status
+                            // Navigate to next page
+                            // pass correct args
+                            print(
+                                "Select Button Pressed: TipsData - $tipsData");
+                            // Save that this tip was selected
+                            // --- Update tipStatus - save this tip is selected
+                            // --- Create / Update user tip
+                            model.selectTip(currentUserUsername, category,
+                                tipsData.tipOrder);
+
+                            model.routeToTipSelectedView(
+                                category, tipsData.tipOrder);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: primaryColor,
+                            padding: const EdgeInsets.all(10),
+                          ),
+                          child: const Text(
+                            'Select',
+                            style: TextStyle(
+                              fontFamily: primaryFont,
+                              color: whiteColor,
+                              fontSize: 20,
+                            ),
+                          ),
+                        )),
+                  ],
                 ),
-                SizedBox(height: height * 0.04),
-                ElevatedButton(
-                  onPressed: () {
-                    // Update Status
-                    // Navigate to next page
-                    // pass correct args
-                    print("Select Button Pressed: TipsData - $tipsData");
-                    // Save that this tip was selected
-                    // --- Update tipStatus - save this tip is selected
-                    // --- Create / Update user tip
-                    model.selectTip(
-                        currentUserUsername, category, tipsData.tipOrder);
-
-                    model.routeToTipSelectedView(category, tipsData.tipOrder);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                    minimumSize: const Size(170, 40),
-                    padding: const EdgeInsets.all(10),
-                  ),
-                  child: const Text(
-                    'Select',
-                    style: TextStyle(
-                      fontFamily: primaryFont,
-                      color: whiteColor,
-                      fontSize: 20,
-                    ),
-                  ),
-                )
               ]),
         ),
       ),

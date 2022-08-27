@@ -149,6 +149,7 @@ class SuggestATipThanksView extends StatelessWidget {
                   height: height * 0.03,
                 ),
                 SizedBox(
+                  width: width * 0.8,
                   child: ElevatedButton(
                     onPressed: () {
                       model.routeToHomeView();
@@ -160,7 +161,7 @@ class SuggestATipThanksView extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: primaryFont,
                           color: whiteColor,
-                          fontSize: 20,
+                          fontSize: largeButtonFontSize,
                         )),
                   ),
                 ),
