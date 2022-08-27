@@ -178,6 +178,7 @@ class HomeViewModel extends SharedViewModel {
     int startDays =
         Timestamp.now().toDate().difference(tipStartTime.toDate()).inDays;
     int possibleCarbon = 0;
+    print("Get Tip Carbon Called");
     await FirebaseFirestore.instance
         .collection('Tips')
         .where('Category', isEqualTo: category)
@@ -197,15 +198,7 @@ class HomeViewModel extends SharedViewModel {
     });
 
     // Get current Tip Stats and update them
-    Map<String, dynamic> statsData = {
-      'lastWeekCarbon': 0,
-      'lastWeekPossibleCarbon': 0,
-      'totalCarbon': 0,
-      'totalPossibleCarbon': 0,
-      'totalTons': 0,
-      'user': user,
-      'userID': 0,
-    };
+    Map<String, dynamic> statsData = {};
     await FirebaseFirestore.instance
         .collection('UserStatistics')
         .where('user', isEqualTo: user)
@@ -214,37 +207,46 @@ class HomeViewModel extends SharedViewModel {
       List<dynamic> data = querySnapshot.docs;
       if (data.isEmpty) {
         print("User Statistics: Data is empty");
-      }
-      for (var snapshot in data) {
-        statsData = snapshot.data();
+        userStats = UserStats(
+            user: user,
+            lastWeekCarbon: carbon,
+            lastWeekPossibleCarbon: possibleCarbon,
+            totalCarbon: carbon,
+            totalPossibleCarbon: possibleCarbon,
+            totalTons: carbon / 2000);
+      } else {
+        for (var snapshot in data) {
+          statsData = snapshot.data();
+        }
+        userStats = UserStats(
+            user: user,
+            lastWeekCarbon: carbon,
+            lastWeekPossibleCarbon: possibleCarbon,
+            totalCarbon: carbon + statsData['totalCarbon'] as int,
+            totalPossibleCarbon:
+                possibleCarbon + statsData['totalPossibleCarbon'] as int,
+            totalTons: (carbon + statsData['totalCarbon']) / 2000);
       }
     });
 
+    print("UserStats Data:$userStats");
     // Set Tip Carbon Stats now
     await FirebaseFirestore.instance
         .collection('UserStatistics')
         .doc("$user" "TipStats")
         .set({
-          'lastWeekCarbon': carbon,
-          'lastWeekPossibleCarbon': possibleCarbon,
-          'totalCarbon': carbon + statsData['totalCarbon'],
-          'totalPossibleCarbon':
-              possibleCarbon + statsData['totalPossibleCarbon'],
-          'totalTons': (carbon + statsData['totalPossibleCarbon']) / 2000,
+          'lastWeekCarbon': userStats.lastWeekCarbon,
+          'lastWeekPossibleCarbon': userStats.lastWeekPossibleCarbon,
+          'totalCarbon': userStats.totalCarbon,
+          'totalPossibleCarbon': userStats.totalPossibleCarbon,
+          'totalTons': userStats.totalTons,
           'user': user,
-          'userID': 0,
+          'userID': currentUserUID,
         }, SetOptions(merge: true))
         .then((value) => print("UserStatistics complete Updated"))
         .catchError(
             (error) => print("Failed to update user tip status: $error"));
 
-    userStats = UserStats(
-        user: user,
-        lastWeekCarbon: carbon,
-        lastWeekPossibleCarbon: carbon,
-        totalCarbon: carbon + statsData['totalCarbon'] as int,
-        totalPossibleCarbon: carbon + statsData['totalCarbon'] as int,
-        totalTons: (carbon + statsData['totalPossibleCarbon']) / 2000);
     return carbon;
   }
 

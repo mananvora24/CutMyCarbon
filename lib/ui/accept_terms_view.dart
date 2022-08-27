@@ -274,7 +274,7 @@ class AcceptTermsView extends StatelessWidget {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            model.routeToHomeView();
+                            model.routeToSignInView();
                           },
                           style: ElevatedButton.styleFrom(
                             primary: primaryColor,

@@ -5,12 +5,12 @@ import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 class AuthViewModel extends SharedViewModel {
   AuthViewModel();
 
-  Future<String> getUsername(String uID) async {
+  Future<String> getUsername(String email) async {
     Map<String, dynamic> currentUser = {};
     String user = '';
     await FirebaseFirestore.instance
         .collection('Users')
-        .where('uID', isEqualTo: uID)
+        .where('userEmail', isEqualTo: email)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;
@@ -22,6 +22,10 @@ class AuthViewModel extends SharedViewModel {
           currentUser = snapshot.data();
           user = currentUser['username'];
           currentUserUsername = user;
+          currentUserUserEmail = currentUser['userEmail'];
+          currentUserUID = currentUser['uID'];
+          currentUserDisplayName = currentUser['userDisplayName'];
+          //userDBFetch = true;
           break;
         }
       }

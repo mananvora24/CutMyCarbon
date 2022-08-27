@@ -72,15 +72,14 @@ class AuthView extends StatelessWidget {
                               primary: primaryColor,
                               padding: const EdgeInsets.all(10)),
                           onPressed: () async {
-                            print('a');
                             final provider = Provider.of<GoogleSigninProvider>(
                                 context,
                                 listen: false);
-                            print('b');
                             await provider.googleLogin();
                             user = FirebaseAuth.instance.currentUser;
+                            String? email = user?.email;
                             String username;
-                            username = await model.getUsername(user!.uid);
+                            username = await model.getUsername(email!);
                             currentUserUsername = username;
                             print(
                                 'user is logged in - User name is: $currentUserUsername');
@@ -133,7 +132,7 @@ class AuthView extends StatelessWidget {
                           },
                           icon: const FaIcon(FontAwesomeIcons.apple,
                               color: whiteColor),
-                          label: const Text('Sign Up with Apple',
+                          label: const Text('Sign In with Apple',
                               style: TextStyle(
                                   fontFamily: primaryFont, color: whiteColor)),
                         ),
