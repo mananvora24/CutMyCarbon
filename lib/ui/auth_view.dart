@@ -80,16 +80,18 @@ class AuthView extends StatelessWidget {
                             String? email = user?.email;
                             String username;
                             username = await model.getUsername(email!);
-                            currentUserUsername = username;
+                            //currentUserUsername = username;
                             print(
                                 'user is logged in - User name is: $currentUserUsername');
                             if (username == '') {
                               print(
-                                  'Matched empty string $username this is uID');
-                              model.routeToAcceptTermsView();
-                            } else {
-                              print('$username this is uID');
+                                  'Matched empty string for email = $email, username = $username');
+                              model.routeToSignInView();
+                            } else if (currentUserTermsAccepted) {
                               model.routeToHomeView();
+                            } else {
+                              print('$username has not accepted terms');
+                              model.routeToAcceptTermsView();
                             }
                           },
                           icon: const FaIcon(FontAwesomeIcons.google,

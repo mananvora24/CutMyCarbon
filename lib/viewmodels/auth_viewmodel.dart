@@ -21,11 +21,13 @@ class AuthViewModel extends SharedViewModel {
         for (var snapshot in data) {
           currentUser = snapshot.data();
           user = currentUser['username'];
-          currentUserUsername = user;
-          currentUserUserEmail = currentUser['userEmail'];
-          currentUserUID = currentUser['uID'];
-          currentUserDisplayName = currentUser['userDisplayName'];
-          //userDBFetch = true;
+          if (user != '') {
+            currentUserUsername = user;
+            currentUserUserEmail = currentUser['userEmail'];
+            currentUserUID = currentUser['uID'];
+            currentUserDisplayName = currentUser['userDisplayName'];
+            currentUserTermsAccepted = currentUser['termsAccepted'];
+          }
           break;
         }
       }

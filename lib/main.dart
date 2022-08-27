@@ -66,9 +66,11 @@ class _MyAppState extends State<MyApp> {
                   if (currentUserUsername == "") {
                     //return const AuthView(title: "Auth");
                     navigationService.navigateTo(authViewRoute);
-                  } else {
+                  } else if (currentUserTermsAccepted) {
                     //return const HomeView(title: 'Home');
                     navigationService.navigateTo(homeViewRoute);
+                  } else {
+                    navigationService.navigateTo(acceptTermsViewRoute);
                   }
                 });
                 print("User Object from Firebase$userData");

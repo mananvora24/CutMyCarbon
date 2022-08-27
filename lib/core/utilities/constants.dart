@@ -22,7 +22,7 @@ String currentUserUsername = '';
 String currentUserUserEmail = '';
 String currentUserUID = '';
 String currentUserDisplayName = '';
-bool userDBFetch = false;
+bool currentUserTermsAccepted = false;
 
 // How many tips are there?
 List<Map<String, dynamic>> tipCountList = [];

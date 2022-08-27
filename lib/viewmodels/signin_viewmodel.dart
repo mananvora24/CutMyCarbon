@@ -14,18 +14,19 @@ class SignInViewModel extends SharedViewModel {
           'uID': uID,
           'userDisplayName': userDisplayName,
           'userEmail': userEmail,
-          'username': username
+          'username': username,
+          'termsAccepted': false,
         }, SetOptions(merge: true))
         .then((value) => print("Feedback complete Updated"))
         .catchError((error) => print("Failed to update feedback: $error"));
   }
 
-  Future<String> getUsername(String uID) async {
+  Future<String> getUsername(String myUser) async {
     Map<String, dynamic> currentUser = {};
     String user = '';
     await FirebaseFirestore.instance
         .collection('Users')
-        .where('username', isEqualTo: uID)
+        .where('username', isEqualTo: myUser)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;

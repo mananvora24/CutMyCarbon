@@ -86,7 +86,7 @@ class SignInView extends StatelessWidget {
                     print(model.username + checkingNewUser);
                     currentUserUsername = model.username;
 
-                    model.routeToHomeView();
+                    model.routeToAcceptTermsView();
                   }
                 },
                 style: ElevatedButton.styleFrom(
