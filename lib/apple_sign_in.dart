@@ -1,36 +1,15 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:crypto/crypto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:crypto/crypto.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-class GoogleSigninProvider extends ChangeNotifier {
-  final googleSignIn = GoogleSignIn();
-
-  GoogleSignInAccount? _user;
-
-  GoogleSignInAccount get user => _user!;
-
-  Future googleLogin() async {
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) return;
-    _user = googleUser;
-
-    final googleAuth = await googleUser.authentication;
-
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    await FirebaseAuth.instance.signInWithCredential(credential);
-    notifyListeners();
-  }
-
+class AppleSigninProvider extends ChangeNotifier {
+  /// Generates a cryptographically secure random nonce, to be included in a
+  /// credential request.
   String generateNonce([int length = 32]) {
     const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
@@ -74,8 +53,8 @@ class GoogleSigninProvider extends ChangeNotifier {
     return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
   }
 
-  Future logout() async {
-    googleSignIn.disconnect;
-    await FirebaseAuth.instance.signOut();
-  }
+//  Future logout() async {
+//    googleSignIn.disconnect;
+//    await FirebaseAuth.instance.signOut();
+//  }
 }

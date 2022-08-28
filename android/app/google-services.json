@@ -1,37 +1,37 @@
 {
   "project_info": {
-    "project_number": "159713230272",
-    "project_id": "cut-my-carbon",
-    "storage_bucket": "cut-my-carbon.appspot.com"
+    "project_number": "280514295082",
+    "project_id": "cut-my-carbon-c71bc",
+    "storage_bucket": "cut-my-carbon-c71bc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:159713230272:android:5d5a90c5f06a8604badc25",
+        "mobilesdk_app_id": "1:280514295082:android:971adee247d27570721a53",
         "android_client_info": {
           "package_name": "com.example.cut_my_carbon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "159713230272-kcbeec07cvasah3vipm3ocvf24abea7s.apps.googleusercontent.com",
+          "client_id": "280514295082-uv10k752s4a7plpe9vd0p5bi6c4fags6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBjhKaXzhizuSrvkcX2aixLWSQp_1rZTHU"
+          "current_key": "AIzaSyCtSc3ipUe91bSwNs8NA-Hq3LNw95lya44"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "159713230272-kcbeec07cvasah3vipm3ocvf24abea7s.apps.googleusercontent.com",
+              "client_id": "280514295082-uv10k752s4a7plpe9vd0p5bi6c4fags6.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "159713230272-k40b6s6opvdcl864s0g8qagf1bafbljf.apps.googleusercontent.com",
+              "client_id": "280514295082-c2lftecoq4ip05feahr0ic6nln3jidrd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.cutMyCarbon"

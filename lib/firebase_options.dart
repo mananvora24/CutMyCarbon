@@ -44,42 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAGR93VvclQhaG3c5TYtpDKXzdVr0QY3Kg',
-    appId: '1:159713230272:web:4b2f36f2fa7c73cbbadc25',
-    messagingSenderId: '159713230272',
-    projectId: 'cut-my-carbon',
-    authDomain: 'cut-my-carbon.firebaseapp.com',
-    storageBucket: 'cut-my-carbon.appspot.com',
-    measurementId: 'G-9M0DDDZ71G',
+    apiKey: 'AIzaSyCf83oT9zzRt1mDdmJaoliVSSfJwLcUOv4',
+    appId: '1:280514295082:web:193d71fff30df23e721a53',
+    messagingSenderId: '280514295082',
+    projectId: 'cut-my-carbon-c71bc',
+    authDomain: 'cut-my-carbon-c71bc.firebaseapp.com',
+    storageBucket: 'cut-my-carbon-c71bc.appspot.com',
+    measurementId: 'G-2FH4NQX5B2',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBjhKaXzhizuSrvkcX2aixLWSQp_1rZTHU',
-    appId: '1:159713230272:android:2e1e6484779fa7babadc25',
-    messagingSenderId: '159713230272',
-    projectId: 'cut-my-carbon',
-    storageBucket: 'cut-my-carbon.appspot.com',
+    apiKey: 'AIzaSyCtSc3ipUe91bSwNs8NA-Hq3LNw95lya44',
+    appId: '1:280514295082:android:971adee247d27570721a53',
+    messagingSenderId: '280514295082',
+    projectId: 'cut-my-carbon-c71bc',
+    storageBucket: 'cut-my-carbon-c71bc.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAn8dR8feLfAK6wvkyYkXEp1v4zqx7YgtU',
-    appId: '1:159713230272:ios:c82c9a3d1a20545bbadc25',
-    messagingSenderId: '159713230272',
-    projectId: 'cut-my-carbon',
-    storageBucket: 'cut-my-carbon.appspot.com',
-    androidClientId: '159713230272-91jjlb570h6kgc9bl9hk57eke86d70cr.apps.googleusercontent.com',
-    iosClientId: '159713230272-oe116663nto3tiblg76v88ka6rjfs0m1.apps.googleusercontent.com',
-    iosBundleId: 'com.testing.cutMyCarbon',
+    apiKey: 'AIzaSyBXSSiJUwpm-7IJBlXgKD4vuZyjjRfQH1E',
+    appId: '1:280514295082:ios:d0a7eb48639392ec721a53',
+    messagingSenderId: '280514295082',
+    projectId: 'cut-my-carbon-c71bc',
+    storageBucket: 'cut-my-carbon-c71bc.appspot.com',
+    iosClientId: '280514295082-t5og5u45f871lvmd5utp42u23vqdp3ve.apps.googleusercontent.com',
+    iosBundleId: 'com.publishing.cutMyCarbon',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAn8dR8feLfAK6wvkyYkXEp1v4zqx7YgtU',
-    appId: '1:159713230272:ios:980cc4af80e00367badc25',
-    messagingSenderId: '159713230272',
-    projectId: 'cut-my-carbon',
-    storageBucket: 'cut-my-carbon.appspot.com',
-    androidClientId: '159713230272-91jjlb570h6kgc9bl9hk57eke86d70cr.apps.googleusercontent.com',
-    iosClientId: '159713230272-k40b6s6opvdcl864s0g8qagf1bafbljf.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBXSSiJUwpm-7IJBlXgKD4vuZyjjRfQH1E',
+    appId: '1:280514295082:ios:c8092113b3732c85721a53',
+    messagingSenderId: '280514295082',
+    projectId: 'cut-my-carbon-c71bc',
+    storageBucket: 'cut-my-carbon-c71bc.appspot.com',
+    iosClientId: '280514295082-c2lftecoq4ip05feahr0ic6nln3jidrd.apps.googleusercontent.com',
     iosBundleId: 'com.example.cutMyCarbon',
   );
 }

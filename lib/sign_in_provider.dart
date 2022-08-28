@@ -8,17 +8,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-class GoogleSigninProvider extends ChangeNotifier {
+class SigninProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
 
-  GoogleSignInAccount? _user;
+  GoogleSignInAccount? _googleUser;
 
-  GoogleSignInAccount get user => _user!;
+  GoogleSignInAccount get user => _googleUser!;
 
   Future googleLogin() async {
     final googleUser = await googleSignIn.signIn();
     if (googleUser == null) return;
-    _user = googleUser;
+    _googleUser = googleUser;
 
     final googleAuth = await googleUser.authentication;
 

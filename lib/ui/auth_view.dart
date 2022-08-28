@@ -116,7 +116,9 @@ class AuthView extends StatelessWidget {
                                 context,
                                 listen: false);
                             print('b');
-                            await provider.googleLogin();
+                            UserCredential appleUser =
+                                await provider.signInWithApple();
+
                             user = FirebaseAuth.instance.currentUser;
                             String username;
                             username = await model.getUsername(user!.uid);
