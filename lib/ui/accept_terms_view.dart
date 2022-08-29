@@ -273,7 +273,8 @@ class AcceptTermsView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            await model.saveAcceptedTerms();
                             model.routeToHomeView();
                           },
                           style: ElevatedButton.styleFrom(
