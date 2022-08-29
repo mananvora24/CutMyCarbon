@@ -6,8 +6,14 @@ class AcceptTermsViewModel extends SharedViewModel {
   AcceptTermsViewModel();
 
   Future<void> saveAcceptedTerms() async {
+    String table = '';
+    if (currentUserProvider == googleProvider) {
+      table = 'GoogleUsers';
+    } else {
+      table = 'AppleUsers';
+    }
     await FirebaseFirestore.instance
-        .collection('Users')
+        .collection(table)
         .doc(currentUserUsername)
         .update({
           'termsAccepted': true,

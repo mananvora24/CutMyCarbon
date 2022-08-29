@@ -132,7 +132,7 @@ class HomeViewModel extends SharedViewModel {
   }
 
   saveTipsCarbonDays(
-      String user, String category, int tipOrder, int days, int week) async {
+      String user, String category, int tipOrder, int days) async {
     await FirebaseFirestore.instance
         .collection('UserTips')
         .doc("$user" "$category" "$tipOrder")
@@ -144,7 +144,7 @@ class HomeViewModel extends SharedViewModel {
         await getCurrentTipStatus(user, category, tipOrder);
     print("Submit Tips Data => Save carbon days");
     await saveTipsCarbonDays(
-        user, currentTip['Category'], currentTip['TipOrder'], days, 25);
+        user, currentTip['Category'], currentTip['TipOrder'], days);
     await saveTipStatusCompleted(category, user, tipOrder);
   }
 
@@ -194,6 +194,7 @@ class HomeViewModel extends SharedViewModel {
         tipsData = snapshot.data();
         carbon = tipsData["Carbon"] * days;
         possibleCarbon = tipsData['Carbon'] * startDays;
+        break;
       }
     });
 
@@ -217,6 +218,7 @@ class HomeViewModel extends SharedViewModel {
       } else {
         for (var snapshot in data) {
           statsData = snapshot.data();
+          break;
         }
         userStats = UserStats(
             user: user,
@@ -265,30 +267,6 @@ class HomeViewModel extends SharedViewModel {
         .then((value) => print("UserTipStatus complete Updated"))
         .catchError(
             (error) => print("Failed to update user tip status: $error"));
-  }
-
-  Future<String> getUsername(String uID) async {
-    Map<String, dynamic> currentUser = {};
-    String user = '';
-    await FirebaseFirestore.instance
-        .collection('Users')
-        .where('uID', isEqualTo: uID)
-        .get()
-        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
-      List<dynamic> data = querySnapshot.docs;
-      if (data.isEmpty) {
-        print("getCurrentUser: Data is empty");
-      } else if (data.isNotEmpty) {
-        for (var snapshot in data) {
-          currentUser = snapshot.data();
-          user = currentUser['username'];
-          print("getCurrentUser: Data Found, User: $user");
-
-          break;
-        }
-      }
-    });
-    return user;
   }
 
   Future<int> getUserCategoryTipOrder(String category, String user) async {

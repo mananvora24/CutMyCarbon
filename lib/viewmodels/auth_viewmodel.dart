@@ -5,11 +5,22 @@ import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 class AuthViewModel extends SharedViewModel {
   AuthViewModel();
 
-  Future<String> getUsernameById(String uID) async {
+  Future<String> getUsername(String provider, String email, String uID) async {
+    if (provider != '') {
+      if (provider == googleProvider) {
+        return getGoogleUsername(email);
+      } else if (provider == appleProvider) {
+        return getAppleUsernameById(uID);
+      }
+    }
+    return '';
+  }
+
+  Future<String> getAppleUsernameById(String uID) async {
     Map<String, dynamic> currentUser = {};
     String user = '';
     await FirebaseFirestore.instance
-        .collection('Users')
+        .collection('AppleUsers')
         .where('uID', isEqualTo: uID)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
@@ -23,9 +34,9 @@ class AuthViewModel extends SharedViewModel {
           user = currentUser['username'];
           if (user != '') {
             currentUserUsername = user;
-            currentUserUserEmail = currentUser['userEmail'];
+            currentUserUserEmail = currentUser['userEmail'] ?? '';
             currentUserUID = currentUser['uID'];
-            currentUserDisplayName = currentUser['userDisplayName'];
+            currentUserDisplayName = currentUser['userDisplayName'] ?? '';
             currentUserTermsAccepted = currentUser['termsAccepted'];
           }
           break;
@@ -35,11 +46,11 @@ class AuthViewModel extends SharedViewModel {
     return user;
   }
 
-  Future<String> getUsername(String email) async {
+  Future<String> getGoogleUsername(String email) async {
     Map<String, dynamic> currentUser = {};
     String user = '';
     await FirebaseFirestore.instance
-        .collection('Users')
+        .collection('GoogleUsers')
         .where('userEmail', isEqualTo: email)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
@@ -53,9 +64,9 @@ class AuthViewModel extends SharedViewModel {
           user = currentUser['username'];
           if (user != '') {
             currentUserUsername = user;
-            currentUserUserEmail = currentUser['userEmail'];
+            currentUserUserEmail = currentUser['userEmail'] ?? '';
             currentUserUID = currentUser['uID'];
-            currentUserDisplayName = currentUser['userDisplayName'];
+            currentUserDisplayName = currentUser['userDisplayName'] ?? '';
             currentUserTermsAccepted = currentUser['termsAccepted'];
           }
           break;

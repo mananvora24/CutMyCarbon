@@ -16,6 +16,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    print("This is Home View - check 1");
     TipStatusData tipStatusData = TipStatusData(
         category: "",
         user: "",
@@ -26,8 +27,10 @@ class HomeView extends StatelessWidget {
 
     User? user = FirebaseAuth.instance.currentUser;
     currentUserUID = user!.uid;
-    currentUserDisplayName = user.displayName!;
-    currentUserUserEmail = user.email!;
+    currentUserProvider = user.providerData[0].providerId;
+    currentUserDisplayName = user.displayName ?? "";
+    currentUserUserEmail = user.email ?? "";
+    print("This is Home View - check 2 - provider is $currentUserProvider");
 
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),

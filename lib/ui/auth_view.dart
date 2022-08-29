@@ -28,6 +28,9 @@ class AuthView extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      // Image.asset(
+                      //  'assets/finalLogo.png',
+                      //),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.85,
                         child: const Text(
@@ -84,9 +87,10 @@ class AuthView extends StatelessWidget {
                                 listen: false);
                             await provider.googleLogin();
                             user = FirebaseAuth.instance.currentUser;
+                            currentUserProvider = googleProvider;
                             String? email = user?.email;
                             String username;
-                            username = await model.getUsername(email!);
+                            username = await model.getGoogleUsername(email!);
                             //currentUserUsername = username;
                             print(
                                 'user is logged in - User name is: $currentUserUsername');
@@ -122,20 +126,25 @@ class AuthView extends StatelessWidget {
                             print('b');
                             UserCredential appleUser =
                                 await provider.signInWithApple();
+                            currentUserProvider = appleProvider;
 
                             user = FirebaseAuth.instance.currentUser;
                             String username;
-                            username = await model.getUsernameById(user!.uid);
+                            username =
+                                await model.getAppleUsernameById(user!.uid);
                             currentUserUsername = username;
                             print(
                                 'user is logged in - User name is: $currentUserUsername');
                             if (username == '') {
                               print(
                                   'Matched empty string $username this is uID');
-                              model.routeToAcceptTermsView();
-                            } else {
+                              model.routeToSignInView();
+                            } else if (currentUserTermsAccepted) {
                               print('$username this is uID');
                               model.routeToHomeView();
+                            } else {
+                              print('$username has not accepted terms');
+                              model.routeToAcceptTermsView();
                             }
                           },
                         ),

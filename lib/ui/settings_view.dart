@@ -13,7 +13,7 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    User? user = FirebaseAuth.instance.currentUser;
+    //User? user = FirebaseAuth.instance.currentUser;
     return ChangeNotifierProvider(
       create: (context) => SettingsViewModel(),
       child: Consumer<SettingsViewModel>(
@@ -43,6 +43,7 @@ class SettingsView extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+/*
                   CircleAvatar(
                       radius: 43,
                       backgroundColor: primaryColor,
@@ -50,11 +51,12 @@ class SettingsView extends StatelessWidget {
                         radius: 40,
                         backgroundImage: NetworkImage(user!.photoURL!),
                       )),
+                      */
                   const SizedBox(
                     height: 8,
                   ),
                   Text(
-                    user.displayName!,
+                    currentUserDisplayName,
                     style: const TextStyle(
                       fontFamily: primaryFont,
                       color: primaryColor,
@@ -64,7 +66,7 @@ class SettingsView extends StatelessWidget {
                     height: 8,
                   ),
                   Text(
-                    user.email!,
+                    currentUserUserEmail,
                     style: const TextStyle(
                       fontFamily: primaryFont,
                       color: primaryColor,
