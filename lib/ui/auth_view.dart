@@ -66,7 +66,7 @@ class AuthView extends StatelessWidget {
                         height: height * 0.03,
                       ),
                       SizedBox(
-                        width: 185,
+                        //width: 195,
                         child: SignInButton(
                           text: "Sign in with Google",
                           Buttons.GoogleDark,
@@ -107,7 +107,7 @@ class AuthView extends StatelessWidget {
                         height: 10,
                       ),
                       SizedBox(
-                        width: 185,
+                        //width: 185,
                         child: SignInButton(
                           Buttons.AppleDark,
                           text: "Sign in with Apple",
@@ -125,7 +125,7 @@ class AuthView extends StatelessWidget {
 
                             user = FirebaseAuth.instance.currentUser;
                             String username;
-                            username = await model.getUsername(user!.uid);
+                            username = await model.getUsernameById(user!.uid);
                             currentUserUsername = username;
                             print(
                                 'user is logged in - User name is: $currentUserUsername');
