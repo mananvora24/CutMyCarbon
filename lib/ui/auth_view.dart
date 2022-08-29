@@ -2,6 +2,7 @@ import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 import 'package:cut_my_carbon/viewmodels/auth_viewmodel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -67,10 +68,17 @@ class AuthView extends StatelessWidget {
                       ),
                       SizedBox(
                         width: 185,
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                              primary: primaryColor,
-                              padding: const EdgeInsets.all(10)),
+                        child: SignInButton(
+                          text: "Sign in with Google",
+                          Buttons.GoogleDark,
+                          /*shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),*/
+                          //style: ElevatedButton.styleFrom(
+                          //  primary: primaryColor,
+                          //padding: const EdgeInsets.all(10)),
                           onPressed: () async {
                             final provider = Provider.of<GoogleSigninProvider>(
                                 context,
@@ -94,11 +102,6 @@ class AuthView extends StatelessWidget {
                               model.routeToAcceptTermsView();
                             }
                           },
-                          icon: const FaIcon(FontAwesomeIcons.google,
-                              color: whiteColor),
-                          label: const Text('Sign In with Google',
-                              style: TextStyle(
-                                  fontFamily: primaryFont, color: whiteColor)),
                         ),
                       ),
                       const SizedBox(
@@ -106,10 +109,12 @@ class AuthView extends StatelessWidget {
                       ),
                       SizedBox(
                         width: 185,
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                              primary: primaryColor,
-                              padding: const EdgeInsets.all(10)),
+                        child: SignInButton(
+                          Buttons.AppleDark,
+                          text: "Sign in with Apple",
+                          //style: ElevatedButton.styleFrom(
+                          //  primary: primaryColor,
+                          //padding: const EdgeInsets.all(10)),
                           onPressed: () async {
                             print('a');
                             final provider = Provider.of<GoogleSigninProvider>(
@@ -134,11 +139,6 @@ class AuthView extends StatelessWidget {
                               model.routeToHomeView();
                             }
                           },
-                          icon: const FaIcon(FontAwesomeIcons.apple,
-                              color: whiteColor),
-                          label: const Text('Sign In with Apple',
-                              style: TextStyle(
-                                  fontFamily: primaryFont, color: whiteColor)),
                         ),
                       ),
                     ]),
