@@ -34,6 +34,17 @@ class TipStatusUpdateView extends StatelessWidget {
         description: "",
         carbon: 0);
 
+    bool _isExecuting = false;
+    void debounce(Function action) async {
+      if (!_isExecuting) {
+        _isExecuting = true;
+        action();
+        await Future.delayed(const Duration(milliseconds: 500), () {
+          _isExecuting = false;
+        });
+      }
+    }
+
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
@@ -214,26 +225,31 @@ class TipStatusUpdateView extends StatelessWidget {
                   width: width * 0.5,
                   child: ElevatedButton(
                     onPressed: () {
-                      String input = daysController.text;
-                      var days = int.parse(daysController.text);
-                      final now = Timestamp.now();
-                      final int selectedDays =
-                          now.toDate().difference(tipStartTime.toDate()).inDays;
-                      print(
-                          "Validator: input: $input, current time: $now, startTime: $tipStartTime, selectedDays: $selectedDays, days: $days");
+                      debounce(() {
+                        // Your code
+                        String input = daysController.text;
+                        var days = int.parse(daysController.text);
+                        final now = Timestamp.now();
+                        final int selectedDays = now
+                            .toDate()
+                            .difference(tipStartTime.toDate())
+                            .inDays;
+                        print(
+                            "Validator: input: $input, current time: $now, startTime: $tipStartTime, selectedDays: $selectedDays, days: $days");
 
-                      String errorMessage =
-                          "You started this tip $selectedDays days ago. You entered $days days.";
-                      if (days > selectedDays) {
-                        model.routeToTipStatusUpdateView(user, category,
-                            tipOrder, tipStartTime, errorMessage);
-                      } else {
-                        model.submitTipsData(
-                            currentUserUsername, category, tipOrder, days);
-                        print(days);
-                        model.routeToTipStatusResultView(
-                            user, category, tipOrder, days, tipStartTime);
-                      }
+                        String errorMessage =
+                            "You started this tip $selectedDays days ago. You entered $days days.";
+                        if (days > selectedDays) {
+                          model.routeToTipStatusUpdateView(user, category,
+                              tipOrder, tipStartTime, errorMessage);
+                        } else {
+                          model.submitTipsData(
+                              currentUserUsername, category, tipOrder, days);
+                          print(days);
+                          model.routeToTipStatusResultView(
+                              user, category, tipOrder, days, tipStartTime);
+                        }
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       primary: primaryColor,

@@ -29,15 +29,10 @@ class TipsViewModel extends SharedViewModel {
         for (var snapshot in dataList) {
           tipCountMap = snapshot.data();
           tipCountList.add(tipCountMap);
-          print("getMaxCategoryTipOrder: $tipCountMap");
         }
       });
     }
     for (var tipCount in tipCountList) {
-      print("Second Loop: $tipCount");
-    }
-    for (var tipCount in tipCountList) {
-      print("tipCountLoop:  ${tipCount['Category']}  ${tipCount['Count']}");
       if (tipCount['Category'] == category) {
         count = tipCount['Count'] as int;
       } else {

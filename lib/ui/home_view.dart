@@ -16,7 +16,6 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    print("This is Home View - check 1");
     TipStatusData tipStatusData = TipStatusData(
         category: "",
         user: "",
@@ -30,7 +29,6 @@ class HomeView extends StatelessWidget {
     currentUserProvider = user.providerData[0].providerId;
     currentUserDisplayName = user.displayName ?? "";
     currentUserUserEmail = user.email ?? "";
-    print("This is Home View - check 2 - provider is $currentUserProvider");
 
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
@@ -176,7 +174,7 @@ class HomeView extends StatelessWidget {
                               .difference(tipStatusData.tipStartTime.toDate())
                               .inDays;
                           print(
-                              "tipStartTime: ${tipStatusData.tipStartTime.toDate()}");
+                              "tipStartTime: ${tipStatusData.tipStartTime.toDate()}, Days = $days");
                           if (tipStatusData.tipSelected && days > 6) {
                             model.routeToTipStatusUpdateView(
                                 tipStatusData.user,
