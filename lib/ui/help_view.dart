@@ -46,7 +46,7 @@ class HelpView extends StatelessWidget {
                 SizedBox(
                     width: width * 0.85,
                     child: const Text(
-                      "Selecting A Tip",
+                      "Tips",
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
@@ -59,7 +59,7 @@ class HelpView extends StatelessWidget {
                 SizedBox(
                     width: width * 0.85,
                     child: const Text(
-                      "Add help text to explain how to select a Tip, what to do after selecting a tip.",
+                      "From the home page click \"Tip\". This shows a list of categories. Select a Categpry that you want to receive a tip in. Next, find a tip you would like to work on for the next week. To find a tip you prefer, you can use the \"Skip\" and \"Select\" buttons. Then you will be able to view your Tip. At the end of the week come back to report your progress, so that we can calculate your carbon savings.",
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
@@ -72,7 +72,7 @@ class HelpView extends StatelessWidget {
                 SizedBox(
                     width: width * 0.85,
                     child: const Text(
-                      "Following A Tip",
+                      "Statistics",
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
@@ -85,7 +85,7 @@ class HelpView extends StatelessWidget {
                 SizedBox(
                     width: width * 0.85,
                     child: const Text(
-                      "Add help text to explain how to perform a selected Tip, when to report progress.",
+                      "To find your total carbon savings, click on the \"Statistics\" button from the home page",
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
@@ -95,7 +95,7 @@ class HelpView extends StatelessWidget {
                 SizedBox(
                     width: width * 0.85,
                     child: const Text(
-                      "Reporting Progress",
+                      "Feedback",
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
@@ -108,7 +108,30 @@ class HelpView extends StatelessWidget {
                 SizedBox(
                     width: width * 0.85,
                     child: const Text(
-                      "Add help text to explain how to report progress.",
+                      "The feedback form can be used to provide feedback to the Cut My Carbon team.",
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 20,
+                      ),
+                    )),
+                SizedBox(
+                    width: width * 0.85,
+                    child: const Text(
+                      "Suggest a Tip",
+                      style: TextStyle(
+                        fontFamily: primaryFont,
+                        color: primaryColor,
+                        fontSize: 25,
+                      ),
+                    )),
+                SizedBox(
+                  height: height * 0.01,
+                ),
+                SizedBox(
+                    width: width * 0.85,
+                    child: const Text(
+                      "The Tip suggestion form can be used to suggest a tip to the Cut My Carbon team",
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
