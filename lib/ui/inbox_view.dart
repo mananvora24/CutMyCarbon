@@ -9,10 +9,10 @@ class InboxView extends StatefulWidget {
   const InboxView({Key? key}) : super(key: key);
 
   @override
-  _InboxViewState createState() => _InboxViewState();
+  InboxViewState createState() => InboxViewState();
 }
 
-class _InboxViewState extends State<InboxView> {
+class InboxViewState extends State<InboxView> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
