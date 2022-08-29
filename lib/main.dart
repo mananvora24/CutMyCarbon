@@ -60,7 +60,6 @@ class _MyAppState extends State<MyApp> {
                 User userData = snapshot.data! as User;
                 AuthViewModel model = AuthViewModel();
                 String email = userData.email ?? "";
-                String routeName = "";
                 model.getUsername(email).then((value) {
                   final navigationService = locator<NavigationService>();
                   if (currentUserUsername == "") {

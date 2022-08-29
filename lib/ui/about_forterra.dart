@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/gestures.dart';
 
 class AboutFView extends StatelessWidget {
   const AboutFView({Key? key, required this.title}) : super(key: key);
