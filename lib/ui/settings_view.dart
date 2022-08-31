@@ -1,7 +1,6 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
 import 'package:cut_my_carbon/models/User.dart';
 import 'package:cut_my_carbon/viewmodels/settings_viewmodel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
@@ -44,37 +43,8 @@ class SettingsView extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-/*
-                  CircleAvatar(
-                      radius: 43,
-                      backgroundColor: primaryColor,
-                      child: CircleAvatar(
-                        radius: 40,
-                        backgroundImage: NetworkImage(user!.photoURL!),
-                      )),
-                      */
                   const SizedBox(
                     height: 8,
-                  ),
-                  Text(
-                    currentUserDisplayName,
-                    style: const TextStyle(
-                      fontFamily: primaryFont,
-                      color: primaryColor,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    currentUserUserEmail,
-                    style: const TextStyle(
-                      fontFamily: primaryFont,
-                      color: primaryColor,
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.05,
                   ),
                   SizedBox(
                     width: width * 0.8,
@@ -88,12 +58,10 @@ class SettingsView extends StatelessWidget {
                               listen: false);
                           await provider.logout();
                           // Wipe out all the user global variables data
-                          user = MyUser("", "", "", "");
+                          user = MyUser("", "");
                           currentUserProvider = '';
                           currentUserUsername = '';
-                          currentUserUserEmail = '';
                           currentUserUID = '';
-                          currentUserDisplayName = '';
                           currentUserTermsAccepted = false;
                           model.routeToAuthView();
                         },

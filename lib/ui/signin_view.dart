@@ -81,8 +81,7 @@ class SignInView extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0));
                   } else {
-                    await model.saveUsername(user!.uid, user.displayName ?? '',
-                        user.email ?? '', model.username);
+                    await model.saveUsername(user!.uid, model.username);
                     print(model.username + checkingNewUser);
                     currentUserUsername = model.username;
 

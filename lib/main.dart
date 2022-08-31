@@ -59,11 +59,10 @@ class _MyAppState extends State<MyApp> {
               } else if (snapshot.hasData) {
                 User userData = snapshot.data! as User;
                 AuthViewModel model = AuthViewModel();
-                String email = userData.email ?? "";
                 String uid = userData.uid;
                 String provider = userData.providerData[0].providerId;
                 print("Provider in main.dart is $provider");
-                model.getUsername(provider, email, uid).then((value) {
+                model.getUsername(provider, uid).then((value) {
                   final navigationService = locator<NavigationService>();
                   if (currentUserUsername == "") {
                     //return const AuthView(title: "Auth");

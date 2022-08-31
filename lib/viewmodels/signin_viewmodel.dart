@@ -6,26 +6,22 @@ class SignInViewModel extends SharedViewModel {
   SignInViewModel();
   String username = '';
 
-  saveUsername(String uID, String userDisplayName, String userEmail,
-      String username) async {
+  saveUsername(String uID, String username) async {
     if (currentUserProvider != '') {
       if (currentUserProvider == googleProvider) {
-        await saveGoogleUsername(uID, userDisplayName, userEmail, username);
+        await saveGoogleUsername(uID, username);
       } else if (currentUserProvider == appleProvider) {
-        await saveAppleUsername(uID, userDisplayName, userEmail, username);
+        await saveAppleUsername(uID, username);
       }
     }
   }
 
-  saveAppleUsername(String uID, String userDisplayName, String userEmail,
-      String username) async {
+  saveAppleUsername(String uID, String username) async {
     await FirebaseFirestore.instance
         .collection('AppleUsers')
         .doc(username)
         .set({
           'uID': uID,
-          'userDisplayName': userDisplayName,
-          'userEmail': userEmail,
           'username': username,
           'termsAccepted': false,
         }, SetOptions(merge: true))
@@ -33,15 +29,12 @@ class SignInViewModel extends SharedViewModel {
         .catchError((error) => print("Failed to update feedback: $error"));
   }
 
-  saveGoogleUsername(String uID, String userDisplayName, String userEmail,
-      String username) async {
+  saveGoogleUsername(String uID, String username) async {
     await FirebaseFirestore.instance
         .collection('GoogleUsers')
         .doc(username)
         .set({
           'uID': uID,
-          'userDisplayName': userDisplayName,
-          'userEmail': userEmail,
           'username': username,
           'termsAccepted': false,
         }, SetOptions(merge: true))

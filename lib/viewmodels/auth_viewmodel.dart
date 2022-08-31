@@ -5,10 +5,10 @@ import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 class AuthViewModel extends SharedViewModel {
   AuthViewModel();
 
-  Future<String> getUsername(String provider, String email, String uID) async {
+  Future<String> getUsername(String provider, String uID) async {
     if (provider != '') {
       if (provider == googleProvider) {
-        return getGoogleUsername(email);
+        return getGoogleUsername(uID);
       } else if (provider == appleProvider) {
         return getAppleUsernameById(uID);
       }
@@ -34,9 +34,7 @@ class AuthViewModel extends SharedViewModel {
           user = currentUser['username'];
           if (user != '') {
             currentUserUsername = user;
-            currentUserUserEmail = currentUser['userEmail'] ?? '';
             currentUserUID = currentUser['uID'];
-            currentUserDisplayName = currentUser['userDisplayName'] ?? '';
             currentUserTermsAccepted = currentUser['termsAccepted'];
           }
           break;
@@ -46,12 +44,12 @@ class AuthViewModel extends SharedViewModel {
     return user;
   }
 
-  Future<String> getGoogleUsername(String email) async {
+  Future<String> getGoogleUsername(String uID) async {
     Map<String, dynamic> currentUser = {};
     String user = '';
     await FirebaseFirestore.instance
         .collection('GoogleUsers')
-        .where('userEmail', isEqualTo: email)
+        .where('uID', isEqualTo: uID)
         .get()
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;
@@ -64,9 +62,7 @@ class AuthViewModel extends SharedViewModel {
           user = currentUser['username'];
           if (user != '') {
             currentUserUsername = user;
-            currentUserUserEmail = currentUser['userEmail'] ?? '';
             currentUserUID = currentUser['uID'];
-            currentUserDisplayName = currentUser['userDisplayName'] ?? '';
             currentUserTermsAccepted = currentUser['termsAccepted'];
           }
           break;

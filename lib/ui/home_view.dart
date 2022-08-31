@@ -27,8 +27,6 @@ class HomeView extends StatelessWidget {
     User? user = FirebaseAuth.instance.currentUser;
     currentUserUID = user!.uid;
     currentUserProvider = user.providerData[0].providerId;
-    currentUserDisplayName = user.displayName ?? "";
-    currentUserUserEmail = user.email ?? "";
 
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),

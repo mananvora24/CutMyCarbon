@@ -19,12 +19,10 @@ const String secondaryFont = "";
 // User data initialization
 const String googleProvider = "google.com";
 const String appleProvider = "apple.com";
-MyUser user = MyUser("", "", "", "");
+MyUser user = MyUser("", "");
 String currentUserProvider = '';
 String currentUserUsername = '';
-String currentUserUserEmail = '';
 String currentUserUID = '';
-String currentUserDisplayName = '';
 bool currentUserTermsAccepted = false;
 
 // How many tips are there?
