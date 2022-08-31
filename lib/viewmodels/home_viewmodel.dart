@@ -14,7 +14,7 @@ class HomeViewModel extends SharedViewModel {
   Map<String, dynamic>? factsData = {};
   String userTip = "";
   String tipDescription = "";
-  int carbon = 0;
+  num carbon = 0;
 
   Future<List<Map<String, dynamic>>?> getTipCount(
       String category, int tipOrder) async {
@@ -172,12 +172,12 @@ class HomeViewModel extends SharedViewModel {
     return fact;
   }
 
-  Future<int> getTipCarbon(String user, String category, int tipOrder, int days,
+  Future<num> getTipCarbon(String user, String category, int tipOrder, int days,
       Timestamp tipStartTime) async {
-    int carbon = 0;
+    num carbon = 0;
     int startDays =
         Timestamp.now().toDate().difference(tipStartTime.toDate()).inDays;
-    int possibleCarbon = 0;
+    num possibleCarbon = 0;
     print("Get Tip Carbon Called");
     await FirebaseFirestore.instance
         .collection('Tips')
@@ -224,9 +224,9 @@ class HomeViewModel extends SharedViewModel {
             user: user,
             lastWeekCarbon: carbon,
             lastWeekPossibleCarbon: possibleCarbon,
-            totalCarbon: carbon + statsData['totalCarbon'] as int,
+            totalCarbon: carbon + statsData['totalCarbon'] as num,
             totalPossibleCarbon:
-                possibleCarbon + statsData['totalPossibleCarbon'] as int,
+                possibleCarbon + statsData['totalPossibleCarbon'] as num,
             totalTons: (carbon + statsData['totalCarbon']) / 2000);
       }
     });
@@ -336,5 +336,27 @@ class HomeViewModel extends SharedViewModel {
         carbon: carbon);
 
     return tipsData;
+  }
+
+  bool isNumeric(String str) {
+    try {
+      double value = double.parse(str);
+    } on FormatException {
+      return false;
+    } finally {
+      // ignore: control_flow_in_finally
+      return true;
+    }
+  }
+
+  bool isInt(String str) {
+    try {
+      int value = int.parse(str);
+    } on FormatException {
+      return false;
+    } finally {
+      // ignore: control_flow_in_finally
+      return true;
+    }
   }
 }

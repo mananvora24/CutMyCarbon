@@ -1,4 +1,5 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
+import 'package:cut_my_carbon/models/User.dart';
 import 'package:cut_my_carbon/viewmodels/settings_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -86,6 +87,14 @@ class SettingsView extends StatelessWidget {
                               context,
                               listen: false);
                           await provider.logout();
+                          // Wipe out all the user global variables data
+                          user = MyUser("", "", "", "");
+                          currentUserProvider = '';
+                          currentUserUsername = '';
+                          currentUserUserEmail = '';
+                          currentUserUID = '';
+                          currentUserDisplayName = '';
+                          currentUserTermsAccepted = false;
                           model.routeToAuthView();
                         },
                         child: const Text(

@@ -8,7 +8,7 @@ class TipsViewModel extends SharedViewModel {
 
   String userTip = "";
   String tipDescription = "";
-  int carbon = 0;
+  num carbon = 0;
   Map<String, dynamic>? tipData = {};
 
   Future<int> getMaxCategoryTipOrder(String category) async {

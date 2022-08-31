@@ -53,14 +53,14 @@ class StatsView extends StatelessWidget {
                             color: primaryColor,
                           ));
                     } else if (snapshot.hasData) {
-                      int lastWeekCarbon =
-                          snapshot.data!['lastWeekCarbon'] as int;
-                      int lastWeekPossibleCarbon =
-                          snapshot.data!['lastWeekPossibleCarbon'] as int;
-                      int totalCarbon = snapshot.data!['totalCarbon'] as int;
-                      int totalPossibleCarbon =
-                          snapshot.data!['totalPossibleCarbon'] as int;
-                      double totalTons = snapshot.data!['totalTons'];
+                      num lastWeekCarbon =
+                          snapshot.data!['lastWeekCarbon'] as num;
+                      num lastWeekPossibleCarbon =
+                          snapshot.data!['lastWeekPossibleCarbon'] as num;
+                      num totalCarbon = snapshot.data!['totalCarbon'] as num;
+                      num totalPossibleCarbon =
+                          snapshot.data!['totalPossibleCarbon'] as num;
+                      num totalTons = snapshot.data!['totalTons'] as num;
                       return SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,

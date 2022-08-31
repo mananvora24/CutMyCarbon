@@ -2,11 +2,11 @@
 
 class UserStats {
   String user;
-  final int lastWeekCarbon;
-  final int lastWeekPossibleCarbon;
-  final int totalCarbon;
-  final int totalPossibleCarbon;
-  final double totalTons;
+  final num lastWeekCarbon;
+  final num lastWeekPossibleCarbon;
+  final num totalCarbon;
+  final num totalPossibleCarbon;
+  final num totalTons;
 
   UserStats({
     required this.user,

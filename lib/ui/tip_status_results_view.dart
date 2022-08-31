@@ -55,12 +55,12 @@ class TipStatusResultsView extends StatelessWidget {
                     // Get the carbon calculation
                     SizedBox(
                       width: width * 0.9,
-                      child: FutureBuilder<int>(
+                      child: FutureBuilder<num>(
                           future: model.getTipCarbon(
                               user, category, tipOrder, days, tipStartTime),
                           builder: (
                             BuildContext context,
-                            AsyncSnapshot<int> snapshot,
+                            AsyncSnapshot<num> snapshot,
                           ) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {

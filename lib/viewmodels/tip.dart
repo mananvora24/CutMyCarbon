@@ -4,7 +4,7 @@ class TipsData {
   int tipOrder;
   String tip;
   String description;
-  int carbon;
+  num carbon;
 
   TipsData({
     required this.category,

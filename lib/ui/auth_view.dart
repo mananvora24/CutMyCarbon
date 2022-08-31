@@ -15,6 +15,7 @@ class AuthView extends StatelessWidget {
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     double height = (MediaQuery.of(context).size.height);
+    double width = (MediaQuery.of(context).size.width);
     return ChangeNotifierProvider(
         create: (context) => AuthViewModel(),
         child: Consumer<AuthViewModel>(
@@ -23,16 +24,15 @@ class AuthView extends StatelessWidget {
             body: SingleChildScrollView(
                 child: Center(
                     child: SizedBox(
+              width: width,
               child: SizedBox(
+                width: width,
                 height: height,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Image.asset(
-                      //  'assets/finalLogo.png',
-                      //),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.85,
+                        width: MediaQuery.of(context).size.width * 0.9,
                         child: const Text(
                           "Welcome to Cut My Carbon!",
                           textAlign: TextAlign.left,
@@ -44,7 +44,7 @@ class AuthView extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.85,
+                          width: MediaQuery.of(context).size.width * 0.9,
                           child: const Text(
                             "Cut My Carbon helps to reduce carbon footprints.", // Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity.",
                             textAlign: TextAlign.left,
@@ -55,7 +55,7 @@ class AuthView extends StatelessWidget {
                             ),
                           )),
                       SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.85,
+                          width: MediaQuery.of(context).size.width * 0.9,
                           child: const Text(
                             "Cut My Carbon App provides users quick and easy tips to lower their carbon footprints. Are you ready to cat your carbon?",
                             textAlign: TextAlign.left,
@@ -69,18 +69,9 @@ class AuthView extends StatelessWidget {
                         height: height * 0.03,
                       ),
                       SizedBox(
-                        //width: 195,
                         child: SignInButton(
-                          text: "Sign in with Google",
+                          text: "Signin with Google",
                           Buttons.GoogleDark,
-                          /*shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(
-                                color: Theme.of(context).primaryColor),
-                          ),*/
-                          //style: ElevatedButton.styleFrom(
-                          //  primary: primaryColor,
-                          //padding: const EdgeInsets.all(10)),
                           onPressed: () async {
                             final provider = Provider.of<GoogleSigninProvider>(
                                 context,
@@ -90,64 +81,64 @@ class AuthView extends StatelessWidget {
                             currentUserProvider = googleProvider;
                             String? email = user?.email;
                             String username;
-                            username = await model.getGoogleUsername(email!);
+                            model.getGoogleUsername(email!).then(
+                              (value) {
+                                username = value;
+                                print(
+                                    'user is logged in - User name is: $currentUserUsername');
+                                if (username == '') {
+                                  print(
+                                      'Matched empty string for email = $email, username = $username');
+                                  model.routeToSignInView();
+                                } else if (currentUserTermsAccepted) {
+                                  model.routeToHomeView();
+                                } else {
+                                  print('$username has not accepted terms');
+                                  model.routeToAcceptTermsView();
+                                }
+                              },
+                            );
                             //currentUserUsername = username;
-                            print(
-                                'user is logged in - User name is: $currentUserUsername');
-                            if (username == '') {
-                              print(
-                                  'Matched empty string for email = $email, username = $username');
-                              model.routeToSignInView();
-                            } else if (currentUserTermsAccepted) {
-                              model.routeToHomeView();
-                            } else {
-                              print('$username has not accepted terms');
-                              model.routeToAcceptTermsView();
-                            }
                           },
                         ),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      SizedBox(
-                        //width: 185,
-                        child: SignInButton(
-                          Buttons.AppleDark,
-                          text: "Sign in with Apple",
-                          //style: ElevatedButton.styleFrom(
-                          //  primary: primaryColor,
-                          //padding: const EdgeInsets.all(10)),
-                          onPressed: () async {
-                            print('a');
-                            final provider = Provider.of<GoogleSigninProvider>(
-                                context,
-                                listen: false);
-                            print('b');
-                            UserCredential appleUser =
-                                await provider.signInWithApple();
-                            currentUserProvider = appleProvider;
+                      SignInButton(
+                        Buttons.AppleDark,
+                        text: "Signin with Apple",
+                        //style: ElevatedButton.styleFrom(
+                        //  primary: primaryColor,
+                        //padding: const EdgeInsets.all(10)),
+                        onPressed: () async {
+                          print('a');
+                          final provider = Provider.of<GoogleSigninProvider>(
+                              context,
+                              listen: false);
+                          print('b');
+                          UserCredential appleUser =
+                              await provider.signInWithApple();
+                          currentUserProvider = appleProvider;
 
-                            user = FirebaseAuth.instance.currentUser;
-                            String username;
-                            username =
-                                await model.getAppleUsernameById(user!.uid);
-                            currentUserUsername = username;
-                            print(
-                                'user is logged in - User name is: $currentUserUsername');
-                            if (username == '') {
-                              print(
-                                  'Matched empty string $username this is uID');
-                              model.routeToSignInView();
-                            } else if (currentUserTermsAccepted) {
-                              print('$username this is uID');
-                              model.routeToHomeView();
-                            } else {
-                              print('$username has not accepted terms');
-                              model.routeToAcceptTermsView();
-                            }
-                          },
-                        ),
+                          user = FirebaseAuth.instance.currentUser;
+                          String username;
+                          username =
+                              await model.getAppleUsernameById(user!.uid);
+                          currentUserUsername = username;
+                          print(
+                              'user is logged in - User name is: $currentUserUsername');
+                          if (username == '') {
+                            print('Matched empty string $username this is uID');
+                            model.routeToSignInView();
+                          } else if (currentUserTermsAccepted) {
+                            print('$username this is uID');
+                            model.routeToHomeView();
+                          } else {
+                            print('$username has not accepted terms');
+                            model.routeToAcceptTermsView();
+                          }
+                        },
                       ),
                     ]),
               ),

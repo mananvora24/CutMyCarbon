@@ -1,3 +1,5 @@
+import 'package:cut_my_carbon/core/utilities/route_names.dart';
+import 'package:cut_my_carbon/ui/home_view.dart';
 import 'package:cut_my_carbon/viewmodels/tips_viewmodel.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,9 @@ class TipCategoriesView extends StatelessWidget {
                 color: primaryColor,
               ),
               onPressed: () {
-                Navigator.pop(context);
+                // Navigator.pop(context);
+                // Need to pop out everything
+                model.popAllAndRouteToHome();
               },
             ),
             title: const Text('Select Category',

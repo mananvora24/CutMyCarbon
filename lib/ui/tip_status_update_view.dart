@@ -56,7 +56,7 @@ class TipStatusUpdateView extends StatelessWidget {
                 color: primaryColor,
               ),
               onPressed: () {
-                Navigator.pop(context);
+                model.popAllAndRouteToHome();
               },
             ),
             backgroundColor: backgroundColor,
@@ -226,7 +226,19 @@ class TipStatusUpdateView extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       debounce(() {
-                        // Your code
+                        /*
+                        if (model.isInt(daysController.text)) {
+                          String errorMessage =
+                              "Please enter a whole number of days.";
+                          model.routeToTipStatusUpdateView(user, category,
+                              tipOrder, tipStartTime, errorMessage);
+                        }*/
+                        if (model.isNumeric(daysController.text)) {
+                          String errorMessage =
+                              "Please enter a number of days.";
+                          model.routeToTipStatusUpdateView(user, category,
+                              tipOrder, tipStartTime, errorMessage);
+                        }
                         String input = daysController.text;
                         var days = int.parse(daysController.text);
                         final now = Timestamp.now();
@@ -237,9 +249,14 @@ class TipStatusUpdateView extends StatelessWidget {
                         print(
                             "Validator: input: $input, current time: $now, startTime: $tipStartTime, selectedDays: $selectedDays, days: $days");
 
-                        String errorMessage =
-                            "You started this tip $selectedDays days ago. You entered $days days.";
                         if (days > selectedDays) {
+                          String errorMessage =
+                              "You started this tip $selectedDays days ago. You entered $days days.";
+                          model.routeToTipStatusUpdateView(user, category,
+                              tipOrder, tipStartTime, errorMessage);
+                        } else if (days > selectedDays) {
+                          String errorMessage =
+                              "You started this tip $selectedDays days ago. You entered $days days.";
                           model.routeToTipStatusUpdateView(user, category,
                               tipOrder, tipStartTime, errorMessage);
                         } else {

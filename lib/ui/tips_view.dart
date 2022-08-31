@@ -48,7 +48,11 @@ class TipsView extends StatelessWidget {
                     color: primaryColor,
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                    if (skip) {
+                      model.routeToTipCategoriesView(user);
+                    } else {
+                      Navigator.pop(context);
+                    }
                   },
                 ),
                 title: Text(category,
