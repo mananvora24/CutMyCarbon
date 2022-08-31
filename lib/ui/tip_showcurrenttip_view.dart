@@ -335,30 +335,6 @@ class TipShowCurrentView extends StatelessWidget {
                   ),
                 ]),
           ),
-          /*
-            persistentFooterButtons: [
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    model.routeToHomeView();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                    minimumSize: const Size(170, 30),
-                    padding: const EdgeInsets.all(10),
-                  ),
-                  child: const Text(
-                    'Home',
-                    style: TextStyle(
-                      fontFamily: primaryFont,
-                      color: whiteColor,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              ),
-            ]
-            */
         ),
       ),
     );
