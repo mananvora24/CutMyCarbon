@@ -138,6 +138,9 @@ class HelpView extends StatelessWidget {
                         fontSize: 20,
                       ),
                     )),
+                const SizedBox(
+                  height: 20,
+                ),
               ],
             )),
           ),
