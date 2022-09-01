@@ -25,13 +25,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-    	    <key>CFBundleTypeRole</key>
-	        	<string>Editor</string>
-    	    <key>CFBundleURLSchemes</key>
-        	<array>
-            	<string>com.googleusercontent.apps.280514295082-t5og5u45f871lvmd5utp42u23vqdp3ve</string>
-    	    </array>
-   	 	</dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.280514295082-t5og5u45f871lvmd5utp42u23vqdp3ve</string>
+			</array>
+		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>

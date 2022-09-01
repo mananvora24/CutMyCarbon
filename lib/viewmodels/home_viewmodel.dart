@@ -235,7 +235,7 @@ class HomeViewModel extends SharedViewModel {
     // Set Tip Carbon Stats now
     await FirebaseFirestore.instance
         .collection('UserStatistics')
-        .doc("$user" "TipStats")
+        .doc("${user}TipStats")
         .set({
           'lastWeekCarbon': userStats.lastWeekCarbon,
           'lastWeekPossibleCarbon': userStats.lastWeekPossibleCarbon,

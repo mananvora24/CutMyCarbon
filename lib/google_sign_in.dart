@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
+import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -75,7 +76,9 @@ class GoogleSigninProvider extends ChangeNotifier {
   }
 
   Future logout() async {
-    googleSignIn.disconnect;
+    if (currentUserProvider == googleProvider) {
+      googleSignIn.disconnect;
+    }
     await FirebaseAuth.instance.signOut();
   }
 }

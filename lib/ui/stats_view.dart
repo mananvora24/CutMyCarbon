@@ -82,7 +82,8 @@ class StatsView extends StatelessWidget {
                               height: height * 0.01,
                             ),
                             SizedBox(
-                              child: Text("$totalCarbon lbs",
+                              child: Text(
+                                  "${totalCarbon.toStringAsFixed(1)} lbs",
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       fontFamily: primaryFont,
@@ -142,7 +143,8 @@ class StatsView extends StatelessWidget {
                                       ),
                                       SizedBox(
                                         width: width * 0.3,
-                                        child: Text("$lastWeekCarbon lbs",
+                                        child: Text(
+                                            "${lastWeekCarbon.toStringAsFixed(1)} lbs",
                                             textAlign: TextAlign.right,
                                             style: const TextStyle(
                                                 fontFamily: primaryFont,
@@ -171,7 +173,7 @@ class StatsView extends StatelessWidget {
                                       SizedBox(
                                         width: width * 0.3,
                                         child: Text(
-                                            "$lastWeekPossibleCarbon lbs",
+                                            "${lastWeekPossibleCarbon.toStringAsFixed(1)} lbs",
                                             textAlign: TextAlign.right,
                                             style: const TextStyle(
                                                 fontFamily: primaryFont,
@@ -199,7 +201,8 @@ class StatsView extends StatelessWidget {
                                       ),
                                       SizedBox(
                                         width: width * 0.3,
-                                        child: Text("$totalCarbon lbs",
+                                        child: Text(
+                                            "${totalCarbon.toStringAsFixed(1)} lbs",
                                             textAlign: TextAlign.right,
                                             style: const TextStyle(
                                                 fontFamily: primaryFont,
@@ -227,7 +230,8 @@ class StatsView extends StatelessWidget {
                                       ),
                                       SizedBox(
                                         width: width * 0.3,
-                                        child: Text("$totalTons tons",
+                                        child: Text(
+                                            "${totalTons.toStringAsFixed(2)} tons",
                                             textAlign: TextAlign.right,
                                             style: const TextStyle(
                                                 fontFamily: primaryFont,
@@ -255,7 +259,8 @@ class StatsView extends StatelessWidget {
                                       ),
                                       SizedBox(
                                         width: width * 0.3,
-                                        child: Text("$totalPossibleCarbon lbs",
+                                        child: Text(
+                                            "${totalPossibleCarbon.toStringAsFixed(1)} lbs",
                                             textAlign: TextAlign.right,
                                             style: const TextStyle(
                                                 fontFamily: primaryFont,

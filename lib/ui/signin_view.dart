@@ -13,6 +13,7 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     double height = MediaQuery.of(context).size.height;
+    String inputUsername = '';
     return ChangeNotifierProvider(
       create: (context) => SignInViewModel(),
       child: Consumer<SignInViewModel>(
@@ -47,7 +48,7 @@ class SignInView extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextField(
                       onChanged: (String value) {
-                        model.username = value;
+                        inputUsername = value;
                       },
                       decoration: const InputDecoration(
                         focusedBorder: OutlineInputBorder(
@@ -69,9 +70,9 @@ class SignInView extends StatelessWidget {
             persistentFooterButtons: [
               ElevatedButton(
                 onPressed: () async {
-                  String checkingNewUser =
-                      await model.getUsername(model.username);
-                  if (model.username == checkingNewUser) {
+                  String checkingNewUser = await model.getUsername(
+                      inputUsername, currentUserProvider);
+                  if (inputUsername == checkingNewUser) {
                     print('This username is taken');
                     const Text('This username is taken',
                         textAlign: TextAlign.center,
@@ -81,9 +82,10 @@ class SignInView extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0));
                   } else {
-                    await model.saveUsername(user!.uid, model.username);
-                    print(model.username + checkingNewUser);
-                    currentUserUsername = model.username;
+                    await model.saveUsername(
+                        user!.uid, inputUsername, currentUserProvider);
+                    print(inputUsername + checkingNewUser);
+                    currentUserUsername = inputUsername;
 
                     model.routeToAcceptTermsView();
                   }

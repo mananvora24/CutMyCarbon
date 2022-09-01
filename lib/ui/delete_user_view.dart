@@ -1,12 +1,11 @@
 import 'package:cut_my_carbon/google_sign_in.dart';
-import 'package:cut_my_carbon/models/User.dart';
 import 'package:cut_my_carbon/viewmodels/settings_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 
-class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key}) : super(key: key);
+class DeleteUserView extends StatelessWidget {
+  const DeleteUserView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class SettingsView extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            title: const Text('Settings',
+            title: const Text('Delete User',
                 style: TextStyle(
                     fontFamily: primaryFont,
                     color: primaryColor,
@@ -46,6 +45,16 @@ class SettingsView extends StatelessWidget {
                   ),
                   SizedBox(
                     width: width * 0.8,
+                    child: const Text(
+                      'Are you sure you want to delete your account? All of your user information and data will be lost.',
+                      style: TextStyle(
+                          fontFamily: primaryFont,
+                          color: primaryColor,
+                          fontSize: largeButtonFontSize),
+                    ),
+                  ),
+                  SizedBox(
+                    width: width * 0.8,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
@@ -55,16 +64,11 @@ class SettingsView extends StatelessWidget {
                               context,
                               listen: false);
                           await provider.logout();
-                          // Wipe out all the user global variables data
-                          user = MyUser("", "");
-                          currentUserProvider = '';
-                          currentUserUsername = '';
-                          currentUserUID = '';
-                          currentUserTermsAccepted = false;
+                          model.deleteUser(currentUserUsername);
                           model.routeToAuthView();
                         },
                         child: const Text(
-                          'Logout',
+                          'Confirm Delete',
                           style: TextStyle(
                               fontFamily: primaryFont,
                               color: whiteColor,
@@ -81,10 +85,10 @@ class SettingsView extends StatelessWidget {
                             primary: primaryColor,
                             padding: const EdgeInsets.all(10)),
                         onPressed: () async {
-                          model.routeToTermsView();
+                          model.routeToHomeView();
                         },
                         child: const Text(
-                          'Terms',
+                          'Cancel',
                           style: TextStyle(
                               fontFamily: primaryFont,
                               color: whiteColor,
@@ -94,7 +98,6 @@ class SettingsView extends StatelessWidget {
                   SizedBox(
                     height: height * 0.05,
                   ),
-                  model.getDeleteButtonWidget(width, context)
                 ])),
           ),
         ),

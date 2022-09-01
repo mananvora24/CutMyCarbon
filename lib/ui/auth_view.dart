@@ -80,25 +80,33 @@ class AuthView extends StatelessWidget {
                             user = FirebaseAuth.instance.currentUser;
                             currentUserProvider = googleProvider;
                             String? uid = user?.uid;
+                            if (uid == null || uid == '') {
+                              // This is most likely due to cancel during sign in. So best to request sign in again
+                              model.routeToAuthView();
+                              return;
+                            }
                             String username;
-                            model.getGoogleUsername(uid!).then(
+                            model.getUsername(uid, currentUserProvider).then(
                               (value) {
-                                username = value;
+                                // username = value;
                                 print(
                                     'user is logged in - User name is: $currentUserUsername');
-                                if (username == '') {
+                                if (currentUserUsername == '') {
                                   print(
-                                      'Matched empty string for email = $uid, username = $username');
+                                      'Matched empty string for email = $uid, username = $currentUserUsername');
                                   model.routeToSignInView();
+                                  return;
                                 } else if (currentUserTermsAccepted) {
                                   model.routeToHomeView();
+                                  return;
                                 } else {
-                                  print('$username has not accepted terms');
+                                  print(
+                                      '$currentUserUsername has not accepted terms');
                                   model.routeToAcceptTermsView();
+                                  return;
                                 }
                               },
                             );
-                            //currentUserUsername = username;
                           },
                         ),
                       ),
@@ -112,19 +120,26 @@ class AuthView extends StatelessWidget {
                         //  primary: primaryColor,
                         //padding: const EdgeInsets.all(10)),
                         onPressed: () async {
-                          print('a');
                           final provider = Provider.of<GoogleSigninProvider>(
                               context,
                               listen: false);
-                          print('b');
                           UserCredential appleUser =
                               await provider.signInWithApple();
                           currentUserProvider = appleProvider;
 
                           user = FirebaseAuth.instance.currentUser;
+                          print(
+                              'Apple User object: $appleUser, vs Firebase Auth User object: $user');
+                          String? uid = user?.uid;
+                          if (uid == null || uid == '') {
+                            // This is most likely due to cancel during sign in. So best to request sign in again
+                            model.routeToAuthView();
+                            return;
+                          }
+
                           String username;
-                          username =
-                              await model.getAppleUsernameById(user!.uid);
+                          username = await model.getUsername(
+                              user!.uid, currentUserProvider);
                           currentUserUsername = username;
                           print(
                               'user is logged in - User name is: $currentUserUsername');

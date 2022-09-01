@@ -116,6 +116,10 @@ class SharedViewModel extends BaseViewModel {
     _navigationService.navigateTo(settingsViewRoute);
   }
 
+  void routeToDeleteUserView() {
+    _navigationService.navigateTo(deleteUserViewRoute);
+  }
+
   void routeToAuthView() {
     _navigationService.navigateTo(authViewRoute);
   }

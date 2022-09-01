@@ -66,13 +66,13 @@ class TipCategoriesView extends StatelessWidget {
                             primary: primaryColor,
                             padding: const EdgeInsets.all(7)),
                         onPressed: () async {
-                          int tipMax =
-                              await model.getMaxCategoryTipOrder(categoryHome);
-                          model.routeToTipsView(user, categoryHome, false, 0,
-                              tipMax); // tipOverride = 0
+                          int tipMax = await model
+                              .getMaxCategoryTipOrder(categoryRecycling);
+                          model.routeToTipsView(user, categoryRecycling, false,
+                              0, tipMax); // tipOverride = 0
                         },
                         child: const Text(
-                          categoryHome,
+                          categoryRecycling,
                           style: TextStyle(
                             fontFamily: primaryFont,
                             color: whiteColor,

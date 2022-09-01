@@ -30,7 +30,7 @@ List<Map<String, dynamic>> tipCountList = [];
 
 // Supported Categories
 const String categoryEnergy = 'Energy';
-const String categoryHome = 'Home';
+const String categoryRecycling = 'Recycling';
 const String categoryFood = 'Food';
 const String categoryWater = 'Water';
 const String categoryShopping = 'Shopping';
