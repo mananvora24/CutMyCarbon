@@ -13,7 +13,7 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     double height = MediaQuery.of(context).size.height;
-    String inputUsername = '';
+    inputUsername = '';
     return ChangeNotifierProvider(
       create: (context) => SignInViewModel(),
       child: Consumer<SignInViewModel>(
@@ -46,9 +46,11 @@ class SignInView extends StatelessWidget {
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextField(
+                    child: TextFormField(
                       onChanged: (String value) {
                         inputUsername = value;
+                        print(
+                            "Input user value: $value, inputUserName: $inputUsername");
                       },
                       decoration: const InputDecoration(
                         focusedBorder: OutlineInputBorder(
@@ -73,12 +75,13 @@ class SignInView extends StatelessWidget {
                   String checkingNewUser = await model.getUsername(
                       inputUsername, currentUserProvider);
                   if (inputUsername == checkingNewUser) {
-                    print('This username is taken');
+                    print(
+                        'This input username $inputUsername is taken - checkingNewUser = $checkingNewUser');
                     const Text('This username is taken',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: primaryFont,
-                            color: whiteColor,
+                            color: primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0));
                   } else {

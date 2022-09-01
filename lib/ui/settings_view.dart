@@ -55,12 +55,6 @@ class SettingsView extends StatelessWidget {
                               context,
                               listen: false);
                           await provider.logout();
-                          // Wipe out all the user global variables data
-                          user = MyUser("", "");
-                          currentUserProvider = '';
-                          currentUserUsername = '';
-                          currentUserUID = '';
-                          currentUserTermsAccepted = false;
                           model.routeToAuthView();
                         },
                         child: const Text(

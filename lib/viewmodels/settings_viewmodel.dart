@@ -32,11 +32,11 @@ class SettingsViewModel extends SharedViewModel {
         .catchError((error) => print("Failed to update feedback: $error"));
 
     // Wipe out all the user global variables data
-    user = MyUser("", "");
     currentUserProvider = '';
     currentUserUsername = '';
     currentUserUID = '';
     currentUserTermsAccepted = false;
+    inputUsername = '';
   }
 
   Widget getDeleteButtonWidget(double width, BuildContext context) {

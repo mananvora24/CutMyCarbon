@@ -19,7 +19,8 @@ const String secondaryFont = "";
 // User data initialization
 const String googleProvider = "google.com";
 const String appleProvider = "apple.com";
-MyUser user = MyUser("", "");
+String inputUsername = '';
+
 String currentUserProvider = '';
 String currentUserUsername = '';
 String currentUserUID = '';

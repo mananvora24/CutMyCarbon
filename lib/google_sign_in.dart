@@ -79,6 +79,13 @@ class GoogleSigninProvider extends ChangeNotifier {
     if (currentUserProvider == googleProvider) {
       googleSignIn.disconnect;
     }
+    // Wipe out all the user global variables data
+    currentUserProvider = '';
+    currentUserUsername = '';
+    currentUserUID = '';
+    inputUsername = '';
+    currentUserTermsAccepted = false;
+
     await FirebaseAuth.instance.signOut();
   }
 }

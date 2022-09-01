@@ -29,9 +29,9 @@ class SignInViewModel extends SharedViewModel {
         .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       List<dynamic> data = querySnapshot.docs;
       if (data.isEmpty) {
-        print("getCurrentUser: Data is empty");
+        print("getUsername: Data is empty");
       } else if (data.isNotEmpty) {
-        print("getCurrentUser: Data Found");
+        print("getUsername: Data Found");
         for (var snapshot in data) {
           currentUser = snapshot.data();
           user = currentUser['username'];
