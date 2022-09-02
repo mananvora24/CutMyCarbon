@@ -373,7 +373,7 @@ class TipsView extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
                         ),
                         child: const Text(
-                          'Skip',
+                          'New Tip',
                           style: TextStyle(
                             fontFamily: primaryFont,
                             color: whiteColor,

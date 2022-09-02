@@ -141,10 +141,10 @@ class AboutFView extends StatelessWidget {
                           primary: primaryColor,
                           padding: const EdgeInsets.all(10)),
                       onPressed: () async {
-                        _launchUrl(events);
+                        _launchUrl(volunteering);
                       },
                       child: const Text(
-                        'Volunteer at Forterra',
+                        'Volunteer at Green Seattle',
                         style: TextStyle(
                             fontFamily: primaryFont,
                             color: whiteColor,
@@ -164,7 +164,7 @@ class AboutFView extends StatelessWidget {
                         _launchUrl(events);
                       },
                       child: const Text(
-                        'Forterra Events Calendar',
+                        'Green Seattle Events',
                         style: TextStyle(
                             fontFamily: primaryFont,
                             color: whiteColor,
