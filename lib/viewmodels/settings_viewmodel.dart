@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
-import 'package:cut_my_carbon/google_sign_in.dart';
-import 'package:cut_my_carbon/models/User.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
