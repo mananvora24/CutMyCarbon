@@ -50,7 +50,7 @@ class AboutUsView extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
-                        fontSize: 20,
+                        fontSize: textNormalFontSize,
                       ),
                     )),
                 SizedBox(
@@ -59,11 +59,11 @@ class AboutUsView extends StatelessWidget {
                 SizedBox(
                     width: width * 0.85,
                     child: const Text(
-                      "Cut My Carbon App provides users quick and easy tips to lower their carbon footprints. Are you ready to cat your carbon? Cut My Carbon will lower trash going to landfills, promote recycling, help clean the atmosphere and oceans, and work towards the global mission on reversing the effects of climate change",
+                      "Cut My Carbon App provides users quick and easy tips to lower their carbon footprints. Cut My Carbon will lower trash going to landfills, promote recycling, help clean the atmosphere and oceans, and work towards the global mission on reversing the effects of climate change",
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
-                        fontSize: 20,
+                        fontSize: textNormalFontSize,
                       ),
                     )),
                 const SizedBox(height: 20),

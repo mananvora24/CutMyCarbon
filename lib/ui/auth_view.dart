@@ -46,7 +46,7 @@ class AuthView extends StatelessWidget {
                       SizedBox(
                           width: MediaQuery.of(context).size.width * 0.9,
                           child: const Text(
-                            "Cut My Carbon helps to reduce carbon footprints.", // Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity.",
+                            "Cut My Carbon helps to reduce your carbon footprints.", // Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity.",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: primaryFont,
@@ -57,7 +57,7 @@ class AuthView extends StatelessWidget {
                       SizedBox(
                           width: MediaQuery.of(context).size.width * 0.9,
                           child: const Text(
-                            "Cut My Carbon App provides users quick and easy tips to lower their carbon footprints. Are you ready to cat your carbon?",
+                            "We provide users quick and easy tips to lower their carbon footprints.",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: primaryFont,
@@ -94,7 +94,7 @@ class AuthView extends StatelessWidget {
                                 if (currentUserUsername == '') {
                                   print(
                                       'Matched empty string for email = $uid, username = $currentUserUsername');
-                                  model.routeToSignInView();
+                                  model.routeToSignInView('');
                                   return;
                                 } else if (currentUserTermsAccepted) {
                                   model.routeToHomeView();
@@ -145,7 +145,7 @@ class AuthView extends StatelessWidget {
                               'user is logged in - User name is: $currentUserUsername');
                           if (username == '') {
                             print('Matched empty string $username this is uID');
-                            model.routeToSignInView();
+                            model.routeToSignInView('');
                           } else if (currentUserTermsAccepted) {
                             print('$username this is uID');
                             model.routeToHomeView();

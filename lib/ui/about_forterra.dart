@@ -3,14 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutFView extends StatelessWidget {
-  const AboutFView({Key? key, required this.title}) : super(key: key);
+  AboutFView({Key? key, required this.title}) : super(key: key);
   final String title;
+  final Uri events =
+      Uri.parse('https://seattle.greencitypartnerships.org/event/map/');
+  final Uri volunteering =
+      Uri.parse('https://greenseattle.org/get-involved/volunteer/');
+
+  Future<void> _launchUrl(Uri uri) async {
+    if (!await launchUrl(uri)) {
+      throw 'Could not launch $uri';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
       create: (context) => AboutForterraViewModel(),
       child: Consumer<AboutForterraViewModel>(
@@ -120,41 +132,44 @@ class AboutFView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: width,
-                  child: Link(
-                    uri: Uri.parse(
-                        'https://greenseattle.org/get-involved/volunteer/'),
-                    builder: (context, followLink) => GestureDetector(
-                      onTap: followLink,
-                      child: const Text(
-                        'Volunteering with the Green Seattle Partnership',
-                        style: TextStyle(
-                            fontSize: 17,
-                            height: 1.2,
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline),
-                      ),
-                    ),
-                  ),
+                  height: height * 0.01,
                 ),
                 SizedBox(
-                  width: width,
-                  child: Link(
-                    uri: Uri.parse(
-                        'https://seattle.greencitypartnerships.org/event/map/'),
-                    builder: (context, followLink) => GestureDetector(
-                      onTap: followLink,
+                  width: width * 0.8,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: primaryColor,
+                          padding: const EdgeInsets.all(10)),
+                      onPressed: () async {
+                        _launchUrl(events);
+                      },
                       child: const Text(
-                        'Events Calendar',
-                        //textAlign: TextAlign.left,
+                        'Volunteer at Forterra',
                         style: TextStyle(
-                            fontSize: 17,
-                            height: 1.2,
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline),
-                      ),
-                    ),
-                  ),
+                            fontFamily: primaryFont,
+                            color: whiteColor,
+                            fontSize: smallButtonFontSize),
+                      )),
+                ),
+                SizedBox(
+                  height: height * 0.02,
+                ),
+                SizedBox(
+                  width: width * 0.8,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: primaryColor,
+                          padding: const EdgeInsets.all(10)),
+                      onPressed: () async {
+                        _launchUrl(events);
+                      },
+                      child: const Text(
+                        'Forterra Events Calendar',
+                        style: TextStyle(
+                            fontFamily: primaryFont,
+                            color: whiteColor,
+                            fontSize: smallButtonFontSize),
+                      )),
                 ),
                 const SizedBox(height: 10),
               ],

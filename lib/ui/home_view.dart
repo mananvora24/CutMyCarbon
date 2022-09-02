@@ -25,8 +25,10 @@ class HomeView extends StatelessWidget {
         tipStartTime: Timestamp.now());
 
     User? user = FirebaseAuth.instance.currentUser;
-    currentUserUID = user!.uid;
-    currentUserProvider = user.providerData[0].providerId;
+    if (user != null) {
+      currentUserUID = user.uid;
+      currentUserProvider = user.providerData[0].providerId;
+    }
 
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),

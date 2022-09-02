@@ -97,8 +97,11 @@ class Router {
           tipStartTime: tipStartTime,
         );
       case signInViewRoute:
-        return const SignInView(
-          title: "SignIn",
+        Map<String, dynamic> tipArgs =
+            settings.arguments as Map<String, String>;
+        String message = tipArgs['message'];
+        return SignInView(
+          message: message,
         );
       case tipSelectedViewRoute:
         Map<String, dynamic> tipArgs =
@@ -123,7 +126,7 @@ class Router {
       case statsViewRoute:
         return const StatsView(title: "Stats");
       case aboutForterraViewRoute:
-        return const AboutFView(title: "About Forterra");
+        return AboutFView(title: "About Forterra");
       case aboutUsViewRoute:
         return const AboutUsView(title: "About Cut My Carbon");
       case inboxViewRoute:

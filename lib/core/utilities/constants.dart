@@ -56,6 +56,7 @@ const months = <String>[
 // Common font sizes
 const double largeButtonFontSize = 30;
 const double regularButtonFontSize = 24;
+const double smallButtonFontSize = 18;
 const double appBarFontSize = 25;
 const double textTitleFontSize = 25;
 const double textNormalFontSize = 20;

@@ -60,11 +60,11 @@ class DeleteUserView extends StatelessWidget {
                             primary: primaryColor,
                             padding: const EdgeInsets.all(10)),
                         onPressed: () async {
+                          model.deleteUser(currentUserUsername);
                           final provider = Provider.of<GoogleSigninProvider>(
                               context,
                               listen: false);
                           await provider.logout();
-                          model.deleteUser(currentUserUsername);
                           model.routeToAuthView();
                         },
                         child: const Text(

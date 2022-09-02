@@ -108,8 +108,9 @@ class SharedViewModel extends BaseViewModel {
     _navigationService.popAllAndPushNamed(homeViewRoute);
   }
 
-  void routeToSignInView() {
-    _navigationService.navigateTo(signInViewRoute);
+  void routeToSignInView(String message) {
+    _navigationService
+        .navigateTo(signInViewRoute, arguments: {'message': message});
   }
 
   void routeToSettingsView() {
