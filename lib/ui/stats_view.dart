@@ -61,6 +61,8 @@ class StatsView extends StatelessWidget {
                       num totalPossibleCarbon =
                           snapshot.data!['totalPossibleCarbon'] as num;
                       num totalTons = snapshot.data!['totalTons'] as num;
+                      int totalTips = snapshot.data!['totalTips'] as int;
+                      int totalDays = snapshot.data!['totalDays'] as int;
                       return SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -273,8 +275,6 @@ class StatsView extends StatelessWidget {
                                 ],
                               ),
                             ),
-
-                            /*
                             Container(
                               margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                               padding: const EdgeInsets.all(9.0),
@@ -323,7 +323,7 @@ class StatsView extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: width * 0.4,
-                                        child: const Text("X",
+                                        child: const Text("Number of Tips",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontFamily: primaryFont,
@@ -333,9 +333,9 @@ class StatsView extends StatelessWidget {
                                       ),
                                       SizedBox(
                                         width: width * 0.4,
-                                        child: const Text("Y",
+                                        child: Text("$totalTips",
                                             textAlign: TextAlign.right,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontFamily: primaryFont,
                                                 color: primaryColor,
                                                 fontWeight: FontWeight.bold,
@@ -348,7 +348,7 @@ class StatsView extends StatelessWidget {
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [],
+                                    children: const [],
                                   ),
                                   SizedBox(
                                     height: height * 0.005,
@@ -358,7 +358,7 @@ class StatsView extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: width * 0.4,
-                                        child: const Text("X",
+                                        child: const Text("Number of Days",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontFamily: primaryFont,
@@ -368,9 +368,9 @@ class StatsView extends StatelessWidget {
                                       ),
                                       SizedBox(
                                         width: width * 0.4,
-                                        child: const Text("Y",
+                                        child: Text("$totalDays",
                                             textAlign: TextAlign.right,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontFamily: primaryFont,
                                                 color: primaryColor,
                                                 fontWeight: FontWeight.bold,
@@ -381,8 +381,6 @@ class StatsView extends StatelessWidget {
                                 ],
                               ),
                             ),
-
-                            */
                           ],
                         ),
                       );

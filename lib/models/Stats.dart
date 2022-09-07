@@ -7,6 +7,8 @@ class UserStats {
   final num totalCarbon;
   final num totalPossibleCarbon;
   final num totalTons;
+  final int tipCount;
+  final int tipDays;
 
   UserStats({
     required this.user,
@@ -15,6 +17,8 @@ class UserStats {
     required this.totalCarbon,
     required this.totalPossibleCarbon,
     required this.totalTons,
+    required this.tipCount,
+    required this.tipDays,
   });
 
   Map<String, dynamic> toJson() => {
@@ -24,6 +28,8 @@ class UserStats {
         'totalCarbon': totalCarbon,
         'totalPossibleCarbon': totalPossibleCarbon,
         'totalTons': totalTons,
+        'tipCount': tipCount,
+        'tipDays': tipDays,
       };
 
   static UserStats fromJson(Map<String, dynamic> json) => UserStats(
@@ -33,5 +39,7 @@ class UserStats {
         totalCarbon: json['totalCarbon'],
         totalPossibleCarbon: json['totalPossibleCarbon'],
         totalTons: json['totalTons'],
+        tipCount: json['tipCount'],
+        tipDays: json['tipDays'],
       );
 }

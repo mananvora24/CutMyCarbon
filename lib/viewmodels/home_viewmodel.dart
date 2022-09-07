@@ -214,20 +214,25 @@ class HomeViewModel extends SharedViewModel {
             lastWeekPossibleCarbon: possibleCarbon,
             totalCarbon: carbon,
             totalPossibleCarbon: possibleCarbon,
-            totalTons: carbon / 2000);
+            totalTons: carbon / 2000,
+            tipCount: 1,
+            tipDays: 1);
       } else {
         for (var snapshot in data) {
           statsData = snapshot.data();
           break;
         }
         userStats = UserStats(
-            user: user,
-            lastWeekCarbon: carbon,
-            lastWeekPossibleCarbon: possibleCarbon,
-            totalCarbon: carbon + statsData['totalCarbon'] as num,
-            totalPossibleCarbon:
-                possibleCarbon + statsData['totalPossibleCarbon'] as num,
-            totalTons: (carbon + statsData['totalCarbon']) / 2000);
+          user: user,
+          lastWeekCarbon: carbon,
+          lastWeekPossibleCarbon: possibleCarbon,
+          totalCarbon: carbon + statsData['totalCarbon'],
+          totalPossibleCarbon:
+              possibleCarbon + statsData['totalPossibleCarbon'],
+          totalTons: (carbon + statsData['totalCarbon']) / 2000,
+          tipCount: 1 + statsData['tipCount'] as int,
+          tipDays: 1 + statsData['tipDays'] as int,
+        );
       }
     });
 
@@ -242,6 +247,8 @@ class HomeViewModel extends SharedViewModel {
           'totalCarbon': userStats.totalCarbon,
           'totalPossibleCarbon': userStats.totalPossibleCarbon,
           'totalTons': userStats.totalTons,
+          'totalTips': userStats.tipCount,
+          'totalDays': userStats.tipDays,
           'user': user,
           'userID': currentUserUID,
         }, SetOptions(merge: true))

@@ -74,4 +74,6 @@ UserStats userStats = UserStats(
     lastWeekPossibleCarbon: 0,
     totalCarbon: 0,
     totalPossibleCarbon: 0,
-    totalTons: 0);
+    totalTons: 0,
+    tipCount: 0,
+    tipDays: 0);

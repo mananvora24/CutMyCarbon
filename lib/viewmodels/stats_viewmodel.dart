@@ -20,6 +20,8 @@ class StatsViewModel extends SharedViewModel {
         currentUserStatistics['totalCarbon'] = 0;
         currentUserStatistics['totalPossibleCarbon'] = 0;
         currentUserStatistics['totalTons'] = 0;
+        currentUserStatistics['totalTips'] = 0;
+        currentUserStatistics['totalDays'] = 0;
         currentUserStatistics['user'] = user;
         currentUserStatistics['userID'] = 0;
       } else {
