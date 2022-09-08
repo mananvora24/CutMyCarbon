@@ -62,6 +62,7 @@ class TipStatusResultsView extends StatelessWidget {
                             BuildContext context,
                             AsyncSnapshot<num> snapshot,
                           ) {
+                            print("Calling to display Tip Carbon Results");
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
                               return const CircularProgressIndicator();
@@ -74,7 +75,8 @@ class TipStatusResultsView extends StatelessWidget {
                                       color: primaryColor,
                                     ));
                               } else if (snapshot.hasData) {
-                                return Text("${snapshot.data!} lbs",
+                                return Text(
+                                    "${snapshot.data!.toStringAsFixed(1)} lbs",
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                         fontFamily: primaryFont,

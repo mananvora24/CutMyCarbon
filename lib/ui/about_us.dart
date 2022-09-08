@@ -40,33 +40,22 @@ class AboutUsView extends StatelessWidget {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: height * 0.01,
+                Image.asset(
+                  'assets/CMCLogo.png',
                 ),
                 SizedBox(
                     width: width * 0.85,
                     child: const Text(
-                      "Cut My Carbon helps to reduce carbon footprints. Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity. Cut My Carbon will aid the Green Seattle Project, in partnership with Forterra.",
+                      "Cut My Carbon is a simple way to lower your carbon footprint. With global temperatures rising everyday, it is more important now than ever that we reduce our climate impact. Just by following our weekly tips, you can significantly reduce your carbon output and make a real change. Our mission is to make a carbon neutral world where we work with mother nature cleaning the atmosphere and preserving habitats. While these tips won’t just fix the climate crisis, every little step we take will bring us closer to a carbon neutral world. Even though you might only save a few pounds, being aware and spreading the word is exactly what we need. So find a tip, start working, and cut your carbon!",
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
-                        fontSize: textNormalFontSize,
+                        fontSize: 17,
                       ),
                     )),
                 SizedBox(
                   height: height * 0.03,
                 ),
-                SizedBox(
-                    width: width * 0.85,
-                    child: const Text(
-                      "Cut My Carbon App provides users quick and easy tips to lower their carbon footprints. Cut My Carbon will lower trash going to landfills, promote recycling, help clean the atmosphere and oceans, and work towards the global mission on reversing the effects of climate change",
-                      style: TextStyle(
-                        fontFamily: primaryFont,
-                        color: primaryColor,
-                        fontSize: textNormalFontSize,
-                      ),
-                    )),
-                const SizedBox(height: 20),
               ],
             )),
           ),

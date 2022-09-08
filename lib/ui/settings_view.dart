@@ -45,6 +45,26 @@ class SettingsView extends StatelessWidget {
                     height: 8,
                   ),
                   SizedBox(
+                    height: height * 0.18,
+                  ),
+                  SizedBox(
+                    width: width,
+                    child: Text(
+                      currentUserUsername,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontFamily: primaryFont,
+                        fontWeight: FontWeight.bold,
+                        color: primaryColor,
+                        fontSize: 20,
+                        height: 1,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.08,
+                  ),
+                  SizedBox(
                     width: width * 0.8,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(

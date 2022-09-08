@@ -39,25 +39,14 @@ class AuthView extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: primaryFont,
                             color: primaryColor,
-                            fontSize: 30,
+                            fontSize: 26,
                           ),
                         ),
                       ),
                       SizedBox(
                           width: MediaQuery.of(context).size.width * 0.9,
                           child: const Text(
-                            "Cut My Carbon helps to reduce your carbon footprints.", // Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity.",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontFamily: primaryFont,
-                              color: primaryColor,
-                              fontSize: 20,
-                            ),
-                          )),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          child: const Text(
-                            "We provide users quick and easy tips to lower their carbon footprints.",
+                            "Did you know that the average American’s carbon footprint is 5 times the global average? Our mission is to achieve a carbon neutral world. So find a tip, start working, and cut your carbon! We would also like to emphasize that your account is not linked with any personal information like name or email address.", // Reducing your carbon footprint is important because it mitigates the effects of global climate change, improves public health, boost the global economy, and maintains biodiversity.",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: primaryFont,

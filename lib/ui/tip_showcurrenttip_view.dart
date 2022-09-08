@@ -333,6 +333,7 @@ class TipShowCurrentView extends StatelessWidget {
                             color: primaryColor,
                             fontSize: textNormalFontSize)),
                   ),
+                  SizedBox(height: height * 0.03),
                 ]),
           ),
         ),

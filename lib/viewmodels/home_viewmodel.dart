@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
-import 'package:cut_my_carbon/models/Stats.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 import 'package:cut_my_carbon/viewmodels/tip.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
@@ -198,63 +197,46 @@ class HomeViewModel extends SharedViewModel {
       }
     });
 
-    // Get current Tip Stats and update them
-    Map<String, dynamic> statsData = {};
-    await FirebaseFirestore.instance
-        .collection('UserStatistics')
-        .where('user', isEqualTo: user)
-        .get()
-        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
-      List<dynamic> data = querySnapshot.docs;
-      if (data.isEmpty) {
-        print("User Statistics: Data is empty");
-        userStats = UserStats(
-            user: user,
-            lastWeekCarbon: carbon,
-            lastWeekPossibleCarbon: possibleCarbon,
-            totalCarbon: carbon,
-            totalPossibleCarbon: possibleCarbon,
-            totalTons: carbon / 2000,
-            tipCount: 1,
-            tipDays: 1);
+    final db = FirebaseFirestore.instance;
+    final docRef = db.collection('UserStatistics').doc("${user}TipStats");
+    db.runTransaction((transaction) async {
+      final snapshot = await transaction.get(docRef);
+      num newTotalCarbon;
+      num newTotalPossibleCarbon;
+      num newTotalTons;
+      int newTotalTips;
+      int newTotalDays;
+      if (snapshot.exists) {
+        newTotalCarbon = carbon + (snapshot.get("totalCarbon") ?? 0);
+        newTotalPossibleCarbon =
+            possibleCarbon + (snapshot.get("totalPossibleCarbon") ?? 0);
+        newTotalTips = 1 + (snapshot.get("totalTips") as int);
+        newTotalDays = days + (snapshot.get("totalDays") as int);
       } else {
-        for (var snapshot in data) {
-          statsData = snapshot.data();
-          break;
-        }
-        userStats = UserStats(
-          user: user,
-          lastWeekCarbon: carbon,
-          lastWeekPossibleCarbon: possibleCarbon,
-          totalCarbon: carbon + statsData['totalCarbon'],
-          totalPossibleCarbon:
-              possibleCarbon + statsData['totalPossibleCarbon'],
-          totalTons: (carbon + statsData['totalCarbon']) / 2000,
-          tipCount: 1 + statsData['tipCount'] as int,
-          tipDays: 1 + statsData['tipDays'] as int,
-        );
+        newTotalCarbon = carbon;
+        newTotalPossibleCarbon = possibleCarbon;
+        newTotalTips = 1;
+        newTotalDays = days;
       }
-    });
-
-    print("UserStats Data:$userStats");
-    // Set Tip Carbon Stats now
-    await FirebaseFirestore.instance
-        .collection('UserStatistics')
-        .doc("${user}TipStats")
-        .set({
-          'lastWeekCarbon': userStats.lastWeekCarbon,
-          'lastWeekPossibleCarbon': userStats.lastWeekPossibleCarbon,
-          'totalCarbon': userStats.totalCarbon,
-          'totalPossibleCarbon': userStats.totalPossibleCarbon,
-          'totalTons': userStats.totalTons,
-          'totalTips': userStats.tipCount,
-          'totalDays': userStats.tipDays,
-          'user': user,
-          'userID': currentUserUID,
-        }, SetOptions(merge: true))
-        .then((value) => print("UserStatistics complete Updated"))
-        .catchError(
-            (error) => print("Failed to update user tip status: $error"));
+      newTotalTons = newTotalCarbon / 2000;
+      transaction.set(
+          docRef,
+          {
+            'lastWeekCarbon': carbon,
+            'lastWeekPossibleCarbon': possibleCarbon,
+            'totalCarbon': newTotalCarbon,
+            'totalPossibleCarbon': newTotalPossibleCarbon,
+            'totalTons': newTotalTons,
+            'totalTips': newTotalTips,
+            'totalDays': newTotalDays,
+            'user': user,
+            'userID': currentUserUID,
+          },
+          SetOptions(merge: true));
+    }).then(
+      (value) => print("DocumentSnapshot successfully updated!"),
+      onError: (e) => print("Error updating document $e"),
+    );
 
     return carbon;
   }

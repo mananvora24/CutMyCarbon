@@ -161,9 +161,9 @@ class HomeView extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
                     alignment: Alignment.topRight,
                   ),
-                  SizedBox(height: height * 0.1),
+                  SizedBox(height: height * 0.07),
                   Image.asset(
-                    'assets/finalLogo.png',
+                    'assets/CMCLogo.png',
                   ),
                   SizedBox(height: height * 0.07),
                   SizedBox(

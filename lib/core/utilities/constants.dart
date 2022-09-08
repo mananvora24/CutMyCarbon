@@ -1,5 +1,4 @@
 import 'package:cut_my_carbon/models/Stats.dart';
-import 'package:cut_my_carbon/models/User.dart';
 import 'package:cut_my_carbon/viewmodels/tip.dart';
 import 'package:flutter/material.dart';
 
@@ -69,11 +68,12 @@ TipsData tipsData = TipsData(
 
 // Initialize stats data
 UserStats userStats = UserStats(
-    user: "",
-    lastWeekCarbon: 0,
-    lastWeekPossibleCarbon: 0,
-    totalCarbon: 0,
-    totalPossibleCarbon: 0,
-    totalTons: 0,
-    tipCount: 0,
-    tipDays: 0);
+  user: "",
+  lastWeekCarbon: 0,
+  lastWeekPossibleCarbon: 0,
+  totalCarbon: 0,
+  totalPossibleCarbon: 0,
+  totalTons: 0,
+  totalTips: 0,
+  totalDays: 0,
+);

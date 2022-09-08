@@ -39,7 +39,7 @@ class SettingsViewModel extends SharedViewModel {
             routeToDeleteUserView();
           },
           child: const Text(
-            'Delete User',
+            'Delete Account',
             style: TextStyle(
                 fontFamily: primaryFont,
                 color: whiteColor,
