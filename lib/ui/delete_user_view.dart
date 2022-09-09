@@ -40,8 +40,8 @@ class DeleteUserView extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  const SizedBox(
-                    height: 8,
+                  SizedBox(
+                    height: height * 0.17,
                   ),
                   SizedBox(
                     width: width * 0.8,
@@ -50,8 +50,12 @@ class DeleteUserView extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: primaryFont,
                           color: primaryColor,
-                          fontSize: largeButtonFontSize),
+                          fontSize: textNormalFontSize),
+                      textAlign: TextAlign.center,
                     ),
+                  ),
+                  SizedBox(
+                    height: height * 0.03,
                   ),
                   SizedBox(
                     width: width * 0.8,

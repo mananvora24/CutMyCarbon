@@ -45,7 +45,7 @@ class TipCategoriesView extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  SizedBox(height: height * 0.05),
+                  SizedBox(height: height * 0.1),
                   SizedBox(
                     width: width * 0.9,
                     child: const Text(

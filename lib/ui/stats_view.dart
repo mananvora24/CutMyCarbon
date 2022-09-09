@@ -135,7 +135,7 @@ class StatsView extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: width * 0.5,
-                                        child: const Text("Last Week:",
+                                        child: const Text("Last Week",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontFamily: primaryFont,
@@ -164,7 +164,7 @@ class StatsView extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: width * 0.5,
-                                        child: const Text("Last Week Possible:",
+                                        child: const Text("Last Week Possible",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontFamily: primaryFont,
@@ -193,7 +193,7 @@ class StatsView extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: width * 0.5,
-                                        child: const Text("Total:",
+                                        child: const Text("Total Pounds",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontFamily: primaryFont,
@@ -222,7 +222,7 @@ class StatsView extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: width * 0.5,
-                                        child: const Text("Total Tons:",
+                                        child: const Text("Total Tons",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontFamily: primaryFont,
@@ -251,7 +251,7 @@ class StatsView extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: width * 0.5,
-                                        child: const Text("Total Possible:",
+                                        child: const Text("Total Possible",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontFamily: primaryFont,
@@ -323,7 +323,7 @@ class StatsView extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: width * 0.4,
-                                        child: const Text("Number of Tips",
+                                        child: const Text("Total Tips",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontFamily: primaryFont,
@@ -358,7 +358,7 @@ class StatsView extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: width * 0.4,
-                                        child: const Text("Number of Days",
+                                        child: const Text("Total Days",
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontFamily: primaryFont,

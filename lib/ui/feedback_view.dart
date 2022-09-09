@@ -71,6 +71,7 @@ class FeedbackView extends StatelessWidget {
                     onChanged: (String value) {
                       model.reason = value;
                     },
+                    keyboardType: TextInputType.text,
                     controller: reasonController,
                     style: const TextStyle(
                         fontFamily: primaryFont, color: primaryColor),
@@ -113,6 +114,7 @@ class FeedbackView extends StatelessWidget {
                     onChanged: (String value) {
                       model.feedback = value;
                     },
+                    keyboardType: TextInputType.text,
                     controller: feedbackController,
                     style: const TextStyle(
                         fontFamily: primaryFont, color: primaryColor),

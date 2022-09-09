@@ -63,6 +63,7 @@ class SuggestATipView extends StatelessWidget {
                 SizedBox(
                   width: width * 0.85,
                   child: TextField(
+                    keyboardType: TextInputType.text,
                     onChanged: (String value) {
                       model.category = value;
                       print(value);
@@ -106,6 +107,7 @@ class SuggestATipView extends StatelessWidget {
                   width: width * 0.85,
                   child: TextField(
                     maxLines: 10,
+                    keyboardType: TextInputType.text,
                     onChanged: (String value) {
                       model.tip = value;
                       print(value);

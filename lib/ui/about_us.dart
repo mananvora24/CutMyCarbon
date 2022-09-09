@@ -2,6 +2,7 @@ import 'package:cut_my_carbon/viewmodels/aboutus_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
+import 'package:url_launcher/link.dart';
 
 class AboutUsView extends StatelessWidget {
   const AboutUsView({Key? key, required this.title}) : super(key: key);
@@ -46,13 +47,44 @@ class AboutUsView extends StatelessWidget {
                 SizedBox(
                     width: width * 0.85,
                     child: const Text(
-                      "Cut My Carbon is a simple way to lower your carbon footprint. With global temperatures rising everyday, it is more important now than ever that we reduce our climate impact. Just by following our weekly tips, you can significantly reduce your carbon output and make a real change. Our mission is to make a carbon neutral world where we work with mother nature cleaning the atmosphere and preserving habitats. While these tips won’t just fix the climate crisis, every little step we take will bring us closer to a carbon neutral world. Even though you might only save a few pounds, being aware and spreading the word is exactly what we need. So find a tip, start working, and cut your carbon!",
+                      "Cut My Carbon is a simple way to lower your carbon footprint. With global temperatures rising everyday, it is more important now than ever that we reduce our climate impact. Just by following our weekly tips, you can significantly reduce your carbon output and make a real change. Our mission is to make a carbon neutral world where we work with mother nature cleaning the atmosphere and preserving habitats. While these tips won’t just fix the climate crisis, every little step we take will bring us closer to a carbon neutral world. Even though you might only save a few pounds, being aware and spreading the word is exactly what we need. So find a tip, start working, and cut your carbon!\n",
                       style: TextStyle(
                         fontFamily: primaryFont,
                         color: primaryColor,
                         fontSize: 17,
                       ),
                     )),
+                SizedBox(
+                  width: width * 0.85,
+                  child: const Text(
+                    "Contact Us",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontFamily: primaryFont,
+                      fontWeight: FontWeight.bold,
+                      color: primaryColor,
+                      fontSize: 20,
+                      height: 1,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: width * 0.85,
+                  child: Link(
+                    uri: Uri.parse('mailto:cutmycarbonhelp@gmail.com'),
+                    builder: (context, followLink) => GestureDetector(
+                      onTap: followLink,
+                      child: const Text(
+                        'cutmycarbonhelp@gmail.com',
+                        style: TextStyle(
+                            fontSize: 17,
+                            height: 1.2,
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline),
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: height * 0.03,
                 ),

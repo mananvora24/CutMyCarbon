@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cut_my_carbon/core/utilities/constants.dart';
+import 'package:cut_my_carbon/models/Stats.dart';
 import 'package:cut_my_carbon/viewmodels/shared_model.dart';
 import 'package:cut_my_carbon/viewmodels/tip.dart';
 import 'package:cut_my_carbon/viewmodels/tip_status_data.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class HomeViewModel extends SharedViewModel {
@@ -13,7 +15,6 @@ class HomeViewModel extends SharedViewModel {
   Map<String, dynamic>? factsData = {};
   String userTip = "";
   String tipDescription = "";
-  num carbon = 0;
 
   Future<List<Map<String, dynamic>>?> getTipCount(
       String category, int tipOrder) async {
@@ -41,6 +42,7 @@ class HomeViewModel extends SharedViewModel {
 
   Future<TipsData> getCurrentTip(
       String category, int tipOrder, String user) async {
+    num carbon = 0;
     List<dynamic> dataList = List.empty();
     Map<String, dynamic> currentTip = {};
     await FirebaseFirestore.instance
@@ -138,13 +140,23 @@ class HomeViewModel extends SharedViewModel {
         .update({'Days': days, 'End': Timestamp.now()});
   }
 
-  submitTipsData(String user, String category, int tipOrder, int days) async {
+  submitTipsData(String user, String category, int tipOrder, int days,
+      Timestamp tipStartTime) async {
+    num carbon = 0;
+    num possibleCarbon = 0;
+    int startDays =
+        Timestamp.now().toDate().difference(tipStartTime.toDate()).inDays;
+
     Map<String, dynamic> currentTip =
         await getCurrentTipStatus(user, category, tipOrder);
     print("Submit Tips Data => Save carbon days");
     await saveTipsCarbonDays(
         user, currentTip['Category'], currentTip['TipOrder'], days);
     await saveTipStatusCompleted(category, user, tipOrder);
+    carbon = await getTipCarbon(user, category, tipOrder, days, tipStartTime);
+    possibleCarbon = carbon * startDays;
+    carbon = carbon * days;
+    await saveTipResultsInStats(user, carbon, possibleCarbon, days);
   }
 
   String getTipsButtonText(TipStatusData tipStatusData) {
@@ -174,9 +186,6 @@ class HomeViewModel extends SharedViewModel {
   Future<num> getTipCarbon(String user, String category, int tipOrder, int days,
       Timestamp tipStartTime) async {
     num carbon = 0;
-    int startDays =
-        Timestamp.now().toDate().difference(tipStartTime.toDate()).inDays;
-    num possibleCarbon = 0;
     print("Get Tip Carbon Called");
     await FirebaseFirestore.instance
         .collection('Tips')
@@ -191,12 +200,16 @@ class HomeViewModel extends SharedViewModel {
       Map<String, dynamic> tipsData;
       for (var snapshot in data) {
         tipsData = snapshot.data();
-        carbon = tipsData["Carbon"] * days;
-        possibleCarbon = tipsData['Carbon'] * startDays;
+        carbon = tipsData["Carbon"];
         break;
       }
     });
 
+    return carbon;
+  }
+
+  Future<void> saveTipResultsInStats(
+      String user, num carbon, num possibleCarbon, int days) async {
     final db = FirebaseFirestore.instance;
     final docRef = db.collection('UserStatistics').doc("${user}TipStats");
     db.runTransaction((transaction) async {
@@ -237,8 +250,6 @@ class HomeViewModel extends SharedViewModel {
       (value) => print("DocumentSnapshot successfully updated!"),
       onError: (e) => print("Error updating document $e"),
     );
-
-    return carbon;
   }
 
   Future<void> saveTipStatusCompleted(
@@ -282,6 +293,7 @@ class HomeViewModel extends SharedViewModel {
       String category, String user, bool skip, int tipOverride) async {
     bool tipFound = false;
     int tipOrder = 0;
+    num carbon = 0;
     if (skip) {
       tipOrder = tipOverride;
     } else {

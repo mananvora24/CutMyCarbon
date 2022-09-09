@@ -42,15 +42,18 @@ class TipStatusResultsView extends StatelessWidget {
                 child: Center(
                   child: Column(children: [
                     SizedBox(
-                      height: height * 0.11,
+                      height: height * 0.15,
+                    ),
+
+                    SizedBox(
                       width: width * 0.8,
-                      child: const Text('Well done! \n Carbon Saved',
+                      child: const Text('Well done!\nYou Saved',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: primaryFont,
                               color: primaryColor,
                               fontWeight: FontWeight.bold,
-                              fontSize: textNormalFontSize)),
+                              fontSize: 30)),
                     ),
                     // Get the carbon calculation
                     SizedBox(
@@ -76,7 +79,7 @@ class TipStatusResultsView extends StatelessWidget {
                                     ));
                               } else if (snapshot.hasData) {
                                 return Text(
-                                    "${snapshot.data!.toStringAsFixed(1)} lbs",
+                                    "${(snapshot.data! * days).toStringAsFixed(1)} lbs",
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                         fontFamily: primaryFont,
@@ -106,7 +109,7 @@ class TipStatusResultsView extends StatelessWidget {
 
                     SizedBox(
                       width: width * 0.9,
-                      child: const Text('Click on Home to get your next Tip',
+                      child: const Text('Go Home for your next Tip',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: primaryFont,

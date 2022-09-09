@@ -4,6 +4,7 @@ import 'package:cut_my_carbon/viewmodels/tip.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cut_my_carbon/viewmodels/home_viewmodel.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class TipStatusUpdateView extends StatelessWidget {
@@ -167,7 +168,7 @@ class TipStatusUpdateView extends StatelessWidget {
                   height: height * 0.02,
                 ),
                 SizedBox(
-                  height: height * 0.08,
+                  //height: height * 0.08,
                   width: width * 0.8,
                   child: Text(
                     message,
@@ -178,6 +179,9 @@ class TipStatusUpdateView extends StatelessWidget {
                         fontSize: 16.0,
                         color: Colors.red),
                   ),
+                ),
+                SizedBox(
+                  height: height * 0.02,
                 ),
                 SizedBox(
                   width: width * 0.9,
@@ -202,6 +206,7 @@ class TipStatusUpdateView extends StatelessWidget {
                       controller: daysController,
                       obscureText: false,
                       keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
                       decoration: const InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: secondaryColor),
@@ -260,8 +265,8 @@ class TipStatusUpdateView extends StatelessWidget {
                           model.routeToTipStatusUpdateView(user, category,
                               tipOrder, tipStartTime, errorMessage);
                         } else {
-                          model.submitTipsData(
-                              currentUserUsername, category, tipOrder, days);
+                          model.submitTipsData(currentUserUsername, category,
+                              tipOrder, days, tipStartTime);
                           print(days);
                           model.routeToTipStatusResultView(
                               user, category, tipOrder, days, tipStartTime);
@@ -282,6 +287,9 @@ class TipStatusUpdateView extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: height * 0.1,
                 ),
               ]),
             ),
