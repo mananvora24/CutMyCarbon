@@ -29,9 +29,9 @@ class TipShowCurrentView extends StatelessWidget {
         description: "",
         carbon: 0);
 
-    int dayStart = tipStartTime.toDate().day;
-    int today = Timestamp.now().toDate().day;
-    int days = 7 - (today - dayStart);
+    DateTime todayDate = Timestamp.now().toDate();
+    int sinceDays = todayDate.difference(tipStartTime.toDate()).inDays;
+    int remainingDays = 7 - sinceDays;
 
     return ChangeNotifierProvider(
       create: (context) => HomeViewModel(),
@@ -325,7 +325,7 @@ class TipShowCurrentView extends StatelessWidget {
                   SizedBox(height: height * 0.03),
                   SizedBox(
                     width: width * 0.8,
-                    child: Text("Submit your progress in $days days",
+                    child: Text("Submit your progress in $remainingDays days",
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontFamily: primaryFont,
