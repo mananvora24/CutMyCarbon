@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cut_my_carbon/core/utilities/constants.dart';
 import 'package:cut_my_carbon/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -102,48 +104,50 @@ class AuthView extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      SignInButton(
-                        Buttons.AppleDark,
-                        text: "Signin with Apple",
-                        //style: ElevatedButton.styleFrom(
-                        //  primary: primaryColor,
-                        //padding: const EdgeInsets.all(10)),
-                        onPressed: () async {
-                          final provider = Provider.of<GoogleSigninProvider>(
-                              context,
-                              listen: false);
-                          UserCredential appleUser =
-                              await provider.signInWithApple();
-                          currentUserProvider = appleProvider;
+                      if (Platform.isIOS)
+                        SignInButton(
+                          Buttons.AppleDark,
+                          text: "Signin with Apple",
+                          //style: ElevatedButton.styleFrom(
+                          //  primary: primaryColor,
+                          //padding: const EdgeInsets.all(10)),
+                          onPressed: () async {
+                            final provider = Provider.of<GoogleSigninProvider>(
+                                context,
+                                listen: false);
+                            UserCredential appleUser =
+                                await provider.signInWithApple();
+                            currentUserProvider = appleProvider;
 
-                          user = FirebaseAuth.instance.currentUser;
-                          print(
-                              'Apple User object: $appleUser, vs Firebase Auth User object: $user');
-                          String? uid = user?.uid;
-                          if (uid == null || uid == '') {
-                            // This is most likely due to cancel during sign in. So best to request sign in again
-                            model.routeToAuthView();
-                            return;
-                          }
+                            user = FirebaseAuth.instance.currentUser;
+                            print(
+                                'Apple User object: $appleUser, vs Firebase Auth User object: $user');
+                            String? uid = user?.uid;
+                            if (uid == null || uid == '') {
+                              // This is most likely due to cancel during sign in. So best to request sign in again
+                              model.routeToAuthView();
+                              return;
+                            }
 
-                          String username;
-                          username = await model.getUsername(
-                              user!.uid, currentUserProvider);
-                          currentUserUsername = username;
-                          print(
-                              'user is logged in - User name is: $currentUserUsername');
-                          if (username == '') {
-                            print('Matched empty string $username this is uID');
-                            model.routeToSignInView('');
-                          } else if (currentUserTermsAccepted) {
-                            print('$username this is uID');
-                            model.routeToHomeView();
-                          } else {
-                            print('$username has not accepted terms');
-                            model.routeToAcceptTermsView();
-                          }
-                        },
-                      ),
+                            String username;
+                            username = await model.getUsername(
+                                user!.uid, currentUserProvider);
+                            currentUserUsername = username;
+                            print(
+                                'user is logged in - User name is: $currentUserUsername');
+                            if (username == '') {
+                              print(
+                                  'Matched empty string $username this is uID');
+                              model.routeToSignInView('');
+                            } else if (currentUserTermsAccepted) {
+                              print('$username this is uID');
+                              model.routeToHomeView();
+                            } else {
+                              print('$username has not accepted terms');
+                              model.routeToAcceptTermsView();
+                            }
+                          },
+                        ),
                     ]),
               ),
             ))),

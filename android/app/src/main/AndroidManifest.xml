@@ -3,7 +3,8 @@
    <application
         android:label="cut_my_carbon"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@drawable/icon">
+        android:logo="@drawable/logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"
