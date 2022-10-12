@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class TipStatusUpdateView extends StatelessWidget {
-  const TipStatusUpdateView({
+  TipStatusUpdateView({
     Key? key,
     required this.user,
     required this.category,
@@ -22,9 +22,10 @@ class TipStatusUpdateView extends StatelessWidget {
   final Timestamp tipStartTime;
   final String message;
 
+  TextEditingController daysController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController daysController = TextEditingController();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     TipsData tipsData = TipsData(
@@ -231,13 +232,6 @@ class TipStatusUpdateView extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       debounce(() {
-                        /*
-                        if (model.isInt(daysController.text)) {
-                          String errorMessage =
-                              "Please enter a whole number of days.";
-                          model.routeToTipStatusUpdateView(user, category,
-                              tipOrder, tipStartTime, errorMessage);
-                        }*/
                         if (model.isNumeric(daysController.text)) {
                           String errorMessage =
                               "Please enter a number of days.";
