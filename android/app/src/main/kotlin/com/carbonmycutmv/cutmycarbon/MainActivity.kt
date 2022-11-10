@@ -1,4 +1,4 @@
-package com.example.cut_my_carbon
+package com.carbonmycutmv.cutmycarbon
 
 import io.flutter.embedding.android.FlutterActivity
 

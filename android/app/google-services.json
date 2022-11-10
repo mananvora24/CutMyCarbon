@@ -7,34 +7,34 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:280514295082:android:971adee247d27570721a53",
+        "mobilesdk_app_id": "1:280514295082:android:aeb69643bff3b257721a53",
         "android_client_info": {
-          "package_name": "com.example.cut_my_carbon"
+          "package_name": "com.carbonmycutmv.cutmycarbon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "280514295082-99ej0aqg2tc7stba7ckffl3mebt8cdj4.apps.googleusercontent.com",
+          "client_id": "280514295082-955c5p9l2bi5n0cj5smd4ogcn7mqsuh9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.cut_my_carbon",
-            "certificate_hash": "322f05b7383dbfe80f025193ecfb339cb112b9d7"
-          }
-        },
-        {
-          "client_id": "280514295082-e81kbrm489i18ium3kkdl2ov249v4n9v.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.cut_my_carbon",
+            "package_name": "com.carbonmycutmv.cutmycarbon",
             "certificate_hash": "c7c2048505d851707cc5f997c05332a6d18459a0"
           }
         },
         {
-          "client_id": "280514295082-rm17imljjgoppjfnoiih845mm218s931.apps.googleusercontent.com",
+          "client_id": "280514295082-hj26f4uku64s67g3hop4187oo8b0g2s7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.cut_my_carbon",
+            "package_name": "com.carbonmycutmv.cutmycarbon",
             "certificate_hash": "f28ec4810431ad36db01ab7f348094b017c6a13c"
+          }
+        },
+        {
+          "client_id": "280514295082-tjmfjdcl2bn4vsnt3cmkdpi5hnihr0ek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.carbonmycutmv.cutmycarbon",
+            "certificate_hash": "322f05b7383dbfe80f025193ecfb339cb112b9d7"
           }
         },
         {
@@ -65,6 +65,7 @@
         }
       }
     }
-  ],
+
+    ],
   "configuration_version": "1"
 }
